@@ -1,0 +1,8 @@
+{
+  "id": "var-simulations-digest",
+  "title": "VaR Simulations Digest",
+  "collector": "var-sim",
+  "repo": "C:/Users/bottl/FinancialDevelopment",
+  "description": "Latest VaR context run (Historical / MC / GARCH metrics) from VaR_Tools_Simulations/var_context_run_latest.json.",
+  "refresh": "ask Hermes to 'refresh var-simulations-digest'"
+}

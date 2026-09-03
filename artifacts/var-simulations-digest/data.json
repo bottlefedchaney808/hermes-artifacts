@@ -1,0 +1,99 @@
+{
+  "summary": [
+    {
+      "label": "suite",
+      "value": "var"
+    },
+    {
+      "label": "status",
+      "value": "ok"
+    },
+    {
+      "label": "module",
+      "value": "corr_sim"
+    },
+    {
+      "label": "var",
+      "value": "424442.6690440216"
+    },
+    {
+      "label": "cvar",
+      "value": "469727.92880735593"
+    },
+    {
+      "label": "confidence",
+      "value": "0.99"
+    },
+    {
+      "label": "horizon_days",
+      "value": "252"
+    },
+    {
+      "label": "timestamp",
+      "value": "2026-09-02T19:02:25.885649Z"
+    }
+  ],
+  "tables": [
+    {
+      "id": "fields",
+      "title": "Fields",
+      "columns": [
+        "field",
+        "value"
+      ],
+      "rows": [
+        [
+          "suite",
+          "var"
+        ],
+        [
+          "status",
+          "ok"
+        ],
+        [
+          "module",
+          "corr_sim"
+        ],
+        [
+          "var",
+          "424442.6690440216"
+        ],
+        [
+          "cvar",
+          "469727.92880735593"
+        ],
+        [
+          "confidence",
+          "0.99"
+        ],
+        [
+          "horizon_days",
+          "252"
+        ],
+        [
+          "timestamp",
+          "2026-09-02T19:02:25.885649Z"
+        ],
+        [
+          "positions_source",
+          "derived"
+        ],
+        [
+          "notes",
+          "weights were normalized to sum to 1.0. | positions missing; derived proportional notionals from weights with total notional = 1,000,000. | live spot unavailable for SMCI,NVDA,AAPL,MSFT,AMZN,GOOGL,AVGO,MU,META,TSLA,BRK.B; used fallback price 100.0."
+        ]
+      ]
+    }
+  ],
+  "charts": [],
+  "notes": [],
+  "source": {
+    "repo": "C:\\Users\\bottl\\FinancialDevelopment",
+    "collector": "var-sim",
+    "note": "var_context_run_latest.json"
+  },
+  "schema_version": 1,
+  "artifact_id": "var-simulations-digest",
+  "title": "VaR Simulations Digest",
+  "generated_at": "2026-09-03 05:24 UTC"
+}

@@ -1,0 +1,38 @@
+/* Hermes Interactive Artifacts — universal shell styles.
+   Uses Hermes ::preview theme vars when present; var() fallbacks keep it
+   readable standalone in any browser. Never hardcode frame backgrounds. */
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 16px;
+  color: var(--foreground, #1a1a1a);
+  background: var(--card, transparent);
+  font: 14px/1.45 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+h1 { font-size: 20px; margin: 0 0 2px; }
+.ha-sub { color: var(--muted-foreground, #6b6b6b); font-size: 12px; margin-bottom: 16px; }
+.ha-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px; margin-bottom: 16px; }
+.ha-card { border: 1px solid var(--border, #e8e6e0); border-radius: 10px; padding: 12px 14px; }
+.ha-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--muted-foreground, #8a8a8a); }
+.ha-card .value { font-size: 20px; font-weight: 650; margin-top: 3px; }
+.ha-card.tone-ok .value { color: #1a7f37; }
+.ha-card.tone-bad .value { color: #c0341d; }
+.ha-chart { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 12px; margin-bottom: 16px; }
+.ha-chart h3 { font-size: 14px; margin: 0 0 8px; }
+.ha-chart .box { position: relative; height: 280px; }
+.ha-tablewrap { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 10px 12px 14px; margin-bottom: 16px; overflow-x: auto; }
+.ha-tablewrap h3 { font-size: 14px; margin: 2px 0 8px; }
+.ha-filter { width: 220px; padding: 4px 8px; margin-bottom: 8px;
+  border: 1px solid var(--border, #ccc); border-radius: 6px;
+  background: transparent; color: inherit; font: inherit; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 9px; white-space: nowrap;
+  border-bottom: 1px solid var(--border, #efece5); }
+th { cursor: pointer; color: var(--muted-foreground, #6b6b6b);
+  font-size: 11px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+.ha-notes { color: var(--muted-foreground, #6b6b6b); font-size: 12px; }
+.ha-notes li { margin-bottom: 4px; }

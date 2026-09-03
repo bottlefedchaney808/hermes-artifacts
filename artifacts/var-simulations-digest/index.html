@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VaR Simulations Digest</title>
+<!--HERMES-ARTIFACT:CSS-->
+<style>
+/* Hermes Interactive Artifacts — universal shell styles.
+   Uses Hermes ::preview theme vars when present; var() fallbacks keep it
+   readable standalone in any browser. Never hardcode frame backgrounds. */
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 16px;
+  color: var(--foreground, #1a1a1a);
+  background: var(--card, transparent);
+  font: 14px/1.45 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+h1 { font-size: 20px; margin: 0 0 2px; }
+.ha-sub { color: var(--muted-foreground, #6b6b6b); font-size: 12px; margin-bottom: 16px; }
+.ha-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px; margin-bottom: 16px; }
+.ha-card { border: 1px solid var(--border, #e8e6e0); border-radius: 10px; padding: 12px 14px; }
+.ha-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--muted-foreground, #8a8a8a); }
+.ha-card .value { font-size: 20px; font-weight: 650; margin-top: 3px; }
+.ha-card.tone-ok .value { color: #1a7f37; }
+.ha-card.tone-bad .value { color: #c0341d; }
+.ha-chart { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 12px; margin-bottom: 16px; }
+.ha-chart h3 { font-size: 14px; margin: 0 0 8px; }
+.ha-chart .box { position: relative; height: 280px; }
+.ha-tablewrap { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 10px 12px 14px; margin-bottom: 16px; overflow-x: auto; }
+.ha-tablewrap h3 { font-size: 14px; margin: 2px 0 8px; }
+.ha-filter { width: 220px; padding: 4px 8px; margin-bottom: 8px;
+  border: 1px solid var(--border, #ccc); border-radius: 6px;
+  background: transparent; color: inherit; font: inherit; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 9px; white-space: nowrap;
+  border-bottom: 1px solid var(--border, #efece5); }
+th { cursor: pointer; color: var(--muted-foreground, #6b6b6b);
+  font-size: 11px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+.ha-notes { color: var(--muted-foreground, #6b6b6b); font-size: 12px; }
+.ha-notes li { margin-bottom: 4px; }
+
+</style>
+<!--/HERMES-ARTIFACT:CSS-->
+</head>
+<body>
+<div id="app"></div>
+<!--HERMES-ARTIFACT:DATA-->
+<script id="hermes-artifact-data" type="application/json">
+{"summary": [{"label": "suite", "value": "var"}, {"label": "status", "value": "ok"}, {"label": "module", "value": "corr_sim"}, {"label": "var", "value": "424442.6690440216"}, {"label": "cvar", "value": "469727.92880735593"}, {"label": "confidence", "value": "0.99"}, {"label": "horizon_days", "value": "252"}, {"label": "timestamp", "value": "2026-09-02T19:02:25.885649Z"}], "tables": [{"id": "fields", "title": "Fields", "columns": ["field", "value"], "rows": [["suite", "var"], ["status", "ok"], ["module", "corr_sim"], ["var", "424442.6690440216"], ["cvar", "469727.92880735593"], ["confidence", "0.99"], ["horizon_days", "252"], ["timestamp", "2026-09-02T19:02:25.885649Z"], ["positions_source", "derived"], ["notes", "weights were normalized to sum to 1.0. | positions missing; derived proportional notionals from weights with total notional = 1,000,000. | live spot unavailable for SMCI,NVDA,AAPL,MSFT,AMZN,GOOGL,AVGO,MU,META,TSLA,BRK.B; used fallback price 100.0."]]}], "charts": [], "notes": [], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "var-sim", "note": "var_context_run_latest.json"}, "schema_version": 1, "artifact_id": "var-simulations-digest", "title": "VaR Simulations Digest", "generated_at": "2026-09-03 05:24 UTC"}
+</script>
+<!--/HERMES-ARTIFACT:DATA-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" crossorigin="anonymous"></script>
+<!--HERMES-ARTIFACT:JS-->
+<script>
+/* Hermes Interactive Artifacts — universal renderer.
+   Reads the inline JSON payload written by tools/refresh.py and renders
+   summary cards, charts (Chart.js if the CDN is reachable), and
+   filterable/sortable tables. No build step, no fetches, no framework. */
+(function () {
+  'use strict';
+  /* Vivid, full-opacity palette per Jason's chart preferences. */
+  var PALETTE = ['#3b82f6', '#ef4444', '#22c55e', '#eab308', '#a855f7', '#06b6d4'];
+
+  function h(tag, attrs) {
+    var node = document.createElement(tag);
+    attrs = attrs || {};
+    Object.keys(attrs).forEach(function (k) {
+      if (k === 'text') node.textContent = attrs[k];
+      else if (k === 'class') node.className = attrs[k];
+      else node.setAttribute(k, attrs[k]);
+    });
+    for (var i = 2; i < arguments.length; i++) {
+      if (arguments[i]) node.appendChild(arguments[i]);
+    }
+    return node;
+  }
+
+  function payload() {
+    return JSON.parse(document.getElementById('hermes-artifact-data').textContent);
+  }
+
+  function renderCards(d) {
+    var wrap = h('div', { class: 'ha-cards' });
+    (d.summary || []).forEach(function (c) {
+      wrap.appendChild(h('div', { class: 'ha-card' + (c.tone ? ' tone-' + c.tone : '') },
+        h('div', { class: 'label', text: c.label }),
+        h('div', { class: 'value', text: String(c.value) })));
+    });
+    return wrap;
+  }
+
+  function renderChart(chart) {
+    var box = h('div', { class: 'ha-chart' }, h('h3', { text: chart.title }));
+    if (typeof Chart === 'undefined') {
+      box.appendChild(h('div', { class: 'ha-notes',
+        text: 'Chart.js CDN unreachable — values remain in tables/notes.' }));
+      return box;
+    }
+    var canvas = h('canvas');
+    box.appendChild(h('div', { class: 'box' }, canvas));
+    var datasets = (chart.series || []).map(function (s, i) {
+      return {
+        label: s.label,
+        data: s.data,
+        backgroundColor: PALETTE[i % PALETTE.length],
+        borderColor: PALETTE[i % PALETTE.length],
+        borderWidth: 2, tension: 0.35, pointRadius: 2,
+        fill: chart.type === 'line'
+      };
+    });
+    new Chart(canvas.getContext('2d'), {
+      type: chart.type,
+      data: { labels: chart.labels || [], datasets: datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } }
+      }
+    });
+    return box;
+  }
+
+  function renderTable(table) {
+    var wrap = h('div', { class: 'ha-tablewrap' }, h('h3', { text: table.title }));
+    var filter = h('input', { class: 'ha-filter', placeholder: 'Filter...' });
+    var tbl = h('table');
+    var headRow = h('tr');
+    var thead = h('thead'), tbody = h('tbody');
+    (table.columns || []).forEach(function (c) {
+      headRow.appendChild(h('th', { text: c }));
+    });
+    thead.appendChild(headRow);
+    tbl.appendChild(thead);
+    tbl.appendChild(tbody);
+    var rows = table.rows || [];
+
+    function fill(list) {
+      tbody.textContent = '';
+      list.forEach(function (r) {
+        var tr = h('tr');
+        (table.columns || []).forEach(function (_, i) {
+          tr.appendChild(h('td', { text: r[i] == null ? '' : String(r[i]) }));
+        });
+        tbody.appendChild(tr);
+      });
+    }
+    fill(rows);
+    filter.addEventListener('input', function () {
+      var q = filter.value.toLowerCase();
+      fill(rows.filter(function (r) {
+        return r.some(function (cell) {
+          return String(cell == null ? '' : cell).toLowerCase().indexOf(q) !== -1;
+        });
+      }));
+    });
+    var sortDir = {};
+    headRow.addEventListener('click', function (e) {
+      var idx = Array.prototype.indexOf.call(headRow.children, e.target);
+      if (idx < 0) return;
+      sortDir[idx] = !sortDir[idx];
+      fill(rows.slice().sort(function (a, b) {
+        var x = a[idx], y = b[idx];
+        var nx = parseFloat(x), ny = parseFloat(y);
+        var cmp = (!isNaN(nx) && !isNaN(ny)) ? nx - ny
+          : String(x).localeCompare(String(y));
+        return sortDir[idx] ? cmp : -cmp;
+      }));
+    });
+    wrap.appendChild(filter);
+    wrap.appendChild(tbl);
+    return wrap;
+  }
+
+  function render(root) {
+    var d = payload();
+    root.textContent = '';
+    root.appendChild(h('h1', { text: d.title || d.artifact_id }));
+    root.appendChild(h('div', { class: 'ha-sub', text: 'Generated '
+      + d.generated_at + (d.source && d.source.note ? ' - ' + d.source.note : '') }));
+    if ((d.summary || []).length) root.appendChild(renderCards(d));
+    (d.charts || []).forEach(function (c) { root.appendChild(renderChart(c)); });
+    (d.tables || []).forEach(function (t) { root.appendChild(renderTable(t)); });
+    if ((d.notes || []).length) {
+      var ul = h('ul', { class: 'ha-notes' });
+      d.notes.forEach(function (n) { ul.appendChild(h('li', { text: n })); });
+      root.appendChild(ul);
+    }
+  }
+
+  window.HermesArtifact = { render: render };
+  document.addEventListener('DOMContentLoaded', function () {
+    render(document.getElementById('app'));
+  });
+})();
+
+</script>
+<!--/HERMES-ARTIFACT:JS-->
+</body>
+</html>
