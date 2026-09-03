@@ -1,0 +1,3354 @@
+{
+  "summary": [
+    {
+      "label": "notes",
+      "value": "326"
+    },
+    {
+      "label": "nodes",
+      "value": "345"
+    },
+    {
+      "label": "links",
+      "value": "269"
+    },
+    {
+      "label": "dangling",
+      "value": "19",
+      "tone": "bad"
+    }
+  ],
+  "tables": [
+    {
+      "id": "hubs",
+      "title": "Highest degree",
+      "columns": [
+        "note",
+        "leg",
+        "degree"
+      ],
+      "rows": [
+        [
+          "Tiferet",
+          "construction",
+          "25"
+        ],
+        [
+          "Development",
+          "development",
+          "23"
+        ],
+        [
+          "Construction",
+          "construction",
+          "21"
+        ],
+        [
+          "Trading journal",
+          "trading",
+          "19"
+        ],
+        [
+          "Hermes",
+          "development",
+          "18"
+        ],
+        [
+          "FinancialDevelopment",
+          "development",
+          "14"
+        ],
+        [
+          "FD Map",
+          "development",
+          "14"
+        ],
+        [
+          "FD Open work",
+          "development",
+          "14"
+        ],
+        [
+          "Jason",
+          "hub",
+          "13"
+        ],
+        [
+          "Estimating",
+          "construction",
+          "13"
+        ],
+        [
+          "Google Drive",
+          "construction",
+          "12"
+        ],
+        [
+          "ConstructionDevelopment",
+          "development",
+          "11"
+        ],
+        [
+          "Repo and vault map",
+          "development",
+          "11"
+        ],
+        [
+          "Trading",
+          "trading",
+          "10"
+        ],
+        [
+          "Cloud instance",
+          "development",
+          "9"
+        ],
+        [
+          "SoundDevelopment",
+          "development",
+          "9"
+        ],
+        [
+          "Vault handoff",
+          "development",
+          "9"
+        ],
+        [
+          "Home",
+          "hub",
+          "8"
+        ],
+        [
+          "Research",
+          "trading",
+          "8"
+        ],
+        [
+          "SD Open work",
+          "development",
+          "8"
+        ],
+        [
+          "2026-08-21_power-hour",
+          "trading",
+          "8"
+        ],
+        [
+          "LATEST",
+          "trading",
+          "8"
+        ],
+        [
+          "LATEST_power-hour",
+          "trading",
+          "8"
+        ],
+        [
+          "0DTE Anderson Lakha Cem 20260820",
+          "trading",
+          "7"
+        ],
+        [
+          "9732 Manchester La Tijera",
+          "construction",
+          "7"
+        ]
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "id": "legs",
+      "title": "Notes by leg",
+      "type": "doughnut",
+      "labels": [
+        "construction",
+        "development",
+        "hub",
+        "inbox",
+        "trading",
+        "templates",
+        "dangling"
+      ],
+      "series": [
+        {
+          "label": "count",
+          "data": [
+            14,
+            39,
+            3,
+            1,
+            267,
+            2,
+            19
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Force graph is live [[wikilinks]] in this vault. Color = leg. Size = degree.",
+    "Dangling nodes are links that do not resolve to a note."
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "Construction.md",
+        "label": "Construction",
+        "group": "construction",
+        "size": 21
+      },
+      {
+        "id": "Development.md",
+        "label": "Development",
+        "group": "development",
+        "size": 23
+      },
+      {
+        "id": "Home.md",
+        "label": "Home",
+        "group": "hub",
+        "size": 8
+      },
+      {
+        "id": "Inbox.md",
+        "label": "Inbox",
+        "group": "inbox",
+        "size": 5
+      },
+      {
+        "id": "Jason.md",
+        "label": "Jason",
+        "group": "hub",
+        "size": 13
+      },
+      {
+        "id": "Trading.md",
+        "label": "Trading",
+        "group": "trading",
+        "size": 10
+      },
+      {
+        "id": "Construction/8074 - Fireproofing SFRM LF Takeoff.md",
+        "label": "8074 - Fireproofing SFRM LF Takeoff",
+        "group": "construction",
+        "size": 1
+      },
+      {
+        "id": "Construction/Estimating.md",
+        "label": "Estimating",
+        "group": "construction",
+        "size": 13
+      },
+      {
+        "id": "Construction/Google Drive.md",
+        "label": "Google Drive",
+        "group": "construction",
+        "size": 12
+      },
+      {
+        "id": "Construction/HOA LA market 2026-09-02.md",
+        "label": "HOA LA market 2026-09-02",
+        "group": "construction",
+        "size": 4
+      },
+      {
+        "id": "Construction/Labor rates.md",
+        "label": "Labor rates",
+        "group": "construction",
+        "size": 1
+      },
+      {
+        "id": "Construction/Tiferet.md",
+        "label": "Tiferet",
+        "group": "construction",
+        "size": 25
+      },
+      {
+        "id": "Development/Cloud instance.md",
+        "label": "Cloud instance",
+        "group": "development",
+        "size": 9
+      },
+      {
+        "id": "Development/ConstructionDevelopment.md",
+        "label": "ConstructionDevelopment",
+        "group": "development",
+        "size": 11
+      },
+      {
+        "id": "Development/Dev notes.md",
+        "label": "Dev notes",
+        "group": "development",
+        "size": 1
+      },
+      {
+        "id": "Development/Discord-Cron-Runbook.md",
+        "label": "Discord-Cron-Runbook",
+        "group": "development",
+        "size": 2
+      },
+      {
+        "id": "Development/FinancialDevelopment.md",
+        "label": "FinancialDevelopment",
+        "group": "development",
+        "size": 14
+      },
+      {
+        "id": "Development/HANDOFF_trading_journal_history_purge.md",
+        "label": "HANDOFF_trading_journal_history_purge",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/Hermes skill catalog.md",
+        "label": "Hermes skill catalog",
+        "group": "development",
+        "size": 5
+      },
+      {
+        "id": "Development/hermes-artifacts.md",
+        "label": "hermes-artifacts",
+        "group": "development",
+        "size": 5
+      },
+      {
+        "id": "Development/Hermes.md",
+        "label": "Hermes",
+        "group": "development",
+        "size": 18
+      },
+      {
+        "id": "Development/kanban_cloud_bridge_handoff.md",
+        "label": "kanban_cloud_bridge_handoff",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/Local Qwen llama.cpp.md",
+        "label": "Local Qwen llama.cpp",
+        "group": "development",
+        "size": 6
+      },
+      {
+        "id": "Development/Repo and vault map.md",
+        "label": "Repo and vault map",
+        "group": "development",
+        "size": 11
+      },
+      {
+        "id": "Development/SoundDevelopment.md",
+        "label": "SoundDevelopment",
+        "group": "development",
+        "size": 9
+      },
+      {
+        "id": "Development/Vault handoff.md",
+        "label": "Vault handoff",
+        "group": "development",
+        "size": 9
+      },
+      {
+        "id": "Development/Zai GLM provider setup.md",
+        "label": "Zai GLM provider setup",
+        "group": "development",
+        "size": 3
+      },
+      {
+        "id": "Home/Lawn Repair Plan.md",
+        "label": "Lawn Repair Plan",
+        "group": "hub",
+        "size": 0
+      },
+      {
+        "id": "Templates/Daily.md",
+        "label": "Daily",
+        "group": "templates",
+        "size": 0
+      },
+      {
+        "id": "Templates/Project.md",
+        "label": "Project",
+        "group": "templates",
+        "size": 0
+      },
+      {
+        "id": "Trading/0DTE Anderson Lakha Cem 20260820.md",
+        "label": "0DTE Anderson Lakha Cem 20260820",
+        "group": "trading",
+        "size": 7
+      },
+      {
+        "id": "Trading/2026-08-31.md",
+        "label": "2026-08-31",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/AEO_CAVA_research_20260825.md",
+        "label": "AEO_CAVA_research_20260825",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/AIGamma steal list — Phase 2-3 plan status.md",
+        "label": "AIGamma steal list — Phase 2-3 plan status",
+        "group": "trading",
+        "size": 4
+      },
+      {
+        "id": "Trading/AIGamma teardown - what to steal.md",
+        "label": "AIGamma teardown - what to steal",
+        "group": "trading",
+        "size": 6
+      },
+      {
+        "id": "Trading/Cem charm clock insight.md",
+        "label": "Cem charm clock insight",
+        "group": "trading",
+        "size": 3
+      },
+      {
+        "id": "Trading/Cem charm test - layman deliverable.md",
+        "label": "Cem charm test - layman deliverable",
+        "group": "trading",
+        "size": 1
+      },
+      {
+        "id": "Trading/Delta-band dual-book merge — one look 20260901.md",
+        "label": "Delta-band dual-book merge — one look 20260901",
+        "group": "trading",
+        "size": 1
+      },
+      {
+        "id": "Trading/Desk note 20260819 sentiment overlay.md",
+        "label": "Desk note 20260819 sentiment overlay",
+        "group": "trading",
+        "size": 5
+      },
+      {
+        "id": "Trading/Desk note 20260823 week ahead prep.md",
+        "label": "Desk note 20260823 week ahead prep",
+        "group": "trading",
+        "size": 2
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal.md",
+        "label": "FinancialDevelopment Journal",
+        "group": "trading",
+        "size": 2
+      },
+      {
+        "id": "Trading/Jump-diffusion model zoo — shipped.md",
+        "label": "Jump-diffusion model zoo — shipped",
+        "group": "trading",
+        "size": 4
+      },
+      {
+        "id": "Trading/Operational.md",
+        "label": "Operational",
+        "group": "trading",
+        "size": 2
+      },
+      {
+        "id": "Trading/Positions.md",
+        "label": "Positions",
+        "group": "trading",
+        "size": 5
+      },
+      {
+        "id": "Trading/Research.md",
+        "label": "Research",
+        "group": "trading",
+        "size": 8
+      },
+      {
+        "id": "Trading/Sentiment scanner 3packs 20260825-0827.md",
+        "label": "Sentiment scanner 3packs 20260825-0827",
+        "group": "trading",
+        "size": 2
+      },
+      {
+        "id": "Trading/Trading journal.md",
+        "label": "Trading journal",
+        "group": "trading",
+        "size": 19
+      },
+      {
+        "id": "Construction/Jobs/8430 Verdugo Tower.md",
+        "label": "8430 Verdugo Tower",
+        "group": "construction",
+        "size": 6
+      },
+      {
+        "id": "Construction/Jobs/9380 Garden Street.md",
+        "label": "9380 Garden Street",
+        "group": "construction",
+        "size": 4
+      },
+      {
+        "id": "Construction/Jobs/9422 531 College.md",
+        "label": "9422 531 College",
+        "group": "construction",
+        "size": 6
+      },
+      {
+        "id": "Construction/Jobs/9732 Manchester La Tijera.md",
+        "label": "9732 Manchester La Tijera",
+        "group": "construction",
+        "size": 7
+      },
+      {
+        "id": "Construction/Jobs/9736 Napa Street.md",
+        "label": "9736 Napa Street",
+        "group": "construction",
+        "size": 6
+      },
+      {
+        "id": "Construction/Jobs/9770 Fairchild.md",
+        "label": "9770 Fairchild",
+        "group": "construction",
+        "size": 4
+      },
+      {
+        "id": "Construction/Jobs/9793 The Aventine.md",
+        "label": "9793 The Aventine",
+        "group": "construction",
+        "size": 4
+      },
+      {
+        "id": "Development/ConstructionDevelopment/CD Map.md",
+        "label": "CD Map",
+        "group": "development",
+        "size": 2
+      },
+      {
+        "id": "Development/ConstructionDevelopment/CD Open work.md",
+        "label": "CD Open work",
+        "group": "development",
+        "size": 4
+      },
+      {
+        "id": "Development/ConstructionDevelopment/CD Repo docs.md",
+        "label": "CD Repo docs",
+        "group": "development",
+        "size": 3
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Audit 20260831.md",
+        "label": "FD Audit 20260831",
+        "group": "development",
+        "size": 6
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Cloud Keys.md",
+        "label": "FD Cloud Keys",
+        "group": "development",
+        "size": 4
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Dashboard.md",
+        "label": "FD Dashboard",
+        "group": "development",
+        "size": 1
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Dealer book 20260821.md",
+        "label": "FD Dealer book 20260821",
+        "group": "development",
+        "size": 7
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Improve 20260902.md",
+        "label": "FD Improve 20260902",
+        "group": "development",
+        "size": 4
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Map.md",
+        "label": "FD Map",
+        "group": "development",
+        "size": 14
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md",
+        "label": "FD Modularization handoff 20260902",
+        "group": "development",
+        "size": 4
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Open work.md",
+        "label": "FD Open work",
+        "group": "development",
+        "size": 14
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD PHClient.md",
+        "label": "FD PHClient",
+        "group": "development",
+        "size": 5
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Repo docs.md",
+        "label": "FD Repo docs",
+        "group": "development",
+        "size": 7
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Suites.md",
+        "label": "FD Suites",
+        "group": "development",
+        "size": 6
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Swaps DB.md",
+        "label": "FD Swaps DB",
+        "group": "development",
+        "size": 7
+      },
+      {
+        "id": "Development/SoundDevelopment/AmbiToolbox.md",
+        "label": "AmbiToolbox",
+        "group": "development",
+        "size": 4
+      },
+      {
+        "id": "Development/SoundDevelopment/OpenALHost.md",
+        "label": "OpenALHost",
+        "group": "development",
+        "size": 2
+      },
+      {
+        "id": "Development/SoundDevelopment/SD Map.md",
+        "label": "SD Map",
+        "group": "development",
+        "size": 3
+      },
+      {
+        "id": "Development/SoundDevelopment/SD Open work.md",
+        "label": "SD Open work",
+        "group": "development",
+        "size": 8
+      },
+      {
+        "id": "Development/SoundDevelopment/SD Repo docs.md",
+        "label": "SD Repo docs",
+        "group": "development",
+        "size": 1
+      },
+      {
+        "id": "Development/SoundDevelopment/Sound by Zinko.md",
+        "label": "Sound by Zinko",
+        "group": "development",
+        "size": 4
+      },
+      {
+        "id": "Development/SoundDevelopment/X-Fi adaptation.md",
+        "label": "X-Fi adaptation",
+        "group": "development",
+        "size": 4
+      },
+      {
+        "id": "Development/SoundDevelopment/Zinko Spatial Audio.md",
+        "label": "Zinko Spatial Audio",
+        "group": "development",
+        "size": 5
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/2026-08-10.md",
+        "label": "2026-08-10",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/2026-08-11.md",
+        "label": "2026-08-11",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/2026-08-12.md",
+        "label": "2026-08-12",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/adversarial_audit_20260817.md",
+        "label": "adversarial_audit_20260817",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_0850_20260818.md",
+        "label": "ALERT_0850_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_0900_20260818.md",
+        "label": "ALERT_0900_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_0910_20260818.md",
+        "label": "ALERT_0910_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_0920_20260818.md",
+        "label": "ALERT_0920_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_0930_20260818.md",
+        "label": "ALERT_0930_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_0940_20260818.md",
+        "label": "ALERT_0940_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_0950_20260818.md",
+        "label": "ALERT_0950_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1000_20260818.md",
+        "label": "ALERT_1000_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1010_20260818.md",
+        "label": "ALERT_1010_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1020_20260818.md",
+        "label": "ALERT_1020_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1030_20260818.md",
+        "label": "ALERT_1030_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1040_20260818.md",
+        "label": "ALERT_1040_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1050_20260818.md",
+        "label": "ALERT_1050_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1100_20260818.md",
+        "label": "ALERT_1100_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1110_20260818.md",
+        "label": "ALERT_1110_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1120_20260818.md",
+        "label": "ALERT_1120_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1130_20260818.md",
+        "label": "ALERT_1130_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1140_20260818.md",
+        "label": "ALERT_1140_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1150_20260818.md",
+        "label": "ALERT_1150_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1200_20260818.md",
+        "label": "ALERT_1200_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1210_20260818.md",
+        "label": "ALERT_1210_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1220_20260818.md",
+        "label": "ALERT_1220_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1230_20260818.md",
+        "label": "ALERT_1230_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1240_20260818.md",
+        "label": "ALERT_1240_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1250_20260818.md",
+        "label": "ALERT_1250_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1300_20260818.md",
+        "label": "ALERT_1300_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1310_20260818.md",
+        "label": "ALERT_1310_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1320_20260818.md",
+        "label": "ALERT_1320_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1330_20260818.md",
+        "label": "ALERT_1330_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1340_20260818.md",
+        "label": "ALERT_1340_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1350_20260818.md",
+        "label": "ALERT_1350_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1400_20260818.md",
+        "label": "ALERT_1400_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1410_20260818.md",
+        "label": "ALERT_1410_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1420_20260818.md",
+        "label": "ALERT_1420_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1430_20260818.md",
+        "label": "ALERT_1430_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1440_20260818.md",
+        "label": "ALERT_1440_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1450_20260818.md",
+        "label": "ALERT_1450_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1500_20260818.md",
+        "label": "ALERT_1500_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1510_20260818.md",
+        "label": "ALERT_1510_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1520_20260818.md",
+        "label": "ALERT_1520_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1530_20260818.md",
+        "label": "ALERT_1530_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1540_20260818.md",
+        "label": "ALERT_1540_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/ALERT_1550_20260818.md",
+        "label": "ALERT_1550_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/cem_karsan_dealer_vanna_deepdive.md",
+        "label": "cem_karsan_dealer_vanna_deepdive",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/cem_karsan_video_deepdive_20260813.md",
+        "label": "cem_karsan_video_deepdive_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/dealer_book_ab_exposure_20260902.md",
+        "label": "dealer_book_ab_exposure_20260902",
+        "group": "trading",
+        "size": 3
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/default_deep_dive_20260810.md",
+        "label": "default_deep_dive_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/desk_note_20260813.md",
+        "label": "desk_note_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/desk_note_20260818.md",
+        "label": "desk_note_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/desk_note_20260819.md",
+        "label": "desk_note_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/direction_tool_review_and_cash_plan_20260819.md",
+        "label": "direction_tool_review_and_cash_plan_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/energy_deep_dive_20260810.md",
+        "label": "energy_deep_dive_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/energy_quant_deep_dive_20260810.md",
+        "label": "energy_quant_deep_dive_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/energy_research_deep_dive_20260810.md",
+        "label": "energy_research_deep_dive_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/fills_20260811.md",
+        "label": "fills_20260811",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/hermes_settings_audit_20260813.md",
+        "label": "hermes_settings_audit_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/intraday_1344_20260811.md",
+        "label": "intraday_1344_20260811",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/INVESTMENT_PLAN_20260810.md",
+        "label": "INVESTMENT_PLAN_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/karsan_expert_agent_brief_20260814.md",
+        "label": "karsan_expert_agent_brief_20260814",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/knowledge_0dte_anderson_lakha_20260820.md",
+        "label": "knowledge_0dte_anderson_lakha_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/knowledge_base_cem_karsan.md",
+        "label": "knowledge_base_cem_karsan",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/LAUNCH_DAY_20260811.md",
+        "label": "LAUNCH_DAY_20260811",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/market_rumors_20260825.md",
+        "label": "market_rumors_20260825",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/monitor_20260812.md",
+        "label": "monitor_20260812",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/monitor_20260813.md",
+        "label": "monitor_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/monitor_20260814.md",
+        "label": "monitor_20260814",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/monitor_20260818.md",
+        "label": "monitor_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/monitor_20260819.md",
+        "label": "monitor_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/monitor_20260820.md",
+        "label": "monitor_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/monitor_20260821.md",
+        "label": "monitor_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/monitor_prompt.md",
+        "label": "monitor_prompt",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/MORNING_BRIEF_20260813.md",
+        "label": "MORNING_BRIEF_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/morning_outlook_20260813.md",
+        "label": "morning_outlook_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/morning_plan_20260819.md",
+        "label": "morning_plan_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/morning_plan_20260820.md",
+        "label": "morning_plan_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/morning_scan_2026-08-21.md",
+        "label": "morning_scan_2026-08-21",
+        "group": "trading",
+        "size": 1
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/morning_scan_2026-08-24.md",
+        "label": "morning_scan_2026-08-24",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/play_addition_report_2026-08-21.md",
+        "label": "play_addition_report_2026-08-21",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_cron_verify_20260813.md",
+        "label": "powerhour_cron_verify_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_plan_20260811.md",
+        "label": "powerhour_plan_20260811",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_plan_20260812.md",
+        "label": "powerhour_plan_20260812",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_plan_20260813.md",
+        "label": "powerhour_plan_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_plan_20260814.md",
+        "label": "powerhour_plan_20260814",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260811.md",
+        "label": "powerhour_prep_20260811",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260812.md",
+        "label": "powerhour_prep_20260812",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260813.md",
+        "label": "powerhour_prep_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260814.md",
+        "label": "powerhour_prep_20260814",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260817.md",
+        "label": "powerhour_prep_20260817",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260818.md",
+        "label": "powerhour_prep_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260819.md",
+        "label": "powerhour_prep_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260820.md",
+        "label": "powerhour_prep_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/powerhour_prep_20260821.md",
+        "label": "powerhour_prep_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/pten_momentum_20260818.md",
+        "label": "pten_momentum_20260818",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/quant_deep_dive_20260810.md",
+        "label": "quant_deep_dive_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/research_deep_dive_20260810.md",
+        "label": "research_deep_dive_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/sentiment_x_context_20260826.md",
+        "label": "sentiment_x_context_20260826",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/tgb_research_20260814.md",
+        "label": "tgb_research_20260814",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/watchlist_adds_research_20260813.md",
+        "label": "watchlist_adds_research_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/web_tools_outage_fix_20260813.md",
+        "label": "web_tools_outage_fix_20260813",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/WEEK_PLAN_20260810.md",
+        "label": "WEEK_PLAN_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0800_20260820.md",
+        "label": "ALERT_0800_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0800_20260821.md",
+        "label": "ALERT_0800_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0810_20260820.md",
+        "label": "ALERT_0810_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0810_20260821.md",
+        "label": "ALERT_0810_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0820_20260820.md",
+        "label": "ALERT_0820_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0820_20260821.md",
+        "label": "ALERT_0820_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0830_20260820.md",
+        "label": "ALERT_0830_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0830_20260821.md",
+        "label": "ALERT_0830_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0840_20260820.md",
+        "label": "ALERT_0840_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0840_20260821.md",
+        "label": "ALERT_0840_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0850_20260820.md",
+        "label": "ALERT_0850_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0850_20260821.md",
+        "label": "ALERT_0850_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0900_20260820.md",
+        "label": "ALERT_0900_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0900_20260821.md",
+        "label": "ALERT_0900_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0901_20260819.md",
+        "label": "ALERT_0901_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0910_20260819.md",
+        "label": "ALERT_0910_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0910_20260820.md",
+        "label": "ALERT_0910_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0910_20260821.md",
+        "label": "ALERT_0910_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0920_20260819.md",
+        "label": "ALERT_0920_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0920_20260820.md",
+        "label": "ALERT_0920_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0920_20260821.md",
+        "label": "ALERT_0920_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0930_20260819.md",
+        "label": "ALERT_0930_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0930_20260820.md",
+        "label": "ALERT_0930_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0930_20260821.md",
+        "label": "ALERT_0930_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0940_20260819.md",
+        "label": "ALERT_0940_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0940_20260820.md",
+        "label": "ALERT_0940_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0940_20260821.md",
+        "label": "ALERT_0940_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0950_20260819.md",
+        "label": "ALERT_0950_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0950_20260820.md",
+        "label": "ALERT_0950_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_0950_20260821.md",
+        "label": "ALERT_0950_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1000_20260819.md",
+        "label": "ALERT_1000_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1000_20260820.md",
+        "label": "ALERT_1000_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1000_20260821.md",
+        "label": "ALERT_1000_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1010_20260819.md",
+        "label": "ALERT_1010_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1010_20260820.md",
+        "label": "ALERT_1010_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1010_20260821.md",
+        "label": "ALERT_1010_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1020_20260819.md",
+        "label": "ALERT_1020_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1020_20260820.md",
+        "label": "ALERT_1020_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1020_20260821.md",
+        "label": "ALERT_1020_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1030_20260821.md",
+        "label": "ALERT_1030_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1031_20260819.md",
+        "label": "ALERT_1031_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1031_20260820.md",
+        "label": "ALERT_1031_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1040_20260820.md",
+        "label": "ALERT_1040_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1040_20260821.md",
+        "label": "ALERT_1040_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1041_20260819.md",
+        "label": "ALERT_1041_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1050_20260820.md",
+        "label": "ALERT_1050_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1050_20260821.md",
+        "label": "ALERT_1050_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1051_20260819.md",
+        "label": "ALERT_1051_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1100_20260819.md",
+        "label": "ALERT_1100_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1100_20260820.md",
+        "label": "ALERT_1100_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1100_20260821.md",
+        "label": "ALERT_1100_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1110_20260819.md",
+        "label": "ALERT_1110_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1110_20260820.md",
+        "label": "ALERT_1110_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1110_20260821.md",
+        "label": "ALERT_1110_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1120_20260819.md",
+        "label": "ALERT_1120_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1120_20260820.md",
+        "label": "ALERT_1120_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1120_20260821.md",
+        "label": "ALERT_1120_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1130_20260819.md",
+        "label": "ALERT_1130_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1130_20260820.md",
+        "label": "ALERT_1130_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1130_20260821.md",
+        "label": "ALERT_1130_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1140_20260819.md",
+        "label": "ALERT_1140_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1140_20260820.md",
+        "label": "ALERT_1140_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1142_20260821.md",
+        "label": "ALERT_1142_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1150_20260819.md",
+        "label": "ALERT_1150_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1150_20260820.md",
+        "label": "ALERT_1150_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1152_20260821.md",
+        "label": "ALERT_1152_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1200_20260819.md",
+        "label": "ALERT_1200_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1200_20260820.md",
+        "label": "ALERT_1200_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1200_20260821.md",
+        "label": "ALERT_1200_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1210_20260819.md",
+        "label": "ALERT_1210_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1210_20260820.md",
+        "label": "ALERT_1210_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1210_20260821.md",
+        "label": "ALERT_1210_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1220_20260819.md",
+        "label": "ALERT_1220_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1220_20260820.md",
+        "label": "ALERT_1220_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1220_20260821.md",
+        "label": "ALERT_1220_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1230_20260819.md",
+        "label": "ALERT_1230_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1230_20260820.md",
+        "label": "ALERT_1230_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1230_20260821.md",
+        "label": "ALERT_1230_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1240_20260819.md",
+        "label": "ALERT_1240_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1240_20260820.md",
+        "label": "ALERT_1240_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1240_20260821.md",
+        "label": "ALERT_1240_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1250_20260819.md",
+        "label": "ALERT_1250_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1250_20260820.md",
+        "label": "ALERT_1250_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1250_20260821.md",
+        "label": "ALERT_1250_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1300_20260819.md",
+        "label": "ALERT_1300_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1300_20260820.md",
+        "label": "ALERT_1300_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1300_20260821.md",
+        "label": "ALERT_1300_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1310_20260819.md",
+        "label": "ALERT_1310_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1310_20260820.md",
+        "label": "ALERT_1310_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1310_20260821.md",
+        "label": "ALERT_1310_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1320_20260819.md",
+        "label": "ALERT_1320_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1320_20260820.md",
+        "label": "ALERT_1320_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1320_20260821.md",
+        "label": "ALERT_1320_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1330_20260819.md",
+        "label": "ALERT_1330_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1330_20260820.md",
+        "label": "ALERT_1330_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1330_20260821.md",
+        "label": "ALERT_1330_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1340_20260819.md",
+        "label": "ALERT_1340_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1340_20260820.md",
+        "label": "ALERT_1340_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1340_20260821.md",
+        "label": "ALERT_1340_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1350_20260819.md",
+        "label": "ALERT_1350_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1350_20260820.md",
+        "label": "ALERT_1350_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1350_20260821.md",
+        "label": "ALERT_1350_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1400_20260819.md",
+        "label": "ALERT_1400_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1400_20260820.md",
+        "label": "ALERT_1400_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1400_20260821.md",
+        "label": "ALERT_1400_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1410_20260819.md",
+        "label": "ALERT_1410_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1410_20260820.md",
+        "label": "ALERT_1410_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1410_20260821.md",
+        "label": "ALERT_1410_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1420_20260819.md",
+        "label": "ALERT_1420_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1420_20260820.md",
+        "label": "ALERT_1420_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1420_20260821.md",
+        "label": "ALERT_1420_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1430_20260819.md",
+        "label": "ALERT_1430_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1430_20260820.md",
+        "label": "ALERT_1430_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1430_20260821.md",
+        "label": "ALERT_1430_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1440_20260819.md",
+        "label": "ALERT_1440_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1440_20260820.md",
+        "label": "ALERT_1440_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1440_20260821.md",
+        "label": "ALERT_1440_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1450_20260819.md",
+        "label": "ALERT_1450_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1450_20260820.md",
+        "label": "ALERT_1450_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1450_20260821.md",
+        "label": "ALERT_1450_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1500_20260819.md",
+        "label": "ALERT_1500_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1500_20260820.md",
+        "label": "ALERT_1500_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1500_20260821.md",
+        "label": "ALERT_1500_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1510_20260819.md",
+        "label": "ALERT_1510_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1510_20260820.md",
+        "label": "ALERT_1510_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1510_20260821.md",
+        "label": "ALERT_1510_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1520_20260819.md",
+        "label": "ALERT_1520_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1520_20260820.md",
+        "label": "ALERT_1520_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1520_20260821.md",
+        "label": "ALERT_1520_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1530_20260819.md",
+        "label": "ALERT_1530_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1530_20260820.md",
+        "label": "ALERT_1530_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1530_20260821.md",
+        "label": "ALERT_1530_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1540_20260819.md",
+        "label": "ALERT_1540_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1540_20260820.md",
+        "label": "ALERT_1540_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1540_20260821.md",
+        "label": "ALERT_1540_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1550_20260819.md",
+        "label": "ALERT_1550_20260819",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1550_20260820.md",
+        "label": "ALERT_1550_20260820",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/alerts/ALERT_1550_20260821.md",
+        "label": "ALERT_1550_20260821",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_mid-day.md",
+        "label": "2026-08-21_mid-day",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_morning.md",
+        "label": "2026-08-21_morning",
+        "group": "trading",
+        "size": 2
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "label": "2026-08-21_power-hour",
+        "group": "trading",
+        "size": 8
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "label": "LATEST",
+        "group": "trading",
+        "size": 8
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_mid-day.md",
+        "label": "LATEST_mid-day",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_morning.md",
+        "label": "LATEST_morning",
+        "group": "trading",
+        "size": 2
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "label": "LATEST_power-hour",
+        "group": "trading",
+        "size": 8
+      },
+      {
+        "id": "dangling:link",
+        "label": "link",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:tiferet-steel-column-takeoff",
+        "label": "tiferet-steel-column-takeoff",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:cell",
+        "label": "cell",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:repo-and-vault-map.excalidraw",
+        "label": "repo-and-vault-map.excalidraw",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:wikilink",
+        "label": "wikilink",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:robinhood",
+        "label": "robinhood",
+        "group": "dangling",
+        "size": 2
+      },
+      {
+        "id": "dangling:Market rumor watchlist 20260828",
+        "label": "Market rumor watchlist 20260828",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:feedback-dont-exit-on-single-adverse-tick",
+        "label": "feedback-dont-exit-on-single-adverse-tick",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:feedback-0dte-standing-authorization",
+        "label": "feedback-0dte-standing-authorization",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:Direction tool",
+        "label": "Direction tool",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:phclient-v2-api",
+        "label": "phclient-v2-api",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:2",
+        "label": "2",
+        "group": "dangling",
+        "size": 5
+      },
+      {
+        "id": "dangling:1",
+        "label": "1",
+        "group": "dangling",
+        "size": 5
+      },
+      {
+        "id": "dangling:7",
+        "label": "7",
+        "group": "dangling",
+        "size": 3
+      },
+      {
+        "id": "dangling:4",
+        "label": "4",
+        "group": "dangling",
+        "size": 3
+      },
+      {
+        "id": "dangling:5",
+        "label": "5",
+        "group": "dangling",
+        "size": 3
+      },
+      {
+        "id": "dangling:3",
+        "label": "3",
+        "group": "dangling",
+        "size": 3
+      },
+      {
+        "id": "dangling:6",
+        "label": "6",
+        "group": "dangling",
+        "size": 3
+      },
+      {
+        "id": "dangling:8",
+        "label": "8",
+        "group": "dangling",
+        "size": 3
+      }
+    ],
+    "edges": [
+      {
+        "source": "Construction.md",
+        "target": "Construction/Jobs/9770 Fairchild.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Jobs/9422 531 College.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Jobs/9736 Napa Street.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Jobs/9732 Manchester La Tijera.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Jobs/8430 Verdugo Tower.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Jobs/9380 Garden Street.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Jobs/9793 The Aventine.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Google Drive.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/Labor rates.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Construction/HOA LA market 2026-09-02.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Development/ConstructionDevelopment.md"
+      },
+      {
+        "source": "Construction.md",
+        "target": "Development.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/FinancialDevelopment.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/FinancialDevelopment/FD PHClient.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/ConstructionDevelopment.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/ConstructionDevelopment/CD Map.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/ConstructionDevelopment/CD Open work.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/ConstructionDevelopment/CD Repo docs.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/SoundDevelopment.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/SoundDevelopment/SD Map.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/SoundDevelopment/SD Open work.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/SoundDevelopment/AmbiToolbox.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/Vault handoff.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/Repo and vault map.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/Dev notes.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Construction.md"
+      },
+      {
+        "source": "Home.md",
+        "target": "Development/Repo and vault map.md"
+      },
+      {
+        "source": "Home.md",
+        "target": "Construction.md"
+      },
+      {
+        "source": "Home.md",
+        "target": "Development.md"
+      },
+      {
+        "source": "Home.md",
+        "target": "Trading.md"
+      },
+      {
+        "source": "Home.md",
+        "target": "Inbox.md"
+      },
+      {
+        "source": "Home.md",
+        "target": "dangling:link"
+      },
+      {
+        "source": "Inbox.md",
+        "target": "Construction.md"
+      },
+      {
+        "source": "Inbox.md",
+        "target": "Development.md"
+      },
+      {
+        "source": "Inbox.md",
+        "target": "Trading.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Construction/Google Drive.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Development/Local Qwen llama.cpp.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Trading/Operational.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Trading.md",
+        "target": "Trading/FinancialDevelopment Journal.md"
+      },
+      {
+        "source": "Construction/8074 - Fireproofing SFRM LF Takeoff.md",
+        "target": "dangling:tiferet-steel-column-takeoff"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Construction/Jobs/9732 Manchester La Tijera.md"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Construction/Jobs/9736 Napa Street.md"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Construction/Jobs/9422 531 College.md"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Construction/Jobs/8430 Verdugo Tower.md"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Development/ConstructionDevelopment.md"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Google Drive.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Google Drive.md",
+        "target": "Construction/Jobs/9770 Fairchild.md"
+      },
+      {
+        "source": "Construction/Google Drive.md",
+        "target": "Construction/Jobs/9422 531 College.md"
+      },
+      {
+        "source": "Construction/Google Drive.md",
+        "target": "Construction/Jobs/9736 Napa Street.md"
+      },
+      {
+        "source": "Construction/Google Drive.md",
+        "target": "Construction/Jobs/9732 Manchester La Tijera.md"
+      },
+      {
+        "source": "Construction/Google Drive.md",
+        "target": "Construction/Jobs/9380 Garden Street.md"
+      },
+      {
+        "source": "Construction/Google Drive.md",
+        "target": "Construction/Jobs/8430 Verdugo Tower.md"
+      },
+      {
+        "source": "Construction/Google Drive.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Construction/HOA LA market 2026-09-02.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/HOA LA market 2026-09-02.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Google Drive.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Development/ConstructionDevelopment.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Jobs/9793 The Aventine.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Jobs/9770 Fairchild.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Jobs/9422 531 College.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Jobs/9736 Napa Street.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Jobs/9732 Manchester La Tijera.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Jobs/8430 Verdugo Tower.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Jobs/9380 Garden Street.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/HOA LA market 2026-09-02.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
+        "target": "Development/Vault handoff.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
+        "target": "Development/FinancialDevelopment.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
+        "target": "Development/hermes-artifacts.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
+        "target": "Development/Discord-Cron-Runbook.md"
+      },
+      {
+        "source": "Development/ConstructionDevelopment.md",
+        "target": "Development/ConstructionDevelopment/CD Map.md"
+      },
+      {
+        "source": "Development/ConstructionDevelopment.md",
+        "target": "Development/ConstructionDevelopment/CD Open work.md"
+      },
+      {
+        "source": "Development/ConstructionDevelopment.md",
+        "target": "Development/ConstructionDevelopment/CD Repo docs.md"
+      },
+      {
+        "source": "Development/ConstructionDevelopment.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Development/ConstructionDevelopment.md",
+        "target": "Construction.md"
+      },
+      {
+        "source": "Development/Discord-Cron-Runbook.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD Repo docs.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD Dashboard.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD Suites.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD PHClient.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Trading.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Construction.md"
+      },
+      {
+        "source": "Development/Hermes skill catalog.md",
+        "target": "Development/Local Qwen llama.cpp.md"
+      },
+      {
+        "source": "Development/hermes-artifacts.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/hermes-artifacts.md",
+        "target": "Development/FinancialDevelopment.md"
+      },
+      {
+        "source": "Development/hermes-artifacts.md",
+        "target": "Development/Hermes skill catalog.md"
+      },
+      {
+        "source": "Development/hermes-artifacts.md",
+        "target": "dangling:cell"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Local Qwen llama.cpp.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Hermes skill catalog.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Vault handoff.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Trading/Operational.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Construction/Google Drive.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Zai GLM provider setup.md"
+      },
+      {
+        "source": "Development/Local Qwen llama.cpp.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Local Qwen llama.cpp.md",
+        "target": "Development/Hermes skill catalog.md"
+      },
+      {
+        "source": "Development/Repo and vault map.md",
+        "target": "dangling:repo-and-vault-map.excalidraw"
+      },
+      {
+        "source": "Development/Repo and vault map.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Development/Repo and vault map.md",
+        "target": "Home.md"
+      },
+      {
+        "source": "Development/Repo and vault map.md",
+        "target": "Inbox.md"
+      },
+      {
+        "source": "Development/Repo and vault map.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
+        "source": "Development/Repo and vault map.md",
+        "target": "Development/ConstructionDevelopment.md"
+      },
+      {
+        "source": "Development/Repo and vault map.md",
+        "target": "Construction.md"
+      },
+      {
+        "source": "Development/Repo and vault map.md",
+        "target": "Trading.md"
+      },
+      {
+        "source": "Development/SoundDevelopment.md",
+        "target": "Development/SoundDevelopment/SD Map.md"
+      },
+      {
+        "source": "Development/SoundDevelopment.md",
+        "target": "Development/SoundDevelopment/SD Open work.md"
+      },
+      {
+        "source": "Development/SoundDevelopment.md",
+        "target": "Development/SoundDevelopment/SD Repo docs.md"
+      },
+      {
+        "source": "Development/SoundDevelopment.md",
+        "target": "Development/SoundDevelopment/AmbiToolbox.md"
+      },
+      {
+        "source": "Development/SoundDevelopment.md",
+        "target": "Development/SoundDevelopment/Zinko Spatial Audio.md"
+      },
+      {
+        "source": "Development/SoundDevelopment.md",
+        "target": "Development/SoundDevelopment/Sound by Zinko.md"
+      },
+      {
+        "source": "Development/SoundDevelopment.md",
+        "target": "Development/SoundDevelopment/OpenALHost.md"
+      },
+      {
+        "source": "Development/SoundDevelopment.md",
+        "target": "Development/SoundDevelopment/X-Fi adaptation.md"
+      },
+      {
+        "source": "Development/Vault handoff.md",
+        "target": "Home.md"
+      },
+      {
+        "source": "Development/Vault handoff.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Development/Vault handoff.md",
+        "target": "Construction.md"
+      },
+      {
+        "source": "Development/Vault handoff.md",
+        "target": "Development.md"
+      },
+      {
+        "source": "Development/Vault handoff.md",
+        "target": "Trading.md"
+      },
+      {
+        "source": "Development/Vault handoff.md",
+        "target": "dangling:wikilink"
+      },
+      {
+        "source": "Development/Zai GLM provider setup.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Zai GLM provider setup.md",
+        "target": "Development/Local Qwen llama.cpp.md"
+      },
+      {
+        "source": "Trading/0DTE Anderson Lakha Cem 20260820.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Trading/0DTE Anderson Lakha Cem 20260820.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/0DTE Anderson Lakha Cem 20260820.md",
+        "target": "Trading/Desk note 20260819 sentiment overlay.md"
+      },
+      {
+        "source": "Trading/AIGamma steal list — Phase 2-3 plan status.md",
+        "target": "Trading/AIGamma teardown - what to steal.md"
+      },
+      {
+        "source": "Trading/AIGamma steal list — Phase 2-3 plan status.md",
+        "target": "Trading/Jump-diffusion model zoo — shipped.md"
+      },
+      {
+        "source": "Trading/AIGamma teardown - what to steal.md",
+        "target": "Development/Hermes skill catalog.md"
+      },
+      {
+        "source": "Trading/AIGamma teardown - what to steal.md",
+        "target": "Trading/AIGamma steal list — Phase 2-3 plan status.md"
+      },
+      {
+        "source": "Trading/AIGamma teardown - what to steal.md",
+        "target": "Trading/Jump-diffusion model zoo — shipped.md"
+      },
+      {
+        "source": "Trading/Cem charm clock insight.md",
+        "target": "Trading/AIGamma teardown - what to steal.md"
+      },
+      {
+        "source": "Trading/Cem charm test - layman deliverable.md",
+        "target": "Trading/Cem charm clock insight.md"
+      },
+      {
+        "source": "Trading/Delta-band dual-book merge — one look 20260901.md",
+        "target": "Trading/Cem charm clock insight.md"
+      },
+      {
+        "source": "Trading/Desk note 20260819 sentiment overlay.md",
+        "target": "Trading/0DTE Anderson Lakha Cem 20260820.md"
+      },
+      {
+        "source": "Trading/Desk note 20260819 sentiment overlay.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Trading/Desk note 20260819 sentiment overlay.md",
+        "target": "Development/FinancialDevelopment/FD Suites.md"
+      },
+      {
+        "source": "Trading/Desk note 20260823 week ahead prep.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Jump-diffusion model zoo — shipped.md",
+        "target": "Trading/AIGamma teardown - what to steal.md"
+      },
+      {
+        "source": "Trading/Jump-diffusion model zoo — shipped.md",
+        "target": "Trading/AIGamma steal list — Phase 2-3 plan status.md"
+      },
+      {
+        "source": "Trading/Positions.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Positions.md",
+        "target": "dangling:robinhood"
+      },
+      {
+        "source": "Trading/Research.md",
+        "target": "Trading/0DTE Anderson Lakha Cem 20260820.md"
+      },
+      {
+        "source": "Trading/Sentiment scanner 3packs 20260825-0827.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:robinhood"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:Market rumor watchlist 20260828"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Trading/Sentiment scanner 3packs 20260825-0827.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:feedback-dont-exit-on-single-adverse-tick"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:feedback-0dte-standing-authorization"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Trading/Desk note 20260823 week ahead prep.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Trading/Desk note 20260819 sentiment overlay.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Trading/0DTE Anderson Lakha Cem 20260820.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:Direction tool"
+      },
+      {
+        "source": "Construction/Jobs/8430 Verdugo Tower.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Jobs/8430 Verdugo Tower.md",
+        "target": "Development/ConstructionDevelopment.md"
+      },
+      {
+        "source": "Construction/Jobs/9380 Garden Street.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Jobs/9422 531 College.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Jobs/9422 531 College.md",
+        "target": "Development/ConstructionDevelopment/CD Open work.md"
+      },
+      {
+        "source": "Construction/Jobs/9732 Manchester La Tijera.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Jobs/9732 Manchester La Tijera.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Construction/Jobs/9732 Manchester La Tijera.md",
+        "target": "Development/ConstructionDevelopment/CD Open work.md"
+      },
+      {
+        "source": "Construction/Jobs/9736 Napa Street.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Jobs/9736 Napa Street.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Construction/Jobs/9770 Fairchild.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Jobs/9793 The Aventine.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Jobs/9793 The Aventine.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Development/ConstructionDevelopment/CD Repo docs.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Audit 20260831.md",
+        "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Audit 20260831.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Audit 20260831.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Audit 20260831.md",
+        "target": "Development/FinancialDevelopment/FD Suites.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Cloud Keys.md",
+        "target": "Development/FinancialDevelopment.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Cloud Keys.md",
+        "target": "dangling:phclient-v2-api"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Cloud Keys.md",
+        "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Dealer book 20260821.md",
+        "target": "Development/FinancialDevelopment/FD Suites.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Dealer book 20260821.md",
+        "target": "Development/FinancialDevelopment/FD PHClient.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Dealer book 20260821.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Dealer book 20260821.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Improve 20260902.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Improve 20260902.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Development/Repo and vault map.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Development/FinancialDevelopment/FD Repo docs.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Development/FinancialDevelopment/FD Audit 20260831.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Development/FinancialDevelopment/FD Improve 20260902.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Map.md",
+        "target": "Development/FinancialDevelopment/FD Cloud Keys.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Development/FinancialDevelopment/FD PHClient.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Development/FinancialDevelopment/FD Dealer book 20260821.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Development/FinancialDevelopment/FD Audit 20260831.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Development/FinancialDevelopment/FD Improve 20260902.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Repo docs.md",
+        "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Repo docs.md",
+        "target": "Development/FinancialDevelopment/FD PHClient.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Repo docs.md",
+        "target": "Trading/0DTE Anderson Lakha Cem 20260820.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Repo docs.md",
+        "target": "Development/FinancialDevelopment/FD Dealer book 20260821.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Repo docs.md",
+        "target": "Trading.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Suites.md",
+        "target": "Development/FinancialDevelopment/FD Dealer book 20260821.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Suites.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/AmbiToolbox.md",
+        "target": "Development/SoundDevelopment/SD Open work.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/SD Map.md",
+        "target": "Development/SoundDevelopment/X-Fi adaptation.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/SD Open work.md",
+        "target": "Development/SoundDevelopment/AmbiToolbox.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/SD Open work.md",
+        "target": "Development/SoundDevelopment/Zinko Spatial Audio.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/SD Open work.md",
+        "target": "Development/SoundDevelopment/OpenALHost.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/SD Open work.md",
+        "target": "Development/SoundDevelopment/Sound by Zinko.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/SD Open work.md",
+        "target": "Development/SoundDevelopment/X-Fi adaptation.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/Sound by Zinko.md",
+        "target": "Development/SoundDevelopment/Zinko Spatial Audio.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/Zinko Spatial Audio.md",
+        "target": "Development/SoundDevelopment/Sound by Zinko.md"
+      },
+      {
+        "source": "Development/SoundDevelopment/Zinko Spatial Audio.md",
+        "target": "Development/SoundDevelopment/X-Fi adaptation.md"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/dealer_book_ab_exposure_20260902.md",
+        "target": "Development/FinancialDevelopment.md"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/dealer_book_ab_exposure_20260902.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/dealer_book_ab_exposure_20260902.md",
+        "target": "Trading/FinancialDevelopment Journal/morning_scan_2026-08-21.md"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_morning.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_morning.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "target": "dangling:7"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "target": "dangling:4"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "target": "dangling:5"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "target": "dangling:3"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "target": "dangling:6"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
+        "target": "dangling:8"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "target": "dangling:7"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "target": "dangling:4"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "target": "dangling:5"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "target": "dangling:3"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "target": "dangling:6"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
+        "target": "dangling:8"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_morning.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_morning.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "target": "dangling:7"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "target": "dangling:4"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "target": "dangling:5"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "target": "dangling:3"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "target": "dangling:6"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST_power-hour.md",
+        "target": "dangling:8"
+      }
+    ]
+  },
+  "source": {
+    "repo": "C:\\Users\\bottl\\obsidian-vault",
+    "collector": "vault-graph",
+    "note": "obsidian-vault"
+  },
+  "schema_version": 1,
+  "artifact_id": "vault-graph",
+  "title": "Vault graph",
+  "generated_at": "2026-09-03 06:49 UTC"
+}

@@ -36,3 +36,16 @@ th { cursor: pointer; color: var(--muted-foreground, #6b6b6b);
 tr:last-child td { border-bottom: none; }
 .ha-notes { color: var(--muted-foreground, #6b6b6b); font-size: 12px; }
 .ha-notes li { margin-bottom: 4px; }
+.ha-graph { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 12px; margin-bottom: 16px; }
+.ha-graph h3 { font-size: 14px; margin: 0 0 8px; }
+.ha-glegend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px;
+  color: var(--muted-foreground, #6b6b6b); margin-bottom: 8px; }
+.ha-glegend .swatch { display: inline-flex; align-items: center; gap: 6px; }
+.ha-glegend i { width: 8px; height: 8px; border-radius: 99px; display: inline-block; }
+.ha-gstage { position: relative; height: 560px; border-radius: 10px; overflow: hidden; }
+.ha-gstage canvas { display: block; width: 100%; height: 560px; cursor: grab; }
+.ha-gtip { display: none; position: absolute; pointer-events: none;
+  font-size: 12px; padding: 4px 8px; border-radius: 6px;
+  background: var(--card, #111); color: var(--foreground, #eee);
+  border: 1px solid var(--border, #333); }

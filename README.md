@@ -4,6 +4,25 @@ Universal, repo-agnostic **interactive artifacts**: single-file HTML dashboards
 that render in the Hermes desktop app (`::preview`), any browser, or anywhere.
 Replaces the static mockups that lived in `C:/Users/bottl/Claude/Artifacts/`.
 
+## Desktop plugin (view / mount)
+
+Installable user plugin so boards are a first-class Hermes surface, not only chat preview.
+
+```
+plugin/plugin.yaml
+plugin/dashboard/plugin_api.py   → /api/plugins/interactive-artifacts/
+plugin/desktop/plugin.js
+```
+
+Installed to:
+
+- `%LOCALAPPDATA%/hermes/plugins/interactive-artifacts/` (Python backend; `hermes plugins enable interactive-artifacts`)
+- `%LOCALAPPDATA%/hermes/desktop-plugins/interactive-artifacts/plugin.js` (sidebar **Interactive**, default on)
+
+Then: **Reload desktop plugins** (⌘K). Sidebar **Interactive**. Palette **Interactive Artifacts: Open boards**. **Mount pane** docks the current board on the right.
+
+Refresh still: `python tools/refresh.py <id>` or the Refresh button (needs gateway restart after first enable so `plugin_api.py` mounts).
+
 ## What an artifact is
 
 One folder under `artifacts/` containing:
