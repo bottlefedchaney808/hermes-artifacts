@@ -1,0 +1,8 @@
+{
+  "id": "vol-suite-dashboard",
+  "title": "Vol Suite Dashboard",
+  "collector": "vol-suite",
+  "repo": "C:/Users/bottl/FinancialDevelopment",
+  "description": "Converted from the static Cowork mockup to the universal Hermes artifact shell.",
+  "refresh": "ask Hermes to 'refresh vol-suite-dashboard'"
+}

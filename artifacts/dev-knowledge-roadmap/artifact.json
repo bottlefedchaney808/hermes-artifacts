@@ -1,0 +1,8 @@
+{
+  "id": "dev-knowledge-roadmap",
+  "title": "Dev Knowledge Roadmap",
+  "collector": "dev-roadmap",
+  "repo": "C:/Users/bottl/FinancialDevelopment",
+  "description": "Converted from the static Cowork mockup to the universal Hermes artifact shell.",
+  "refresh": "ask Hermes to 'refresh dev-knowledge-roadmap'"
+}

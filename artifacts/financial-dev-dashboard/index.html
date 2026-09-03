@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>VaR Simulations Digest</title>
+<title>FinancialDevelopment Swaps Snapshot</title>
 <!--HERMES-ARTIFACT:CSS-->
 <style>
 /* Hermes Interactive Artifacts — universal shell styles.
@@ -51,7 +51,7 @@ tr:last-child td { border-bottom: none; }
 <div id="app"></div>
 <!--HERMES-ARTIFACT:DATA-->
 <script id="hermes-artifact-data" type="application/json">
-{"summary": [{"label": "suite", "value": "var"}, {"label": "status", "value": "ok"}, {"label": "module", "value": "corr_sim"}, {"label": "var", "value": "424442.6690440216"}, {"label": "cvar", "value": "469727.92880735593"}, {"label": "confidence", "value": "0.99"}, {"label": "horizon_days", "value": "252"}, {"label": "timestamp", "value": "2026-09-02T19:02:25.885649Z"}], "tables": [{"id": "fields", "title": "Fields", "columns": ["field", "value"], "rows": [["suite", "var"], ["status", "ok"], ["module", "corr_sim"], ["var", "424442.6690440216"], ["cvar", "469727.92880735593"], ["confidence", "0.99"], ["horizon_days", "252"], ["timestamp", "2026-09-02T19:02:25.885649Z"], ["positions_source", "derived"], ["notes", "weights were normalized to sum to 1.0. | positions missing; derived proportional notionals from weights with total notional = 1,000,000. | live spot unavailable for SMCI,NVDA,AAPL,MSFT,AMZN,GOOGL,AVGO,MU,META,TSLA,BRK.B; used fallback price 100.0."]]}], "charts": [], "notes": [], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "var-sim", "note": "var_context_run_latest.json"}, "schema_version": 1, "artifact_id": "var-simulations-digest", "title": "VaR Simulations Digest", "generated_at": "2026-09-03 05:26 UTC"}
+{"summary": [{"label": "swap_trades (max rowid)", "value": "70,998,132"}, {"label": "orchestrator_runs", "value": "645"}, {"label": "db size", "value": "322 GB"}], "tables": [{"id": "scrape_log", "title": "scrape_log", "columns": ["id", "scrape_date", "rows_fetched", "rows_inserted", "rows_updated", "parse_errors", "status", "error_message", "duration_seconds", "created_at"], "rows": [[57, "2025-09-25", 1768840, 1768840, 0, 0, "success", null, 250, "2026-08-01 22:30:29"], [56, "2025-09-24", 1629220, 1629220, 0, 0, "success", null, 249, "2026-08-01 22:26:08"], [55, "2025-09-23", 1602262, 1602262, 0, 0, "success", null, 276, "2026-08-01 22:21:47"], [54, "2025-09-22", 1667250, 1667250, 0, 0, "success", null, 291, "2026-08-01 22:16:58"], [53, "2025-09-21", 2801, 2801, 0, 0, "success", null, 1, "2026-08-01 22:12:07"]]}], "charts": [], "notes": ["Read-only snapshot. Row count via MAX(rowid) — a COUNT(*) on the 346 GB swap_trades table is a full scan and is avoided."], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "findev-swaps", "note": "swaps.db"}, "schema_version": 1, "artifact_id": "financial-dev-dashboard", "title": "FinancialDevelopment Swaps Snapshot", "generated_at": "2026-09-03 05:26 UTC"}
 </script>
 <!--/HERMES-ARTIFACT:DATA-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" crossorigin="anonymous"></script>

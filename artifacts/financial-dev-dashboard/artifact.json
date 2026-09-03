@@ -1,0 +1,8 @@
+{
+  "id": "financial-dev-dashboard",
+  "title": "FinancialDevelopment Swaps Snapshot",
+  "collector": "findev-swaps",
+  "repo": "C:/Users/bottl/FinancialDevelopment",
+  "description": "Converted from the static Cowork mockup to the universal Hermes artifact shell.",
+  "refresh": "ask Hermes to 'refresh financial-dev-dashboard'"
+}
