@@ -4,9 +4,9 @@ from __future__ import annotations
 import time
 from pathlib import Path
 
-from collectors import register
+from collectors import register, default_findev_repo
 
-DEFAULT_REPO = Path("C:/Users/bottl/FinancialDevelopment")
+DEFAULT_REPO = default_findev_repo()
 SCAN_DIRS = ("trading_journal", "docs", ".hermes/plans")
 
 

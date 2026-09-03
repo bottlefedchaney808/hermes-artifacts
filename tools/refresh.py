@@ -27,6 +27,20 @@ import collectors  # noqa: E402
 for _mod in sorted(p.name for p in (ROOT / "tools" / "collectors").glob("*_collector.py")):
     __import__(f"collectors.{_mod[:-3]}")
 
+LINUX_FINDEV = Path("/opt/data/FinancialDevelopment")
+
+
+def _resolve_repo(manifest_repo, override=None) -> Path:
+    if override:
+        return Path(override)
+    p = Path(manifest_repo)
+    if p.exists():
+        return p
+    if LINUX_FINDEV.exists():
+        return LINUX_FINDEV
+    return p
+
+
 CSS_MARKER = ("<!--HERMES-ARTIFACT:CSS-->", "<!--/HERMES-ARTIFACT:CSS-->")
 DATA_MARKER = ("<!--HERMES-ARTIFACT:DATA-->", "<!--/HERMES-ARTIFACT:DATA-->")
 JS_MARKER = ("<!--HERMES-ARTIFACT:JS-->", "<!--/HERMES-ARTIFACT:JS-->")
@@ -105,7 +119,7 @@ def refresh_one(artifact_id: str, repo_override=None, root: Path = ROOT) -> dict
     collector_name = manifest["collector"]
     if collector_name not in collectors.COLLECTORS:
         raise SystemExit(f"unknown collector {collector_name!r} for {artifact_id}")
-    repo = Path(repo_override or manifest["repo"])
+    repo = _resolve_repo(manifest["repo"], repo_override)
     payload = collectors.COLLECTORS[collector_name](repo)
     payload.update({
         "schema_version": 1,
@@ -137,7 +151,7 @@ def main(argv=None, root: Path = ROOT) -> int:
         return 0
     if args.all:
         for aid in ids:
-            refresh_one(aid, root=root)
+            refresh_one(aid, args.repo, root=root)
             print(f"refreshed {aid}")
         return 0
     if not args.artifact:

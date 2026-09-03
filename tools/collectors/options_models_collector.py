@@ -4,9 +4,9 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-from collectors import register
+from collectors import register, default_findev_repo
 
-DEFAULT_REPO = Path("C:/Users/bottl/FinancialDevelopment")
+DEFAULT_REPO = default_findev_repo()
 SHOW = ("Model", "Price", "Delta", "Gamma", "Vega", "Theta", "Vanna", "Charm", "Sigma")
 
 

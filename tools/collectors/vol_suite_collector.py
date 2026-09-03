@@ -4,9 +4,9 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from collectors import json_to_payload, register
+from collectors import json_to_payload, register, default_findev_repo
 
-DEFAULT_REPO = Path("C:/Users/bottl/FinancialDevelopment")
+DEFAULT_REPO = default_findev_repo()
 
 
 @register("vol-suite")

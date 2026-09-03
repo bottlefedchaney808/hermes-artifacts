@@ -40,12 +40,12 @@
   "charts": [],
   "notes": [],
   "source": {
-    "repo": "C:\\Users\\bottl\\FinancialDevelopment",
+    "repo": "/opt/data/FinancialDevelopment",
     "collector": "sentiment",
     "note": "latest_manifest.json"
   },
   "schema_version": 1,
   "artifact_id": "sentiment-scanner-board",
   "title": "Sentiment Scanner Board",
-  "generated_at": "2026-09-03 05:26 UTC"
+  "generated_at": "2026-09-03 06:31 UTC"
 }

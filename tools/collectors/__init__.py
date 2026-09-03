@@ -12,6 +12,17 @@ from typing import Callable
 
 COLLECTORS = {}
 
+_LINUX_FINDEV = Path("/opt/data/FinancialDevelopment")
+_WIN_FINDEV = Path("C:/Users/bottl/FinancialDevelopment")
+
+
+def default_findev_repo() -> Path:
+    """Cloud clone first, Windows spine if that isn't here."""
+    for p in (_LINUX_FINDEV, _WIN_FINDEV):
+        if p.exists():
+            return p
+    return _LINUX_FINDEV
+
 
 def register(name: str):
     def deco(fn):

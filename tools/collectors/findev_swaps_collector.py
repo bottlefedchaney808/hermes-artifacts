@@ -4,9 +4,9 @@ from __future__ import annotations
 import sqlite3
 from pathlib import Path
 
-from collectors import register
+from collectors import register, default_findev_repo
 
-DEFAULT_REPO = Path("C:/Users/bottl/FinancialDevelopment")
+DEFAULT_REPO = default_findev_repo()
 
 
 def _recent_rows(con: sqlite3.Connection, table: str, limit: int = 5) -> dict:

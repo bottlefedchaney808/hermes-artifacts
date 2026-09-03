@@ -50,10 +50,11 @@ repository for a one-off refresh.
 ## Refresh
 
 ```bash
-python tools/refresh.py --list                 # show artifact ids
-python tools/refresh.py var-simulations-digest # one
-python tools/refresh.py --all                  # every artifact
-python tools/refresh.py dev-knowledge-roadmap --repo C:/path/to/other/repo
+python tools/refresh.py --list
+python tools/refresh.py var-simulations-digest
+python tools/refresh.py --all
+python tools/refresh.py --all --repo /opt/data/FinancialDevelopment   # this cloud box
+python tools/refresh.py dev-knowledge-roadmap --repo /path/to/other/repo
 ```
 
 In chat: **ask Hermes to "refresh <artifact-id>"** — it runs the command and
