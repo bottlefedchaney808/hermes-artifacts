@@ -135,9 +135,19 @@
      this file ships inline into single-file artifacts with no build step. */
 
   var OBSIDIAN_VAULT = 'obsidian-vault';
+  // Single-instance teardown handle for the live Jarvis graph (set by renderGraph's start()).
+  var activeJarvisDestroy = null;
 
   function renderGraph(graph) {
-    if (!graph || !(graph.nodes && graph.nodes.length)) return;
+    // Empty/missing graph → return a visible note box (spec §6). Always returns a
+    // DOM element so any caller's appendChild is safe; no canvas loop started.
+    if (!graph || !(graph.nodes && graph.nodes.length)) {
+      var emptyBox = h('div', { class: 'ha-graph' }, h('h3', { text: 'Graph view' }));
+      var emptyStage = h('div', { class: 'ha-gstage' });
+      emptyStage.appendChild(h('div', { class: 'ha-notes', style: 'padding:16px;', text: 'No links found in this vault.' }));
+      emptyBox.appendChild(emptyStage);
+      return emptyBox;
+    }
 
     // ---- Init: degree map, adjacency (neighborhood sets), top-label set ----
     var rawNodes = graph.nodes, rawEdges = graph.edges || [];
@@ -412,7 +422,7 @@
         tip.style.display = hover ? 'block' : 'none';
         if (hover) {
           var unresolved = String(hover.id).indexOf('dangling:') === 0;
-          tip.textContent = hover.label + '  ·  ' + hover.group + '  ·  deg ' + deg[hover.id] +
+          tip.textContent = hover.label + '  ·  ' + hover.group + '  ·  deg ' + (deg[hover.id] || 0) +
             (unresolved ? '  ·  unresolved link' : '');
           tip.style.left = (p.mx + 12) + 'px';
           tip.style.top = (p.my + 12) + 'px';
@@ -432,6 +442,11 @@
     }
 
     var sim = null;
+    // Single-instance guard: only one live Jarvis graph at a time. If renderGraph is
+    // called again (re-render / refresh), tear down the previous instance first so
+    // window-level listeners + rAF loop never accumulate across renders.
+    if (typeof activeJarvisDestroy === 'function') { try { activeJarvisDestroy(); } catch (e) {} }
+
     // Auto-fit: frame the whole graph in ~90% of the stage, centered (like Obsidian's fit-to-view).
     function autoFit() {
       if (!nodes.length) return;
@@ -486,12 +501,27 @@
       if (hasD3) setTimeout(maybeFit, 1500); // let the sim settle before framing
       else maybeFit();
 
+      var rafId = 0;
       function loop() {
         if (!hasD3) fallbackStep(); // keep the static layout gently alive / responsive to drag
         draw();
-        requestAnimationFrame(loop);
+        rafId = requestAnimationFrame(loop);
       }
       loop();
+
+      // Teardown: stop rAF, remove every listener this instance added (window-level ones
+      // outlive the DOM box that render() clears), and halt the sim. Called by a later
+      // renderGraph via activeJarvisDestroy so re-renders never stack handlers/loops.
+      function destroy() {
+        cancelAnimationFrame(rafId);
+        window.removeEventListener('resize', resize);
+        canvas.removeEventListener('wheel', onWheel);
+        canvas.removeEventListener('mousedown', onDown);
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseup', onUp);
+        if (sim && sim.stop) { try { sim.alphaTarget(0).stop(); } catch (e) {} }
+      }
+      activeJarvisDestroy = destroy;
     }
 
     // Defer start until the stage has a measurable width (it's appended during render()).
