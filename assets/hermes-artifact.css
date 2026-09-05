@@ -43,6 +43,10 @@ tr:last-child td { border-bottom: none; }
   color: var(--muted-foreground, #6b6b6b); margin-bottom: 8px; }
 .ha-glegend .swatch { display: inline-flex; align-items: center; gap: 6px; }
 .ha-glegend i { width: 8px; height: 8px; border-radius: 99px; display: inline-block; }
+/* Jarvis graph stage: base color only here (kills white-flash before JS paints).
+   The radial vignette + faint dot grid are drawn per-frame on the canvas inside
+   renderGraph() — see spec §2 Rendering. Do NOT add a CSS gradient to this rule;
+   it would double-paint under the canvas fill. */
 .ha-gstage { position: relative; height: 560px; border-radius: 10px; overflow: hidden; background: #05070c; }
 .ha-gstage canvas { display: block; width: 100%; height: 560px; cursor: grab; }
 .ha-gtip { display: none; position: absolute; pointer-events: none; }
