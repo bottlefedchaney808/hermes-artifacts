@@ -45,11 +45,8 @@ tr:last-child td { border-bottom: none; }
 .ha-glegend i { width: 8px; height: 8px; border-radius: 99px; display: inline-block; }
 .ha-gstage { position: relative; height: 560px; border-radius: 10px; overflow: hidden; background: #05070c; }
 .ha-gstage canvas { display: block; width: 100%; height: 560px; cursor: grab; }
-.ha-gtip { display: none; position: absolute; pointer-events: none;}
-.ha-gtip { background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; border-radius: 6px; padding: 4px 8px; box-shadow: 0 0 6px rgba(0,0,0,.4); }
+.ha-gtip { display: none; position: absolute; pointer-events: none; }
+.ha-gtip { background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; border-radius: 6px; padding: 4px 8px; box-shadow: 0 0 6px rgba(0,0,0,.4); font-size: 12px; }
 .ha-ghost-toast { position: absolute; left: 50%; transform: translateX(-50%); bottom: 12px; padding: 6px 12px; border-radius: 8px; background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; opacity: 0; transition: opacity .25s ease; pointer-events: none; }
 .ha-ghost-toast.on { opacity: 1; }
 .ha-glegend i { box-shadow: 0 0 6px rgba(255,255,255,.35); }
-  font-size: 12px; padding: 4px 8px; border-radius: 6px;
-  background: var(--card, #111); color: var(--foreground, #eee);
-  border: 1px solid var(--border, #333); }
