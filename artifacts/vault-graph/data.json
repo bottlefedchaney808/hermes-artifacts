@@ -2,15 +2,15 @@
   "summary": [
     {
       "label": "notes",
-      "value": "326"
+      "value": "334"
     },
     {
       "label": "nodes",
-      "value": "345"
+      "value": "353"
     },
     {
       "label": "links",
-      "value": "269"
+      "value": "294"
     },
     {
       "label": "dangling",
@@ -36,7 +36,7 @@
         [
           "Development",
           "development",
-          "23"
+          "24"
         ],
         [
           "Construction",
@@ -44,38 +44,43 @@
           "21"
         ],
         [
+          "Hermes",
+          "development",
+          "19"
+        ],
+        [
           "Trading journal",
           "trading",
           "19"
         ],
         [
-          "Hermes",
-          "development",
+          "Jason",
+          "hub",
           "18"
-        ],
-        [
-          "FinancialDevelopment",
-          "development",
-          "14"
         ],
         [
           "FD Map",
           "development",
-          "14"
+          "17"
+        ],
+        [
+          "FinancialDevelopment",
+          "development",
+          "16"
         ],
         [
           "FD Open work",
           "development",
-          "14"
-        ],
-        [
-          "Jason",
-          "hub",
-          "13"
+          "16"
         ],
         [
           "Estimating",
           "construction",
+          "13"
+        ],
+        [
+          "Cloud instance",
+          "development",
           "13"
         ],
         [
@@ -99,11 +104,6 @@
           "10"
         ],
         [
-          "Cloud instance",
-          "development",
-          "9"
-        ],
-        [
           "SoundDevelopment",
           "development",
           "9"
@@ -121,6 +121,11 @@
         [
           "Research",
           "trading",
+          "8"
+        ],
+        [
+          "FD Swaps DB",
+          "development",
           "8"
         ],
         [
@@ -147,11 +152,6 @@
           "0DTE Anderson Lakha Cem 20260820",
           "trading",
           "7"
-        ],
-        [
-          "9732 Manchester La Tijera",
-          "construction",
-          "7"
         ]
       ]
     }
@@ -162,9 +162,9 @@
       "title": "Notes by leg",
       "type": "doughnut",
       "labels": [
+        "hub",
         "construction",
         "development",
-        "hub",
         "inbox",
         "trading",
         "templates",
@@ -174,9 +174,9 @@
         {
           "label": "count",
           "data": [
+            6,
             14,
-            39,
-            3,
+            44,
             1,
             267,
             2,
@@ -193,6 +193,12 @@
   "graph": {
     "nodes": [
       {
+        "id": "Arkansas MMJ card.md",
+        "label": "Arkansas MMJ card",
+        "group": "hub",
+        "size": 6
+      },
+      {
         "id": "Construction.md",
         "label": "Construction",
         "group": "construction",
@@ -202,7 +208,7 @@
         "id": "Development.md",
         "label": "Development",
         "group": "development",
-        "size": 23
+        "size": 24
       },
       {
         "id": "Home.md",
@@ -217,10 +223,22 @@
         "size": 5
       },
       {
+        "id": "Jason identity.md",
+        "label": "Jason identity",
+        "group": "hub",
+        "size": 6
+      },
+      {
         "id": "Jason.md",
         "label": "Jason",
         "group": "hub",
-        "size": 13
+        "size": 18
+      },
+      {
+        "id": "My debit card.md",
+        "label": "My debit card",
+        "group": "hub",
+        "size": 5
       },
       {
         "id": "Trading.md",
@@ -268,13 +286,19 @@
         "id": "Development/Cloud instance.md",
         "label": "Cloud instance",
         "group": "development",
-        "size": 9
+        "size": 13
       },
       {
         "id": "Development/ConstructionDevelopment.md",
         "label": "ConstructionDevelopment",
         "group": "development",
         "size": 11
+      },
+      {
+        "id": "Development/Cron-Financial-Suite-Inventory.md",
+        "label": "Cron-Financial-Suite-Inventory",
+        "group": "development",
+        "size": 3
       },
       {
         "id": "Development/Dev notes.md",
@@ -292,11 +316,23 @@
         "id": "Development/FinancialDevelopment.md",
         "label": "FinancialDevelopment",
         "group": "development",
-        "size": 14
+        "size": 16
+      },
+      {
+        "id": "Development/Google API credentials.md",
+        "label": "Google API credentials",
+        "group": "development",
+        "size": 2
       },
       {
         "id": "Development/HANDOFF_trading_journal_history_purge.md",
         "label": "HANDOFF_trading_journal_history_purge",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/Hermes fleet overhaul 2026-09-04.md",
+        "label": "Hermes fleet overhaul 2026-09-04",
         "group": "development",
         "size": 0
       },
@@ -316,7 +352,7 @@
         "id": "Development/Hermes.md",
         "label": "Hermes",
         "group": "development",
-        "size": 18
+        "size": 19
       },
       {
         "id": "Development/kanban_cloud_bridge_handoff.md",
@@ -544,7 +580,13 @@
         "id": "Development/FinancialDevelopment/FD Cloud Keys.md",
         "label": "FD Cloud Keys",
         "group": "development",
-        "size": 4
+        "size": 5
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Cloud Workers.md",
+        "label": "FD Cloud Workers",
+        "group": "development",
+        "size": 3
       },
       {
         "id": "Development/FinancialDevelopment/FD Dashboard.md",
@@ -568,19 +610,19 @@
         "id": "Development/FinancialDevelopment/FD Map.md",
         "label": "FD Map",
         "group": "development",
-        "size": 14
+        "size": 17
       },
       {
         "id": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md",
         "label": "FD Modularization handoff 20260902",
         "group": "development",
-        "size": 4
+        "size": 5
       },
       {
         "id": "Development/FinancialDevelopment/FD Open work.md",
         "label": "FD Open work",
         "group": "development",
-        "size": 14
+        "size": 16
       },
       {
         "id": "Development/FinancialDevelopment/FD PHClient.md",
@@ -604,7 +646,13 @@
         "id": "Development/FinancialDevelopment/FD Swaps DB.md",
         "label": "FD Swaps DB",
         "group": "development",
-        "size": 7
+        "size": 8
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Widget console plan 20260903.md",
+        "label": "FD Widget console plan 20260903",
+        "group": "development",
+        "size": 4
       },
       {
         "id": "Development/SoundDevelopment/AmbiToolbox.md",
@@ -2265,6 +2313,18 @@
     ],
     "edges": [
       {
+        "source": "Arkansas MMJ card.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Arkansas MMJ card.md",
+        "target": "Jason identity.md"
+      },
+      {
+        "source": "Arkansas MMJ card.md",
+        "target": "My debit card.md"
+      },
+      {
         "source": "Construction.md",
         "target": "Construction/Jobs/9770 Fairchild.md"
       },
@@ -2433,6 +2493,30 @@
         "target": "Trading.md"
       },
       {
+        "source": "Jason identity.md",
+        "target": "My debit card.md"
+      },
+      {
+        "source": "Jason identity.md",
+        "target": "Arkansas MMJ card.md"
+      },
+      {
+        "source": "Jason identity.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Jason identity.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "Arkansas MMJ card.md"
+      },
+      {
+        "source": "Jason.md",
+        "target": "My debit card.md"
+      },
+      {
         "source": "Jason.md",
         "target": "Construction/Tiferet.md"
       },
@@ -2463,6 +2547,14 @@
       {
         "source": "Jason.md",
         "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "My debit card.md",
+        "target": "Arkansas MMJ card.md"
+      },
+      {
+        "source": "My debit card.md",
+        "target": "Jason identity.md"
       },
       {
         "source": "Trading.md",
@@ -2606,11 +2698,19 @@
       },
       {
         "source": "Development/Cloud instance.md",
+        "target": "Development/Cron-Financial-Suite-Inventory.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
         "target": "Jason.md"
       },
       {
         "source": "Development/Cloud instance.md",
         "target": "Development/Discord-Cron-Runbook.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
       },
       {
         "source": "Development/ConstructionDevelopment.md",
@@ -2633,8 +2733,20 @@
         "target": "Construction.md"
       },
       {
+        "source": "Development/Cron-Financial-Suite-Inventory.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
         "source": "Development/Discord-Cron-Runbook.md",
         "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/Cron-Financial-Suite-Inventory.md"
       },
       {
         "source": "Development/FinancialDevelopment.md",
@@ -2671,6 +2783,14 @@
       {
         "source": "Development/FinancialDevelopment.md",
         "target": "Construction.md"
+      },
+      {
+        "source": "Development/Google API credentials.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Google API credentials.md",
+        "target": "Development.md"
       },
       {
         "source": "Development/Hermes skill catalog.md",
@@ -3053,6 +3173,18 @@
         "target": "Development/FinancialDevelopment/FD Swaps DB.md"
       },
       {
+        "source": "Development/FinancialDevelopment/FD Cloud Workers.md",
+        "target": "Development/FinancialDevelopment/FD Cloud Keys.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Cloud Workers.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Cloud Workers.md",
+        "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
         "source": "Development/FinancialDevelopment/FD Dealer book 20260821.md",
         "target": "Development/FinancialDevelopment/FD Suites.md"
       },
@@ -3126,6 +3258,10 @@
       },
       {
         "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Development/FinancialDevelopment/FD Widget console plan 20260903.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
         "target": "Development/FinancialDevelopment/FD Swaps DB.md"
       },
       {
@@ -3175,6 +3311,18 @@
       {
         "source": "Development/FinancialDevelopment/FD Suites.md",
         "target": "Trading/Research.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Widget console plan 20260903.md",
+        "target": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Widget console plan 20260903.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Widget console plan 20260903.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
       },
       {
         "source": "Development/SoundDevelopment/AmbiToolbox.md",
@@ -3350,5 +3498,5 @@
   "schema_version": 1,
   "artifact_id": "vault-graph",
   "title": "Vault graph",
-  "generated_at": "2026-09-03 06:49 UTC"
+  "generated_at": "2026-09-05 01:44 UTC"
 }

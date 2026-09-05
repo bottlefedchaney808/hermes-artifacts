@@ -165,6 +165,10 @@
     // Group attractor points: each distinct group gets an angle on a ~260 circle.
     var groups = [];
     rawNodes.forEach(function (nd) { if (groups.indexOf(nd.group || 'hub') === -1) groups.push(nd.group || 'hub'); });
+    var groupCount = {};
+    rawNodes.forEach(function (nd) { var g = nd.group || 'hub'; groupCount[g] = (groupCount[g] || 0) + 1; });
+    // Big groups pull harder so they form compact blobs instead of diffuse clouds.
+    function cohesionStrength(g) { return Math.min(0.12, 0.01 * Math.sqrt(groupCount[g] || 1)); }
     var attract = {};
     for (i = 0; i < groups.length; i++) {
       var ang = (i / Math.max(1, groups.length)) * Math.PI * 2;
@@ -428,8 +432,28 @@
     }
 
     var sim = null;
+    // Auto-fit: frame the whole graph in ~90% of the stage, centered (like Obsidian's fit-to-view).
+    function autoFit() {
+      if (!nodes.length) return;
+      var minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+      for (var j = 0; j < nodes.length; j++) {
+        n = nodes[j];
+        if (n.x < minX) minX = n.x;
+        if (n.y < minY) minY = n.y;
+        if (n.x > maxX) maxX = n.x;
+        if (n.y > maxY) maxY = n.y;
+      }
+      var bw = Math.max(60, maxX - minX), bh = Math.max(60, maxY - minY);
+      view.k = clampK(Math.min(cssW * 0.9 / bw, cssH * 0.9 / bh));
+      view.tx = (cssW - bw * view.k) / 2 - minX * view.k;
+      view.ty = (cssH - bh * view.k) / 2 - minY * view.k;
+    }
+
     function start() {
       resize();
+      // Center world origin in the viewport so the ~260-radius attractor circle fits.
+      view.tx = cssW / 2;
+      view.ty = cssH / 2;
       window.addEventListener('resize', resize);
       if (hasD3) {
         // d3-force physics with the exact verified v7 API surface.
@@ -441,10 +465,12 @@
               return 0.5 / Math.max(deg[idOf(l.source)] || 1, deg[idOf(l.target)] || 1);
             }))
           .force('charge', d3.forceManyBody().theta(0.9)
-            .strength(function (nd) { return -18 * (1 + Math.sqrt(nd.size) * 0.4); }))
+            .strength(function (nd) { return -10 * (1 + Math.sqrt(nd.size) * 0.4); }))
           .force('collide', d3.forceCollide(radius).iterations(2))
-          .force('gx', d3.forceX(function (nd) { return (attract[nd.group] || { x: 0 }).x; }).strength(0.03))
-          .force('gy', d3.forceY(function (nd) { return (attract[nd.group] || { y: 0 }).y; }).strength(0.03));
+          .force('gx', d3.forceX(function (nd) { return (attract[nd.group] || { x: 0 }).x; })
+            .strength(function (nd) { return cohesionStrength(nd.group); }))
+          .force('gy', d3.forceY(function (nd) { return (attract[nd.group] || { y: 0 }).y; })
+            .strength(function (nd) { return cohesionStrength(nd.group); }));
 
         canvas.addEventListener('wheel', onWheel, { passive: false });
       } else {
@@ -454,6 +480,11 @@
       canvas.addEventListener('mousedown', onDown);
       window.addEventListener('mousemove', onMove);
       window.addEventListener('mouseup', onUp);
+
+      var fitted = false;
+      function maybeFit() { if (!fitted) { autoFit(); fitted = true; } }
+      if (hasD3) setTimeout(maybeFit, 1500); // let the sim settle before framing
+      else maybeFit();
 
       function loop() {
         if (!hasD3) fallbackStep(); // keep the static layout gently alive / responsive to drag
