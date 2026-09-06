@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{title}}</title>
+
+<!--HERMES-ARTIFACT:CSS-->
+<style>
+  :root { color-scheme: dark; }
+  body {
+    margin: 0; padding: 16px; font-family: ui-monospace, 'Cascadia Mono', Menlo, Consolas, monospace;
+    background: var(--card, #14161b); color: var(--foreground, #e6e6e6); font-size: 13px;
+  }
+  .ha-live-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ha-live-title { font-size: 16px; font-weight: 700; }
+  .ha-badge {
+    padding: 2px 10px; border-radius: 999px; font-weight: 700; font-size: 11px;
+    letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--border, #333);
+  }
+  .ha-badge.running { color: #ffd166; border-color: #ffd166; animation: ha-pulse 1.2s infinite; }
+  .ha-badge.complete { color: #4ade80; border-color: #4ade80; }
+  .ha-badge.failed { color: #ff6b6b; border-color: #ff6b6b; }
+  @keyframes ha-pulse { 50% { opacity: .45; } }
+  .ha-meta { color: var(--muted-foreground, #9aa0a6); font-size: 11px; margin-top: 4px; }
+  .ha-cards { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  .ha-card {
+    border: 1px solid var(--border, #333); border-radius: 8px; padding: 6px 10px;
+    background: var(--background, #0d0f12);
+  }
+  .ha-card b { color: var(--muted-foreground, #9aa0a6); font-weight: 600; font-size: 10px;
+    text-transform: uppercase; letter-spacing: .06em; display: block; }
+  .ha-cmd {
+    margin: 8px 0; padding: 8px 10px; border-left: 3px solid var(--accent, #6ea8fe);
+    background: var(--background, #0d0f12); color: var(--muted-foreground, #b8bec6);
+    overflow-x: auto; white-space: pre-wrap; word-break: break-all; font-size: 12px;
+  }
+  .ha-log {
+    border: 1px solid var(--border, #2a2d33); border-radius: 8px; background: var(--background, #0d0f12);
+    padding: 10px 12px; max-height: 60vh; overflow-y: auto; line-height: 1.45;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .ha-log .line:last-child { color: #ffd166; }
+  .ha-log .err { color: #ff6b6b; }
+  .ha-spin {
+    display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+    border: 2px solid #ffd166; border-top-color: transparent; animation: ha-rot .8s linear infinite;
+  }
+  @keyframes ha-rot { to { transform: rotate(360deg); } }
+</style>
+<!--/HERMES-ARTIFACT:CSS-->
+</head>
+<body>
+  <div class="ha-live-head">
+    <span class="ha-live-title" id="t"></span>
+    <span class="ha-badge" id="badge"></span>
+    <span class="ha-spin" id="spin"></span>
+  </div>
+  <div class="ha-meta" id="meta"></div>
+  <div class="ha-cards" id="cards"></div>
+  <div class="ha-cmd" id="cmd"></div>
+  <div class="ha-log" id="log"></div>
+
+<!--HERMES-ARTIFACT:DATA-->
+<script id="hermes-artifact-data" type="application/json">
+{"schema_version": 1, "artifact_id": "findev-live", "title": "FinDev — SPY dealer exposure (LIVE)", "generated_at": "2026-09-06 00:03:31 UTC", "live": false, "status": "complete", "command": ["/opt/data/FinancialDevelopment/.venv/bin/python", "/opt/data/hermes-artifacts/tools/examples/findev_spy_run.py"], "cwd": "/opt/data/FinancialDevelopment", "started_at": "2026-09-06 00:03:05 UTC", "ended_at": "2026-09-06 00:03:31 UTC", "elapsed_sec": 26.6, "exit_code": 0, "log": ["repo: /opt/data/FinancialDevelopment", "minting run via shared.module_execution (widget-native engine)", "  [flow] scanner_trades failed: PHAPIError: API request failed", "engine order: ['dealer_exposure']", "  dealer_exposure  status=ok metrics=12 artifacts=5", "  spot: 769.05", "  gex_reference: -175483098.43216679", "  book_gamma: 1419404088.327022", "  charm_1d: -9514.686371385433", "  residual_vanna_inventory: -4053.2491682135715", "  structural_status: available", "run_id: 20260906T000305Z-8998", "run_dir: /opt/data/FinancialDevelopment/outputs/20260906T000305Z-8998", "total elapsed: 26s"], "summary": [{"label": "ticker", "value": "SPY"}, {"label": "suite", "value": "Vol_Suite"}, {"label": "status", "value": "complete", "tone": "ok"}, {"label": "elapsed", "value": "27s"}, {"label": "log lines", "value": "14"}], "tables": [], "charts": [], "notes": [], "source": {"repo": "/opt/data/FinancialDevelopment", "collector": "livestream", "note": "live stream of /opt/data/FinancialDevelopment/.venv/bin/python /opt/data/hermes-artifacts/tools/examples/findev_spy_run.py"}}
+</script>
+<!--/HERMES-ARTIFACT:DATA-->
+
+<!--HERMES-ARTIFACT:JS-->
+<script>
+(function () {
+  var data = JSON.parse(document.getElementById("hermes-artifact-data").textContent);
+  var live = !!data.live;
+  document.getElementById("t").textContent = data.title || data.artifact_id;
+  var badge = document.getElementById("badge");
+  badge.textContent = data.status || "";
+  badge.className = "ha-badge " + (data.status || "");
+  document.getElementById("spin").style.display = live ? "" : "none";
+
+  var bits = [];
+  if (data.started_at) bits.push("started " + data.started_at);
+  if (!live && data.ended_at) bits.push("ended " + data.ended_at);
+  bits.push("elapsed " + (data.elapsed_sec != null ? data.elapsed_sec : "?") + "s");
+  if (data.exit_code != null) bits.push("exit " + data.exit_code);
+  document.getElementById("meta").textContent = bits.join("  ·  ");
+
+  var cards = document.getElementById("cards");
+  (data.summary || []).forEach(function (c) {
+    var d = document.createElement("div");
+    d.className = "ha-card";
+    var b = document.createElement("b"); b.textContent = c.label || "";
+    var v = document.createElement("span");
+    v.textContent = c.value;
+    if (c.tone === "ok") v.style.color = "#4ade80";
+    if (c.tone === "bad") v.style.color = "#ff6b6b";
+    d.appendChild(b); d.appendChild(v); cards.appendChild(d);
+  });
+
+  document.getElementById("cmd").textContent = "$ " + (data.command || []).join(" ")
+    + (data.cwd ? "\n# cwd: " + data.cwd : "");
+
+  var log = document.getElementById("log");
+  var lines = data.log || [];
+  lines.forEach(function (l) {
+    var d = document.createElement("div");
+    d.className = "line" + (/error|traceback|failed|panic/i.test(l) ? " err" : "");
+    d.textContent = l;
+    log.appendChild(d);
+  });
+  log.scrollTop = log.scrollHeight;
+
+  // self-stopping reload: only refresh while live; final state stays put
+  var meta = document.getElementById("live-refresh");
+  if (!live && meta) meta.parentNode.removeChild(meta);
+  if (live) {
+    setTimeout(function () { location.reload(); }, 2600);
+  }
+  document.title = (live ? "▶ " : (data.status === "failed" ? "✗ " : "✓ ")) + (data.title || "");
+})();
+</script>
+<!--/HERMES-ARTIFACT:JS-->
+</body>
+</html>
