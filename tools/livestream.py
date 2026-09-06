@@ -129,6 +129,10 @@ def main() -> int:
     ap.add_argument("--cwd", default=None, help="working dir for the command")
     ap.add_argument("--card", action="append", default=[],
                     help="summary card 'label=value' (repeatable)")
+    ap.add_argument("--notify-target", default=None,
+                    help="Discord/other target for digest on completion, e.g. discord:1545456249313824863")
+    ap.add_argument("--notify-subject", default=None,
+                    help="subject line for the completion digest")
     ap.add_argument("command", nargs="+", help="command to run (after --)")
     args = ap.parse_args()
 
@@ -160,6 +164,21 @@ def main() -> int:
     status = "complete" if rc == 0 else "failed"
     st.build(status, live=False, exit_code=rc)
     print(f"{args.id}: {status} (exit {rc}) — {st.dir / 'index.html'}")
+
+    # Completion digest → Discord (best-effort; never fails the run)
+    if args.notify_target:
+        try:
+            sys.path.insert(0, str(Path(__file__).parent))
+            from artifact_digest import render_digest
+            data = json.loads((st.dir / "data.json").read_text())
+            msg = render_digest(data)
+            cmd = ["/opt/hermes/.venv/bin/hermes", "send", "-t", args.notify_target]
+            if args.notify_subject:
+                cmd += ["--subject", args.notify_subject]
+            send = subprocess.run(cmd + [msg], capture_output=True, text=True, timeout=60)
+            print(f"{args.id}: digest -> {args.notify_target} ({'ok' if send.returncode == 0 else send.stderr.strip()[:120]})")
+        except Exception as e:  # noqa: BLE001 — digest is best-effort
+            print(f"{args.id}: digest failed (non-fatal): {e}")
     return rc
 
 
