@@ -66,6 +66,25 @@ The shell renders whatever fits the schema; anything that doesn't fit becomes
 a table row or a note. `--repo <path>` points any artifact at a different
 repository for a one-off refresh.
 
+## Live streaming (2026-09-06)
+
+```bash
+# wrap ANY command — its output streams into a live-updating artifact:
+python tools/livestream.py --id findev-live --title "FinDev — SPY run" \
+    --cwd /opt/data/FinancialDevelopment --card "ticker=SPY" \
+    -- /opt/data/FinancialDevelopment/.venv/bin/python tools/examples/findev_spy_run.py
+```
+
+- `tools/livestream.py` runs the command, rewrites `data.json` + `index.html`
+  **atomically after every output line**; `templates/live.html` self-reloads
+  (2.5s) **only while the payload says `live: true`** — when the command ends
+  the final build strips the reload tag, so finished artifacts are static.
+- Works in the Hermes Interactive tab, chat `::preview`, or any browser —
+  no server, no app cooperation. Exit code mirrors the wrapped command.
+- Examples: `tools/examples/demo_job.py`, `tools/examples/findev_spy_run.py`
+  (real FinDev dealer-exposure run via `shared.module_execution`).
+- Tests: `pytest tests/test_livestream.py -q`.
+
 ## Refresh
 
 ```bash
