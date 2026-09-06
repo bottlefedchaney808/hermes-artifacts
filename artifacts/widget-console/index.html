@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Widget Console</title>
+<!--HERMES-ARTIFACT:CSS-->
+<style>
+/* Hermes Interactive Artifacts — universal shell styles.
+   Uses Hermes ::preview theme vars when present; var() fallbacks keep it
+   readable standalone in any browser. Never hardcode frame backgrounds. */
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 16px;
+  color: var(--foreground, #1a1a1a);
+  background: var(--card, transparent);
+  font: 14px/1.45 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+h1 { font-size: 20px; margin: 0 0 2px; }
+.ha-sub { color: var(--muted-foreground, #6b6b6b); font-size: 12px; margin-bottom: 16px; }
+.ha-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px; margin-bottom: 16px; }
+.ha-card { border: 1px solid var(--border, #e8e6e0); border-radius: 10px; padding: 12px 14px; }
+.ha-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--muted-foreground, #8a8a8a); }
+.ha-card .value { font-size: 20px; font-weight: 650; margin-top: 3px; }
+.ha-card.tone-ok .value { color: #1a7f37; }
+.ha-card.tone-bad .value { color: #c0341d; }
+.ha-chart { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 12px; margin-bottom: 16px; }
+.ha-chart h3 { font-size: 14px; margin: 0 0 8px; }
+.ha-chart .box { position: relative; height: 280px; }
+.ha-tablewrap { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 10px 12px 14px; margin-bottom: 16px; overflow-x: auto; }
+.ha-tablewrap h3 { font-size: 14px; margin: 2px 0 8px; }
+.ha-filter { width: 220px; padding: 4px 8px; margin-bottom: 8px;
+  border: 1px solid var(--border, #ccc); border-radius: 6px;
+  background: transparent; color: inherit; font: inherit; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 9px; white-space: nowrap;
+  border-bottom: 1px solid var(--border, #efece5); }
+th { cursor: pointer; color: var(--muted-foreground, #6b6b6b);
+  font-size: 11px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+.ha-notes { color: var(--muted-foreground, #6b6b6b); font-size: 12px; }
+.ha-notes li { margin-bottom: 4px; }
+.ha-graph { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 12px; margin-bottom: 16px; }
+.ha-graph h3 { font-size: 14px; margin: 0 0 8px; }
+.ha-glegend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px;
+  color: var(--muted-foreground, #6b6b6b); margin-bottom: 8px; }
+.ha-glegend .swatch { display: inline-flex; align-items: center; gap: 6px; }
+.ha-glegend i { width: 8px; height: 8px; border-radius: 99px; display: inline-block; }
+/* Jarvis graph stage: base color only here (kills white-flash before JS paints).
+   The radial vignette + faint dot grid are drawn per-frame on the canvas inside
+   renderGraph() — see spec §2 Rendering. Do NOT add a CSS gradient to this rule;
+   it would double-paint under the canvas fill. */
+.ha-gstage { position: relative; height: 560px; border-radius: 10px; overflow: hidden; background: #05070c; }
+.ha-gstage canvas { display: block; width: 100%; height: 560px; cursor: grab; }
+.ha-gtip { display: none; position: absolute; pointer-events: none; }
+.ha-gtip { background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; border-radius: 6px; padding: 4px 8px; box-shadow: 0 0 6px rgba(0,0,0,.4); font-size: 12px; }
+.ha-ghost-toast { position: absolute; left: 50%; transform: translateX(-50%); bottom: 12px; padding: 6px 12px; border-radius: 8px; background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+.ha-ghost-toast.on { opacity: 1; }
+.ha-glegend i { box-shadow: 0 0 6px rgba(255,255,255,.35); }
+
+</style>
+<!--/HERMES-ARTIFACT:CSS-->
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 16px; background: #1a1a2e; color: #eee; }
+#app { max-width: 1200px; margin: 0 auto; }
+.header { margin-bottom: 16px; }
+.ticker-input { background: #2a2a4e; border: 1px solid #444; color: #eee; padding: 8px 12px; border-radius: 4px; width: 120px; margin-right: 8px; }
+.run-btn, .stop-btn { background: #4a4a8e; border: none; color: #fff; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 8px; }
+.run-btn:hover, .stop-btn:hover { background: #5a5a9e; }
+.stop-btn { background: #8e4a4a; }
+.stop-btn:hover { background: #9e5a5a; }
+.filter-section { margin-bottom: 12px; }
+.filter-input { background: #2a2a4e; border: 1px solid #444; color: #eee; padding: 8px 12px; border-radius: 4px; width: 240px; }
+.group-select { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.group-item { background: #2a2a4e; padding: 6px 10px; border-radius: 4px; font-size: 13px; cursor: pointer; border: 1px solid #444; }
+.group-item:hover { background: #3a3a5e; }
+.group-item.active { background: #4a4a8e; }
+.widgets-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 16px; }
+.widget-card { background: #2a2a4e; border-radius: 8px; padding: 12px; border: 1px solid #444; }
+.widget-card.cached { border-left: 3px solid #4a9e4a; }
+.widget-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.widget-name { font-weight: 600; font-size: 14px; }
+.widget-meta { font-size: 11px; color: #aaa; }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: #666; margin-right: 6px; }
+.status-dot.queued { background: #e0c040; }
+.status-dot.running { background: #4a9e4a; animation: pulse 1s infinite; }
+.status-dot.ok { background: #4a9e4a; }
+.status-dot.failed { background: #9e4a4a; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+.cached-chip { font-size: 10px; background: #4a4a8e; padding: 2px 6px; border-radius: 3px; }
+.widget-content { margin-top: 8px; }
+.headline { font-size: 13px; color: #ddd; margin-bottom: 6px; }
+.json-details { font-size: 11px; margin-top: 8px; }
+.json-details summary { cursor: pointer; color: #aaa; }
+.json-details pre { background: #1a1a2e; padding: 8px; border-radius: 4px; overflow-x: auto; max-height: 200px; }
+.runlog { margin-top: 16px; padding: 12px; background: #1a1a2e; border-radius: 4px; font-size: 11px; }
+.runlog div { padding: 2px 0; border-bottom: 1px solid #333; }
+.runlog .ok { color: #4a9e4a; }
+.runlog .fail { color: #9e4a4a; }
+.api-down-banner { background: #8e6a2a; padding: 12px; border-radius: 4px; margin-bottom: 16px; color: #fff; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="header">
+    <input type="text" id="tickerInput" class="ticker-input" placeholder="Ticker" value="SPY">
+    <button id="runBtn" class="run-btn">Run Selected</button>
+    <button id="stopBtn" class="stop-btn" disabled>Stop</button>
+  </div>
+  <div class="filter-section">
+    <input type="text" id="filterInput" class="filter-input" placeholder="Filter widgets...">
+    <div id="groupSelect" class="group-select"></div>
+  </div>
+  <div id="widgetsList" class="widgets-list"></div>
+  <div id="runLog" class="runlog"></div>
+</div>
+<!--HERMES-ARTIFACT:DATA-->
+<script id="hermes-artifact-data" type="application/json">
+{"summary": [{"label": "widgets in registry", "value": "47"}, {"label": "widget API", "value": "UP @ http://127.0.0.1:8787"}, {"label": "suites", "value": "options_suite, sentiment_scanner, tools, var_tools, vol_suite"}, {"label": "categories", "value": "9"}], "tables": [{"id": "catalog", "title": "Widget catalog (47) — snapshot at refresh; console re-fetches live", "columns": ["name", "slug", "suite", "category", "inputs"], "rows": [["BAW", "baw", "options_suite", "pricing", "ticker, expiry, basket"], ["CRR", "crr", "options_suite", "pricing", "ticker, expiry, basket"], ["Leisen-Reimer", "leisen_reimer", "options_suite", "pricing", "ticker, expiry, basket"], ["MC", "mc", "options_suite", "pricing", "ticker, expiry, basket"], ["MC Heston LSM", "mc_heston_lsm", "options_suite", "pricing", "ticker, expiry, basket"], ["Model Comparison", "model_comparison", "options_suite", "pricing", "ticker, expiry, basket"], ["Newton-Raphson IV", "newton_raphson_iv", "options_suite", "pricing", "ticker, expiry, basket"], ["SABR", "sabr", "options_suite", "pricing", "ticker, expiry, basket"], ["Vanna-Volga", "vanna_volga", "options_suite", "pricing", "ticker, expiry, basket"], ["Earnings", "earnings", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["GEX Scanner", "gex", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["IV Rank", "iv_rank", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Max Pain", "max_pain", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Skew", "skew", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Unusual OI", "unusual_oi", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Vol Dispersion", "vol_dispersion", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Backtesting Tool", "backtesting", "tools", "tool", "ticker, expiry, basket"], ["Directional Engine", "directional-engine", "tools", "tool", "ticker, expiry, basket"], ["Hedge Optimizer", "hedge-optimizer", "tools", "tool", "ticker, expiry, basket"], ["Options Strategy Tool", "options-strategy", "tools", "tool", "ticker, expiry, basket"], ["Simulations", "simulations", "tools", "tool", "ticker, expiry, basket"], ["Surface Explorer", "surface-explorer", "tools", "tool", "ticker, expiry, basket"], ["VRP Term Structure", "vrp-term-structure", "tools", "tool", "ticker, expiry, basket"], ["Cash Flow Mapping", "cashflow_map", "var_tools", "var", "ticker, expiry, basket"], ["Copula VaR", "copulas", "var_tools", "var", "ticker, expiry, basket"], ["Correlation Simulation", "corr_sim", "var_tools", "var", "ticker, expiry, basket"], ["Forex VaR", "forex_var", "var_tools", "var", "ticker, expiry, basket"], ["Hedge Optimizer", "hedge_optimizer", "var_tools", "var", "ticker, expiry, basket"], ["Historical Simulation", "hist_sim", "var_tools", "var", "ticker, expiry, basket"], ["Monte Carlo Simulation", "mc_sim", "var_tools", "var", "ticker, expiry, basket"], ["Price Distribution", "price_dist", "var_tools", "var", "ticker, expiry, basket"], ["Stress Test", "stress_test", "var_tools", "var", "ticker, expiry, basket"], ["VaR Aggregation", "var_agg", "var_tools", "var", "ticker, expiry, basket"], ["Chain Scanner", "chain_scanner", "vol_suite", "scanner", "ticker, expiry, basket"], ["Dealer Exposure", "dealer_exposure", "vol_suite", "exposure", "ticker, expiry, basket"], ["Dealer Flow", "dealer_flow", "vol_suite", "flow", "ticker, expiry, basket"], ["Dual Book", "dual_book", "vol_suite", "exposure", "ticker, expiry, basket"], ["Group Screener (selection-only)", "group_screener", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["Position Book", "position_book", "vol_suite", "exposure", "ticker, expiry, basket"], ["Sentiment Backtest (selection-only)", "sentiment_backtest", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["Surface Flow (Strike x Expiry)", "surface_flow_strike_expiry", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Flow (Strike x Time)", "surface_flow_strike_time", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Greek", "surface_greek", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Market IV", "surface_market_iv", "vol_suite", "surface", "ticker, expiry, basket"], ["SVI Smile", "svi_smile", "vol_suite", "smile", "ticker, expiry, basket"], ["Vol Surface 2D (selection-only)", "vol_surface_2d", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["VRP Term Structure (selection-only)", "vrp_term_structure", "vol_suite", "pipeline_step", "ticker, expiry, basket"]]}], "charts": [], "notes": [], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "widget-console", "note": "live catalog from http://127.0.0.1:8787/api/widgets/catalog"}, "schema_version": 1, "artifact_id": "widget-console", "title": "Widget Console — pick & run widgets", "generated_at": "2026-09-06 05:47 UTC"}
+</script>
+<!--/HERMES-ARTIFACT:DATA-->
+<!--HERMES-ARTIFACT:JS-->
+<script>
+/* Hermes Interactive Artifacts — universal renderer.
+   Reads the inline JSON payload written by tools/refresh.py and renders
+   summary cards, charts (Chart.js if the CDN is reachable), and
+   filterable/sortable tables. No build step, no fetches, no framework. */
+(function () {
+  'use strict';
+  /* Vivid, full-opacity palette per Jason's chart preferences. */
+  var PALETTE = ['#3b82f6', '#ef4444', '#22c55e', '#eab308', '#a855f7', '#06b6d4'];
+
+  function h(tag, attrs) {
+    var node = document.createElement(tag);
+    attrs = attrs || {};
+    Object.keys(attrs).forEach(function (k) {
+      if (k === 'text') node.textContent = attrs[k];
+      else if (k === 'class') node.className = attrs[k];
+      else node.setAttribute(k, attrs[k]);
+    });
+    for (var i = 2; i < arguments.length; i++) {
+      if (arguments[i]) node.appendChild(arguments[i]);
+    }
+    return node;
+  }
+
+  function payload() {
+    return JSON.parse(document.getElementById('hermes-artifact-data').textContent);
+  }
+
+  function renderCards(d) {
+    var wrap = h('div', { class: 'ha-cards' });
+    (d.summary || []).forEach(function (c) {
+      wrap.appendChild(h('div', { class: 'ha-card' + (c.tone ? ' tone-' + c.tone : '') },
+        h('div', { class: 'label', text: c.label }),
+        h('div', { class: 'value', text: String(c.value) })));
+    });
+    return wrap;
+  }
+
+  function renderChart(chart) {
+    var box = h('div', { class: 'ha-chart' }, h('h3', { text: chart.title }));
+    if (typeof Chart === 'undefined') {
+      box.appendChild(h('div', { class: 'ha-notes',
+        text: 'Chart.js CDN unreachable — values remain in tables/notes.' }));
+      return box;
+    }
+    var canvas = h('canvas');
+    box.appendChild(h('div', { class: 'box' }, canvas));
+    var datasets = (chart.series || []).map(function (s, i) {
+      return {
+        label: s.label,
+        data: s.data,
+        backgroundColor: PALETTE[i % PALETTE.length],
+        borderColor: PALETTE[i % PALETTE.length],
+        borderWidth: 2, tension: 0.35, pointRadius: 2,
+        fill: chart.type === 'line'
+      };
+    });
+    new Chart(canvas.getContext('2d'), {
+      type: chart.type,
+      data: { labels: chart.labels || [], datasets: datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } }
+      }
+    });
+    return box;
+  }
+
+  function renderTable(table) {
+    var wrap = h('div', { class: 'ha-tablewrap' }, h('h3', { text: table.title }));
+    var filter = h('input', { class: 'ha-filter', placeholder: 'Filter...' });
+    var tbl = h('table');
+    var headRow = h('tr');
+    var thead = h('thead'), tbody = h('tbody');
+    (table.columns || []).forEach(function (c) {
+      headRow.appendChild(h('th', { text: c }));
+    });
+    thead.appendChild(headRow);
+    tbl.appendChild(thead);
+    tbl.appendChild(tbody);
+    var rows = table.rows || [];
+
+    function fill(list) {
+      tbody.textContent = '';
+      list.forEach(function (r) {
+        var tr = h('tr');
+        (table.columns || []).forEach(function (_, i) {
+          tr.appendChild(h('td', { text: r[i] == null ? '' : String(r[i]) }));
+        });
+        tbody.appendChild(tr);
+      });
+    }
+    fill(rows);
+    filter.addEventListener('input', function () {
+      var q = filter.value.toLowerCase();
+      fill(rows.filter(function (r) {
+        return r.some(function (cell) {
+          return String(cell == null ? '' : cell).toLowerCase().indexOf(q) !== -1;
+        });
+      }));
+    });
+    var sortDir = {};
+    headRow.addEventListener('click', function (e) {
+      var idx = Array.prototype.indexOf.call(headRow.children, e.target);
+      if (idx < 0) return;
+      sortDir[idx] = !sortDir[idx];
+      fill(rows.slice().sort(function (a, b) {
+        var x = a[idx], y = b[idx];
+        var nx = parseFloat(x), ny = parseFloat(y);
+        var cmp = (!isNaN(nx) && !isNaN(ny)) ? nx - ny
+          : String(x).localeCompare(String(y));
+        return sortDir[idx] ? cmp : -cmp;
+      }));
+    });
+    wrap.appendChild(filter);
+    wrap.appendChild(tbl);
+    return wrap;
+  }
+
+  var GROUP_COLOR = {
+    construction: '#f59e0b',
+    development: '#3b82f6',
+    trading: '#22c55e',
+    hub: '#eab308',
+    daily: '#a855f7',
+    inbox: '#ef4444',
+    dangling: '#94a3b8',
+    templates: '#06b6d4',
+    attachments: '#64748b'
+  };
+
+  /* Jarvis brain — cinematic force graph of the vault. Canvas renderer with
+     d3-force physics (when reachable), manual zoom/pan transform state, hover
+     neighborhood isolation, and click-to-open in Obsidian. Falls back to a
+     compact hand-rolled sim when the d3 CDN is unreachable. ES5 on purpose:
+     this file ships inline into single-file artifacts with no build step. */
+
+  var OBSIDIAN_VAULT = 'obsidian-vault';
+  // Single-instance teardown handle for the live Jarvis graph (set by renderGraph's start()).
+  var activeJarvisDestroy = null;
+
+  function renderGraph(graph) {
+    // Empty/missing graph → return a visible note box (spec §6). Always returns a
+    // DOM element so any caller's appendChild is safe; no canvas loop started.
+    if (!graph || !(graph.nodes && graph.nodes.length)) {
+      var emptyBox = h('div', { class: 'ha-graph' }, h('h3', { text: 'Graph view' }));
+      var emptyStage = h('div', { class: 'ha-gstage' });
+      emptyStage.appendChild(h('div', { class: 'ha-notes', style: 'padding:16px;', text: 'No links found in this vault.' }));
+      emptyBox.appendChild(emptyStage);
+      return emptyBox;
+    }
+
+    // ---- Init: degree map, adjacency (neighborhood sets), top-label set ----
+    var rawNodes = graph.nodes, rawEdges = graph.edges || [];
+    var deg = {}, adj = {};
+    var i, n, e;
+    for (i = 0; i < rawNodes.length; i++) {
+      n = rawNodes[i];
+      if (!deg[n.id]) deg[n.id] = 0;
+      if (!adj[n.id]) adj[n.id] = {};
+      adj[n.id][n.id] = true; // self, so the hovered node stays lit
+    }
+    for (i = 0; i < rawEdges.length; i++) {
+      e = rawEdges[i];
+      var a = e.source, b = e.target;
+      if (!deg[a]) deg[a] = 0;
+      if (!deg[b]) deg[b] = 0;
+      deg[a]++; deg[b]++;
+      (adj[a] || (adj[a] = {}))[b] = true;
+      (adj[b] || (adj[b] = {}))[a] = true;
+    }
+    var topLabelSet = {};
+    rawNodes.slice().sort(function (x, y) { return deg[y.id] - deg[x.id]; })
+      .slice(0, 8).forEach(function (nd) { topLabelSet[nd.id] = true; });
+
+    // Group attractor points: each distinct group gets an angle on a ~260 circle.
+    var groups = [];
+    rawNodes.forEach(function (nd) { if (groups.indexOf(nd.group || 'hub') === -1) groups.push(nd.group || 'hub'); });
+    var groupCount = {};
+    rawNodes.forEach(function (nd) { var g = nd.group || 'hub'; groupCount[g] = (groupCount[g] || 0) + 1; });
+    // Big groups pull harder so they form compact blobs instead of diffuse clouds.
+    function cohesionStrength(g) { return Math.min(0.12, 0.01 * Math.sqrt(groupCount[g] || 1)); }
+    var attract = {};
+    for (i = 0; i < groups.length; i++) {
+      var ang = (i / Math.max(1, groups.length)) * Math.PI * 2;
+      attract[groups[i]] = { x: Math.cos(ang) * 260, y: Math.sin(ang) * 260 };
+    }
+
+    // Sim node objects. Seed positions near the group attractor for fast convergence.
+    var nodes = rawNodes.map(function (nd, idx) {
+      var g = nd.group || 'hub';
+      var at = attract[g] || { x: 0, y: 0 };
+      return {
+        id: nd.id, label: nd.label != null ? nd.label : String(nd.id), group: g,
+        size: Math.max(1, nd.size || 1),
+        x: at.x + (Math.random() - 0.5) * 60, y: at.y + (Math.random() - 0.5) * 60,
+        vx: 0, vy: 0
+      };
+    });
+    var byId = {};
+    nodes.forEach(function (nd) { byId[nd.id] = nd; });
+    // Links reference node objects directly so d3.forceLink can bind them.
+    var links = [];
+    for (i = 0; i < rawEdges.length; i++) {
+      e = rawEdges[i];
+      if (byId[e.source] && byId[e.target]) links.push({ source: byId[e.source], target: byId[e.target] });
+    }
+
+    function radius(nd) { return 3 + Math.sqrt(nd.size) * 1.8; }
+    var hasD3 = typeof d3 !== 'undefined' && !!d3.forceSimulation;
+
+    // ---- DOM scaffold (canvas, not SVG — spec §2) ----
+    var box = h('div', { class: 'ha-graph' }, h('h3', { text: 'Graph view' }));
+    var legend = h('div', { class: 'ha-glegend' });
+    groups.forEach(function (g) {
+      legend.appendChild(h('span', { class: 'swatch' },
+        h('i', { style: 'background:' + (GROUP_COLOR[g] || '#94a3b8') }),
+        h('span', { text: g })));
+    });
+    box.appendChild(legend);
+    var stage = h('div', { class: 'ha-gstage' });
+    var canvas = document.createElement('canvas');
+    var tip = h('div', { class: 'ha-gtip', text: '' });
+    var toast = h('div', { class: 'ha-ghost-toast', text: '' });
+    stage.appendChild(canvas);
+    stage.appendChild(tip);
+    stage.appendChild(toast);
+    box.appendChild(stage);
+
+    // ---- Zoom/pan transform state (manual, spec §3). screenCSS = world*k + t ----
+    var view = { k: 1, tx: 0, ty: 0 };
+    function clampK(k) { return Math.max(0.25, Math.min(8, k)); }
+
+    // ---- Canvas sizing (backing store × dpr; CSS height fixed at 560 by .ha-gstage) ----
+    var cssW = 960, cssH = 560, dpr = window.devicePixelRatio || 1;
+    function resize() {
+      var r = stage.getBoundingClientRect();
+      if (r.width > 2) cssW = Math.round(r.width);
+      cssH = 560;
+      canvas.style.width = cssW + 'px';
+      canvas.style.height = cssH + 'px';
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(cssW * dpr));
+      canvas.height = Math.max(1, Math.round(cssH * dpr));
+    }
+
+    var ctx = null; // set after first resize (canvas must be in DOM)
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.className = 'ha-ghost-toast on';
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(function () { toast.className = 'ha-ghost-toast'; }, 2000);
+    }
+
+    // ---- Click → open note in Obsidian (spec §5, NO silent file:// fallback) ----
+    function openNote(nd) {
+      if (!nd || String(nd.id).indexOf('dangling:') === 0) return;
+      var uri = 'obsidian://open?vault=' + encodeURIComponent(OBSIDIAN_VAULT) +
+        '&file=' + encodeURIComponent(String(nd.id));
+      try {
+        var a = document.createElement('a');
+        a.href = uri;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        showToast("Opening '" + nd.label + "' in Obsidian…");
+      } catch (err) { /* custom-scheme nav may be blocked by host — toast already names the attempt */ }
+    }
+
+    // ---- Pointer state: explicit ownership so zoom/pan/drag don't fight (spec §3) ----
+    var hover = null, mode = null; // mode: 'drag' | 'pan' | null
+    var dragNode = null, lastX = 0, lastY = 0, downX = 0, downY = 0;
+
+    function pointer(ev) {
+      var rect = canvas.getBoundingClientRect();
+      return { mx: ev.clientX - rect.left, my: ev.clientY - rect.top };
+    }
+    // Screen-space hit test (works under any zoom). Returns node or null.
+    function pick(mx, my) {
+      var best = null, bestD = 1e9;
+      for (var j = 0; j < nodes.length; j++) {
+        n = nodes[j];
+        var sx = n.x * view.k + view.tx, sy = n.y * view.k + view.ty;
+        var d = Math.hypot(sx - mx, sy - my);
+        if (d < bestD) { bestD = d; best = n; }
+      }
+      return (best && bestD <= Math.max(10, radius(best) * view.k + 6)) ? best : null;
+    }
+
+    // ---- Draw one frame. Shared by the live and fallback paths. ----
+    function draw() {
+      if (!ctx) ctx = canvas.getContext('2d');
+      var W = cssW, H = cssH;
+      // (1)-(3): screen-space background — fill, radial vignette, faint dot grid.
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = '#05070c';
+      ctx.fillRect(0, 0, W, H);
+      var vg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.7);
+      vg.addColorStop(0, 'rgba(30,41,66,0.55)');
+      vg.addColorStop(1, 'rgba(5,7,12,0)');
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, 0, W, H);
+      if (nodes.length <= 1500) {
+        ctx.fillStyle = 'rgba(148,163,184,0.05)';
+        for (var gx = 20; gx < W; gx += 40) for (var gy = 20; gy < H; gy += 40) { ctx.fillRect(gx, gy, 1, 1); }
+      }
+
+      // World pass: apply zoom transform. screenCSS = world*k + t.
+      var k = view.k, tx = view.tx, ty = view.ty;
+      ctx.setTransform(dpr * k, 0, 0, dpr * k, dpr * tx, dpr * ty);
+
+      // Edges first (spec §2): alpha modulated by hover neighborhood.
+      var litSet = hover ? adj[hover.id] : null;
+      ctx.lineWidth = 0.8 / k;
+      for (var li = 0; li < links.length; li++) {
+        e = links[li];
+        var touchesHover = hover && (e.source === hover || e.target === hover);
+        var alpha = !hover ? 0.10 : (touchesHover ? 0.5 : 0.03);
+        ctx.strokeStyle = 'rgba(148,163,184,' + alpha.toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.moveTo(e.source.x, e.source.y);
+        ctx.lineTo(e.target.x, e.target.y);
+        ctx.stroke();
+      }
+
+      // Nodes: two-pass glow (A) then core fill (B). Dim non-neighbors on hover.
+      for (var pass = 0; pass < 2; pass++) {
+        for (i = 0; i < nodes.length; i++) {
+          n = nodes[i];
+          var lit = !hover || (litSet && litSet[n.id]);
+          ctx.globalAlpha = lit ? 1 : 0.08;
+          if (pass === 0) {
+            ctx.shadowBlur = Math.min(40, 12 + n.size);
+            ctx.shadowColor = GROUP_COLOR[n.group] || '#94a3b8';
+          } else {
+            ctx.shadowBlur = 0;
+          }
+          ctx.fillStyle = GROUP_COLOR[n.group] || '#94a3b8';
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, radius(n), 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+
+      // Labels in SCREEN space (reset transform) — sparse per spec §2.
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.font = '11px sans-serif';
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var showLabel = hover ? (!!litSet && litSet[n.id]) : (topLabelSet[n.id] || k > 2);
+        if (!showLabel) continue;
+        var sx = n.x * k + tx, sy = n.y * k + ty;
+        // Cull off-screen when in zoomed label mode.
+        if (k > 2 && (sx < -40 || sx > W + 40 || sy < -16 || sy > H + 16)) continue;
+        var lit = !hover || (litSet && litSet[n.id]);
+        ctx.globalAlpha = lit ? 0.95 : 0.25;
+        ctx.fillStyle = '#e5e7eb';
+        ctx.fillText(n.label, sx + radius(n) * k + 3, sy + 4);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // ---- Fallback: compact hand-rolled sim when d3 is absent (spec §6). ----
+    function fallbackStep() {
+      var j, m, dx, dy, dist, f;
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        for (j = i + 1; j < nodes.length; j++) {
+          m = nodes[j];
+          dx = n.x - m.x; dy = n.y - m.y; dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+          f = 420 / (dist * dist);
+          n.vx += dx / dist * f; n.vy += dy / dist * f;
+          m.vx -= dx / dist * f; m.vy -= dy / dist * f;
+        }
+      }
+      for (i = 0; i < links.length; i++) {
+        e = links[i];
+        dx = e.target.x - e.source.x; dy = e.target.y - e.source.y; dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        f = (dist - 46) * 0.012;
+        e.source.vx += dx / dist * f; e.source.vy += dy / dist * f;
+        e.target.vx -= dx / dist * f; e.target.vy -= dy / dist * f;
+      }
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var g = attract[n.group] || { x: 0, y: 0 };
+        n.vx += (g.x - n.x) * 0.004 + (-n.x) * 0.002;
+        n.vy += (g.y - n.y) * 0.004 + (-n.y) * 0.002;
+        if (dragNode !== n) { n.vx *= 0.72; n.vy *= 0.72; n.x += n.vx; n.y += n.vy; }
+      }
+    }
+
+    // ---- Wire up events + start the loop once canvas is measurable. ----
+    function onWheel(ev) {
+      if (!hasD3) return; // fallback path: no zoom (spec §6)
+      ev.preventDefault();
+      var p = pointer(ev);
+      var factor = Math.pow(2, -ev.deltaY * 0.002);
+      var newK = clampK(view.k * factor);
+      view.tx = p.mx - (p.mx - view.tx) * (newK / view.k);
+      view.ty = p.my - (p.my - view.ty) * (newK / view.k);
+      view.k = newK;
+    }
+    function onDown(ev) {
+      var p = pointer(ev);
+      downX = p.mx; downY = p.my; lastX = p.mx; lastY = p.my;
+      dragNode = pick(p.mx, p.my);
+      if (dragNode) { mode = 'drag'; if (hasD3) sim.alphaTarget(0.3); } // fallback: reposition only (spec §6)
+      else if (!dragNode && hasD3) { mode = 'pan'; }
+    }
+    function onMove(ev) {
+      var p = pointer(ev);
+      if (mode === 'drag' && dragNode) {
+        dragNode.x = (p.mx - view.tx) / view.k;
+        dragNode.y = (p.my - view.ty) / view.k;
+        dragNode.vx = 0; dragNode.vy = 0;
+      } else if (mode === 'pan') {
+        view.tx += p.mx - lastX; view.ty += p.my - lastY;
+        lastX = p.mx; lastY = p.my;
+      } else {
+        hover = pick(p.mx, p.my);
+        tip.style.display = hover ? 'block' : 'none';
+        if (hover) {
+          var unresolved = String(hover.id).indexOf('dangling:') === 0;
+          tip.textContent = hover.label + '  ·  ' + hover.group + '  ·  deg ' + (deg[hover.id] || 0) +
+            (unresolved ? '  ·  unresolved link' : '');
+          tip.style.left = (p.mx + 12) + 'px';
+          tip.style.top = (p.my + 12) + 'px';
+        }
+      }
+    }
+    function onUp(ev) {
+      var p = pointer(ev);
+      if (mode === 'drag') sim.alphaTarget(0);
+      // Click = up with negligible movement.
+      if (Math.hypot(p.mx - downX, p.my - downY) < 4 && dragNode) {
+        openNote(dragNode);
+      } else if (String((pick(p.mx, p.my) || {}).id).indexOf('dangling:') === 0) {
+        showToast('Unresolved link');
+      }
+      mode = null; dragNode = null;
+    }
+
+    var sim = null;
+    // Single-instance guard: only one live Jarvis graph at a time. If renderGraph is
+    // called again (re-render / refresh), tear down the previous instance first so
+    // window-level listeners + rAF loop never accumulate across renders.
+    if (typeof activeJarvisDestroy === 'function') { try { activeJarvisDestroy(); } catch (e) {} }
+
+    // Auto-fit: frame the whole graph in ~90% of the stage, centered (like Obsidian's fit-to-view).
+    function autoFit() {
+      if (!nodes.length) return;
+      var minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+      for (var j = 0; j < nodes.length; j++) {
+        n = nodes[j];
+        if (n.x < minX) minX = n.x;
+        if (n.y < minY) minY = n.y;
+        if (n.x > maxX) maxX = n.x;
+        if (n.y > maxY) maxY = n.y;
+      }
+      var bw = Math.max(60, maxX - minX), bh = Math.max(60, maxY - minY);
+      view.k = clampK(Math.min(cssW * 0.9 / bw, cssH * 0.9 / bh));
+      view.tx = (cssW - bw * view.k) / 2 - minX * view.k;
+      view.ty = (cssH - bh * view.k) / 2 - minY * view.k;
+    }
+
+    function start() {
+      resize();
+      // Center world origin in the viewport so the ~260-radius attractor circle fits.
+      view.tx = cssW / 2;
+      view.ty = cssH / 2;
+      window.addEventListener('resize', resize);
+      if (hasD3) {
+        // d3-force physics with the exact verified v7 API surface.
+        sim = d3.forceSimulation(nodes)
+          .force('link', d3.forceLink(links).id(function (d) { return d.id; })
+            .distance(46)
+            .strength(function (l) {
+              var idOf = function (x) { return typeof x === 'object' ? x.id : x; };
+              return 0.5 / Math.max(deg[idOf(l.source)] || 1, deg[idOf(l.target)] || 1);
+            }))
+          .force('charge', d3.forceManyBody().theta(0.9)
+            .strength(function (nd) { return -10 * (1 + Math.sqrt(nd.size) * 0.4); }))
+          .force('collide', d3.forceCollide(radius).iterations(2))
+          .force('gx', d3.forceX(function (nd) { return (attract[nd.group] || { x: 0 }).x; })
+            .strength(function (nd) { return cohesionStrength(nd.group); }))
+          .force('gy', d3.forceY(function (nd) { return (attract[nd.group] || { y: 0 }).y; })
+            .strength(function (nd) { return cohesionStrength(nd.group); }));
+
+        canvas.addEventListener('wheel', onWheel, { passive: false });
+      } else {
+        // Settle the hand-rolled sim synchronously before first paint.
+        for (var t = 0; t < 150; t++) fallbackStep();
+      }
+      canvas.addEventListener('mousedown', onDown);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onUp);
+
+      var fitted = false;
+      function maybeFit() { if (!fitted) { autoFit(); fitted = true; } }
+      if (hasD3) setTimeout(maybeFit, 1500); // let the sim settle before framing
+      else maybeFit();
+
+      var rafId = 0;
+      function loop() {
+        if (!hasD3) fallbackStep(); // keep the static layout gently alive / responsive to drag
+        draw();
+        rafId = requestAnimationFrame(loop);
+      }
+      loop();
+
+      // Teardown: stop rAF, remove every listener this instance added (window-level ones
+      // outlive the DOM box that render() clears), and halt the sim. Called by a later
+      // renderGraph via activeJarvisDestroy so re-renders never stack handlers/loops.
+      function destroy() {
+        cancelAnimationFrame(rafId);
+        window.removeEventListener('resize', resize);
+        canvas.removeEventListener('wheel', onWheel);
+        canvas.removeEventListener('mousedown', onDown);
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseup', onUp);
+        if (sim && sim.stop) { try { sim.alphaTarget(0).stop(); } catch (e) {} }
+      }
+      activeJarvisDestroy = destroy;
+    }
+
+    // Defer start until the stage has a measurable width (it's appended during render()).
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); });
+    } else {
+      setTimeout(start, 0);
+    }
+
+    return box;
+  }
+  function render(root) {
+    var d = payload();
+    root.textContent = '';
+    root.appendChild(h('h1', { text: d.title || d.artifact_id }));
+    root.appendChild(h('div', { class: 'ha-sub', text: 'Generated '
+      + d.generated_at + (d.source && d.source.note ? ' - ' + d.source.note : '') }));
+    if ((d.summary || []).length) root.appendChild(renderCards(d));
+    if (d.graph && (d.graph.nodes || []).length) root.appendChild(renderGraph(d.graph));
+    (d.charts || []).forEach(function (c) { root.appendChild(renderChart(c)); });
+    (d.tables || []).forEach(function (t) { root.appendChild(renderTable(t)); });
+    if ((d.notes || []).length) {
+      var ul = h('ul', { class: 'ha-notes' });
+      d.notes.forEach(function (n) { ul.appendChild(h('li', { text: n })); });
+      root.appendChild(ul);
+    }
+  }
+
+  window.HermesArtifact = { render: render };
+  document.addEventListener('DOMContentLoaded', function () {
+    render(document.getElementById('app'));
+  });
+})();
+
+</script>
+<!--/HERMES-ARTIFACT:JS-->
+<script>
+(function() {
+  'use strict';
+
+  // State
+  var widgets = [];
+  var selectedWidgets = new Set();
+  var runningQueue = [];
+  var isRunning = false;
+  var abortRequested = false;
+  var ticker = 'SPY';
+
+  // DOM elements
+  var appEl = document.getElementById('app');
+  var tickerInput = document.getElementById('tickerInput');
+  var runBtn = document.getElementById('runBtn');
+  var stopBtn = document.getElementById('stopBtn');
+  var filterInput = document.getElementById('filterInput');
+  var groupSelect = document.getElementById('groupSelect');
+  var widgetsList = document.getElementById('widgetsList');
+  var runLog = document.getElementById('runLog');
+
+  // API
+  var API_BASE = 'http://127.0.0.1:8787';
+
+  // Initialize
+  function init() {
+    loadCatalog();
+    renderGroupSelect();
+    renderWidgets();
+    setupEvents();
+  }
+
+  function loadCatalog() {
+    // Try live catalog first
+    fetch(API_BASE + '/api/widgets/catalog', { cache: 'no-store' })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        widgets = (data.widgets || data || []).map(function(w) {
+          return {
+            name: w.name || w.slug,
+            slug: w.slug,
+            suite: w.suite || 'misc',
+            category: w.category || 'other',
+            inputs: w.inputs || {},
+            defaultSelected: w.default_selected || false,
+            requires: w.requires || []
+          };
+        });
+        // Apply default selected
+        widgets.forEach(function(w) { if (w.defaultSelected) selectedWidgets.add(w.slug); });
+        renderWidgets();
+      })
+      .catch(function(err) {
+        // API down - show banner, load cached data.json if available
+        showApiDownBanner();
+        // Try to load data.json from this artifact
+        loadCachedData();
+      });
+  }
+
+  function loadCachedData() {
+    // For read-only mode when API is down, try to read data.json
+    // In a real browser, file:// will fail, so we just show the banner
+    // The catalog is still useful read-only from a prior run
+  }
+
+  function showApiDownBanner() {
+    var banner = document.createElement('div');
+    banner.className = 'api-down-banner';
+    banner.innerHTML = '<strong>Dashboard API not reachable.</strong> Start dashboard.bat, then refresh this board. The console UI will retry the catalog live when you open it.';
+    var existing = document.querySelector('.api-down-banner');
+    if (!existing) appEl.insertBefore(banner, appEl.firstChild);
+  }
+
+  function renderGroupSelect() {
+    var suites = {};
+    widgets.forEach(function(w) { suites[w.suite] = true; });
+    var suiteList = Object.keys(suites).sort();
+    groupSelect.innerHTML = '';
+    suiteList.forEach(function(suite) {
+      var el = document.createElement('div');
+      el.className = 'group-item';
+      el.textContent = suite;
+      el.dataset.suite = suite;
+      el.addEventListener('click', function() { toggleSuite(suite); });
+      groupSelect.appendChild(el);
+    });
+  }
+
+  function toggleSuite(suite) {
+    var allSelected = true;
+    widgets.forEach(function(w) { if (w.suite === suite && !selectedWidgets.has(w.slug)) allSelected = false; });
+    widgets.forEach(function(w) {
+      if (w.suite === suite) {
+        if (allSelected) selectedWidgets.delete(w.slug); else selectedWidgets.add(w.slug);
+      }
+    });
+    renderWidgets();
+  }
+
+  function renderWidgets() {
+    var filter = filterInput.value.toLowerCase();
+    var filtered = widgets.filter(function(w) {
+      if (filter && w.name.toLowerCase().indexOf(filter) === -1 && w.slug.indexOf(filter) === -1) return false;
+      return true;
+    });
+    widgetsList.innerHTML = '';
+    filtered.forEach(function(w) {
+      var el = document.createElement('div');
+      el.className = 'widget-card' + (w.defaultSelected ? ' cached' : '');
+      el.innerHTML = '\n      <div class="widget-header">\n        <label class="widget-name">' + escapeHtml(w.name) + '</label>\n        <button class="status-dot" title="' + (selectedWidgets.has(w.slug) ? 'Selected' : 'Not selected') + '"></button>\n      </div>\n      <div class="widget-meta">' + w.slug + ' • ' + w.suite + '/' + w.category + '</div>\n      <div class="widget-content"></div>\n    ';
+      var header = el.querySelector('.widget-header');
+      header.addEventListener('click', function(e) {
+        if (e.target.tagName !== 'BUTTON') {
+          if (selectedWidgets.has(w.slug)) selectedWidgets.delete(w.slug); else selectedWidgets.add(w.slug);
+          renderWidgets();
+        }
+      });
+      widgetsList.appendChild(el);
+    });
+    runBtn.disabled = selectedWidgets.size === 0;
+    updateStopButton();
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function setupEvents() {
+    runBtn.addEventListener('click', runSelected);
+    stopBtn.addEventListener('click', stopRunning);
+    filterInput.addEventListener('input', renderWidgets);
+    tickerInput.addEventListener('change', function() { ticker = tickerInput.value.trim() || 'SPY'; });
+  }
+
+  function updateStopButton() {
+    stopBtn.disabled = !isRunning;
+  }
+
+  function logRun(slug, status, elapsed) {
+    var div = document.createElement('div');
+    div.className = status === 'ok' ? 'ok' : 'fail';
+    var timeStr = elapsed >= 0 ? ' (' + elapsed.toFixed(1) + 's)' : '';
+    div.textContent = (new Date()).toLocaleTimeString() + ' • ' + slug + ' ' + status.toUpperCase() + timeStr;
+    runLog.appendChild(div);
+    runLog.scrollTop = runLog.scrollHeight;
+  }
+
+  async function runSelected() {
+    if (selectedWidgets.size === 0) return;
+    if (isRunning) return;
+    abortRequested = false;
+    isRunning = true;
+    updateStopButton();
+
+    var queue = [];
+    widgets.forEach(function(w) {
+      if (selectedWidgets.has(w.slug)) queue.push(w.slug);
+    });
+
+    for (var i = 0; i < queue.length; i++) {
+      if (abortRequested) {
+        logRun(queue[i], 'aborted', -1);
+        continue;
+      }
+      var slug = queue[i];
+      await runWidget(slug);
+    }
+
+    isRunning = false;
+    updateStopButton();
+  }
+
+  async function runWidget(slug) {
+    // Find widget card
+    var cards = Array.from(widgetsList.querySelectorAll('.widget-card'));
+    var card = cards.find(function(c) { return c.textContent.indexOf(slug) > -1; });
+    if (!card) return;
+
+    // Update status to running
+    var dot = card.querySelector('.status-dot');
+    dot.className = 'status-dot running';
+    dot.title = 'Running...';
+
+    var startTime = Date.now();
+
+    try {
+      var resp = await fetch(API_BASE + '/api/widgets/' + slug + '/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ scope: { ticker: ticker } })
+      });
+      var data = await resp.json();
+
+      var elapsed = (Date.now() - startTime) / 1000;
+      var status = data.status === 'ok' ? 'ok' : 'failed';
+
+      if (status === 'ok') {
+        renderWidgetResult(card, data);
+      } else {
+        renderWidgetError(card, data);
+      }
+      dot.className = 'status-dot ' + status;
+      dot.title = status.toUpperCase();
+      logRun(slug, status, elapsed);
+    } catch (err) {
+      var elapsed = (Date.now() - startTime) / 1000;
+      card.querySelector('.widget-content').innerHTML = '<div class="headline">Error: ' + escapeHtml(err.message || String(err)) + '</div>';
+      var dot = card.querySelector('.status-dot');
+      dot.className = 'status-dot failed';
+      dot.title = 'Failed';
+      logRun(slug, 'error', elapsed);
+    }
+  }
+
+  function renderWidgetResult(card, data) {
+    var content = card.querySelector('.widget-content');
+    var metrics = data.metrics || {};
+    var headline = getHeadline(data.slug, metrics);
+    var html = '<div class="headline">' + headline + '</div>';
+    // Add cached chip if applicable
+    if (card.classList.contains('cached')) {
+      html += '<div class="cached-chip">Cached</div>';
+    }
+    // JSON body
+    html += '<details class="json-details"><summary>JSON result</summary><pre>' + escapeHtml(JSON.stringify(data, null, 2).slice(0, 20000)) + '</pre></details>';
+    content.innerHTML = html;
+  }
+
+  function renderWidgetError(card, data) {
+    var content = card.querySelector('.widget-content');
+    var err = data.metrics && data.metrics.error ? data.metrics.error : JSON.stringify(data);
+    content.innerHTML = '<div class="headline">Failed: ' + escapeHtml(err) + '</div><details class="json-details"><summary>Response</summary><pre>' + escapeHtml(JSON.stringify(data, null, 2)) + '</pre></details>';
+  }
+
+  function getHeadline(slug, metrics) {
+    // Category-specific headline mappings
+    var mappings = {
+      'gex': ['total_net_dollar_gamma', 'gamma_flip_level'],
+      'max_pain': ['max_pain_strike', 'price_vs_pain_pct'],
+      'iv_rank': ['atm_iv_pct', 'regime'],
+      'skew': ['skew_signal', 'put_skew_pts'],
+      'dual_book': ['position_regime', 'position_z'],
+      'dealer_exposure': ['band_regime', 'band_z']
+    };
+    var keys = mappings[slug] || ['status'];
+    var parts = [];
+    keys.forEach(function(k) {
+      if (metrics[k] !== undefined) parts.push(k + ': ' + metrics[k]);
+    });
+    return parts.length > 0 ? parts.join(' • ') : (metrics.status || 'completed');
+  }
+
+  function stopRunning() {
+    abortRequested = true;
+  }
+
+  // Start
+  init();
+})();
+</script>
+</body>
+</html>

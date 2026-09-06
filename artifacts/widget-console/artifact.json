@@ -1,0 +1,8 @@
+{
+  "id": "widget-console",
+  "title": "Widget Console — pick & run widgets",
+  "collector": "widget-console",
+  "repo": "C:/Users/bottl/FinancialDevelopment",
+  "description": "Interactive console to pick one or many widgets from the live catalog and run them sequentially with per-widget status cards and rendered results.",
+  "refresh": "ask Hermes to 'refresh widget-console'"
+}
