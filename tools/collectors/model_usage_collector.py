@@ -15,14 +15,6 @@ from collectors import register
 HERMES_ROOT = Path("C:/Users/bottl/AppData/Local/hermes")
 
 
-@register("model-usage")
-def collect(repo_path=None) -> dict:
-    return {"summary": [], "tables": [], "charts": [],
-            "notes": ["No usage data found."],
-            "source": {"note": "no state.db scanned"},
-            "viz": {}}
-
-
 _COLS = ["session_id","model","billing_provider","billing_base_url","billing_mode",
          "task","api_call_count","input_tokens","output_tokens","cache_read_tokens",
          "cache_write_tokens","reasoning_tokens","estimated_cost_usd","actual_cost_usd",

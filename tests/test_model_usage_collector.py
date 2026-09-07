@@ -161,3 +161,43 @@ def test_collect_full_payload(tmp_path):
     assert v["rows"] and len(v["rows"][0]) == 7      # compact rows for cross-filtering
     assert len(p["tables"]) >= 2
     assert p["charts"] == []
+
+
+def test_compact_row_field_semantics(tmp_path):
+    import datetime as dt
+    root = tmp_path / "hermes"
+    ts = dt.datetime(2026, 9, 5, 12).timestamp()
+    c = mkdb(root / "state.db")
+    insert(c, profile="(root)", billing_provider="custom", billing_base_url="http://127.0.0.1:9/v1",
+           model="m-local", task="", input_tokens=5, output_tokens=3, cache_read_tokens=40,
+           last_seen=ts)
+    c.commit(); c.close()
+    c = mkdb(root / "profiles" / "agent1" / "state.db")
+    insert(c, billing_provider="nous", model="m-cloud", task="compression", input_tokens=7,
+           output_tokens=2, cache_read_tokens=8, last_seen=ts)
+    c.commit(); c.close()
+
+    p = mu.collect(root)
+    v = p["viz"]
+    assert v["schema"] == ["profile", "lane", "model", "task", "fresh", "cached", "day"]
+
+    rows_by_model = {row[2]: row for row in v["rows"]}
+    assert set(rows_by_model.keys()) == {"m-local", "m-cloud"}
+
+    local_row = rows_by_model["m-local"]
+    assert local_row[0] == "(root)"       # profile
+    assert local_row[1] == "local"        # lane (loopback)
+    assert local_row[2] == "m-local"      # model
+    assert local_row[3] == "main"         # task (empty -> main)
+    assert local_row[4] == 8              # fresh = input + output = 5+3
+    assert local_row[5] == 40             # cached
+    assert local_row[6] == "2026-09-05"   # day
+
+    cloud_row = rows_by_model["m-cloud"]
+    assert cloud_row[0] == "agent1"       # profile
+    assert cloud_row[1] == "nous"         # lane
+    assert cloud_row[2] == "m-cloud"      # model
+    assert cloud_row[3] == "compression"  # task
+    assert cloud_row[4] == 9              # fresh = 7+2
+    assert cloud_row[5] == 8              # cached
+    assert cloud_row[6] == "2026-09-05"   # day
