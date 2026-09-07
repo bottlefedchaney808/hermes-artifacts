@@ -137,3 +137,27 @@ def test_sankey_links_profile_provider_model():
     assert {"coder1", "nous", "m1"} <= names
     pairs = {(l["source"], l["target"]) for l in s["links"]}
     assert ("coder1", "nous") in pairs and ("nous", "m1") in pairs
+
+
+def test_collect_full_payload(tmp_path):
+    root = tmp_path / "hermes"
+    c = mkdb(root / "state.db")
+    insert(c, model="glm-5.3", billing_provider="zai", input_tokens=1000, output_tokens=200,
+           cache_read_tokens=50000, api_call_count=10)
+    c.commit(); c.close()
+    c = mkdb(root / "profiles" / "local-agent" / "state.db")
+    insert(c, model="Qwen3.8-27B", billing_provider="custom",
+           billing_base_url="http://127.0.0.1:18434/v1", input_tokens=400, output_tokens=100,
+           api_call_count=5)
+    c.commit(); c.close()
+
+    p = mu.collect(root)
+    labels = {c_["label"] for c_ in p["summary"]}
+    assert "Fresh tokens" in labels and "Local share" in labels
+    v = p["viz"]
+    assert v["totals"]["fresh"] == 1700
+    assert v["totals"]["local_fresh"] == 500
+    assert v["by_provider"] and v["timeseries"]["series"] and v["sankey"]["links"]
+    assert v["rows"] and len(v["rows"][0]) == 7      # compact rows for cross-filtering
+    assert len(p["tables"]) >= 2
+    assert p["charts"] == []

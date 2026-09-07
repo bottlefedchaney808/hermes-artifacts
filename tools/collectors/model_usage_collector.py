@@ -29,6 +29,98 @@ _COLS = ["session_id","model","billing_provider","billing_base_url","billing_mod
          "cost_status","cost_source","first_seen","last_seen"]
 
 
+def _fmt(n):
+    n = float(n or 0)
+    for suf, div in (("B", 1e9), ("M", 1e6), ("K", 1e3)):
+        if abs(n) >= div:
+            return f"{n/div:.2f}{suf}"
+    return str(int(round(n)))
+
+
+@register("model-usage")
+def collect(repo_path=None) -> dict:
+    root = Path(repo_path) if repo_path else HERMES_ROOT
+    rows = _read_all(root)
+    dbs = _dbs(root)
+
+    if not rows:
+        return {"summary": [], "tables": [], "charts": [],
+                "notes": [f"No session_model_usage rows found under {root}."],
+                "source": {"note": f"scanned {len(dbs)} db(s)"}, "viz": {}}
+
+    agg = _aggregate(rows)
+    ts = _timeseries(rows)
+    sankey = _sankey(rows)
+
+    fresh = sum(_fresh(r) for r in rows)
+    cached = sum(_cached(r) for r in rows)
+    reasoning = sum(_reasoning(r) for r in rows)
+    calls = sum(_calls(r) for r in rows)
+    cost = sum(_cost(r) for r in rows)
+    local_fresh = sum(_fresh(r) for r in rows if _lane(r) == "local")
+    cloud_fresh = fresh - local_fresh
+    priced = sum(_fresh(r) for r in rows if _cost(r) > 0)
+
+    summary = [
+        {"label": "Fresh tokens", "value": _fmt(fresh)},
+        {"label": "Cached reads", "value": _fmt(cached)},
+        {"label": "API calls", "value": f"{calls:,}"},
+        {"label": "Est. cost (partial)", "value": f"${cost:,.2f}", "tone": "accent"},
+        {"label": "Local share",
+         "value": f"{(100.0*local_fresh/fresh if fresh else 0):.0f}%",
+         "tone": "ok" if local_fresh else None},
+        {"label": "Lanes", "value": str(len(agg["by_provider"]))},
+    ]
+
+    def _tbl(title, items, label):
+        return {"title": title,
+                "columns": [label, "lane", "fresh", "cached", "calls", "est_cost_usd"],
+                "rows": [[i["key"], i["lane"], _fmt(i["fresh"]), _fmt(i["cached"]),
+                          f"{i['calls']:,}", f"${i['cost_usd']:,.4f}"] for i in items]}
+
+    tables = [
+        _tbl("Usage by model", agg["by_model"], "model"),
+        _tbl("Usage by profile", agg["by_profile"], "profile"),
+        _tbl("Usage by provider / lane", agg["by_provider"], "provider"),
+    ]
+
+    # Compact rows so the browser can re-aggregate under cross-filtering.
+    compact = [[r.get("profile") or "(root)", _lane(r), (r.get("model") or "?").strip() or "?",
+                (r.get("task") or "").strip() or "main", _fresh(r), _cached(r),
+                _day(r.get("last_seen"))] for r in rows]
+
+    viz = {
+        "schema": ["profile", "lane", "model", "task", "fresh", "cached", "day"],
+        "rows": compact,
+        "palette": ["#38bdf8", "#f472b6", "#4ade80", "#facc15", "#a78bfa",
+                    "#22d3ee", "#fb923c", "#f87171", "#2dd4bf", "#c084fc"],
+        "by_provider": agg["by_provider"],
+        "by_model": agg["by_model"],
+        "by_profile": agg["by_profile"],
+        "by_task": agg["by_task"],
+        "timeseries": ts,
+        "sankey": sankey,
+        "totals": {"fresh": fresh, "cached": cached, "reasoning": reasoning,
+                   "calls": calls, "cost_usd": round(cost, 4),
+                   "local_fresh": local_fresh, "cloud_fresh": cloud_fresh,
+                   "profiles": len(agg["by_profile"]), "models": len(agg["by_model"])},
+    }
+
+    notes = [
+        f"Scanned {len(dbs)} state.db file(s) under {root}; {len(rows)} usage rows.",
+        "Primary metric is FRESH tokens (input+output). Cached reads are tracked "
+        "separately because they dwarf fresh usage and would flatten every chart.",
+        f"Cost is partial — only {(100.0*priced/fresh if fresh else 0):.0f}% of fresh tokens "
+        "came from priced lanes (zai and local report $0).",
+        "Daily buckets use date(last_seen) of per-session aggregate rows — an activity "
+        "view, not exact per-call timestamps.",
+    ]
+
+    return {"summary": summary, "tables": tables, "charts": [], "notes": notes,
+            "source": {"note": f"{len(rows)} rows across {len(dbs)} profile db(s)"},
+            "viz": viz}
+
+
 def _dbs(root: Path) -> list[tuple[str, Path]]:
     """[(profile_name, db_path)] for the root db + every profiles/*/state.db."""
     root = Path(root)
