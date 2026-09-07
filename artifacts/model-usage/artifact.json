@@ -1,0 +1,8 @@
+{
+  "id": "model-usage",
+  "title": "Model usage",
+  "collector": "model-usage",
+  "repo": "C:/Users/bottl/AppData/Local/hermes",
+  "description": "Live telemetry of LLM token, call, and cost usage across every Hermes profile — by provider, model, profile, and task, with the local llama.cpp lane called out.",
+  "refresh": "ask Hermes to 'refresh model-usage'"
+}
