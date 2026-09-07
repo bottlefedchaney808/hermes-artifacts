@@ -38,7 +38,9 @@ def row(**kw):
 
 def insert(conn, **kw):
     r = row(**kw)
-    conn.execute("insert into session_model_usage values(%s)" % ",".join("?") * len(COLS),
+    cols = ",".join(COLS)
+    qms = ",".join("?" for _ in COLS)
+    conn.execute(f"insert into session_model_usage ({cols}) values ({qms})",
                  [r[c] for c in COLS])
 
 
@@ -49,3 +51,28 @@ def test_collect_returns_valid_envelope_body(tmp_path):
     assert p["charts"] == []                 # custom layer renders; no Chart.js
     assert all("label" in c and "value" in c for c in p["summary"])
     assert isinstance(p["viz"], dict)
+
+
+def test_reads_all_dbs_and_tags_profile(tmp_path):
+    root = tmp_path / "hermes"
+    c = mkdb(root / "state.db"); insert(c, billing_provider="zai"); c.commit(); c.close()
+    c = mkdb(root / "profiles" / "local-agent" / "state.db")
+    insert(c, billing_provider="custom", billing_base_url="http://127.0.0.1:18434/v1")
+    c.commit(); c.close()
+    c = mkdb(root / "profiles" / "coder1" / "state.db"); insert(c, billing_provider="nous"); c.commit(); c.close()
+
+    rows = mu._read_all(root)
+    assert len(rows) == 3
+    assert {r["profile"] for r in rows} == {"(root)", "local-agent", "coder1"}
+
+
+def test_missing_root_is_empty(tmp_path):
+    assert mu._read_all(tmp_path / "nope") == []
+
+
+def test_unreadable_db_is_skipped(tmp_path):
+    root = tmp_path / "hermes"
+    (root / "profiles" / "broken").mkdir(parents=True)
+    (root / "profiles" / "broken" / "state.db").write_text("not a database", encoding="utf-8")
+    c = mkdb(root / "state.db"); insert(c); c.commit(); c.close()
+    assert len(mu._read_all(root)) == 1          # broken profile skipped, no crash
