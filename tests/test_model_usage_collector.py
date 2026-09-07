@@ -95,3 +95,45 @@ def test_metrics_split_fresh_cached_reasoning():
     assert mu._fresh(r) == 150          # cache must NOT inflate the primary metric
     assert mu._cached(r) == 9000
     assert mu._reasoning(r) == 7
+
+
+def test_aggregate_dimensions():
+    rows = [
+        dict(row(model="qwen/qwen3-coder-next", billing_provider="nous", input_tokens=100,
+                 output_tokens=50, cache_read_tokens=1000, api_call_count=2,
+                 estimated_cost_usd=0.1), profile="coder1"),
+        dict(row(model="Qwen3.8-27B", billing_provider="custom",
+                 billing_base_url="http://127.0.0.1:1/v1", input_tokens=40, output_tokens=10,
+                 api_call_count=1, task="approval"), profile="local-agent"),
+    ]
+    a = mu._aggregate(rows)
+    prov = {p["key"]: p for p in a["by_provider"]}
+    assert prov["nous"]["fresh"] == 150
+    assert prov["local"]["fresh"] == 50
+    assert prov["nous"]["cached"] == 1000
+    prof = {p["key"]: p for p in a["by_profile"]}
+    assert set(prof) == {"coder1", "local-agent"}
+    task = {t["key"]: t for t in a["by_task"]}
+    assert task["main"]["fresh"] == 150 and task["approval"]["fresh"] == 50
+
+
+def test_timeseries_is_stacked_by_provider():
+    import datetime as dt
+    ts = dt.datetime(2026, 9, 5, 12).timestamp()
+    rows = [dict(row(billing_provider="nous", input_tokens=10, last_seen=ts), profile="p"),
+            dict(row(billing_provider="zai", input_tokens=4, last_seen=ts), profile="p"),
+            dict(row(billing_provider="nous", input_tokens=100, last_seen=ts + 86400), profile="p")]
+    t = mu._timeseries(rows)
+    assert t["days"] == ["2026-09-05", "2026-09-06"]
+    series = {s["name"]: s["data"] for s in t["series"]}
+    assert series["nous"] == [10, 100]
+    assert series["zai"] == [4, 0]        # zero-filled, required for stacking
+
+
+def test_sankey_links_profile_provider_model():
+    rows = [dict(row(model="m1", billing_provider="nous", input_tokens=10), profile="coder1")]
+    s = mu._sankey(rows)
+    names = {n["name"] for n in s["nodes"]}
+    assert {"coder1", "nous", "m1"} <= names
+    pairs = {(l["source"], l["target"]) for l in s["links"]}
+    assert ("coder1", "nous") in pairs and ("nous", "m1") in pairs

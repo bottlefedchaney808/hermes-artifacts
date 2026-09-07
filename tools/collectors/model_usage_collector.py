@@ -79,3 +79,68 @@ def _cached(r):    return r.get("cache_read_tokens") or 0
 def _reasoning(r): return r.get("reasoning_tokens") or 0
 def _cost(r):      return r.get("estimated_cost_usd") or 0.0
 def _calls(r):     return r.get("api_call_count") or 0
+
+
+def _day(ts):
+    try:
+        return _dt.datetime.fromtimestamp(float(ts)).strftime("%Y-%m-%d")
+    except Exception:
+        return "unknown"
+
+
+def _bucket(rows, keyfn):
+    agg = {}
+    for r in rows:
+        k = keyfn(r)
+        b = agg.setdefault(k, {"key": k, "fresh": 0, "cached": 0, "reasoning": 0,
+                               "calls": 0, "cost_usd": 0.0, "lane": _lane(r)})
+        b["fresh"] += _fresh(r); b["cached"] += _cached(r)
+        b["reasoning"] += _reasoning(r); b["calls"] += _calls(r)
+        b["cost_usd"] += _cost(r)
+    return sorted(agg.values(), key=lambda x: -x["fresh"])
+
+
+def _aggregate(rows):
+    return {
+        "by_provider": _bucket(rows, _lane),
+        "by_model":    _bucket(rows, lambda r: (r.get("model") or "?").strip() or "?")[:15],
+        "by_profile":  _bucket(rows, lambda r: r.get("profile") or "(root)"),
+        "by_task":     _bucket(rows, lambda r: (r.get("task") or "").strip() or "main")[:12],
+    }
+
+
+def _timeseries(rows, max_days=30):
+    days, provs = set(), set()
+    cell = {}
+    for r in rows:
+        d, p = _day(r.get("last_seen")), _lane(r)
+        if d == "unknown":
+            continue
+        days.add(d); provs.add(p)
+        cell[(d, p)] = cell.get((d, p), 0) + _fresh(r)
+    ordered = sorted(days)[-max_days:]
+    keep = set(ordered)
+    series = [{"name": p, "data": [cell.get((d, p), 0) for d in ordered]}
+              for p in sorted(provs)]
+    series.sort(key=lambda s: -sum(s["data"]))
+    return {"days": ordered, "series": series,
+            "calendar": [[d, sum(cell.get((d, p), 0) for p in provs)] for d in sorted(keep)]}
+
+
+def _sankey(rows, top_models=10):
+    top = {m["key"] for m in _bucket(rows, lambda r: (r.get("model") or "?"))[:top_models]}
+    flows = {}
+    for r in rows:
+        f = _fresh(r)
+        if not f:
+            continue
+        prof, prov = r.get("profile") or "(root)", _lane(r)
+        model = (r.get("model") or "?").strip() or "?"
+        if model not in top:
+            model = "other models"
+        flows[(prof, prov)] = flows.get((prof, prov), 0) + f
+        flows[(prov, model)] = flows.get((prov, model), 0) + f
+    names = sorted({n for pair in flows for n in pair})
+    return {"nodes": [{"name": n} for n in names],
+            "links": [{"source": a, "target": b, "value": v}
+                      for (a, b), v in sorted(flows.items(), key=lambda kv: -kv[1])]}
