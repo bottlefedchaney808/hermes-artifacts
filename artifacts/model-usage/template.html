@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model usage</title>
+<!--HERMES-ARTIFACT:CSS-->
+<!--/HERMES-ARTIFACT:CSS-->
+<style id="mu-css">
+  /* Show-off layer. OUTSIDE all markers -> survives every refresh. */
+  #mu { display:none; margin:0 0 26px; }
+  #mu.on { display:block; }
+  #mu-head { display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin:0 2px 14px; }
+  #mu-head h2 { margin:0; font-size:20px; letter-spacing:.02em; }
+  #mu-filter { font-size:12px; opacity:.75; }
+  #mu-filter b { color:#38bdf8; }
+  #mu-reset { margin-left:auto; font-size:11px; padding:5px 12px; cursor:pointer;
+    border-radius:999px; border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.05); color:inherit; }
+  #mu-reset:hover { background:rgba(56,189,248,.18); border-color:#38bdf8; }
+  #mu-kpis { display:flex; flex-wrap:wrap; gap:12px; margin:0 0 18px; }
+  .mu-kpi { flex:1 1 145px; min-width:132px; padding:14px 16px; border-radius:16px;
+    background:linear-gradient(155deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 10px 34px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.07); }
+  .mu-kpi .k { font-size:10.5px; letter-spacing:.10em; text-transform:uppercase; opacity:.62; }
+  .mu-kpi .v { font-size:25px; font-weight:800; margin-top:5px; line-height:1.15;
+    font-variant-numeric:tabular-nums; }
+  .mu-kpi.accent .v { color:#38bdf8; text-shadow:0 0 22px rgba(56,189,248,.45); }
+  .mu-kpi.ok .v     { color:#4ade80; text-shadow:0 0 22px rgba(74,222,128,.40); }
+  #mu-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+  .mu-p { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; padding:12px 8px 6px; box-shadow:0 8px 26px rgba(0,0,0,.28); }
+  .mu-p h4 { margin:2px 12px 6px; font-size:12px; letter-spacing:.05em;
+    text-transform:uppercase; opacity:.70; font-weight:600; }
+  .mu-c { width:100%; }
+  .s12 { grid-column:span 12; } .s8 { grid-column:span 8; }
+  .s6  { grid-column:span 6; }  .s4 { grid-column:span 4; }
+  @media (max-width:900px){ .s8,.s6,.s4 { grid-column:span 12; } }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- Custom layer: SIBLING of #app (never a child - render() clears #app). -->
+<section id="mu">
+  <div id="mu-head">
+    <h2>Model usage</h2>
+    <span id="mu-filter">all profiles &middot; all providers</span>
+    <button id="mu-reset" type="button">reset filters</button>
+  </div>
+  <div id="mu-kpis"></div>
+  <div id="mu-grid">
+    <div class="mu-p s8"><h4>Fresh tokens over time &mdash; stacked by provider</h4><div id="c-time" class="mu-c" style="height:300px"></div></div>
+    <div class="mu-p s4"><h4>Lane share &mdash; click to filter</h4><div id="c-lane" class="mu-c" style="height:300px"></div></div>
+    <div class="mu-p s12"><h4>Daily activity heatmap</h4><div id="c-cal" class="mu-c" style="height:190px"></div></div>
+    <div class="mu-p s6"><h4>Drill down &mdash; lane &rsaquo; model</h4><div id="c-sun" class="mu-c" style="height:340px"></div></div>
+    <div class="mu-p s6"><h4>Top models by fresh tokens</h4><div id="c-model" class="mu-c" style="height:340px"></div></div>
+    <div class="mu-p s12"><h4>Token flow &mdash; profile &rsaquo; provider &rsaquo; model</h4><div id="c-flow" class="mu-c" style="height:360px"></div></div>
+    <div class="mu-p s6"><h4>Profiles &mdash; click to filter</h4><div id="c-prof" class="mu-c" style="height:280px"></div></div>
+    <div class="mu-p s6"><h4>Main loop vs auxiliary tasks</h4><div id="c-task" class="mu-c" style="height:280px"></div></div>
+  </div>
+</section>
+
+<div id="app"></div>
+<!--HERMES-ARTIFACT:DATA-->
+<!--/HERMES-ARTIFACT:DATA-->
+<!--HERMES-ARTIFACT:JS-->
+<!--/HERMES-ARTIFACT:JS-->
+
+<script id="mu-js">
+/* ECharts show-off layer with cross-filtering. Re-aggregates viz.rows in-browser
+   whenever a filter changes. ES5-safe, no build step, no fetches. */
+(function () {
+  'use strict';
+  var F = { profile: null, lane: null };   // active cross-filter
+  var charts = {}, V = null, PAL = null;
+
+  function payload() {
+    var el = document.getElementById('hermes-artifact-data');
+    return el ? JSON.parse(el.textContent) : null;
+  }
+  function fmt(n) {
+    n = +n || 0;
+    if (Math.abs(n) >= 1e9) return (n / 1e9).toFixed(2) + 'B';
+    if (Math.abs(n) >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+    if (Math.abs(n) >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+    return String(Math.round(n));
+  }
+  var IDX = { profile: 0, lane: 1, model: 2, task: 3, fresh: 4, cached: 5, day: 6 };
+
+  function rows() {
+    return V.rows.filter(function (r) {
+      if (F.profile && r[IDX.profile] !== F.profile) return false;
+      if (F.lane && r[IDX.lane] !== F.lane) return false;
+      return true;
+    });
+  }
+  function sum(rs, field) {
+    var t = 0; for (var i = 0; i < rs.length; i++) t += rs[i][IDX[field]] || 0; return t;
+  }
+  function group(rs, field) {
+    var m = {}, out = [];
+    for (var i = 0; i < rs.length; i++) {
+      var k = rs[i][IDX[field]];
+      m[k] = (m[k] || 0) + (rs[i][IDX.fresh] || 0);
+    }
+    for (var k2 in m) if (m.hasOwnProperty(k2)) out.push({ name: k2, value: m[k2] });
+    out.sort(function (a, b) { return b.value - a.value; });
+    return out;
+  }
+  function color(i) { return PAL[i % PAL.length]; }
+  function laneColor(name, i) { return name === 'local' ? '#4ade80' : color(i); }
+
+  var TXT = { color: 'rgba(255,255,255,.72)' };
+  var SPLIT = { lineStyle: { color: 'rgba(255,255,255,.06)' } };
+  var AXIS = { axisLine: { lineStyle: { color: 'rgba(255,255,255,.16)' } }, axisLabel: TXT };
+  function money(n) { return '$' + (+n || 0).toFixed(2); }
+
+  /* ---- KPI strip with count-up animation ---- */
+  function kpis() {
+    var rs = rows();
+    var fresh = sum(rs, 'fresh'), cached = sum(rs, 'cached');
+    var local = 0;
+    for (var i = 0; i < rs.length; i++) if (rs[i][IDX.lane] === 'local') local += rs[i][IDX.fresh];
+    var pct = fresh ? Math.round(100 * local / fresh) : 0;
+    var eff = fresh ? (cached / fresh) : 0;
+    var spec = [
+      { k: 'Fresh tokens', v: fresh, f: fmt },
+      { k: 'Cached reads', v: cached, f: fmt },
+      { k: 'Cache ratio', v: eff, f: function (x) { return x.toFixed(1) + '\u00d7'; } },
+      { k: 'Est. cost', v: V.totals.cost_usd, f: money, cls: 'accent' },
+      { k: 'Local share', v: pct, f: function (x) { return Math.round(x) + '%'; }, cls: 'ok' },
+      { k: 'Models', v: V.totals.models, f: function (x) { return String(Math.round(x)); } }
+    ];
+    var wrap = document.getElementById('mu-kpis');
+    wrap.innerHTML = '';
+    spec.forEach(function (s) {
+      var el = document.createElement('div');
+      el.className = 'mu-kpi' + (s.cls ? ' ' + s.cls : '');
+      el.innerHTML = '<div class="k">' + s.k + '</div><div class="v">0</div>';
+      wrap.appendChild(el);
+      var node = el.querySelector('.v'), t0 = null, dur = 700;
+      function step(ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min(1, (ts - t0) / dur);
+        node.textContent = s.f(s.v * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  function init(id) {
+    var el = document.getElementById(id);
+    if (!charts[id]) charts[id] = echarts.init(el, null, { renderer: 'canvas' });
+    return charts[id];
+  }
+
+  function draw() {
+    var rs = rows();
+
+    /* 1. Stacked area over time (uses precomputed full-range series; zero-filled) */
+    var ts = V.timeseries;
+    init('c-time').setOption({
+      grid: { left: 58, right: 18, top: 26, bottom: 30 },
+      tooltip: { trigger: 'axis', valueFormatter: fmt },
+      legend: { top: 0, textStyle: TXT, itemWidth: 10, itemHeight: 10 },
+      xAxis: [Object.assign({ type: 'category', boundaryGap: false, data: ts.days }, AXIS)],
+      yAxis: [Object.assign({ type: 'value', splitLine: SPLIT,
+        axisLabel: { color: 'rgba(255,255,255,.72)', formatter: fmt } }, { axisLine: AXIS.axisLine })],
+      series: ts.series.map(function (s, i) {
+        var c = laneColor(s.name, i);
+        return {
+          name: s.name, type: 'line', stack: 'total', smooth: true, symbol: 'none',
+          lineStyle: { width: 1.6, color: c }, itemStyle: { color: c },
+          areaStyle: { opacity: .85, color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: c }, { offset: 1, color: 'rgba(0,0,0,0)' }]) },
+          emphasis: { focus: 'series' }, data: s.data
+        };
+      })
+    }, true);
+
+    /* 2. Lane doughnut - click to filter */
+    var lanes = group(V.rows, 'lane');
+    init('c-lane').setOption({
+      tooltip: { trigger: 'item', formatter: function (p) {
+        return p.name + '<br/>' + fmt(p.value) + ' fresh (' + p.percent + '%)'; } },
+      legend: { bottom: 0, textStyle: TXT, itemWidth: 10, itemHeight: 10 },
+      series: [{
+        type: 'pie', radius: ['52%', '78%'], center: ['50%', '44%'], avoidLabelOverlap: true,
+        padAngle: 2, itemStyle: { borderRadius: 6 },
+        label: { show: true, position: 'center', formatter: function () {
+          return fmt(sum(rows(), 'fresh')); }, color: '#fff', fontSize: 20, fontWeight: 700 },
+        emphasis: { label: { show: true, fontSize: 20 }, scaleSize: 6 },
+        data: lanes.map(function (d, i) {
+          return { name: d.name, value: d.value,
+            itemStyle: { color: laneColor(d.name, i),
+              opacity: (!F.lane || F.lane === d.name) ? 1 : .28 } };
+        })
+      }]
+    }, true);
+
+    /* 3. Calendar heatmap */
+    var cal = ts.calendar || [];
+    if (cal.length) {
+      var maxv = 0; cal.forEach(function (c) { if (c[1] > maxv) maxv = c[1]; });
+      var yr = cal[cal.length - 1][0].slice(0, 4);
+      init('c-cal').setOption({
+        tooltip: { formatter: function (p) { return p.value[0] + '<br/>' + fmt(p.value[1]) + ' fresh'; } },
+        visualMap: { min: 0, max: maxv || 1, calculable: false, orient: 'horizontal',
+          left: 'center', bottom: 0, textStyle: TXT, itemWidth: 11, itemHeight: 90,
+          inRange: { color: ['#0b2942', '#155e75', '#0ea5e9', '#38bdf8', '#a5f3fc'] } },
+        calendar: { top: 20, left: 40, right: 20, cellSize: ['auto', 16], range: yr,
+          itemStyle: { color: 'rgba(255,255,255,.03)', borderColor: 'rgba(255,255,255,.07)', borderWidth: 1 },
+          splitLine: { show: false }, yearLabel: { show: false },
+          dayLabel: { color: 'rgba(255,255,255,.45)', nameMap: 'en' },
+          monthLabel: { color: 'rgba(255,255,255,.60)', nameMap: 'en' } },
+        series: [{ type: 'heatmap', coordinateSystem: 'calendar', data: cal }]
+      }, true);
+    }
+
+    /* 4. Sunburst: lane > model */
+    var tree = {};
+    rs.forEach(function (r) {
+      var l = r[IDX.lane], m = r[IDX.model];
+      tree[l] = tree[l] || {};
+      tree[l][m] = (tree[l][m] || 0) + (r[IDX.fresh] || 0);
+    });
+    var sun = Object.keys(tree).map(function (l, i) {
+      var c = laneColor(l, i);
+      var kids = Object.keys(tree[l]).map(function (m) { return { name: m, value: tree[l][m] }; })
+        .sort(function (a, b) { return b.value - a.value; }).slice(0, 8);
+      return { name: l, itemStyle: { color: c }, children: kids };
+    }).sort(function (a, b) { return b.children.length - a.children.length; });
+    init('c-sun').setOption({
+      tooltip: { formatter: function (p) { return p.name + '<br/>' + fmt(p.value) + ' fresh'; } },
+      series: [{ type: 'sunburst', data: sun, radius: [24, '92%'], sort: 'desc',
+        emphasis: { focus: 'ancestor' },
+        levels: [{}, { r0: 24, r: '48%', label: { rotate: 0, color: '#fff', fontSize: 11 },
+            itemStyle: { borderWidth: 2, borderColor: 'rgba(0,0,0,.45)' } },
+          { r0: '48%', r: '90%', label: { position: 'outside', color: 'rgba(255,255,255,.75)',
+            fontSize: 10, silent: false }, itemStyle: { opacity: .82 } }] }]
+    }, true);
+
+    /* 5. Top models - horizontal bars */
+    var models = group(rs, 'model').slice(0, 12).reverse();
+    init('c-model').setOption({
+      grid: { left: 4, right: 66, top: 8, bottom: 8, containLabel: true },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: fmt },
+      xAxis: Object.assign({ type: 'value', splitLine: SPLIT,
+        axisLabel: { color: 'rgba(255,255,255,.72)', formatter: fmt } }, { axisLine: AXIS.axisLine }),
+      yAxis: Object.assign({ type: 'category',
+        data: models.map(function (m) { return m.name.length > 26 ? m.name.slice(0, 25) + '\u2026' : m.name; }) }, AXIS),
+      series: [{ type: 'bar', barMaxWidth: 15,
+        itemStyle: { borderRadius: [0, 6, 6, 0] },
+        label: { show: true, position: 'right', color: 'rgba(255,255,255,.85)',
+          fontSize: 10, formatter: function (o) { return fmt(o.value); } },
+        data: models.map(function (m, i) {
+          return { value: m.value, itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: 'rgba(56,189,248,.25)' }, { offset: 1, color: color(models.length - i) }]) } };
+        }) }]
+    }, true);
+
+    /* 6. Sankey flow */
+    var sk = V.sankey;
+    if (sk && sk.links && sk.links.length) {
+      init('c-flow').setOption({
+        tooltip: { trigger: 'item', triggerOn: 'mousemove', valueFormatter: fmt },
+        series: [{ type: 'sankey', data: sk.nodes, links: sk.links,
+          emphasis: { focus: 'adjacency' }, nodeAlign: 'left',
+          left: 12, right: 130, top: 14, bottom: 14,
+          label: { color: 'rgba(255,255,255,.85)', fontSize: 11 },
+          lineStyle: { color: 'gradient', opacity: .38, curveness: .5 },
+          itemStyle: { borderWidth: 0 },
+          levels: [{ depth: 0, itemStyle: { color: '#38bdf8' } },
+                   { depth: 1, itemStyle: { color: '#a78bfa' } },
+                   { depth: 2, itemStyle: { color: '#4ade80' } }] }]
+      }, true);
+    }
+
+    /* 7. Profiles - click to filter */
+    var profs = group(V.rows, 'profile').slice(0, 10);
+    init('c-prof').setOption({
+      grid: { left: 4, right: 60, top: 8, bottom: 8, containLabel: true },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: fmt },
+      xAxis: Object.assign({ type: 'value', splitLine: SPLIT,
+        axisLabel: { color: 'rgba(255,255,255,.72)', formatter: fmt } }, { axisLine: AXIS.axisLine }),
+      yAxis: Object.assign({ type: 'category',
+        data: profs.map(function (p) { return p.name; }).reverse() }, AXIS),
+      series: [{ type: 'bar', barMaxWidth: 15, itemStyle: { borderRadius: [0, 6, 6, 0] },
+        label: { show: true, position: 'right', color: 'rgba(255,255,255,.85)',
+          fontSize: 10, formatter: function (o) { return fmt(o.value); } },
+        data: profs.slice().reverse().map(function (p, i) {
+          return { value: p.value, itemStyle: { color: color(i + 3),
+            opacity: (!F.profile || F.profile === p.name) ? 1 : .3 } };
+        }) }]
+    }, true);
+
+    /* 8. Task split */
+    var tasks = group(rs, 'task').slice(0, 10);
+    init('c-task').setOption({
+      grid: { left: 4, right: 60, top: 8, bottom: 8, containLabel: true },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: fmt },
+      xAxis: Object.assign({ type: 'value', splitLine: SPLIT,
+        axisLabel: { color: 'rgba(255,255,255,.72)', formatter: fmt } }, { axisLine: AXIS.axisLine }),
+      yAxis: Object.assign({ type: 'category',
+        data: tasks.map(function (t) { return t.name === 'main' ? 'main loop' : t.name; }).reverse() }, AXIS),
+      series: [{ type: 'bar', barMaxWidth: 15, itemStyle: { borderRadius: [0, 6, 6, 0] },
+        label: { show: true, position: 'right', color: 'rgba(255,255,255,.85)',
+          fontSize: 10, formatter: function (o) { return fmt(o.value); } },
+        data: tasks.slice().reverse().map(function (t, i) {
+          return { value: t.value,
+            itemStyle: { color: t.name === 'main' ? '#38bdf8' : color(i + 1) } };
+        }) }]
+    }, true);
+  }
+
+  function label() {
+    document.getElementById('mu-filter').innerHTML =
+      (F.profile ? 'profile <b>' + F.profile + '</b>' : 'all profiles') + ' &middot; ' +
+      (F.lane ? 'provider <b>' + F.lane + '</b>' : 'all providers');
+  }
+  function refresh() { label(); kpis(); draw(); }
+
+  function boot() {
+    var d = payload();
+    if (!d || !d.viz || !d.viz.rows || typeof echarts === 'undefined') return; // fallback stays
+    V = d.viz; PAL = V.palette;
+    document.getElementById('mu').className = 'on';
+    refresh();
+    charts['c-lane'].on('click', function (p) {
+      F.lane = (F.lane === p.name) ? null : p.name; refresh();
+    });
+    charts['c-prof'].on('click', function (p) {
+      F.profile = (F.profile === p.name) ? null : p.name; refresh();
+    });
+    document.getElementById('mu-reset').addEventListener('click', function () {
+      F.profile = null; F.lane = null; refresh();
+    });
+    var t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () {
+        for (var k in charts) if (charts.hasOwnProperty(k)) charts[k].resize();
+      }, 120);
+    });
+  }
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', boot);
+  else setTimeout(boot, 0);
+})();
+</script>
+</body>
+</html>
