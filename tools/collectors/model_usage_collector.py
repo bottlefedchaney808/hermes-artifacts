@@ -54,3 +54,28 @@ def _read_all(root: Path) -> list[dict]:
         except Exception:
             continue          # missing table / locked / corrupt -> skip that profile
     return rows
+
+
+_LOOPBACK = {"127.0.0.1", "localhost", "::1"}
+
+
+def _host(url: str) -> str:
+    u = (url or "").split("://", 1)[-1]
+    return (u.split("/", 1)[0] if "/" in u else u).lower()
+
+
+def _lane(r: dict) -> str:
+    prov = (r.get("billing_provider") or "").strip().lower()
+    host = _host(r.get("billing_base_url") or "").split(":")[0]
+    if prov in ("custom", "llamacpp") or host in _LOOPBACK:
+        return "local"
+    if prov == "moa":
+        return "moa"
+    return prov or "unknown"
+
+
+def _fresh(r):     return (r.get("input_tokens") or 0) + (r.get("output_tokens") or 0)
+def _cached(r):    return r.get("cache_read_tokens") or 0
+def _reasoning(r): return r.get("reasoning_tokens") or 0
+def _cost(r):      return r.get("estimated_cost_usd") or 0.0
+def _calls(r):     return r.get("api_call_count") or 0

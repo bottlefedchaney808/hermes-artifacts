@@ -76,3 +76,22 @@ def test_unreadable_db_is_skipped(tmp_path):
     (root / "profiles" / "broken" / "state.db").write_text("not a database", encoding="utf-8")
     c = mkdb(root / "state.db"); insert(c); c.commit(); c.close()
     assert len(mu._read_all(root)) == 1          # broken profile skipped, no crash
+
+
+def test_lane_local_by_provider_and_loopback():
+    assert mu._lane(row(billing_provider="custom", billing_base_url="http://127.0.0.1:18434/v1")) == "local"
+    assert mu._lane(row(billing_provider="llamacpp")) == "local"
+    assert mu._lane(row(billing_provider="", billing_base_url="http://localhost:8080/v1")) == "local"
+
+
+def test_lane_moa_and_cloud():
+    assert mu._lane(row(billing_provider="moa", model="default")) == "moa"
+    assert mu._lane(row(billing_provider="nous", billing_base_url="https://inference-api.nousresearch.com/v1")) == "nous"
+    assert mu._lane(row(billing_provider="")) == "unknown"
+
+
+def test_metrics_split_fresh_cached_reasoning():
+    r = row(input_tokens=100, output_tokens=50, cache_read_tokens=9000, reasoning_tokens=7)
+    assert mu._fresh(r) == 150          # cache must NOT inflate the primary metric
+    assert mu._cached(r) == 9000
+    assert mu._reasoning(r) == 7
