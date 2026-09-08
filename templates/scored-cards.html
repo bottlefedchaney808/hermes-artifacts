@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scored cards</title>
+<style>
+  :root { color-scheme: dark; }
+  body {
+    color: var(--foreground, #e6e6e6);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  h1 { font-size: 16px; font-weight: 700; margin: 0 0 4px; }
+  .sub { color: var(--muted-foreground, #9aa0a6); font-size: 12px; margin: 0 0 12px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 12px; }
+  .chip {
+    border: 1px solid var(--border, #333);
+    border-radius: 8px;
+    padding: 6px 10px;
+  }
+  .chip b { display: block; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-foreground, #9aa0a6); }
+  .grid { display: grid; gap: 10px; max-width: 720px; }
+  .card {
+    border: 1px solid var(--border, #333);
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: var(--card, transparent);
+  }
+  .head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .sym { font-size: 18px; font-weight: 800; letter-spacing: .02em; }
+  .score { font-size: 18px; font-weight: 800; color: var(--accent, #6ea8fe); }
+  .lean {
+    font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+    border: 1px solid var(--border, #333); border-radius: 999px; padding: 2px 8px;
+  }
+  .long { color: #4ade80; border-color: #4ade80; }
+  .short { color: #ff6b6b; border-color: #ff6b6b; }
+  .event { color: #ffd166; border-color: #ffd166; }
+  .tape { color: var(--accent, #6ea8fe); border-color: var(--accent, #6ea8fe); }
+  .fade { color: var(--muted-foreground, #9aa0a6); }
+  .meta { color: var(--muted-foreground, #9aa0a6); font-size: 12px; margin: 4px 0 6px; }
+  .ah.up { color: #4ade80; }
+  .ah.dn { color: #ff6b6b; }
+  p { margin: 4px 0; }
+  .k { color: var(--muted-foreground, #9aa0a6); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
+  a { color: var(--accent, #6ea8fe); }
+  .foot { margin-top: 12px; font-size: 11px; color: var(--muted-foreground, #9aa0a6); max-width: 720px; }
+</style>
+</head>
+<body>
+  <h1>Scored cards — title</h1>
+  <p class="sub">One-line context. Sources. Research only.</p>
+  <div class="row">
+    <div class="chip"><b>session</b>when</div>
+    <div class="chip"><b>top</b>A 84 · B 81</div>
+    <div class="chip"><b>outliers</b>+7.0% / −8.3%</div>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="head">
+        <span class="sym">TICK</span>
+        <span class="score">84</span>
+        <span class="lean long">long / fade-watch</span>
+      </div>
+      <div class="meta">Name · extra meta · <span class="ah up">+7.0%</span></div>
+      <p><span class="k">Thesis</span> Why this is on the board.</p>
+      <p><span class="k">Evidence</span> Cited sources.</p>
+      <p><span class="k">Risk</span> What kills it.</p>
+    </div>
+  </div>
+  <p class="foot">Score legend. No orders / not a bid.</p>
+</body>
+</html>
