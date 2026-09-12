@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polymarket desk — W/L record</title>
+<!--HERMES-ARTIFACT:CSS-->
+<style>
+/* Hermes Interactive Artifacts — universal shell styles.
+   Uses Hermes ::preview theme vars when present; var() fallbacks keep it
+   readable standalone in any browser. Never hardcode frame backgrounds. */
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 16px;
+  color: var(--foreground, #1a1a1a);
+  background: var(--card, transparent);
+  font: 14px/1.45 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+h1 { font-size: 20px; margin: 0 0 2px; }
+.ha-sub { color: var(--muted-foreground, #6b6b6b); font-size: 12px; margin-bottom: 16px; }
+.ha-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px; margin-bottom: 16px; }
+.ha-card { border: 1px solid var(--border, #e8e6e0); border-radius: 10px; padding: 12px 14px; }
+.ha-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--muted-foreground, #8a8a8a); }
+.ha-card .value { font-size: 20px; font-weight: 650; margin-top: 3px; }
+.ha-card.tone-ok .value { color: #1a7f37; }
+.ha-card.tone-bad .value { color: #c0341d; }
+.ha-chart { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 12px; margin-bottom: 16px; }
+.ha-chart h3 { font-size: 14px; margin: 0 0 8px; }
+.ha-chart .box { position: relative; height: 280px; }
+.ha-tablewrap { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 10px 12px 14px; margin-bottom: 16px; overflow-x: auto; }
+.ha-tablewrap h3 { font-size: 14px; margin: 2px 0 8px; }
+.ha-filter { width: 220px; padding: 4px 8px; margin-bottom: 8px;
+  border: 1px solid var(--border, #ccc); border-radius: 6px;
+  background: transparent; color: inherit; font: inherit; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 9px; white-space: nowrap;
+  border-bottom: 1px solid var(--border, #efece5); }
+th { cursor: pointer; color: var(--muted-foreground, #6b6b6b);
+  font-size: 11px; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+.ha-notes { color: var(--muted-foreground, #6b6b6b); font-size: 12px; }
+.ha-notes li { margin-bottom: 4px; }
+.ha-graph { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 12px; margin-bottom: 16px; }
+.ha-graph h3 { font-size: 14px; margin: 0 0 8px; }
+.ha-glegend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px;
+  color: var(--muted-foreground, #6b6b6b); margin-bottom: 8px; }
+.ha-glegend .swatch { display: inline-flex; align-items: center; gap: 6px; }
+.ha-glegend i { width: 8px; height: 8px; border-radius: 99px; display: inline-block; }
+/* Jarvis graph stage: base color only here (kills white-flash before JS paints).
+   The radial vignette + faint dot grid are drawn per-frame on the canvas inside
+   renderGraph() — see spec §2 Rendering. Do NOT add a CSS gradient to this rule;
+   it would double-paint under the canvas fill. */
+.ha-gstage { position: relative; height: 560px; border-radius: 10px; overflow: hidden; background: #05070c; }
+.ha-gstage canvas { display: block; width: 100%; height: 560px; cursor: grab; }
+.ha-gtip { display: none; position: absolute; pointer-events: none; }
+.ha-gtip { background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; border-radius: 6px; padding: 4px 8px; box-shadow: 0 0 6px rgba(0,0,0,.4); font-size: 12px; }
+.ha-ghost-toast { position: absolute; left: 50%; transform: translateX(-50%); bottom: 12px; padding: 6px 12px; border-radius: 8px; background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+.ha-ghost-toast.on { opacity: 1; }
+.ha-glegend i { box-shadow: 0 0 6px rgba(255,255,255,.35); }
+
+/* Embed / Brain-tab mode: graph only, no white chrome, full viewport. */
+html.ha-embed, html.ha-embed body {
+  margin: 0; padding: 0; height: 100%; overflow: hidden;
+  background: #05070c; color: #e5e7eb;
+}
+html.ha-embed #app { height: 100%; }
+html.ha-embed .ha-graph {
+  border: none; padding: 0; margin: 0; border-radius: 0;
+  height: 100%; display: flex; flex-direction: column; position: relative;
+}
+html.ha-embed .ha-graph h3 { display: none; }
+html.ha-embed .ha-glegend {
+  position: absolute; z-index: 2; left: 12px; bottom: 12px;
+  margin: 0; color: rgba(229, 231, 235, 0.65); pointer-events: none;
+  text-shadow: 0 0 8px rgba(5, 7, 12, 0.9);
+}
+html.ha-embed .ha-glegend i { box-shadow: 0 0 10px currentColor; }
+html.ha-embed .ha-gstage {
+  flex: 1; height: auto !important; min-height: 0; border-radius: 0;
+}
+html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
+
+</style>
+<!--/HERMES-ARTIFACT:CSS-->
+<style id="pd-css">
+  /* Show-off layer. OUTSIDE all markers -> survives every refresh. */
+  #pd { display:none; margin:0 0 26px; }
+  #pd.on { display:block; }
+  #pd-head { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:0 2px 14px; }
+  #pd-head h2 { margin:0; font-size:20px; letter-spacing:.02em; }
+  .pd-seg { display:inline-flex; border-radius:999px; overflow:hidden; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); }
+  .pd-seg button { font-size:11.5px; padding:6px 13px; cursor:pointer; border:none; background:transparent; color:inherit; opacity:.7; letter-spacing:.03em; }
+  .pd-seg button.on { background:rgba(56,189,248,.2); color:#eaf6ff; opacity:1; box-shadow:inset 0 0 0 1px rgba(56,189,248,.5); }
+  #pd-cat { font-size:11.5px; padding:6px 10px; border-radius:999px; cursor:pointer;
+    border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); color:inherit; }
+  #pd-filter { font-size:12px; opacity:.72; margin-left:auto; }
+  #pd-filter b { color:#38bdf8; }
+  #pd-kpis { display:flex; flex-wrap:wrap; gap:12px; margin:0 0 16px; }
+  .pd-kpi { flex:1 1 140px; min-width:128px; padding:13px 15px; border-radius:16px;
+    background:linear-gradient(155deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.10); box-shadow:0 10px 34px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.07); }
+  .pd-kpi .k { font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; opacity:.62; }
+  .pd-kpi .v { font-size:24px; font-weight:800; margin-top:5px; line-height:1.15; font-variant-numeric:tabular-nums; }
+  .pd-kpi.accent .v { color:#38bdf8; text-shadow:0 0 22px rgba(56,189,248,.45); }
+  .pd-kpi.ok   .v { color:#4ade80; text-shadow:0 0 22px rgba(74,222,128,.40); }
+  .pd-kpi.bad  .v { color:#f87171; text-shadow:0 0 22px rgba(248,113,113,.40); }
+  #pd-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+  .pd-p { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; padding:12px 8px 6px; box-shadow:0 8px 26px rgba(0,0,0,.28); }
+  .pd-p h4 { margin:2px 12px 6px; font-size:12px; letter-spacing:.05em; text-transform:uppercase; opacity:.7; font-weight:600; }
+  .s12{grid-column:span 12;} .s8{grid-column:span 8;} .s4{grid-column:span 4;}
+  .s6 {grid-column:span 6;}   .s3{grid-column:span 3;}
+  @media (max-width:900px){ .s8,.s6,.s4,.s3 { grid-column:span 12; } }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- Custom layer: SIBLING of #app (never a child - render() clears #app). -->
+<section id="pd">
+  <div id="pd-head">
+    <h2>Polymarket desk &mdash; W/L record</h2>
+    <span class="pd-seg" id="pd-outcome">
+      <button data-o="all" class="on">All</button><button data-o="won">Won</button>
+      <button data-o="lost">Lost</button><button data-o="open">Open</button>
+    </span>
+    <select id="pd-cat"><option value="">All categories</option></select>
+    <span id="pd-filter"></span>
+  </div>
+  <div id="pd-kpis"></div>
+  <div id="pd-grid">
+    <div class="pd-p s12"><h4>Cumulative realized P&amp;L &mdash; all clips, oldest first</h4><div id="c-eq" style="height:300px;width:100%"></div></div>
+    <div class="pd-p s8"><h4>P&amp;L vs entry price (each dot = one clip)</h4><div id="c-scatter" style="height:320px;width:100%"></div></div>
+    <div class="pd-p s4"><h4>Outcome mix</h4><div id="c-mix" style="height:320px;width:100%"></div></div>
+    <div class="pd-p s6"><h4>Net P&amp;L by category &mdash; click to filter</h4><div id="c-cat" style="height:320px;width:100%"></div></div>
+    <div class="pd-p s6"><h4>Last 30 settled results (W / L)</h4><div id="c-streak" style="height:320px;width:100%;overflow-x:auto;white-space:nowrap;padding:8px"></div></div>
+  </div>
+</section>
+
+<div id="app"></div>
+<!--HERMES-ARTIFACT:DATA-->
+<script id="hermes-artifact-data" type="application/json">
+{"summary": [{"label": "Record", "value": "44W–12L"}, {"label": "Win rate (settled)", "value": "78.6%"}, {"label": "Closed P&L", "value": "$1,208.01", "tone": "ok"}, {"label": "Clips logged", "value": "117", "sub": "$2,474 deployed all-time"}, {"label": "Open exposure", "value": "18 pos / $398.83"}, {"label": "Avg entry", "value": "67¢"}, {"label": "Streak (current)", "value": "W15"}], "tables": [{"title": "Open positions", "columns": ["Market", "Side", "Entry", "Cost"], "rows": [["Emmys: Outstanding Lead Actor in a Limited Serie", "Oscar Isaac Beef", "67¢", "$20.00"], ["Emmys: Outstanding Supporting Actress in a Comed", "Kate OFlynn Widows Bay", "80¢", "$20.00"], ["Emmys: Outstanding Supporting Actress in a Drama", "Katherine LaNasa The Pitt", "73¢", "$20.00"], ["Washington vs Philadelphia", "Philadelphia", "69¢", "$20.00"], ["New Orleans vs Detroit", "Detroit", "75¢", "$20.00"], ["Cleveland vs Jacksonville", "Jacksonville", "79¢", "$20.00"], ["Jean Silva vs Jose Delgado", "Jean Silva", "78¢", "$20.00"], ["Atlanta vs Pittsburgh", "Pittsburgh", "72¢", "$20.00"], ["Saitama Seibu Lions vs Nippon Ham Fighters", "Saitama Seibu Lions", "54¢", "$20.01"], ["Yujin Kim vs Dabin Kim", "Dabin Kim", "67¢", "$19.97"], ["SoftBank Hawks vs Lotte Marines", "SoftBank", "66¢", "$19.99"], ["Zhao Zhao vs Hiromasa Koyama", "Hiromasa Koyama", "69¢", "$20.00"], ["KT Wiz vs Lotte Giants", "KT Wiz", "67¢", "$19.99"], ["Victoria Bosio vs Lizette Cabrera", "Lizette Cabrera", "69¢", "$20.01"], ["Arthur Weber vs Ilia Simakin", "Ilia Simakin", "79¢", "$40.00"], ["Xiaodi You vs Luiza Fullana", "Xiaodi You", "76¢", "$20.00"], ["Manon Fiorot vs Alexa Grasso", "Manon Fiorot", "70¢", "$39.28"], ["Los Angeles Dodgers vs Miami Marlins", "Dodgers", "64¢", "$19.58"]]}, {"title": "Latest settled trades (realized P&L)", "columns": ["Market", "Side", "Entry", "Cost", "P&L"], "rows": [["Clement Chidekh vs Sebastian Dominko", "Clement Chidekh", "74¢", "$19.99", "+$33.63"], ["Liverpool FC vs Fulham FC", "Liverpool Yes", "67¢", "$39.22", "+$34.20"], ["Titouan Droguet vs Nicolai Budkov Kjaer", "Titouan Droguet", "63¢", "$19.99", "+$23.31"], ["Harold Mayot vs Max Basing", "Harold Mayot", "70¢", "$20.00", "+$35.40"], ["Luca Castelnuovo vs Ilya Ivashka", "Ilya Ivashka", "77¢", "$19.99", "+$33.08"], ["Frances Tiafoe vs Ben Shelton", "Ben Shelton", "72¢", "$19.99", "+$32.81"], ["Fukuoka SoftBank Hawks vs Chiba Lotte Marines", "Fukuoka SoftBank Hawks", "64¢", "$19.99", "+$32.55"], ["FC Kobenhavn vs AC Horsens", "FC Kobenhavn Yes", "75¢", "$20.00", "+$26.15"], ["SV Ried vs FC Salzburg", "FC Salzburg Yes", "64¢", "$19.57", "+$32.55"], ["Titouan Droguet vs Daniil Glinka", "Titouan Droguet", "69¢", "$19.98", "+$32.55"], ["Khachanov vs Tien", "Khachanov", "57¢", "$20.00", "+$31.97"], ["Derepasko vs Ziegann", "Derepasko", "70¢", "$20.00", "+$55.61"], ["Samrej vs Rawat", "Samrej", "68¢", "$20.00", "+$28.85"], ["Sekulic vs Bouzige", "Sekulic", "71¢", "$20.00", "+$27.68"], ["Bax vs Jones", "Jones", "52¢", "$20.00", "+$36.92"]]}], "charts": [], "notes": ["fills.json is the all-time clip log (117 clips). Realized P&L joins from the Polymarket history export; 43 closed fills have no matching settlement row yet (P&L not reconciled) and are shown as 'unsettled', never guessed.", "Account SoT at last verification: cash $27.8, portfolio $369.54 (18 open)."], "source": {"note": "EventTrading fills.json + _hist_parsed.json @ C:\\Users\\bottl\\EventTrading"}, "viz": {"trades": [{"market": "Elsa Jacquemot vs Anastasia Tikhonova", "side": "Jacquemot", "cost": 20.0, "entry": 0.74, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Ane Mintegi Del Olmo vs Alicia Herrero Linana", "side": "Olmo", "cost": 20.0, "entry": 0.6, "outcome": "lost", "pnl": -19.99, "cat": "Other Sports", "sleeve": "", "age_h": 6.0}, {"market": "Sao Bernardo vs Londrina Serie B", "side": "Sao Bernardo", "cost": 20.0, "entry": 0.55, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Millonarios vs AD Cali", "side": "Millonarios", "cost": 19.99, "entry": 0.57, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "CS Cienciano vs Montevideo City Torque", "side": "Cienciano", "cost": 20.0, "entry": 0.63, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Olivieri vs Pereira ML", "side": "Olivieri", "cost": 19.51, "entry": 0.58, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Da Silva vs Monteiro ML", "side": "Da Silva", "cost": 19.23, "entry": 0.33, "outcome": "won", "pnl": 58.26, "cat": "Other Sports", "sleeve": "", "age_h": 6.0}, {"market": "Erel vs Albot ML", "side": "Erel", "cost": 19.57, "entry": 0.64, "outcome": "won", "pnl": 30.58, "cat": "Other Sports", "sleeve": "", "age_h": 9.0}, {"market": "Kjaer vs Durand ML", "side": "Kjaer", "cost": 19.81, "entry": 0.85, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Dedura-Palomero vs Heide ML", "side": "Heide", "cost": 19.48, "entry": 0.56, "outcome": "won", "pnl": 34.79, "cat": "Other Sports", "sleeve": "", "age_h": 7.0}, {"market": "Doosan vs Kiwoom KBO", "side": "Doosan", "cost": 19.98, "entry": 0.69, "outcome": "lost", "pnl": -19.98, "cat": "KBO", "sleeve": "", "age_h": 24.0}, {"market": "Philadelphia Union vs Cincinnati ML", "side": "Philadelphia Union", "cost": 19.99, "entry": 0.6, "outcome": "won", "pnl": 32.55, "cat": "Other Sports", "sleeve": "", "age_h": 18.0}, {"market": "Nam vs Yevseyev ML", "side": "Nam", "cost": 19.46, "entry": 0.54, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Cui vs Zhou ML", "side": "Zhou", "cost": 19.99, "entry": 0.65, "outcome": "won", "pnl": 30.13, "cat": "Other Sports", "sleeve": "", "age_h": 9.0}, {"market": "Tomic vs Ivashka ML", "side": "Ivashka", "cost": 20.0, "entry": 0.59, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Sekulic vs Matsuda ML", "side": "Sekulic", "cost": 19.99, "entry": 0.65, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Basing vs Alkaya ML", "side": "Basing", "cost": 19.99, "entry": 0.6, "outcome": "won", "pnl": 32.55, "cat": "Other Sports", "sleeve": "", "age_h": 11.0}, {"market": "Tobon vs Butvilas ML", "side": "Butvilas", "cost": 20.0, "entry": 0.77, "outcome": "won", "pnl": 25.62, "cat": "Other Sports", "sleeve": "", "age_h": 12.0}, {"market": "Miyoshi vs Peliwo ML", "side": "Miyoshi", "cost": 19.99, "entry": 0.88, "outcome": "lost", "pnl": -19.99, "cat": "Other Sports", "sleeve": "", "age_h": 15.0}, {"market": "Zverev vs Zandschulp ML", "side": "Zverev", "cost": 19.99, "entry": 0.865, "outcome": "won", "pnl": 22.93, "cat": "Other Sports", "sleeve": "", "age_h": 18.0}, {"market": "Aguiard vs Simakin ML", "side": "Simakin", "cost": 19.98, "entry": 0.79, "outcome": "won", "pnl": 24.97, "cat": "Other Sports", "sleeve": "", "age_h": 16.0}, {"market": "Chelsea vs Leeds ML", "side": "Chelsea", "cost": 16.98, "entry": 0.636, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Sporting vs Galatasaray ML", "side": "Sporting", "cost": 19.99, "entry": 0.58, "outcome": "won", "pnl": 33.63, "cat": "Other Sports", "sleeve": "", "age_h": 23.0}, {"market": "Stuttgart vs Viking ML", "side": "Stuttgart", "cost": 20.0, "entry": 0.79, "outcome": "won", "pnl": 25.0, "cat": "Other Sports", "sleeve": "", "age_h": 24.0}, {"market": "Munar vs Bueno ML", "side": "Munar", "cost": 20.0, "entry": 0.77, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Ritschard vs Ofner ML", "side": "Ofner", "cost": 19.99, "entry": 0.58, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Patriots vs Seahawks ML", "side": "SEA", "cost": 19.99, "entry": 0.62, "outcome": "won", "pnl": 31.53, "cat": "Soccer/Club", "sleeve": "", "age_h": 17.0}, {"market": "Napoli vs Arsenal ML", "side": "Arsenal", "cost": 19.99, "entry": 0.6, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Ajdukovic vs Sakellaridis ML", "side": "Sakellaridis", "cost": 19.99, "entry": 0.73, "outcome": "won", "pnl": 26.95, "cat": "Other Sports", "sleeve": "", "age_h": 23.0}, {"market": "Liverpool vs Atletico ML", "side": "Liverpool", "cost": 19.99, "entry": 0.57, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Acosta vs Moro Canas ML", "side": "Acosta", "cost": 19.99, "entry": 0.74, "outcome": "won", "pnl": 26.6, "cat": "Other Sports", "sleeve": "", "age_h": 24.0}, {"market": "Blanchet vs Rincon ML", "side": "Blanchet", "cost": 20.0, "entry": 0.59, "outcome": "won", "pnl": 33.08, "cat": "Other Sports", "sleeve": "", "age_h": 24.0}, {"market": "Khachanov vs Blockx ML", "side": "Khachanov", "cost": 20.0, "entry": 0.61, "outcome": "won", "pnl": 32.03, "cat": "Other Sports", "sleeve": "", "age_h": 21.0}, {"market": "Gjorcheska vs Zantedeschi WTA", "side": "Zantedeschi", "cost": 29.99, "entry": 0.56, "outcome": "won", "pnl": 52.16, "cat": "WTA/ITF", "sleeve": "", "age_h": 24.0}, {"market": "Giants vs Chunichi NPB", "side": "Yomiuri Giants", "cost": 19.99, "entry": 0.53, "outcome": "won", "pnl": 36.69, "cat": "NPB", "sleeve": "", "age_h": 24.0}, {"market": "Rakuten vs Lotte NPB", "side": "Rakuten", "cost": 20.0, "entry": 0.55, "outcome": "unsettled", "pnl": null, "cat": "NPB", "sleeve": "", "age_h": null}, {"market": "Orix vs Seibu NPB", "side": "Orix", "cost": 39.98, "entry": 0.55, "outcome": "lost", "pnl": -19.97, "cat": "NPB", "sleeve": "", "age_h": 24.0}, {"market": "SoftBank vs Nippon Ham NPB", "side": "SoftBank", "cost": 19.99, "entry": 0.58, "outcome": "unsettled", "pnl": null, "cat": "NPB", "sleeve": "", "age_h": null}, {"market": "Yokohama vs Yakult NPB", "side": "Yokohama", "cost": 20.0, "entry": 0.58, "outcome": "won", "pnl": 67.26, "cat": "NPB", "sleeve": "", "age_h": 24.0}, {"market": "Hanshin vs Hiroshima NPB", "side": "Hanshin", "cost": 19.99, "entry": 0.68, "outcome": "lost", "pnl": -20.0, "cat": "NPB", "sleeve": "", "age_h": 24.0}, {"market": "Doosan vs SSG KBO", "side": "Doosan", "cost": 19.98, "entry": 0.67, "outcome": "won", "pnl": 28.44, "cat": "KBO", "sleeve": "", "age_h": 8.0}, {"market": "Moeller vs Soto ML", "side": "Moeller", "cost": 19.6, "entry": 0.67, "outcome": "lost", "pnl": -20.0, "cat": "Other Sports", "sleeve": "", "age_h": 24.0}, {"market": "Erhard vs Glinka ML", "side": "Glinka", "cost": 19.53, "entry": 0.6, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Sharipov vs Daniel ML", "side": "Daniel", "cost": 19.62, "entry": 0.68, "outcome": "lost", "pnl": -20.0, "cat": "Other Sports", "sleeve": "", "age_h": 24.0}, {"market": "Hewitt vs Derepasko ML", "side": "Hewitt", "cost": 19.99, "entry": 0.82, "outcome": "won", "pnl": 24.12, "cat": "Other Sports", "sleeve": "", "age_h": 16.0}, {"market": "Jones vs Moriya ML", "side": "Jones", "cost": 19.49, "entry": 0.57, "outcome": "lost", "pnl": -20.0, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Samrej vs Shimizu ML", "side": "Shimizu", "cost": 19.6, "entry": 0.66, "outcome": "won", "pnl": 29.69, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Dortmund vs Villarreal ML", "side": "Dortmund", "cost": 19.49, "entry": 0.57, "outcome": "unsettled", "pnl": null, "cat": "Soccer/Club", "sleeve": "", "age_h": null}, {"market": "Napolitano vs Travaglia ML", "side": "Travaglia", "cost": 19.49, "entry": 0.57, "outcome": "won", "pnl": 34.2, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Lajovic vs Landaluce ML", "side": "Landaluce", "cost": 19.51, "entry": 0.58, "outcome": "lost", "pnl": -19.99, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Gaubas vs Lagutin ML", "side": "Gaubas", "cost": 20.0, "entry": 0.68, "outcome": "lost", "pnl": -20.0, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Dalla Valle vs Crivellaro ML", "side": "Dalla Valle", "cost": 19.99, "entry": 0.86, "outcome": "won", "pnl": 23.05, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Sonego vs Passaro ML", "side": "Sonego", "cost": 20.0, "entry": 0.61, "outcome": "lost", "pnl": -20.0, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Lee vs Gurri ML", "side": "Gurri", "cost": 20.0, "entry": 0.75, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Dellien vs Alves ML", "side": "Dellien", "cost": 19.98, "entry": 0.69, "outcome": "won", "pnl": 28.44, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Munar vs Batalla ML", "side": "Munar", "cost": 19.99, "entry": 0.74, "outcome": "won", "pnl": 26.6, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "AEK vs LASK ML", "side": "AEK", "cost": 19.49, "entry": 0.57, "outcome": "won", "pnl": 34.2, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Tiafoe vs Michelsen ML", "side": "Tiafoe", "cost": 19.52, "entry": 0.595, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Porto vs Man City ML", "side": "Manchester City", "cost": 20.0, "entry": 0.59, "outcome": "won", "pnl": 33.08, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Real Madrid vs Inter ML", "side": "Real Madrid", "cost": 19.99, "entry": 0.62, "outcome": "won", "pnl": 31.53, "cat": "Soccer/Club", "sleeve": "", "age_h": 48.0}, {"market": "Shelton vs Alcaraz ML", "side": "Alcaraz", "cost": 19.99, "entry": 0.785, "outcome": "lost", "pnl": -19.99, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Bax vs Jones", "side": "Jones", "cost": 20.0, "entry": 0.52, "outcome": "won", "pnl": 36.92, "cat": "Other Sports", "sleeve": "", "age_h": 72.0}, {"market": "Sekulic vs Bouzige", "side": "Sekulic", "cost": 20.0, "entry": 0.71, "outcome": "won", "pnl": 27.68, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Samrej vs Rawat", "side": "Samrej", "cost": 20.0, "entry": 0.68, "outcome": "won", "pnl": 28.85, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Derepasko vs Ziegann", "side": "Derepasko", "cost": 20.0, "entry": 0.7, "outcome": "won", "pnl": 55.61, "cat": "Other Sports", "sleeve": "", "age_h": 72.0}, {"market": "Purcell vs Pacheco", "side": "Purcell", "cost": 20.0, "entry": 0.55, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Khachanov vs Tien", "side": "Khachanov", "cost": 20.0, "entry": 0.58, "outcome": "won", "pnl": 31.97, "cat": "Other Sports", "sleeve": "", "age_h": 72.0}, {"market": "SMU vs FSU ML", "side": "SMU", "cost": 20.0, "entry": 0.57, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Al Qadisiyah vs Al Ettifaq", "side": "Al Qadisiyah Yes", "cost": 19.98, "entry": 0.78, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Samsung Lions vs Kiwoom Heroes", "side": "Samsung Lions", "cost": 19.99, "entry": 0.78, "outcome": "unsettled", "pnl": null, "cat": "Soccer/Club", "sleeve": "", "age_h": null}, {"market": "Titouan Droguet vs Daniil Glinka", "side": "Titouan Droguet", "cost": 19.98, "entry": 0.69, "outcome": "won", "pnl": 32.55, "cat": "Other Sports", "sleeve": "", "age_h": 24.0}, {"market": "Lokomotiv Tashkent vs PFK Mash AL Mubarek", "side": "Lokomotiv Tashkent Yes", "cost": 19.46, "entry": 0.76, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "West Ham United FC vs Wrexham AFC", "side": "West Ham United FC Yes", "cost": 19.23, "entry": 0.62, "outcome": "unsettled", "pnl": null, "cat": "Soccer/Club", "sleeve": "", "age_h": null}, {"market": "Rutgers vs Boston College", "side": "Boston College", "cost": 20.0, "entry": 0.6, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "SV Ried vs FC Salzburg", "side": "FC Salzburg Yes", "cost": 19.57, "entry": 0.64, "outcome": "won", "pnl": 32.55, "cat": "Soccer/Club", "sleeve": "", "age_h": 23.0}, {"market": "FC Kobenhavn vs AC Horsens", "side": "FC Kobenhavn Yes", "cost": 20.0, "entry": 0.75, "outcome": "won", "pnl": 26.15, "cat": "Soccer/Club", "sleeve": "", "age_h": 23.0}, {"market": "BK Hacken vs Mjallby AIF", "side": "BK Hacken Yes", "cost": 19.57, "entry": 0.64, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Mate Valkusz vs Bruno Fernandez", "side": "Mate Valkusz", "cost": 19.99, "entry": 0.73, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Fukuoka SoftBank Hawks vs Chiba Lotte Marines", "side": "Fukuoka SoftBank Hawks", "cost": 19.99, "entry": 0.64, "outcome": "won", "pnl": 32.55, "cat": "Soccer/Club", "sleeve": "", "age_h": 9.0}, {"market": "Samsung Lions vs LG Twins", "side": "Samsung Lions", "cost": 20.0, "entry": 0.58, "outcome": "unsettled", "pnl": null, "cat": "Soccer/Club", "sleeve": "", "age_h": null}, {"market": "Frances Tiafoe vs Ben Shelton", "side": "Ben Shelton", "cost": 19.99, "entry": 0.72, "outcome": "won", "pnl": 32.81, "cat": "Other Sports", "sleeve": "", "age_h": 48.0}, {"market": "Luca Castelnuovo vs Ilya Ivashka", "side": "Ilya Ivashka", "cost": 19.99, "entry": 0.77, "outcome": "won", "pnl": 33.08, "cat": "Other Sports", "sleeve": "", "age_h": 11.0}, {"market": "Harold Mayot vs Max Basing", "side": "Harold Mayot", "cost": 20.0, "entry": 0.7, "outcome": "won", "pnl": 35.4, "cat": "Other Sports", "sleeve": "", "age_h": 72.0}, {"market": "CA Boca Juniors vs CA Central Cordoba", "side": "Boca Juniors Yes", "cost": 19.99, "entry": 0.66, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Titouan Droguet vs Nicolai Budkov Kjaer", "side": "Titouan Droguet", "cost": 19.99, "entry": 0.63, "outcome": "won", "pnl": 23.31, "cat": "Other Sports", "sleeve": "", "age_h": 9.0}, {"market": "Laslo Djere vs Pedro Martinez", "side": "Laslo Djere", "cost": 20.0, "entry": 0.66, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Liverpool FC vs Fulham FC", "side": "Liverpool Yes", "cost": 39.22, "entry": 0.67, "outcome": "won", "pnl": 34.2, "cat": "Soccer/Club", "sleeve": "", "age_h": 23.0}, {"market": "Oklahoma vs Michigan", "side": "Oklahoma", "cost": 39.2, "entry": 0.66, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Los Angeles Dodgers vs Miami Marlins", "side": "Dodgers", "cost": 19.58, "entry": 0.64, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Rositsa Dencheva vs Irene Burillo Escorihuela", "side": "Rositsa Dencheva", "cost": 19.66, "entry": 0.72, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Yuliya Perapekhina vs Yasmin Ezzat", "side": "Yuliya Perapekhina", "cost": 19.98, "entry": 0.69, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Darko Jorgic vs Truls Moregard", "side": "Truls Moregard", "cost": 19.99, "entry": 0.74, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Manon Fiorot vs Alexa Grasso", "side": "Manon Fiorot", "cost": 39.28, "entry": 0.7, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Dortmund vs Paderborn (reg)", "side": "Dortmund Yes", "cost": 39.99, "entry": 0.78, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Ross County vs Hibernian (reg)", "side": "Hibernian Yes", "cost": 40.0, "entry": 0.66, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Andre Lukosiute vs Riko Kikawada", "side": "Andre Lukosiute", "cost": 19.9, "entry": 0.76, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "West Ham vs London City Lionesses (reg)", "side": "London City Lionesses Yes", "cost": 19.99, "entry": 0.71, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Clement Chidekh vs Sebastian Dominko", "side": "Clement Chidekh", "cost": 19.99, "entry": 0.74, "outcome": "won", "pnl": 33.63, "cat": "Other Sports", "sleeve": "", "age_h": 24.0}, {"market": "Xiaodi You vs Luiza Fullana", "side": "Xiaodi You", "cost": 20.0, "entry": 0.76, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Arthur Weber vs Ilia Simakin", "side": "Ilia Simakin", "cost": 40.0, "entry": 0.79, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Wolfsberger vs SK Rapid (reg)", "side": "SK Rapid Yes", "cost": 20.0, "entry": 0.63, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Victoria Bosio vs Lizette Cabrera", "side": "Lizette Cabrera", "cost": 20.01, "entry": 0.69, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "KT Wiz vs Lotte Giants", "side": "KT Wiz", "cost": 19.99, "entry": 0.67, "outcome": "open", "pnl": null, "cat": "Soccer/Club", "sleeve": "", "age_h": null}, {"market": "Zhao Zhao vs Hiromasa Koyama", "side": "Hiromasa Koyama", "cost": 20.0, "entry": 0.69, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "SoftBank Hawks vs Lotte Marines", "side": "SoftBank", "cost": 19.99, "entry": 0.66, "outcome": "open", "pnl": null, "cat": "Soccer/Club", "sleeve": "", "age_h": null}, {"market": "Yujin Kim vs Dabin Kim", "side": "Dabin Kim", "cost": 19.97, "entry": 0.67, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "CS Independiente Rivadavia vs CA Aldosivi (reg)", "side": "Rivadavia Yes", "cost": 19.99, "entry": 0.68, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "", "age_h": null}, {"market": "Saitama Seibu Lions vs Nippon Ham Fighters", "side": "Saitama Seibu Lions", "cost": 20.01, "entry": 0.54, "outcome": "open", "pnl": null, "cat": "Soccer/Club", "sleeve": "sports_line", "age_h": null}, {"market": "Drakkar Klose vs Tommy Gantt", "side": "Tommy Gantt", "cost": 20.0, "entry": 0.78, "outcome": "unsettled", "pnl": null, "cat": "Other Sports", "sleeve": "maker", "age_h": null}, {"market": "Atlanta vs Pittsburgh", "side": "Pittsburgh", "cost": 20.0, "entry": 0.72, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "sports_weekend", "age_h": null}, {"market": "Jean Silva vs Jose Delgado", "side": "Jean Silva", "cost": 20.0, "entry": 0.78, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "sports_ml", "age_h": null}, {"market": "Cleveland vs Jacksonville", "side": "Jacksonville", "cost": 20.0, "entry": 0.79, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "sports_weekend", "age_h": null}, {"market": "New Orleans vs Detroit", "side": "Detroit", "cost": 20.0, "entry": 0.75, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "sports_weekend", "age_h": null}, {"market": "Washington vs Philadelphia", "side": "Philadelphia", "cost": 20.0, "entry": 0.69, "outcome": "open", "pnl": null, "cat": "Other Sports", "sleeve": "sports_weekend", "age_h": null}, {"market": "Emmys: Outstanding Supporting Actress in a Drama Series", "side": "Katherine LaNasa The Pitt", "cost": 20.0, "entry": 0.73, "outcome": "open", "pnl": null, "cat": "Emmys", "sleeve": "events", "age_h": null}, {"market": "Emmys: Outstanding Supporting Actress in a Comedy Series", "side": "Kate OFlynn Widows Bay", "cost": 20.0, "entry": 0.8, "outcome": "open", "pnl": null, "cat": "Emmys", "sleeve": "events", "age_h": null}, {"market": "Emmys: Outstanding Lead Actor in a Limited Series", "side": "Oscar Isaac Beef", "cost": 20.0, "entry": 0.67, "outcome": "open", "pnl": null, "cat": "Emmys", "sleeve": "events", "age_h": null}], "deposits": [20.0, 200.0, 200.0, 200.0, 150.0, 300.0], "totals": {"won": 44, "lost": 12, "open": 18, "unsettled": 43, "closed_pnl": 1208.01, "deployed": 2473.51, "open_exposure": 398.83}}, "schema_version": 1, "artifact_id": "polymarket-desk", "title": "Polymarket desk — W/L record", "generated_at": "2026-09-12 23:46 UTC"}
+</script>
+<!--/HERMES-ARTIFACT:DATA-->
+<!--HERMES-ARTIFACT:JS-->
+<script>
+/* Hermes Interactive Artifacts — universal renderer.
+   Reads the inline JSON payload written by tools/refresh.py and renders
+   summary cards, charts (Chart.js if the CDN is reachable), and
+   filterable/sortable tables. No build step, no fetches, no framework. */
+(function () {
+  'use strict';
+  /* Vivid, full-opacity palette per Jason's chart preferences. */
+  var PALETTE = ['#3b82f6', '#ef4444', '#22c55e', '#eab308', '#a855f7', '#06b6d4'];
+
+  function h(tag, attrs) {
+    var node = document.createElement(tag);
+    attrs = attrs || {};
+    Object.keys(attrs).forEach(function (k) {
+      if (k === 'text') node.textContent = attrs[k];
+      else if (k === 'class') node.className = attrs[k];
+      else node.setAttribute(k, attrs[k]);
+    });
+    for (var i = 2; i < arguments.length; i++) {
+      if (arguments[i]) node.appendChild(arguments[i]);
+    }
+    return node;
+  }
+
+  function payload() {
+    return JSON.parse(document.getElementById('hermes-artifact-data').textContent);
+  }
+
+  function renderCards(d) {
+    var wrap = h('div', { class: 'ha-cards' });
+    (d.summary || []).forEach(function (c) {
+      wrap.appendChild(h('div', { class: 'ha-card' + (c.tone ? ' tone-' + c.tone : '') },
+        h('div', { class: 'label', text: c.label }),
+        h('div', { class: 'value', text: String(c.value) })));
+    });
+    return wrap;
+  }
+
+  function renderChart(chart) {
+    var box = h('div', { class: 'ha-chart' }, h('h3', { text: chart.title }));
+    if (typeof Chart === 'undefined') {
+      box.appendChild(h('div', { class: 'ha-notes',
+        text: 'Chart.js CDN unreachable — values remain in tables/notes.' }));
+      return box;
+    }
+    var canvas = h('canvas');
+    box.appendChild(h('div', { class: 'box' }, canvas));
+    var datasets = (chart.series || []).map(function (s, i) {
+      return {
+        label: s.label,
+        data: s.data,
+        backgroundColor: PALETTE[i % PALETTE.length],
+        borderColor: PALETTE[i % PALETTE.length],
+        borderWidth: 2, tension: 0.35, pointRadius: 2,
+        fill: chart.type === 'line'
+      };
+    });
+    new Chart(canvas.getContext('2d'), {
+      type: chart.type,
+      data: { labels: chart.labels || [], datasets: datasets },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } }
+      }
+    });
+    return box;
+  }
+
+  function renderTable(table) {
+    var wrap = h('div', { class: 'ha-tablewrap' }, h('h3', { text: table.title }));
+    var filter = h('input', { class: 'ha-filter', placeholder: 'Filter...' });
+    var tbl = h('table');
+    var headRow = h('tr');
+    var thead = h('thead'), tbody = h('tbody');
+    (table.columns || []).forEach(function (c) {
+      headRow.appendChild(h('th', { text: c }));
+    });
+    thead.appendChild(headRow);
+    tbl.appendChild(thead);
+    tbl.appendChild(tbody);
+    var rows = table.rows || [];
+
+    function fill(list) {
+      tbody.textContent = '';
+      list.forEach(function (r) {
+        var tr = h('tr');
+        (table.columns || []).forEach(function (_, i) {
+          tr.appendChild(h('td', { text: r[i] == null ? '' : String(r[i]) }));
+        });
+        tbody.appendChild(tr);
+      });
+    }
+    fill(rows);
+    filter.addEventListener('input', function () {
+      var q = filter.value.toLowerCase();
+      fill(rows.filter(function (r) {
+        return r.some(function (cell) {
+          return String(cell == null ? '' : cell).toLowerCase().indexOf(q) !== -1;
+        });
+      }));
+    });
+    var sortDir = {};
+    headRow.addEventListener('click', function (e) {
+      var idx = Array.prototype.indexOf.call(headRow.children, e.target);
+      if (idx < 0) return;
+      sortDir[idx] = !sortDir[idx];
+      fill(rows.slice().sort(function (a, b) {
+        var x = a[idx], y = b[idx];
+        var nx = parseFloat(x), ny = parseFloat(y);
+        var cmp = (!isNaN(nx) && !isNaN(ny)) ? nx - ny
+          : String(x).localeCompare(String(y));
+        return sortDir[idx] ? cmp : -cmp;
+      }));
+    });
+    wrap.appendChild(filter);
+    wrap.appendChild(tbl);
+    return wrap;
+  }
+
+  var GROUP_COLOR = {
+    construction: '#f59e0b',
+    development: '#3b82f6',
+    trading: '#22c55e',
+    hub: '#eab308',
+    daily: '#a855f7',
+    inbox: '#ef4444',
+    dangling: '#94a3b8',
+    templates: '#06b6d4',
+    attachments: '#64748b'
+  };
+
+  /* Jarvis brain — cinematic force graph of the vault. Canvas renderer with
+     d3-force physics (when reachable), manual zoom/pan transform state, hover
+     neighborhood isolation, and click-to-open in Obsidian. Falls back to a
+     compact hand-rolled sim when the d3 CDN is unreachable. ES5 on purpose:
+     this file ships inline into single-file artifacts with no build step. */
+
+  var OBSIDIAN_VAULT = 'obsidian-vault';
+  // Single-instance teardown handle for the live Jarvis graph (set by renderGraph's start()).
+  var activeJarvisDestroy = null;
+
+  function isEmbed() {
+    try {
+      var q = String(location.search || '');
+      var hsh = String(location.hash || '');
+      return q.indexOf('embed=1') !== -1 || hsh.indexOf('embed') !== -1;
+    } catch (err) { return false; }
+  }
+
+  function hexRgb(hex) {
+    var s = String(hex || '').replace('#', '');
+    if (s.length === 3) s = s.charAt(0) + s.charAt(0) + s.charAt(1) + s.charAt(1) + s.charAt(2) + s.charAt(2);
+    var n = parseInt(s, 16);
+    if (isNaN(n)) return [148, 163, 184];
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+
+  function renderGraph(graph) {
+    // Empty/missing graph → return a visible note box (spec §6). Always returns a
+    // DOM element so any caller's appendChild is safe; no canvas loop started.
+    if (!graph || !(graph.nodes && graph.nodes.length)) {
+      var emptyBox = h('div', { class: 'ha-graph' }, h('h3', { text: 'Graph view' }));
+      var emptyStage = h('div', { class: 'ha-gstage' });
+      emptyStage.appendChild(h('div', { class: 'ha-notes', style: 'padding:16px;', text: 'No links found in this vault.' }));
+      emptyBox.appendChild(emptyStage);
+      return emptyBox;
+    }
+
+    // ---- Init: degree map, adjacency (neighborhood sets), top-label set ----
+    var rawNodes = graph.nodes, rawEdges = graph.edges || [];
+    var deg = {}, adj = {};
+    var i, n, e;
+    for (i = 0; i < rawNodes.length; i++) {
+      n = rawNodes[i];
+      if (!deg[n.id]) deg[n.id] = 0;
+      if (!adj[n.id]) adj[n.id] = {};
+      adj[n.id][n.id] = true; // self, so the hovered node stays lit
+    }
+    for (i = 0; i < rawEdges.length; i++) {
+      e = rawEdges[i];
+      var a = e.source, b = e.target;
+      if (!deg[a]) deg[a] = 0;
+      if (!deg[b]) deg[b] = 0;
+      deg[a]++; deg[b]++;
+      (adj[a] || (adj[a] = {}))[b] = true;
+      (adj[b] || (adj[b] = {}))[a] = true;
+    }
+    var topLabelSet = {};
+    rawNodes.slice().sort(function (x, y) { return deg[y.id] - deg[x.id]; })
+      .slice(0, 8).forEach(function (nd) { topLabelSet[nd.id] = true; });
+
+    // Group attractor points: each distinct group gets an angle on a ~260 circle.
+    var groups = [];
+    rawNodes.forEach(function (nd) { if (groups.indexOf(nd.group || 'hub') === -1) groups.push(nd.group || 'hub'); });
+    var groupCount = {};
+    rawNodes.forEach(function (nd) { var g = nd.group || 'hub'; groupCount[g] = (groupCount[g] || 0) + 1; });
+    // Big groups pull harder so they form compact blobs instead of diffuse clouds.
+    function cohesionStrength(g) { return Math.min(0.12, 0.01 * Math.sqrt(groupCount[g] || 1)); }
+    var attract = {};
+    for (i = 0; i < groups.length; i++) {
+      var ang = (i / Math.max(1, groups.length)) * Math.PI * 2;
+      attract[groups[i]] = { x: Math.cos(ang) * 260, y: Math.sin(ang) * 260 };
+    }
+
+    // Sim node objects. Seed positions near the group attractor for fast convergence.
+    var nodes = rawNodes.map(function (nd, idx) {
+      var g = nd.group || 'hub';
+      var at = attract[g] || { x: 0, y: 0 };
+      return {
+        id: nd.id, label: nd.label != null ? nd.label : String(nd.id), group: g,
+        size: Math.max(1, nd.size || 1),
+        x: at.x + (Math.random() - 0.5) * 60, y: at.y + (Math.random() - 0.5) * 60,
+        vx: 0, vy: 0
+      };
+    });
+    var byId = {};
+    nodes.forEach(function (nd) { byId[nd.id] = nd; });
+    // Links reference node objects directly so d3.forceLink can bind them.
+    var links = [];
+    for (i = 0; i < rawEdges.length; i++) {
+      e = rawEdges[i];
+      if (byId[e.source] && byId[e.target]) links.push({ source: byId[e.source], target: byId[e.target] });
+    }
+
+    function radius(nd) { return 3 + Math.sqrt(nd.size) * 1.8; }
+    var hasD3 = typeof d3 !== 'undefined' && !!d3.forceSimulation;
+
+    // ---- DOM scaffold (canvas, not SVG — spec §2) ----
+    var box = h('div', { class: 'ha-graph' }, h('h3', { text: 'Graph view' }));
+    var legend = h('div', { class: 'ha-glegend' });
+    groups.forEach(function (g) {
+      legend.appendChild(h('span', { class: 'swatch' },
+        h('i', { style: 'background:' + (GROUP_COLOR[g] || '#94a3b8') }),
+        h('span', { text: g })));
+    });
+    box.appendChild(legend);
+    var stage = h('div', { class: 'ha-gstage' });
+    var canvas = document.createElement('canvas');
+    var tip = h('div', { class: 'ha-gtip', text: '' });
+    var toast = h('div', { class: 'ha-ghost-toast', text: '' });
+    stage.appendChild(canvas);
+    stage.appendChild(tip);
+    stage.appendChild(toast);
+    box.appendChild(stage);
+
+    // ---- Zoom/pan transform state (manual, spec §3). screenCSS = world*k + t ----
+    var view = { k: 1, tx: 0, ty: 0 };
+    function clampK(k) { return Math.max(0.25, Math.min(8, k)); }
+
+    // ---- Canvas sizing (backing store × dpr; CSS height fixed at 560 by .ha-gstage) ----
+    var cssW = 960, cssH = 560, dpr = window.devicePixelRatio || 1;
+    var embed = isEmbed();
+    function resize() {
+      var r = stage.getBoundingClientRect();
+      if (r.width > 2) cssW = Math.round(r.width);
+      if (embed && r.height > 2) cssH = Math.round(r.height);
+      else cssH = 560;
+      canvas.style.width = cssW + 'px';
+      canvas.style.height = cssH + 'px';
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(cssW * dpr));
+      canvas.height = Math.max(1, Math.round(cssH * dpr));
+    }
+
+    var ctx = null; // set after first resize (canvas must be in DOM)
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.className = 'ha-ghost-toast on';
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(function () { toast.className = 'ha-ghost-toast'; }, 2000);
+    }
+
+    // ---- Click → open note in Obsidian (spec §5, NO silent file:// fallback) ----
+    function openNote(nd) {
+      if (!nd || String(nd.id).indexOf('dangling:') === 0) return;
+      var uri = 'obsidian://open?vault=' + encodeURIComponent(OBSIDIAN_VAULT) +
+        '&file=' + encodeURIComponent(String(nd.id));
+      try {
+        var a = document.createElement('a');
+        a.href = uri;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        showToast("Opening '" + nd.label + "' in Obsidian…");
+      } catch (err) { /* custom-scheme nav may be blocked by host — toast already names the attempt */ }
+    }
+
+    // ---- Pointer state: explicit ownership so zoom/pan/drag don't fight (spec §3) ----
+    var hover = null, mode = null; // mode: 'drag' | 'pan' | null
+    var dragNode = null, lastX = 0, lastY = 0, downX = 0, downY = 0;
+
+    function pointer(ev) {
+      var rect = canvas.getBoundingClientRect();
+      return { mx: ev.clientX - rect.left, my: ev.clientY - rect.top };
+    }
+    // Screen-space hit test (works under any zoom). Returns node or null.
+    function pick(mx, my) {
+      var best = null, bestD = 1e9;
+      for (var j = 0; j < nodes.length; j++) {
+        n = nodes[j];
+        var sx = n.x * view.k + view.tx, sy = n.y * view.k + view.ty;
+        var d = Math.hypot(sx - mx, sy - my);
+        if (d < bestD) { bestD = d; best = n; }
+      }
+      return (best && bestD <= Math.max(10, radius(best) * view.k + 6)) ? best : null;
+    }
+
+    // ---- Draw one frame. Shared by the live and fallback paths. ----
+    function draw() {
+      if (!ctx) ctx = canvas.getContext('2d');
+      var W = cssW, H = cssH;
+      var tnow = Date.now() / 1000;
+      var pulse = 0.72 + 0.28 * Math.sin(tnow * 1.7);
+      // (1)-(3): screen-space background — fill, radial vignette, faint dot grid.
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = '#05070c';
+      ctx.fillRect(0, 0, W, H);
+      var vg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.72);
+      vg.addColorStop(0, embed ? 'rgba(56, 80, 140, 0.38)' : 'rgba(30,41,66,0.55)');
+      vg.addColorStop(1, 'rgba(5,7,12,0)');
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, 0, W, H);
+      if (nodes.length <= 1500) {
+        ctx.fillStyle = embed ? 'rgba(148,163,184,0.08)' : 'rgba(148,163,184,0.05)';
+        for (var gx = 20; gx < W; gx += 40) for (var gy = 20; gy < H; gy += 40) { ctx.fillRect(gx, gy, 1, 1); }
+      }
+
+      // World pass: apply zoom transform. screenCSS = world*k + t.
+      var k = view.k, tx = view.tx, ty = view.ty;
+      ctx.setTransform(dpr * k, 0, 0, dpr * k, dpr * tx, dpr * ty);
+
+      // Edges first (spec §2): alpha modulated by hover neighborhood.
+      var litSet = hover ? adj[hover.id] : null;
+      ctx.lineCap = 'round';
+      for (var li = 0; li < links.length; li++) {
+        e = links[li];
+        var touchesHover = hover && (e.source === hover || e.target === hover);
+        var alpha = !hover ? (embed ? 0.16 : 0.10) : (touchesHover ? 0.72 : 0.03);
+        var col = hexRgb(GROUP_COLOR[e.source.group] || '#94a3b8');
+        if (embed && touchesHover) {
+          ctx.shadowBlur = 18 / k;
+          ctx.shadowColor = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',0.85)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.lineWidth = (touchesHover ? 1.6 : (embed ? 1.05 : 0.8)) / k;
+        ctx.strokeStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + alpha.toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.moveTo(e.source.x, e.source.y);
+        ctx.lineTo(e.target.x, e.target.y);
+        ctx.stroke();
+      }
+      ctx.shadowBlur = 0;
+
+      // Nodes: bloom (embed) → glow → core. Dim non-neighbors on hover.
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var lit = !hover || (litSet && litSet[n.id]);
+        var gcol = GROUP_COLOR[n.group] || '#94a3b8';
+        var rgb = hexRgb(gcol);
+        var r = radius(n);
+        ctx.globalAlpha = lit ? 1 : 0.08;
+        if (embed) {
+          ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + (0.18 * pulse).toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r * (3.4 + pulse), 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.shadowBlur = Math.min(embed ? 56 : 40, (embed ? 18 : 12) + n.size * (embed ? 2.2 : 1));
+        ctx.shadowColor = gcol;
+        ctx.fillStyle = gcol;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#f8fafc';
+        ctx.globalAlpha = lit ? (embed ? 0.95 : 0.85) : 0.08;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, Math.max(1.1, r * 0.38), 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+
+      // Labels in SCREEN space (reset transform) — sparse per spec §2.
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.font = embed ? '600 11px sans-serif' : '11px sans-serif';
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var showLabel = hover ? (!!litSet && litSet[n.id]) : (topLabelSet[n.id] || k > 2);
+        if (!showLabel) continue;
+        var sx = n.x * k + tx, sy = n.y * k + ty;
+        // Cull off-screen when in zoomed label mode.
+        if (k > 2 && (sx < -40 || sx > W + 40 || sy < -16 || sy > H + 16)) continue;
+        var litL = !hover || (litSet && litSet[n.id]);
+        ctx.globalAlpha = litL ? 0.95 : 0.25;
+        ctx.shadowBlur = embed ? 10 : 0;
+        ctx.shadowColor = embed ? (GROUP_COLOR[n.group] || '#94a3b8') : 'transparent';
+        ctx.fillStyle = '#e5e7eb';
+        ctx.fillText(n.label, sx + radius(n) * k + 3, sy + 4);
+      }
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+    }
+
+    // ---- Fallback: compact hand-rolled sim when d3 is absent (spec §6). ----
+    function fallbackStep() {
+      var j, m, dx, dy, dist, f;
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        for (j = i + 1; j < nodes.length; j++) {
+          m = nodes[j];
+          dx = n.x - m.x; dy = n.y - m.y; dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+          f = 420 / (dist * dist);
+          n.vx += dx / dist * f; n.vy += dy / dist * f;
+          m.vx -= dx / dist * f; m.vy -= dy / dist * f;
+        }
+      }
+      for (i = 0; i < links.length; i++) {
+        e = links[i];
+        dx = e.target.x - e.source.x; dy = e.target.y - e.source.y; dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        f = (dist - 46) * 0.012;
+        e.source.vx += dx / dist * f; e.source.vy += dy / dist * f;
+        e.target.vx -= dx / dist * f; e.target.vy -= dy / dist * f;
+      }
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var g = attract[n.group] || { x: 0, y: 0 };
+        n.vx += (g.x - n.x) * 0.004 + (-n.x) * 0.002;
+        n.vy += (g.y - n.y) * 0.004 + (-n.y) * 0.002;
+        if (dragNode !== n) { n.vx *= 0.72; n.vy *= 0.72; n.x += n.vx; n.y += n.vy; }
+      }
+    }
+
+    // ---- Wire up events + start the loop once canvas is measurable. ----
+    function onWheel(ev) {
+      if (!hasD3) return; // fallback path: no zoom (spec §6)
+      ev.preventDefault();
+      var p = pointer(ev);
+      var factor = Math.pow(2, -ev.deltaY * 0.002);
+      var newK = clampK(view.k * factor);
+      view.tx = p.mx - (p.mx - view.tx) * (newK / view.k);
+      view.ty = p.my - (p.my - view.ty) * (newK / view.k);
+      view.k = newK;
+    }
+    function onDown(ev) {
+      var p = pointer(ev);
+      downX = p.mx; downY = p.my; lastX = p.mx; lastY = p.my;
+      dragNode = pick(p.mx, p.my);
+      if (dragNode) { mode = 'drag'; if (hasD3) sim.alphaTarget(0.3); } // fallback: reposition only (spec §6)
+      else if (!dragNode && hasD3) { mode = 'pan'; }
+    }
+    function onMove(ev) {
+      var p = pointer(ev);
+      if (mode === 'drag' && dragNode) {
+        dragNode.x = (p.mx - view.tx) / view.k;
+        dragNode.y = (p.my - view.ty) / view.k;
+        dragNode.vx = 0; dragNode.vy = 0;
+      } else if (mode === 'pan') {
+        view.tx += p.mx - lastX; view.ty += p.my - lastY;
+        lastX = p.mx; lastY = p.my;
+      } else {
+        hover = pick(p.mx, p.my);
+        tip.style.display = hover ? 'block' : 'none';
+        if (hover) {
+          var unresolved = String(hover.id).indexOf('dangling:') === 0;
+          tip.textContent = hover.label + '  ·  ' + hover.group + '  ·  deg ' + (deg[hover.id] || 0) +
+            (unresolved ? '  ·  unresolved link' : '');
+          tip.style.left = (p.mx + 12) + 'px';
+          tip.style.top = (p.my + 12) + 'px';
+        }
+      }
+    }
+    function onUp(ev) {
+      var p = pointer(ev);
+      if (mode === 'drag') sim.alphaTarget(0);
+      // Click = up with negligible movement.
+      if (Math.hypot(p.mx - downX, p.my - downY) < 4 && dragNode) {
+        openNote(dragNode);
+      } else if (String((pick(p.mx, p.my) || {}).id).indexOf('dangling:') === 0) {
+        showToast('Unresolved link');
+      }
+      mode = null; dragNode = null;
+    }
+
+    var sim = null;
+    // Single-instance guard: only one live Jarvis graph at a time. If renderGraph is
+    // called again (re-render / refresh), tear down the previous instance first so
+    // window-level listeners + rAF loop never accumulate across renders.
+    if (typeof activeJarvisDestroy === 'function') { try { activeJarvisDestroy(); } catch (e) {} }
+
+    // Auto-fit: frame the whole graph in ~90% of the stage, centered (like Obsidian's fit-to-view).
+    function autoFit() {
+      if (!nodes.length) return;
+      var minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+      for (var j = 0; j < nodes.length; j++) {
+        n = nodes[j];
+        if (n.x < minX) minX = n.x;
+        if (n.y < minY) minY = n.y;
+        if (n.x > maxX) maxX = n.x;
+        if (n.y > maxY) maxY = n.y;
+      }
+      var bw = Math.max(60, maxX - minX), bh = Math.max(60, maxY - minY);
+      view.k = clampK(Math.min(cssW * 0.9 / bw, cssH * 0.9 / bh));
+      view.tx = (cssW - bw * view.k) / 2 - minX * view.k;
+      view.ty = (cssH - bh * view.k) / 2 - minY * view.k;
+    }
+
+    function start() {
+      resize();
+      // Center world origin in the viewport so the ~260-radius attractor circle fits.
+      view.tx = cssW / 2;
+      view.ty = cssH / 2;
+      window.addEventListener('resize', resize);
+      var ro = null;
+      if (typeof ResizeObserver !== 'undefined') {
+        ro = new ResizeObserver(function () { resize(); });
+        ro.observe(stage);
+      }
+      if (hasD3) {
+        // d3-force physics with the exact verified v7 API surface.
+        sim = d3.forceSimulation(nodes)
+          .force('link', d3.forceLink(links).id(function (d) { return d.id; })
+            .distance(46)
+            .strength(function (l) {
+              var idOf = function (x) { return typeof x === 'object' ? x.id : x; };
+              return 0.5 / Math.max(deg[idOf(l.source)] || 1, deg[idOf(l.target)] || 1);
+            }))
+          .force('charge', d3.forceManyBody().theta(0.9)
+            .strength(function (nd) { return -10 * (1 + Math.sqrt(nd.size) * 0.4); }))
+          .force('collide', d3.forceCollide(radius).iterations(2))
+          .force('gx', d3.forceX(function (nd) { return (attract[nd.group] || { x: 0 }).x; })
+            .strength(function (nd) { return cohesionStrength(nd.group); }))
+          .force('gy', d3.forceY(function (nd) { return (attract[nd.group] || { y: 0 }).y; })
+            .strength(function (nd) { return cohesionStrength(nd.group); }));
+
+        canvas.addEventListener('wheel', onWheel, { passive: false });
+      } else {
+        // Settle the hand-rolled sim synchronously before first paint.
+        for (var t = 0; t < 150; t++) fallbackStep();
+      }
+      canvas.addEventListener('mousedown', onDown);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onUp);
+
+      var fitted = false;
+      function maybeFit() { if (!fitted) { autoFit(); fitted = true; } }
+      if (hasD3) setTimeout(maybeFit, 1500); // let the sim settle before framing
+      else maybeFit();
+
+      var rafId = 0;
+      function loop() {
+        if (!hasD3) fallbackStep(); // keep the static layout gently alive / responsive to drag
+        draw();
+        rafId = requestAnimationFrame(loop);
+      }
+      loop();
+
+      // Teardown: stop rAF, remove every listener this instance added (window-level ones
+      // outlive the DOM box that render() clears), and halt the sim. Called by a later
+      // renderGraph via activeJarvisDestroy so re-renders never stack handlers/loops.
+      function destroy() {
+        cancelAnimationFrame(rafId);
+        window.removeEventListener('resize', resize);
+        if (ro) { try { ro.disconnect(); } catch (e) {} }
+        canvas.removeEventListener('wheel', onWheel);
+        canvas.removeEventListener('mousedown', onDown);
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseup', onUp);
+        if (sim && sim.stop) { try { sim.alphaTarget(0).stop(); } catch (e) {} }
+      }
+      activeJarvisDestroy = destroy;
+    }
+
+    // Defer start until the stage has a measurable width (it's appended during render()).
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); });
+    } else {
+      setTimeout(start, 0);
+    }
+
+    return box;
+  }
+  function render(root) {
+    var d = payload();
+    root.textContent = '';
+    if (isEmbed()) {
+      try { document.documentElement.classList.add('ha-embed'); } catch (e) {}
+      if (d.graph && (d.graph.nodes || []).length) root.appendChild(renderGraph(d.graph));
+      else root.appendChild(renderGraph(null));
+      return;
+    }
+    root.appendChild(h('h1', { text: d.title || d.artifact_id }));
+    root.appendChild(h('div', { class: 'ha-sub', text: 'Generated '
+      + d.generated_at + (d.source && d.source.note ? ' - ' + d.source.note : '') }));
+    if ((d.summary || []).length) root.appendChild(renderCards(d));
+    if (d.graph && (d.graph.nodes || []).length) root.appendChild(renderGraph(d.graph));
+    (d.charts || []).forEach(function (c) { root.appendChild(renderChart(c)); });
+    (d.tables || []).forEach(function (t) { root.appendChild(renderTable(t)); });
+    if ((d.notes || []).length) {
+      var ul = h('ul', { class: 'ha-notes' });
+      d.notes.forEach(function (n) { ul.appendChild(h('li', { text: n })); });
+      root.appendChild(ul);
+    }
+  }
+
+  window.HermesArtifact = { render: render };
+  document.addEventListener('DOMContentLoaded', function () {
+    render(document.getElementById('app'));
+  });
+})();
+
+</script>
+<!--/HERMES-ARTIFACT:JS-->
+
+<script id="pd-js">
+/* ECharts show-off layer with live filters. Re-aggregates viz.trades in-browser on
+   every filter change. ES5-safe, no build step, no fetches. Single window-resize handler. */
+(function () {
+  'use strict';
+  var F = { outcome: 'all', cat: '' };
+  var charts = {}, V = null;
+  var WCOL = '#4ade80', LCOL = '#f87171', OCOL = '#38bdf8', NCOL = '#9ca3af';
+
+  function payload() {
+    var el = document.getElementById('hermes-artifact-data');
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch (e) { return null; }
+  }
+  function $(id){ return document.getElementById(id); }
+  function money(n, sign){ n=Math.round((n||0)*100)/100; var s=n<0?'-':(sign?'+':''); return '$'+s+Math.abs(n).toFixed(2); }
+
+  function filtered(){
+    if(!V) return [];
+    return V.trades.filter(function(t){
+      if(F.outcome!=='all' && t.outcome!==F.outcome) return false;
+      if(F.cat && t.cat!==F.cat) return false;
+      return true;
+    });
+  }
+
+  function kpis(rows){
+    var w=0,l=0,o=0,u=0,pnl=0,dep=0,en=[],enN=0;
+    rows.forEach(function(t){
+      if(t.outcome==='won'){w++;pnl+=t.pnl||0;}
+      else if(t.outcome==='lost'){l++;pnl+=(t.pnl!=null?t.pnl:-t.cost);}
+      else if(t.outcome==='open')o++; else u++;
+      dep+=t.cost; if(t.entry){en.push(t.entry);enN++;}
+    });
+    var settled=w+l, wr=settled?Math.round(100*w/settled):0;
+    var avg=en.length?(en.reduce(function(a,b){return a+b*100;},0)/en.length):0;
+    var oexp=o?rows.filter(function(t){return t.outcome==='open';}).reduce(function(a,t){return a+t.cost;},0):0;
+    return [
+      {k:'Record', v:w+'W\u2013'+l+'L'},
+      {k:'Win rate (settled)', v:wr+'%', c:'accent'},
+      {k:'Realized P&L', v:money(pnl,true), c:pnl>=0?'ok':'bad'},
+      {k:'Clips shown', v:String(rows.length)},
+      {k:'Deployed (shown)', v:money(dep)},
+      {k:'Open exposure', v:o+' / '+money(oexp)},
+      {k:'Avg entry', v:(avg?Math.round(avg)+'\u00a2':'\u2014')}
+    ];
+  }
+
+  function renderKpis(rows){
+    var html=''; kpis(rows).forEach(function(k){
+      html+='<div class="pd-kpi '+(k.c||'')+'"><div class="k">'+k.k+'</div><div class="v">'+k.v+'</div></div>';
+    }); $('pd-kpis').innerHTML=html;
+  }
+
+  function initChart(id, opt){ if(typeof echarts==='undefined') return null; if(!charts[id]) charts[id]=echarts.init($(id)); charts[id].setOption(opt,true); }
+
+  function drawEquity(rows){ if(typeof echarts==='undefined')return;
+    var x=[],y=0; rows.forEach(function(t){ if(t.pnl!=null){ y+=t.pnl; } x.push(Math.round(y*100)/100); });
+    initChart('c-eq',{
+      grid:{left:52,right:18,top:16,bottom:34},
+      tooltip:{trigger:'axis', valueFormatter:function(v){return money(v,true);}},
+      xAxis:{type:'category', data:x.map(function(_,i){return i+1;}), axisLabel:{color:'#9ca3af'}, name:'clip #', nameTextStyle:{color:'#6b7280'}},
+      yAxis:{type:'value', splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}, axisLabel:{formatter:function(v){return '$'+v;}}},
+      series:[{ type:'line', data:x, smooth:true, symbol:'none', lineStyle:{width:2.4,color:'#38bdf8'},
+        areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(56,189,248,.35)'},{offset:1,color:'rgba(56,189,248,0)'}])},
+        markLine:{silent:true,symbol:'none',lineStyle:{color:'#f87171',type:'dashed'},data:[{yAxis:0}]}}]
+    });
+  }
+
+  function drawScatter(rows){ if(typeof echarts==='undefined')return; var pts=[]; rows.forEach(function(t,i){ if(t.entry!=null) pts.push([t.entry*100, t.pnl!=null?t.pnl:(-t.cost), t.outcome, (t.market||'').slice(0,42)]); });
+    initChart('c-scatter',{
+      grid:{left:56,right:18,top:16,bottom:34},
+      tooltip:{formatter:function(p){var d=p.data; return '<b>'+d[3]+'</b><br>entry '+Math.round(d[0])+'\u00a2<br>P&L '+money(d[1],true)+'<br>'+(p.seriesName||'');}},
+      xAxis:{type:'value',name:'entry \u00a2',min:0,max:100,axisLabel:{color:'#9ca3af'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
+      yAxis:{type:'value',axisLabel:{formatter:function(v){return '$'+v;}},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}},markLine:{silent:true,symbol:'none',data:[{yAxis:0}],lineStyle:{color:'#f87171',type:'dashed'}}},
+      series:[
+        {name:'Won',type:'scatter',symbolSize:9,itemStyle:{color:WCOL,opacity:.85},data:pts.filter(function(p){return p[2]==='won';})},
+        {name:'Lost',type:'scatter',symbolSize:9,itemStyle:{color:LCOL,opacity:.85},data:pts.filter(function(p){return p[2]==='lost';})}
+      ]
+    });
+  }
+
+  function drawMix(rows){ if(typeof echarts==='undefined')return; var c={won:0,lost:0,open:0,unsettled:0}; rows.forEach(function(t){c[t.outcome]=(c[t.outcome]||0)+1;});
+    initChart('c-mix',{
+      tooltip:{trigger:'item'}, legend:{bottom:0,textStyle:{color:'#9ca3af'}},
+      series:[{type:'pie',radius:['46%','72%'],center:['50%','44%'],avoidLabelOverlap:true,
+        label:{show:false}, data:[
+          {value:c.won,name:'Won '+c.won,itemStyle:{color:WCOL}},
+          {value:c.lost,name:'Lost '+c.lost,itemStyle:{color:LCOL}},
+          {value:c.open,name:'Open '+c.open,itemStyle:{color:OCOL}},
+          {value:(c.unsettled||0),name:'Unsettled '+(c.unsettled||0),itemStyle:{color:NCOL}}
+        ].filter(function(d){return d.value>0;})}]
+    });
+  }
+
+  function drawCat(rows){ if(typeof echarts==='undefined')return; var m={}; rows.forEach(function(t){ (m[t.cat]=m[t.cat]||{n:0,pnl:0}); m[t.cat].n++; if(t.pnl!=null)m[t.cat].pnl+=t.pnl; else if(t.outcome==='lost')m[t.cat].pnl-=t.cost; });
+    var keys=Object.keys(m).sort(function(a,b){return m[b].pnl-m[a].pnl;});
+    initChart('c-cat',{
+      grid:{left:96,right:40,top:8,bottom:24}, tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+      xAxis:{type:'value',splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}},axisLabel:{formatter:function(v){return '$'+v;}}},
+      yAxis:{type:'category',data:keys,axisLabel:{color:'#cbd5e1'}},
+      series:[{type:'bar',data:keys.map(function(k){return {value:Math.round(m[k].pnl*100)/100,itemStyle:{color:m[k].pnl>=0?WCOL:LCOL}};}),
+        label:{show:true,position:'right',formatter:function(p){return money(p.value,true);},color:'#9ca3af'}}]
+    });
+  }
+
+  function drawStreak(rows){
+    var settled=rows.filter(function(t){return t.outcome==='won'||t.outcome==='lost';}).slice(-30); // oldest→newest, recent at far right
+    var html=''; settled.forEach(function(t,i){
+      var w=t.outcome==='won', col=w?WCOL:LCOL;
+      html+='<span title="'+(t.market||'').replace(/"/g,'&quot;')+'" style="display:inline-block;width:26px;height:34px;line-height:34px;text-align:center;margin-right:5px;border-radius:7px;font-weight:800;color:#0b1220;background:'+col+'">'+(w?'W':'L')+'</span>';
+    });
+    if(!settled.length) html='<span style="opacity:.6">no settled clips in this filter</span>';
+    $('c-streak').innerHTML=html;
+  }
+
+  function drawAll(){
+    var rows=filtered();
+    renderKpis(rows); drawEquity(rows); drawScatter(rows); drawMix(rows); drawCat(rows); drawStreak(rows);
+    $('pd-filter').innerHTML='showing <b>'+rows.length+'</b> of '+V.trades.length+' clips';
+  }
+
+  function buildCats(){
+    var seen={}; V.trades.forEach(function(t){ if(t.cat) seen[t.cat]=1; });
+    Object.keys(seen).sort().forEach(function(c){ var o=document.createElement('option'); o.value=c;o.textContent=c;$('pd-cat').appendChild(o); });
+  }
+
+  function boot(){
+    var p=payload(); if(!p) return;
+    V = (p && p.viz && Array.isArray(p.viz.trades)) ? {trades:p.viz.trades} : null;
+    if(!V){ $('pd').classList.remove('on'); return; }
+    buildCats(); drawAll(); $('pd').classList.add('on');
+
+    // single window-resize handler (no per-render accumulation)
+    var rz=function(){ Object.keys(charts).forEach(function(k){ charts[k].resize(); }); };
+    if(!window.__pdRzBound){ window.addEventListener('resize',rz); window.__pdRzBound=true; }
+
+    Array.prototype.forEach.call(document.querySelectorAll('#pd-outcome button'),function(b){
+      b.onclick=function(){ F.outcome=b.getAttribute('data-o');
+        document.querySelectorAll('#pd-outcome button').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on'); drawAll(); };
+    });
+    $('pd-cat').onchange=function(e){ F.cat=e.target.value; drawAll(); };
+
+    // category bar click -> set category filter (off/on keeps a single live handler)
+    if(typeof echarts!=='undefined' && charts['c-cat']){
+      charts['c-cat'].off('click');
+      charts['c-cat'].on('click', function(p){ F.cat=p.name; $('pd-cat').value=p.name; drawAll(); });
+    }
+  }
+
+  function init(){ try{ boot(); }catch(e){ window.__pdBoot='err:'+e.message; } }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</body>
+</html>

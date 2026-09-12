@@ -1,0 +1,8 @@
+{
+  "id": "polymarket-desk",
+  "title": "Polymarket desk — W/L record",
+  "collector": "polymarket-desk",
+  "repo": "C:/Users/bottl/EventTrading",
+  "description": "Win/loss record, equity curve, entry-price and sleeve breakdowns for the $200 Polymarket.us clip desk, plus current open holdings. Filterable by time range and outcome.",
+  "refresh": "ask Hermes to 'refresh polymarket-desk'"
+}

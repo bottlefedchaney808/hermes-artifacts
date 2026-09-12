@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polymarket desk — W/L record</title>
+<!--HERMES-ARTIFACT:CSS-->
+<!--/HERMES-ARTIFACT:CSS-->
+<style id="pd-css">
+  /* Show-off layer. OUTSIDE all markers -> survives every refresh. */
+  #pd { display:none; margin:0 0 26px; }
+  #pd.on { display:block; }
+  #pd-head { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:0 2px 14px; }
+  #pd-head h2 { margin:0; font-size:20px; letter-spacing:.02em; }
+  .pd-seg { display:inline-flex; border-radius:999px; overflow:hidden; border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); }
+  .pd-seg button { font-size:11.5px; padding:6px 13px; cursor:pointer; border:none; background:transparent; color:inherit; opacity:.7; letter-spacing:.03em; }
+  .pd-seg button.on { background:rgba(56,189,248,.2); color:#eaf6ff; opacity:1; box-shadow:inset 0 0 0 1px rgba(56,189,248,.5); }
+  #pd-cat { font-size:11.5px; padding:6px 10px; border-radius:999px; cursor:pointer;
+    border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.04); color:inherit; }
+  #pd-filter { font-size:12px; opacity:.72; margin-left:auto; }
+  #pd-filter b { color:#38bdf8; }
+  #pd-kpis { display:flex; flex-wrap:wrap; gap:12px; margin:0 0 16px; }
+  .pd-kpi { flex:1 1 140px; min-width:128px; padding:13px 15px; border-radius:16px;
+    background:linear-gradient(155deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.10); box-shadow:0 10px 34px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.07); }
+  .pd-kpi .k { font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; opacity:.62; }
+  .pd-kpi .v { font-size:24px; font-weight:800; margin-top:5px; line-height:1.15; font-variant-numeric:tabular-nums; }
+  .pd-kpi.accent .v { color:#38bdf8; text-shadow:0 0 22px rgba(56,189,248,.45); }
+  .pd-kpi.ok   .v { color:#4ade80; text-shadow:0 0 22px rgba(74,222,128,.40); }
+  .pd-kpi.bad  .v { color:#f87171; text-shadow:0 0 22px rgba(248,113,113,.40); }
+  #pd-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; }
+  .pd-p { background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; padding:12px 8px 6px; box-shadow:0 8px 26px rgba(0,0,0,.28); }
+  .pd-p h4 { margin:2px 12px 6px; font-size:12px; letter-spacing:.05em; text-transform:uppercase; opacity:.7; font-weight:600; }
+  .s12{grid-column:span 12;} .s8{grid-column:span 8;} .s4{grid-column:span 4;}
+  .s6 {grid-column:span 6;}   .s3{grid-column:span 3;}
+  @media (max-width:900px){ .s8,.s6,.s4,.s3 { grid-column:span 12; } }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- Custom layer: SIBLING of #app (never a child - render() clears #app). -->
+<section id="pd">
+  <div id="pd-head">
+    <h2>Polymarket desk &mdash; W/L record</h2>
+    <span class="pd-seg" id="pd-outcome">
+      <button data-o="all" class="on">All</button><button data-o="won">Won</button>
+      <button data-o="lost">Lost</button><button data-o="open">Open</button>
+    </span>
+    <select id="pd-cat"><option value="">All categories</option></select>
+    <span id="pd-filter"></span>
+  </div>
+  <div id="pd-kpis"></div>
+  <div id="pd-grid">
+    <div class="pd-p s12"><h4>Cumulative realized P&amp;L &mdash; all clips, oldest first</h4><div id="c-eq" style="height:300px;width:100%"></div></div>
+    <div class="pd-p s8"><h4>P&amp;L vs entry price (each dot = one clip)</h4><div id="c-scatter" style="height:320px;width:100%"></div></div>
+    <div class="pd-p s4"><h4>Outcome mix</h4><div id="c-mix" style="height:320px;width:100%"></div></div>
+    <div class="pd-p s6"><h4>Net P&amp;L by category &mdash; click to filter</h4><div id="c-cat" style="height:320px;width:100%"></div></div>
+    <div class="pd-p s6"><h4>Last 30 settled results (W / L)</h4><div id="c-streak" style="height:320px;width:100%;overflow-x:auto;white-space:nowrap;padding:8px"></div></div>
+  </div>
+</section>
+
+<div id="app"></div>
+<!--HERMES-ARTIFACT:DATA-->
+<!--/HERMES-ARTIFACT:DATA-->
+<!--HERMES-ARTIFACT:JS-->
+<!--/HERMES-ARTIFACT:JS-->
+
+<script id="pd-js">
+/* ECharts show-off layer with live filters. Re-aggregates viz.trades in-browser on
+   every filter change. ES5-safe, no build step, no fetches. Single window-resize handler. */
+(function () {
+  'use strict';
+  var F = { outcome: 'all', cat: '' };
+  var charts = {}, V = null;
+  var WCOL = '#4ade80', LCOL = '#f87171', OCOL = '#38bdf8', NCOL = '#9ca3af';
+
+  function payload() {
+    var el = document.getElementById('hermes-artifact-data');
+    if (!el) return null;
+    try { return JSON.parse(el.textContent); } catch (e) { return null; }
+  }
+  function $(id){ return document.getElementById(id); }
+  function money(n, sign){ n=Math.round((n||0)*100)/100; var s=n<0?'-':(sign?'+':''); return '$'+s+Math.abs(n).toFixed(2); }
+
+  function filtered(){
+    if(!V) return [];
+    return V.trades.filter(function(t){
+      if(F.outcome!=='all' && t.outcome!==F.outcome) return false;
+      if(F.cat && t.cat!==F.cat) return false;
+      return true;
+    });
+  }
+
+  function kpis(rows){
+    var w=0,l=0,o=0,u=0,pnl=0,dep=0,en=[],enN=0;
+    rows.forEach(function(t){
+      if(t.outcome==='won'){w++;pnl+=t.pnl||0;}
+      else if(t.outcome==='lost'){l++;pnl+=(t.pnl!=null?t.pnl:-t.cost);}
+      else if(t.outcome==='open')o++; else u++;
+      dep+=t.cost; if(t.entry){en.push(t.entry);enN++;}
+    });
+    var settled=w+l, wr=settled?Math.round(100*w/settled):0;
+    var avg=en.length?(en.reduce(function(a,b){return a+b*100;},0)/en.length):0;
+    var oexp=o?rows.filter(function(t){return t.outcome==='open';}).reduce(function(a,t){return a+t.cost;},0):0;
+    return [
+      {k:'Record', v:w+'W\u2013'+l+'L'},
+      {k:'Win rate (settled)', v:wr+'%', c:'accent'},
+      {k:'Realized P&L', v:money(pnl,true), c:pnl>=0?'ok':'bad'},
+      {k:'Clips shown', v:String(rows.length)},
+      {k:'Deployed (shown)', v:money(dep)},
+      {k:'Open exposure', v:o+' / '+money(oexp)},
+      {k:'Avg entry', v:(avg?Math.round(avg)+'\u00a2':'\u2014')}
+    ];
+  }
+
+  function renderKpis(rows){
+    var html=''; kpis(rows).forEach(function(k){
+      html+='<div class="pd-kpi '+(k.c||'')+'"><div class="k">'+k.k+'</div><div class="v">'+k.v+'</div></div>';
+    }); $('pd-kpis').innerHTML=html;
+  }
+
+  function initChart(id, opt){ if(typeof echarts==='undefined') return null; if(!charts[id]) charts[id]=echarts.init($(id)); charts[id].setOption(opt,true); }
+
+  function drawEquity(rows){ if(typeof echarts==='undefined')return;
+    var x=[],y=0; rows.forEach(function(t){ if(t.pnl!=null){ y+=t.pnl; } x.push(Math.round(y*100)/100); });
+    initChart('c-eq',{
+      grid:{left:52,right:18,top:16,bottom:34},
+      tooltip:{trigger:'axis', valueFormatter:function(v){return money(v,true);}},
+      xAxis:{type:'category', data:x.map(function(_,i){return i+1;}), axisLabel:{color:'#9ca3af'}, name:'clip #', nameTextStyle:{color:'#6b7280'}},
+      yAxis:{type:'value', splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}, axisLabel:{formatter:function(v){return '$'+v;}}},
+      series:[{ type:'line', data:x, smooth:true, symbol:'none', lineStyle:{width:2.4,color:'#38bdf8'},
+        areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(56,189,248,.35)'},{offset:1,color:'rgba(56,189,248,0)'}])},
+        markLine:{silent:true,symbol:'none',lineStyle:{color:'#f87171',type:'dashed'},data:[{yAxis:0}]}}]
+    });
+  }
+
+  function drawScatter(rows){ if(typeof echarts==='undefined')return; var pts=[]; rows.forEach(function(t,i){ if(t.entry!=null) pts.push([t.entry*100, t.pnl!=null?t.pnl:(-t.cost), t.outcome, (t.market||'').slice(0,42)]); });
+    initChart('c-scatter',{
+      grid:{left:56,right:18,top:16,bottom:34},
+      tooltip:{formatter:function(p){var d=p.data; return '<b>'+d[3]+'</b><br>entry '+Math.round(d[0])+'\u00a2<br>P&L '+money(d[1],true)+'<br>'+(p.seriesName||'');}},
+      xAxis:{type:'value',name:'entry \u00a2',min:0,max:100,axisLabel:{color:'#9ca3af'},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}}},
+      yAxis:{type:'value',axisLabel:{formatter:function(v){return '$'+v;}},splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}},markLine:{silent:true,symbol:'none',data:[{yAxis:0}],lineStyle:{color:'#f87171',type:'dashed'}}},
+      series:[
+        {name:'Won',type:'scatter',symbolSize:9,itemStyle:{color:WCOL,opacity:.85},data:pts.filter(function(p){return p[2]==='won';})},
+        {name:'Lost',type:'scatter',symbolSize:9,itemStyle:{color:LCOL,opacity:.85},data:pts.filter(function(p){return p[2]==='lost';})}
+      ]
+    });
+  }
+
+  function drawMix(rows){ if(typeof echarts==='undefined')return; var c={won:0,lost:0,open:0,unsettled:0}; rows.forEach(function(t){c[t.outcome]=(c[t.outcome]||0)+1;});
+    initChart('c-mix',{
+      tooltip:{trigger:'item'}, legend:{bottom:0,textStyle:{color:'#9ca3af'}},
+      series:[{type:'pie',radius:['46%','72%'],center:['50%','44%'],avoidLabelOverlap:true,
+        label:{show:false}, data:[
+          {value:c.won,name:'Won '+c.won,itemStyle:{color:WCOL}},
+          {value:c.lost,name:'Lost '+c.lost,itemStyle:{color:LCOL}},
+          {value:c.open,name:'Open '+c.open,itemStyle:{color:OCOL}},
+          {value:(c.unsettled||0),name:'Unsettled '+(c.unsettled||0),itemStyle:{color:NCOL}}
+        ].filter(function(d){return d.value>0;})}]
+    });
+  }
+
+  function drawCat(rows){ if(typeof echarts==='undefined')return; var m={}; rows.forEach(function(t){ (m[t.cat]=m[t.cat]||{n:0,pnl:0}); m[t.cat].n++; if(t.pnl!=null)m[t.cat].pnl+=t.pnl; else if(t.outcome==='lost')m[t.cat].pnl-=t.cost; });
+    var keys=Object.keys(m).sort(function(a,b){return m[b].pnl-m[a].pnl;});
+    initChart('c-cat',{
+      grid:{left:96,right:40,top:8,bottom:24}, tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
+      xAxis:{type:'value',splitLine:{lineStyle:{color:'rgba(255,255,255,.06)'}},axisLabel:{formatter:function(v){return '$'+v;}}},
+      yAxis:{type:'category',data:keys,axisLabel:{color:'#cbd5e1'}},
+      series:[{type:'bar',data:keys.map(function(k){return {value:Math.round(m[k].pnl*100)/100,itemStyle:{color:m[k].pnl>=0?WCOL:LCOL}};}),
+        label:{show:true,position:'right',formatter:function(p){return money(p.value,true);},color:'#9ca3af'}}]
+    });
+  }
+
+  function drawStreak(rows){
+    var settled=rows.filter(function(t){return t.outcome==='won'||t.outcome==='lost';}).slice(-30); // oldest→newest, recent at far right
+    var html=''; settled.forEach(function(t,i){
+      var w=t.outcome==='won', col=w?WCOL:LCOL;
+      html+='<span title="'+(t.market||'').replace(/"/g,'&quot;')+'" style="display:inline-block;width:26px;height:34px;line-height:34px;text-align:center;margin-right:5px;border-radius:7px;font-weight:800;color:#0b1220;background:'+col+'">'+(w?'W':'L')+'</span>';
+    });
+    if(!settled.length) html='<span style="opacity:.6">no settled clips in this filter</span>';
+    $('c-streak').innerHTML=html;
+  }
+
+  function drawAll(){
+    var rows=filtered();
+    renderKpis(rows); drawEquity(rows); drawScatter(rows); drawMix(rows); drawCat(rows); drawStreak(rows);
+    $('pd-filter').innerHTML='showing <b>'+rows.length+'</b> of '+V.trades.length+' clips';
+  }
+
+  function buildCats(){
+    var seen={}; V.trades.forEach(function(t){ if(t.cat) seen[t.cat]=1; });
+    Object.keys(seen).sort().forEach(function(c){ var o=document.createElement('option'); o.value=c;o.textContent=c;$('pd-cat').appendChild(o); });
+  }
+
+  function boot(){
+    var p=payload(); if(!p) return;
+    V = (p && p.viz && Array.isArray(p.viz.trades)) ? {trades:p.viz.trades} : null;
+    if(!V){ $('pd').classList.remove('on'); return; }
+    buildCats(); drawAll(); $('pd').classList.add('on');
+
+    // single window-resize handler (no per-render accumulation)
+    var rz=function(){ Object.keys(charts).forEach(function(k){ charts[k].resize(); }); };
+    if(!window.__pdRzBound){ window.addEventListener('resize',rz); window.__pdRzBound=true; }
+
+    Array.prototype.forEach.call(document.querySelectorAll('#pd-outcome button'),function(b){
+      b.onclick=function(){ F.outcome=b.getAttribute('data-o');
+        document.querySelectorAll('#pd-outcome button').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on'); drawAll(); };
+    });
+    $('pd-cat').onchange=function(e){ F.cat=e.target.value; drawAll(); };
+
+    // category bar click -> set category filter (off/on keeps a single live handler)
+    if(typeof echarts!=='undefined' && charts['c-cat']){
+      charts['c-cat'].off('click');
+      charts['c-cat'].on('click', function(p){ F.cat=p.name; $('pd-cat').value=p.name; drawAll(); });
+    }
+  }
+
+  function init(){ try{ boot(); }catch(e){ window.__pdBoot='err:'+e.message; } }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+</body>
+</html>
