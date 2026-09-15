@@ -12,7 +12,8 @@ from pathlib import Path
 
 from collectors import register
 
-HERMES_ROOT = Path("C:/Users/bottl/AppData/Local/hermes")
+import os
+HERMES_ROOT = Path(os.environ.get("HERMES_HOME", str(Path.home() / ".hermes")))
 
 
 _COLS = ["session_id","model","billing_provider","billing_base_url","billing_mode",
