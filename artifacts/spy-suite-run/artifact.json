@@ -1,0 +1,7 @@
+{
+  "id": "spy-suite-run",
+  "title": "SPY Suite Run (2026-09-06)",
+  "description": "Dealer exposure + flow analysis",
+  "collector": "static",
+  "repo": "hermes-artifacts"
+}

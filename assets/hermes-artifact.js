@@ -138,6 +138,22 @@
   // Single-instance teardown handle for the live Jarvis graph (set by renderGraph's start()).
   var activeJarvisDestroy = null;
 
+  function isEmbed() {
+    try {
+      var q = String(location.search || '');
+      var hsh = String(location.hash || '');
+      return q.indexOf('embed=1') !== -1 || hsh.indexOf('embed') !== -1;
+    } catch (err) { return false; }
+  }
+
+  function hexRgb(hex) {
+    var s = String(hex || '').replace('#', '');
+    if (s.length === 3) s = s.charAt(0) + s.charAt(0) + s.charAt(1) + s.charAt(1) + s.charAt(2) + s.charAt(2);
+    var n = parseInt(s, 16);
+    if (isNaN(n)) return [148, 163, 184];
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+
   function renderGraph(graph) {
     // Empty/missing graph → return a visible note box (spec §6). Always returns a
     // DOM element so any caller's appendChild is safe; no canvas loop started.
@@ -232,10 +248,12 @@
 
     // ---- Canvas sizing (backing store × dpr; CSS height fixed at 560 by .ha-gstage) ----
     var cssW = 960, cssH = 560, dpr = window.devicePixelRatio || 1;
+    var embed = isEmbed();
     function resize() {
       var r = stage.getBoundingClientRect();
       if (r.width > 2) cssW = Math.round(r.width);
-      cssH = 560;
+      if (embed && r.height > 2) cssH = Math.round(r.height);
+      else cssH = 560;
       canvas.style.width = cssW + 'px';
       canvas.style.height = cssH + 'px';
       dpr = window.devicePixelRatio || 1;
@@ -291,17 +309,19 @@
     function draw() {
       if (!ctx) ctx = canvas.getContext('2d');
       var W = cssW, H = cssH;
+      var tnow = Date.now() / 1000;
+      var pulse = 0.72 + 0.28 * Math.sin(tnow * 1.7);
       // (1)-(3): screen-space background — fill, radial vignette, faint dot grid.
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.fillStyle = '#05070c';
       ctx.fillRect(0, 0, W, H);
-      var vg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.7);
-      vg.addColorStop(0, 'rgba(30,41,66,0.55)');
+      var vg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.72);
+      vg.addColorStop(0, embed ? 'rgba(56, 80, 140, 0.38)' : 'rgba(30,41,66,0.55)');
       vg.addColorStop(1, 'rgba(5,7,12,0)');
       ctx.fillStyle = vg;
       ctx.fillRect(0, 0, W, H);
       if (nodes.length <= 1500) {
-        ctx.fillStyle = 'rgba(148,163,184,0.05)';
+        ctx.fillStyle = embed ? 'rgba(148,163,184,0.08)' : 'rgba(148,163,184,0.05)';
         for (var gx = 20; gx < W; gx += 40) for (var gy = 20; gy < H; gy += 40) { ctx.fillRect(gx, gy, 1, 1); }
       }
 
@@ -311,41 +331,60 @@
 
       // Edges first (spec §2): alpha modulated by hover neighborhood.
       var litSet = hover ? adj[hover.id] : null;
-      ctx.lineWidth = 0.8 / k;
+      ctx.lineCap = 'round';
       for (var li = 0; li < links.length; li++) {
         e = links[li];
         var touchesHover = hover && (e.source === hover || e.target === hover);
-        var alpha = !hover ? 0.10 : (touchesHover ? 0.5 : 0.03);
-        ctx.strokeStyle = 'rgba(148,163,184,' + alpha.toFixed(3) + ')';
+        var alpha = !hover ? (embed ? 0.16 : 0.10) : (touchesHover ? 0.72 : 0.03);
+        var col = hexRgb(GROUP_COLOR[e.source.group] || '#94a3b8');
+        if (embed && touchesHover) {
+          ctx.shadowBlur = 18 / k;
+          ctx.shadowColor = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',0.85)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.lineWidth = (touchesHover ? 1.6 : (embed ? 1.05 : 0.8)) / k;
+        ctx.strokeStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + alpha.toFixed(3) + ')';
         ctx.beginPath();
         ctx.moveTo(e.source.x, e.source.y);
         ctx.lineTo(e.target.x, e.target.y);
         ctx.stroke();
       }
+      ctx.shadowBlur = 0;
 
-      // Nodes: two-pass glow (A) then core fill (B). Dim non-neighbors on hover.
-      for (var pass = 0; pass < 2; pass++) {
-        for (i = 0; i < nodes.length; i++) {
-          n = nodes[i];
-          var lit = !hover || (litSet && litSet[n.id]);
-          ctx.globalAlpha = lit ? 1 : 0.08;
-          if (pass === 0) {
-            ctx.shadowBlur = Math.min(40, 12 + n.size);
-            ctx.shadowColor = GROUP_COLOR[n.group] || '#94a3b8';
-          } else {
-            ctx.shadowBlur = 0;
-          }
-          ctx.fillStyle = GROUP_COLOR[n.group] || '#94a3b8';
+      // Nodes: bloom (embed) → glow → core. Dim non-neighbors on hover.
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var lit = !hover || (litSet && litSet[n.id]);
+        var gcol = GROUP_COLOR[n.group] || '#94a3b8';
+        var rgb = hexRgb(gcol);
+        var r = radius(n);
+        ctx.globalAlpha = lit ? 1 : 0.08;
+        if (embed) {
+          ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + (0.18 * pulse).toFixed(3) + ')';
           ctx.beginPath();
-          ctx.arc(n.x, n.y, radius(n), 0, Math.PI * 2);
+          ctx.arc(n.x, n.y, r * (3.4 + pulse), 0, Math.PI * 2);
           ctx.fill();
         }
+        ctx.shadowBlur = Math.min(embed ? 56 : 40, (embed ? 18 : 12) + n.size * (embed ? 2.2 : 1));
+        ctx.shadowColor = gcol;
+        ctx.fillStyle = gcol;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#f8fafc';
+        ctx.globalAlpha = lit ? (embed ? 0.95 : 0.85) : 0.08;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, Math.max(1.1, r * 0.38), 0, Math.PI * 2);
+        ctx.fill();
       }
       ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
 
       // Labels in SCREEN space (reset transform) — sparse per spec §2.
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = '11px sans-serif';
+      ctx.font = embed ? '600 11px sans-serif' : '11px sans-serif';
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         var showLabel = hover ? (!!litSet && litSet[n.id]) : (topLabelSet[n.id] || k > 2);
@@ -353,12 +392,15 @@
         var sx = n.x * k + tx, sy = n.y * k + ty;
         // Cull off-screen when in zoomed label mode.
         if (k > 2 && (sx < -40 || sx > W + 40 || sy < -16 || sy > H + 16)) continue;
-        var lit = !hover || (litSet && litSet[n.id]);
-        ctx.globalAlpha = lit ? 0.95 : 0.25;
+        var litL = !hover || (litSet && litSet[n.id]);
+        ctx.globalAlpha = litL ? 0.95 : 0.25;
+        ctx.shadowBlur = embed ? 10 : 0;
+        ctx.shadowColor = embed ? (GROUP_COLOR[n.group] || '#94a3b8') : 'transparent';
         ctx.fillStyle = '#e5e7eb';
         ctx.fillText(n.label, sx + radius(n) * k + 3, sy + 4);
       }
       ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
     }
 
     // ---- Fallback: compact hand-rolled sim when d3 is absent (spec §6). ----
@@ -470,6 +512,11 @@
       view.tx = cssW / 2;
       view.ty = cssH / 2;
       window.addEventListener('resize', resize);
+      var ro = null;
+      if (typeof ResizeObserver !== 'undefined') {
+        ro = new ResizeObserver(function () { resize(); });
+        ro.observe(stage);
+      }
       if (hasD3) {
         // d3-force physics with the exact verified v7 API surface.
         sim = d3.forceSimulation(nodes)
@@ -515,6 +562,7 @@
       function destroy() {
         cancelAnimationFrame(rafId);
         window.removeEventListener('resize', resize);
+        if (ro) { try { ro.disconnect(); } catch (e) {} }
         canvas.removeEventListener('wheel', onWheel);
         canvas.removeEventListener('mousedown', onDown);
         window.removeEventListener('mousemove', onMove);
@@ -536,6 +584,12 @@
   function render(root) {
     var d = payload();
     root.textContent = '';
+    if (isEmbed()) {
+      try { document.documentElement.classList.add('ha-embed'); } catch (e) {}
+      if (d.graph && (d.graph.nodes || []).length) root.appendChild(renderGraph(d.graph));
+      else root.appendChild(renderGraph(null));
+      return;
+    }
     root.appendChild(h('h1', { text: d.title || d.artifact_id }));
     root.appendChild(h('div', { class: 'ha-sub', text: 'Generated '
       + d.generated_at + (d.source && d.source.note ? ' - ' + d.source.note : '') }));

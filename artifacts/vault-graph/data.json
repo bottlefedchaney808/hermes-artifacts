@@ -2,19 +2,19 @@
   "summary": [
     {
       "label": "notes",
-      "value": "334"
+      "value": "412"
     },
     {
       "label": "nodes",
-      "value": "353"
+      "value": "443"
     },
     {
       "label": "links",
-      "value": "294"
+      "value": "507"
     },
     {
       "label": "dangling",
-      "value": "19",
+      "value": "31",
       "tone": "bad"
     }
   ],
@@ -29,14 +29,29 @@
       ],
       "rows": [
         [
+          "Hermes",
+          "development",
+          "41"
+        ],
+        [
+          "Trading journal",
+          "trading",
+          "35"
+        ],
+        [
           "Tiferet",
           "construction",
-          "25"
+          "30"
         ],
         [
           "Development",
           "development",
-          "24"
+          "27"
+        ],
+        [
+          "Jason",
+          "hub",
+          "27"
         ],
         [
           "Construction",
@@ -44,49 +59,54 @@
           "21"
         ],
         [
-          "Hermes",
+          "FinancialDevelopment",
+          "development",
+          "21"
+        ],
+        [
+          "Cloud instance",
           "development",
           "19"
         ],
         [
-          "Trading journal",
-          "trading",
-          "19"
-        ],
-        [
-          "Jason",
-          "hub",
+          "Estimating",
+          "construction",
           "18"
         ],
         [
           "FD Map",
           "development",
-          "17"
-        ],
-        [
-          "FinancialDevelopment",
-          "development",
-          "16"
+          "18"
         ],
         [
           "FD Open work",
           "development",
+          "18"
+        ],
+        [
+          "Research",
+          "trading",
           "16"
         ],
         [
-          "Estimating",
-          "construction",
-          "13"
+          "hermes-artifacts",
+          "development",
+          "15"
         ],
         [
-          "Cloud instance",
-          "development",
-          "13"
+          "Positions",
+          "trading",
+          "14"
         ],
         [
           "Google Drive",
           "construction",
-          "12"
+          "13"
+        ],
+        [
+          "BrowserOS neo bridge",
+          "development",
+          "13"
         ],
         [
           "ConstructionDevelopment",
@@ -99,59 +119,39 @@
           "11"
         ],
         [
+          "Sentiment rumor social brief 20260910",
+          "trading",
+          "11"
+        ],
+        [
+          "1",
+          "dangling",
+          "11"
+        ],
+        [
           "Trading",
           "trading",
           "10"
         ],
         [
-          "SoundDevelopment",
+          "Yahoo bot mailbox",
+          "development",
+          "10"
+        ],
+        [
+          "2026-08-26_mid-day",
+          "trading",
+          "10"
+        ],
+        [
+          "2026-08-27_morning",
+          "trading",
+          "10"
+        ],
+        [
+          "Hermes update and desktop plugins 2026-09-09",
           "development",
           "9"
-        ],
-        [
-          "Vault handoff",
-          "development",
-          "9"
-        ],
-        [
-          "Home",
-          "hub",
-          "8"
-        ],
-        [
-          "Research",
-          "trading",
-          "8"
-        ],
-        [
-          "FD Swaps DB",
-          "development",
-          "8"
-        ],
-        [
-          "SD Open work",
-          "development",
-          "8"
-        ],
-        [
-          "2026-08-21_power-hour",
-          "trading",
-          "8"
-        ],
-        [
-          "LATEST",
-          "trading",
-          "8"
-        ],
-        [
-          "LATEST_power-hour",
-          "trading",
-          "8"
-        ],
-        [
-          "0DTE Anderson Lakha Cem 20260820",
-          "trading",
-          "7"
         ]
       ]
     }
@@ -174,13 +174,13 @@
         {
           "label": "count",
           "data": [
-            6,
             14,
-            44,
+            18,
+            79,
             1,
-            267,
+            298,
             2,
-            19
+            31
           ]
         }
       ]
@@ -208,7 +208,7 @@
         "id": "Development.md",
         "label": "Development",
         "group": "development",
-        "size": 24
+        "size": 27
       },
       {
         "id": "Home.md",
@@ -220,19 +220,19 @@
         "id": "Inbox.md",
         "label": "Inbox",
         "group": "inbox",
-        "size": 5
+        "size": 6
       },
       {
         "id": "Jason identity.md",
         "label": "Jason identity",
         "group": "hub",
-        "size": 6
+        "size": 7
       },
       {
         "id": "Jason.md",
         "label": "Jason",
         "group": "hub",
-        "size": 18
+        "size": 27
       },
       {
         "id": "My debit card.md",
@@ -247,22 +247,40 @@
         "size": 10
       },
       {
+        "id": "Career/SpaceX applications.md",
+        "label": "SpaceX applications",
+        "group": "hub",
+        "size": 2
+      },
+      {
         "id": "Construction/8074 - Fireproofing SFRM LF Takeoff.md",
         "label": "8074 - Fireproofing SFRM LF Takeoff",
         "group": "construction",
         "size": 1
       },
       {
+        "id": "Construction/Bid-to-proposal continuation.md",
+        "label": "Bid-to-proposal continuation",
+        "group": "construction",
+        "size": 7
+      },
+      {
+        "id": "Construction/Bid-to-proposal technical plan.md",
+        "label": "Bid-to-proposal technical plan",
+        "group": "construction",
+        "size": 5
+      },
+      {
         "id": "Construction/Estimating.md",
         "label": "Estimating",
         "group": "construction",
-        "size": 13
+        "size": 18
       },
       {
         "id": "Construction/Google Drive.md",
         "label": "Google Drive",
         "group": "construction",
-        "size": 12
+        "size": 13
       },
       {
         "id": "Construction/HOA LA market 2026-09-02.md",
@@ -277,16 +295,64 @@
         "size": 1
       },
       {
+        "id": "Construction/Project Serpentine.md",
+        "label": "Project Serpentine",
+        "group": "construction",
+        "size": 2
+      },
+      {
+        "id": "Construction/Tiferet master database TO DO.md",
+        "label": "Tiferet master database TO DO",
+        "group": "construction",
+        "size": 4
+      },
+      {
         "id": "Construction/Tiferet.md",
         "label": "Tiferet",
         "group": "construction",
-        "size": 25
+        "size": 30
+      },
+      {
+        "id": "Development/A2A and Relay.md",
+        "label": "A2A and Relay",
+        "group": "development",
+        "size": 5
+      },
+      {
+        "id": "Development/Browser reliability plan (Claude, 2026-09-06).md",
+        "label": "Browser reliability plan (Claude, 2026-09-06)",
+        "group": "development",
+        "size": 8
+      },
+      {
+        "id": "Development/BrowserOS neo bridge.md",
+        "label": "BrowserOS neo bridge",
+        "group": "development",
+        "size": 13
+      },
+      {
+        "id": "Development/Camofox camo profile.md",
+        "label": "Camofox camo profile",
+        "group": "development",
+        "size": 5
+      },
+      {
+        "id": "Development/ClipsFarm.md",
+        "label": "ClipsFarm",
+        "group": "development",
+        "size": 1
       },
       {
         "id": "Development/Cloud instance.md",
         "label": "Cloud instance",
         "group": "development",
-        "size": 13
+        "size": 19
+      },
+      {
+        "id": "Development/Coder fleet.md",
+        "label": "Coder fleet",
+        "group": "development",
+        "size": 5
       },
       {
         "id": "Development/ConstructionDevelopment.md",
@@ -304,19 +370,19 @@
         "id": "Development/Dev notes.md",
         "label": "Dev notes",
         "group": "development",
-        "size": 1
+        "size": 2
       },
       {
         "id": "Development/Discord-Cron-Runbook.md",
         "label": "Discord-Cron-Runbook",
         "group": "development",
-        "size": 2
+        "size": 3
       },
       {
         "id": "Development/FinancialDevelopment.md",
         "label": "FinancialDevelopment",
         "group": "development",
-        "size": 16
+        "size": 21
       },
       {
         "id": "Development/Google API credentials.md",
@@ -331,6 +397,18 @@
         "size": 0
       },
       {
+        "id": "Development/Hermes audit and cleanup 2026-09-06.md",
+        "label": "Hermes audit and cleanup 2026-09-06",
+        "group": "development",
+        "size": 8
+      },
+      {
+        "id": "Development/Hermes Desktop plugins.md",
+        "label": "Hermes Desktop plugins",
+        "group": "development",
+        "size": 7
+      },
+      {
         "id": "Development/Hermes fleet overhaul 2026-09-04.md",
         "label": "Hermes fleet overhaul 2026-09-04",
         "group": "development",
@@ -340,19 +418,25 @@
         "id": "Development/Hermes skill catalog.md",
         "label": "Hermes skill catalog",
         "group": "development",
-        "size": 5
+        "size": 7
+      },
+      {
+        "id": "Development/Hermes update and desktop plugins 2026-09-09.md",
+        "label": "Hermes update and desktop plugins 2026-09-09",
+        "group": "development",
+        "size": 9
       },
       {
         "id": "Development/hermes-artifacts.md",
         "label": "hermes-artifacts",
         "group": "development",
-        "size": 5
+        "size": 15
       },
       {
         "id": "Development/Hermes.md",
         "label": "Hermes",
         "group": "development",
-        "size": 19
+        "size": 41
       },
       {
         "id": "Development/kanban_cloud_bridge_handoff.md",
@@ -364,13 +448,31 @@
         "id": "Development/Local Qwen llama.cpp.md",
         "label": "Local Qwen llama.cpp",
         "group": "development",
-        "size": 6
+        "size": 9
+      },
+      {
+        "id": "Development/Reddit bot + reading skill.md",
+        "label": "Reddit bot + reading skill",
+        "group": "development",
+        "size": 5
       },
       {
         "id": "Development/Repo and vault map.md",
         "label": "Repo and vault map",
         "group": "development",
         "size": 11
+      },
+      {
+        "id": "Development/scored-cards template.md",
+        "label": "scored-cards template",
+        "group": "development",
+        "size": 5
+      },
+      {
+        "id": "Development/Shelved Hermes Bot-mode org.md",
+        "label": "Shelved Hermes Bot-mode org",
+        "group": "development",
+        "size": 2
       },
       {
         "id": "Development/SoundDevelopment.md",
@@ -385,16 +487,64 @@
         "size": 9
       },
       {
+        "id": "Development/Yahoo bot mailbox.md",
+        "label": "Yahoo bot mailbox",
+        "group": "development",
+        "size": 10
+      },
+      {
         "id": "Development/Zai GLM provider setup.md",
         "label": "Zai GLM provider setup",
         "group": "development",
+        "size": 4
+      },
+      {
+        "id": "Home/Attorney income brief.md",
+        "label": "Attorney income brief",
+        "group": "hub",
         "size": 3
+      },
+      {
+        "id": "Home/Automatable gig market — broad board sweep.md",
+        "label": "Automatable gig market — broad board sweep",
+        "group": "hub",
+        "size": 5
+      },
+      {
+        "id": "Home/Automation shop — platform profile + proposal packet.md",
+        "label": "Automation shop — platform profile + proposal packet",
+        "group": "hub",
+        "size": 3
+      },
+      {
+        "id": "Home/Automation shop — tomorrow handoff.md",
+        "label": "Automation shop — tomorrow handoff",
+        "group": "hub",
+        "size": 6
+      },
+      {
+        "id": "Home/Contacts.md",
+        "label": "Contacts",
+        "group": "hub",
+        "size": 2
+      },
+      {
+        "id": "Home/Fiverr gig demand sweep.md",
+        "label": "Fiverr gig demand sweep",
+        "group": "hub",
+        "size": 2
       },
       {
         "id": "Home/Lawn Repair Plan.md",
         "label": "Lawn Repair Plan",
         "group": "hub",
         "size": 0
+      },
+      {
+        "id": "Home/TC Gig Radar — Lane B deep dive.md",
+        "label": "TC Gig Radar — Lane B deep dive",
+        "group": "hub",
+        "size": 5
       },
       {
         "id": "Templates/Daily.md",
@@ -439,6 +589,12 @@
         "size": 6
       },
       {
+        "id": "Trading/CASY_research_20260909.md",
+        "label": "CASY_research_20260909",
+        "group": "trading",
+        "size": 7
+      },
+      {
         "id": "Trading/Cem charm clock insight.md",
         "label": "Cem charm clock insight",
         "group": "trading",
@@ -475,40 +631,94 @@
         "size": 2
       },
       {
+        "id": "Trading/Fri vol hunt 20260911.md",
+        "label": "Fri vol hunt 20260911",
+        "group": "trading",
+        "size": 6
+      },
+      {
         "id": "Trading/Jump-diffusion model zoo — shipped.md",
         "label": "Jump-diffusion model zoo — shipped",
         "group": "trading",
         "size": 4
       },
       {
+        "id": "Trading/Kalshi BTC 15m engine.md",
+        "label": "Kalshi BTC 15m engine",
+        "group": "trading",
+        "size": 3
+      },
+      {
+        "id": "Trading/LATEST rumor social brief.md",
+        "label": "LATEST rumor social brief",
+        "group": "trading",
+        "size": 6
+      },
+      {
         "id": "Trading/Operational.md",
         "label": "Operational",
         "group": "trading",
-        "size": 2
+        "size": 6
+      },
+      {
+        "id": "Trading/Polymarket 200 desk.md",
+        "label": "Polymarket 200 desk",
+        "group": "trading",
+        "size": 5
+      },
+      {
+        "id": "Trading/Polymarket overnight watch.md",
+        "label": "Polymarket overnight watch",
+        "group": "trading",
+        "size": 4
       },
       {
         "id": "Trading/Positions.md",
         "label": "Positions",
         "group": "trading",
-        "size": 5
+        "size": 14
       },
       {
         "id": "Trading/Research.md",
         "label": "Research",
         "group": "trading",
+        "size": 16
+      },
+      {
+        "id": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md",
+        "label": "Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909",
+        "group": "trading",
         "size": 8
+      },
+      {
+        "id": "Trading/Sentiment rumor social brief 20260910.md",
+        "label": "Sentiment rumor social brief 20260910",
+        "group": "trading",
+        "size": 11
       },
       {
         "id": "Trading/Sentiment scanner 3packs 20260825-0827.md",
         "label": "Sentiment scanner 3packs 20260825-0827",
         "group": "trading",
-        "size": 2
+        "size": 6
+      },
+      {
+        "id": "Trading/Thu open plays 20260910.md",
+        "label": "Thu open plays 20260910",
+        "group": "trading",
+        "size": 5
       },
       {
         "id": "Trading/Trading journal.md",
         "label": "Trading journal",
         "group": "trading",
-        "size": 19
+        "size": 35
+      },
+      {
+        "id": "Trading/Tue open plays 20260908.md",
+        "label": "Tue open plays 20260908",
+        "group": "trading",
+        "size": 7
       },
       {
         "id": "Construction/Jobs/8430 Verdugo Tower.md",
@@ -553,6 +763,108 @@
         "size": 4
       },
       {
+        "id": "Development/.remember/archive.md",
+        "label": "archive",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/now.md",
+        "label": "now",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/recent.md",
+        "label": "recent",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-22.done.md",
+        "label": "today-2026-08-22.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-23.done.md",
+        "label": "today-2026-08-23.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-24.done.md",
+        "label": "today-2026-08-24.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-25.done.md",
+        "label": "today-2026-08-25.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-26.done.md",
+        "label": "today-2026-08-26.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-27.done.md",
+        "label": "today-2026-08-27.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-28.done.md",
+        "label": "today-2026-08-28.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-29.done.md",
+        "label": "today-2026-08-29.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-30.done.md",
+        "label": "today-2026-08-30.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-08-31.done.md",
+        "label": "today-2026-08-31.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-09-01.done.md",
+        "label": "today-2026-09-01.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-09-02.done.md",
+        "label": "today-2026-09-02.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-09-03.done.md",
+        "label": "today-2026-09-03.done",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/today-2026-09-04.md",
+        "label": "today-2026-09-04",
+        "group": "development",
+        "size": 0
+      },
+      {
         "id": "Development/ConstructionDevelopment/CD Map.md",
         "label": "CD Map",
         "group": "development",
@@ -574,13 +886,19 @@
         "id": "Development/FinancialDevelopment/FD Audit 20260831.md",
         "label": "FD Audit 20260831",
         "group": "development",
-        "size": 6
+        "size": 7
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Audit 20260911.md",
+        "label": "FD Audit 20260911",
+        "group": "development",
+        "size": 8
       },
       {
         "id": "Development/FinancialDevelopment/FD Cloud Keys.md",
         "label": "FD Cloud Keys",
         "group": "development",
-        "size": 5
+        "size": 6
       },
       {
         "id": "Development/FinancialDevelopment/FD Cloud Workers.md",
@@ -592,7 +910,7 @@
         "id": "Development/FinancialDevelopment/FD Dashboard.md",
         "label": "FD Dashboard",
         "group": "development",
-        "size": 1
+        "size": 3
       },
       {
         "id": "Development/FinancialDevelopment/FD Dealer book 20260821.md",
@@ -610,7 +928,7 @@
         "id": "Development/FinancialDevelopment/FD Map.md",
         "label": "FD Map",
         "group": "development",
-        "size": 17
+        "size": 18
       },
       {
         "id": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md",
@@ -622,7 +940,7 @@
         "id": "Development/FinancialDevelopment/FD Open work.md",
         "label": "FD Open work",
         "group": "development",
-        "size": 16
+        "size": 18
       },
       {
         "id": "Development/FinancialDevelopment/FD PHClient.md",
@@ -634,7 +952,7 @@
         "id": "Development/FinancialDevelopment/FD Repo docs.md",
         "label": "FD Repo docs",
         "group": "development",
-        "size": 7
+        "size": 9
       },
       {
         "id": "Development/FinancialDevelopment/FD Suites.md",
@@ -652,7 +970,13 @@
         "id": "Development/FinancialDevelopment/FD Widget console plan 20260903.md",
         "label": "FD Widget console plan 20260903",
         "group": "development",
-        "size": 4
+        "size": 5
+      },
+      {
+        "id": "Development/FinancialDevelopment/FD Widget console.md",
+        "label": "FD Widget console",
+        "group": "development",
+        "size": 9
       },
       {
         "id": "Development/SoundDevelopment/AmbiToolbox.md",
@@ -701,6 +1025,24 @@
         "label": "Zinko Spatial Audio",
         "group": "development",
         "size": 5
+      },
+      {
+        "id": "Development/.remember/tmp/rejected-20260827-125249-919.md",
+        "label": "rejected-20260827-125249-919",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/tmp/rejected-20260902-091558-1321.md",
+        "label": "rejected-20260902-091558-1321",
+        "group": "development",
+        "size": 0
+      },
+      {
+        "id": "Development/.remember/tmp/rejected-20260903-182018-733.md",
+        "label": "rejected-20260903-182018-733",
+        "group": "development",
+        "size": 0
       },
       {
         "id": "Trading/FinancialDevelopment Journal/2026-08-10.md",
@@ -1057,10 +1399,22 @@
         "size": 0
       },
       {
+        "id": "Trading/FinancialDevelopment Journal/gme_earnings_vol_20260903.md",
+        "label": "gme_earnings_vol_20260903",
+        "group": "trading",
+        "size": 2
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/gme_lotto_oct16_20260903.md",
+        "label": "gme_lotto_oct16_20260903",
+        "group": "trading",
+        "size": 0
+      },
+      {
         "id": "Trading/FinancialDevelopment Journal/hermes_settings_audit_20260813.md",
         "label": "hermes_settings_audit_20260813",
         "group": "trading",
-        "size": 0
+        "size": 1
       },
       {
         "id": "Trading/FinancialDevelopment Journal/intraday_1344_20260811.md",
@@ -1101,6 +1455,12 @@
       {
         "id": "Trading/FinancialDevelopment Journal/market_rumors_20260825.md",
         "label": "market_rumors_20260825",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/market_rumor_watchlist_20260828.md",
+        "label": "market_rumor_watchlist_20260828",
         "group": "trading",
         "size": 0
       },
@@ -1159,6 +1519,12 @@
         "size": 0
       },
       {
+        "id": "Trading/FinancialDevelopment Journal/morning_handoff_20260824.md",
+        "label": "morning_handoff_20260824",
+        "group": "trading",
+        "size": 0
+      },
+      {
         "id": "Trading/FinancialDevelopment Journal/morning_outlook_20260813.md",
         "label": "morning_outlook_20260813",
         "group": "trading",
@@ -1187,6 +1553,12 @@
         "label": "morning_scan_2026-08-24",
         "group": "trading",
         "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/pcg_straddle_20260903.md",
+        "label": "pcg_straddle_20260903",
+        "group": "trading",
+        "size": 1
       },
       {
         "id": "Trading/FinancialDevelopment Journal/play_addition_report_2026-08-21.md",
@@ -1297,8 +1669,32 @@
         "size": 0
       },
       {
+        "id": "Trading/FinancialDevelopment Journal/robinhood_vol_scans_20260828.md",
+        "label": "robinhood_vol_scans_20260828",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/robinhood_vol_scans_20260903.md",
+        "label": "robinhood_vol_scans_20260903",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/sentiment_scanner_3packs_20260825-0827.md",
+        "label": "sentiment_scanner_3packs_20260825-0827",
+        "group": "trading",
+        "size": 1
+      },
+      {
         "id": "Trading/FinancialDevelopment Journal/sentiment_x_context_20260826.md",
         "label": "sentiment_x_context_20260826",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/spy_directional_scan_20260828.md",
+        "label": "spy_directional_scan_20260828",
         "group": "trading",
         "size": 0
       },
@@ -1307,6 +1703,12 @@
         "label": "tgb_research_20260814",
         "group": "trading",
         "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/vol_suite_screener_sellvol_20260828.md",
+        "label": "vol_suite_screener_sellvol_20260828",
+        "group": "trading",
+        "size": 2
       },
       {
         "id": "Trading/FinancialDevelopment Journal/watchlist_adds_research_20260813.md",
@@ -1323,6 +1725,12 @@
       {
         "id": "Trading/FinancialDevelopment Journal/WEEK_PLAN_20260810.md",
         "label": "WEEK_PLAN_20260810",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/Journal/2026-09-13.md",
+        "label": "2026-09-13",
         "group": "trading",
         "size": 0
       },
@@ -2173,6 +2581,66 @@
         "size": 8
       },
       {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-23_weekend_x_market_scan.md",
+        "label": "2026-08-23_weekend_x_market_scan",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-24_morning.md",
+        "label": "2026-08-24_morning",
+        "group": "trading",
+        "size": 2
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-25_mid-day.md",
+        "label": "2026-08-25_mid-day",
+        "group": "trading",
+        "size": 1
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-25_power-hour.md",
+        "label": "2026-08-25_power-hour",
+        "group": "trading",
+        "size": 1
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "label": "2026-08-26_mid-day",
+        "group": "trading",
+        "size": 10
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_morning.md",
+        "label": "2026-08-26_morning",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_power-hour.md",
+        "label": "2026-08-26_power-hour",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_mid-day.md",
+        "label": "2026-08-27_mid-day",
+        "group": "trading",
+        "size": 0
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "label": "2026-08-27_morning",
+        "group": "trading",
+        "size": 10
+      },
+      {
+        "id": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "label": "2026-08-27_power-hour",
+        "group": "trading",
+        "size": 9
+      },
+      {
         "id": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
         "label": "LATEST",
         "group": "trading",
@@ -2209,6 +2677,12 @@
         "size": 1
       },
       {
+        "id": "dangling:webbot",
+        "label": "webbot",
+        "group": "dangling",
+        "size": 2
+      },
+      {
         "id": "dangling:cell",
         "label": "cell",
         "group": "dangling",
@@ -2227,10 +2701,46 @@
         "size": 1
       },
       {
+        "id": "dangling:Attorney_Income_Report_2026.pdf",
+        "label": "Attorney_Income_Report_2026.pdf",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:TC outreach engine",
+        "label": "TC outreach engine",
+        "group": "dangling",
+        "size": 2
+      },
+      {
+        "id": "dangling:feedback_no_per_leg_stops_on_straddles",
+        "label": "feedback_no_per_leg_stops_on_straddles",
+        "group": "dangling",
+        "size": 3
+      },
+      {
         "id": "dangling:robinhood",
         "label": "robinhood",
         "group": "dangling",
+        "size": 5
+      },
+      {
+        "id": "dangling:feedback_dont_exit_on_single_adverse_tick",
+        "label": "feedback_dont_exit_on_single_adverse_tick",
+        "group": "dangling",
         "size": 2
+      },
+      {
+        "id": "dangling:feedback_options_under_60dte_need_watching",
+        "label": "feedback_options_under_60dte_need_watching",
+        "group": "dangling",
+        "size": 3
+      },
+      {
+        "id": "dangling:market-rumor-research",
+        "label": "market-rumor-research",
+        "group": "dangling",
+        "size": 1
       },
       {
         "id": "dangling:Market rumor watchlist 20260828",
@@ -2257,6 +2767,12 @@
         "size": 1
       },
       {
+        "id": "dangling:feedback_standing_authorization_manage_positions",
+        "label": "feedback_standing_authorization_manage_positions",
+        "group": "dangling",
+        "size": 1
+      },
+      {
         "id": "dangling:phclient-v2-api",
         "label": "phclient-v2-api",
         "group": "dangling",
@@ -2266,49 +2782,73 @@
         "id": "dangling:2",
         "label": "2",
         "group": "dangling",
-        "size": 5
+        "size": 9
       },
       {
         "id": "dangling:1",
         "label": "1",
         "group": "dangling",
-        "size": 5
+        "size": 11
       },
       {
         "id": "dangling:7",
         "label": "7",
         "group": "dangling",
-        "size": 3
+        "size": 5
       },
       {
         "id": "dangling:4",
         "label": "4",
         "group": "dangling",
-        "size": 3
+        "size": 6
       },
       {
         "id": "dangling:5",
         "label": "5",
         "group": "dangling",
-        "size": 3
+        "size": 5
       },
       {
         "id": "dangling:3",
         "label": "3",
         "group": "dangling",
-        "size": 3
+        "size": 6
       },
       {
         "id": "dangling:6",
         "label": "6",
         "group": "dangling",
-        "size": 3
+        "size": 6
       },
       {
         "id": "dangling:8",
         "label": "8",
         "group": "dangling",
+        "size": 5
+      },
+      {
+        "id": "dangling:10",
+        "label": "10",
+        "group": "dangling",
+        "size": 2
+      },
+      {
+        "id": "dangling:9",
+        "label": "9",
+        "group": "dangling",
         "size": 3
+      },
+      {
+        "id": "dangling:12",
+        "label": "12",
+        "group": "dangling",
+        "size": 1
+      },
+      {
+        "id": "dangling:11",
+        "label": "11",
+        "group": "dangling",
+        "size": 2
       }
     ],
     "edges": [
@@ -2446,6 +2986,18 @@
       },
       {
         "source": "Development.md",
+        "target": "Development/Reddit bot + reading skill.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/Yahoo bot mailbox.md"
+      },
+      {
+        "source": "Development.md",
+        "target": "Development/BrowserOS neo bridge.md"
+      },
+      {
+        "source": "Development.md",
         "target": "Development/Repo and vault map.md"
       },
       {
@@ -2493,6 +3045,14 @@
         "target": "Trading.md"
       },
       {
+        "source": "Inbox.md",
+        "target": "Career/SpaceX applications.md"
+      },
+      {
+        "source": "Jason identity.md",
+        "target": "Development/Yahoo bot mailbox.md"
+      },
+      {
         "source": "Jason identity.md",
         "target": "My debit card.md"
       },
@@ -2549,6 +3109,10 @@
         "target": "Trading/Trading journal.md"
       },
       {
+        "source": "Jason.md",
+        "target": "Development/Yahoo bot mailbox.md"
+      },
+      {
         "source": "My debit card.md",
         "target": "Arkansas MMJ card.md"
       },
@@ -2573,8 +3137,44 @@
         "target": "Trading/FinancialDevelopment Journal.md"
       },
       {
+        "source": "Career/SpaceX applications.md",
+        "target": "Jason.md"
+      },
+      {
         "source": "Construction/8074 - Fireproofing SFRM LF Takeoff.md",
         "target": "dangling:tiferet-steel-column-takeoff"
+      },
+      {
+        "source": "Construction/Bid-to-proposal continuation.md",
+        "target": "Construction/Bid-to-proposal technical plan.md"
+      },
+      {
+        "source": "Construction/Bid-to-proposal continuation.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Construction/Bid-to-proposal continuation.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Bid-to-proposal continuation.md",
+        "target": "Construction/Google Drive.md"
+      },
+      {
+        "source": "Construction/Bid-to-proposal technical plan.md",
+        "target": "Construction/Bid-to-proposal continuation.md"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Construction/Tiferet master database TO DO.md"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Construction/Bid-to-proposal continuation.md"
+      },
+      {
+        "source": "Construction/Estimating.md",
+        "target": "Construction/Bid-to-proposal technical plan.md"
       },
       {
         "source": "Construction/Estimating.md",
@@ -2639,6 +3239,26 @@
       {
         "source": "Construction/HOA LA market 2026-09-02.md",
         "target": "Jason.md"
+      },
+      {
+        "source": "Construction/Project Serpentine.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Project Serpentine.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Construction/Tiferet master database TO DO.md",
+        "target": "Construction/Estimating.md"
+      },
+      {
+        "source": "Construction/Tiferet master database TO DO.md",
+        "target": "Construction/Tiferet.md"
+      },
+      {
+        "source": "Construction/Tiferet master database TO DO.md",
+        "target": "Construction/Bid-to-proposal technical plan.md"
       },
       {
         "source": "Construction/Tiferet.md",
@@ -2678,7 +3298,87 @@
       },
       {
         "source": "Construction/Tiferet.md",
+        "target": "Construction/Bid-to-proposal continuation.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
+        "target": "Construction/Bid-to-proposal technical plan.md"
+      },
+      {
+        "source": "Construction/Tiferet.md",
         "target": "Construction/HOA LA market 2026-09-02.md"
+      },
+      {
+        "source": "Development/A2A and Relay.md",
+        "target": "Development/Discord-Cron-Runbook.md"
+      },
+      {
+        "source": "Development/A2A and Relay.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/A2A and Relay.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/A2A and Relay.md",
+        "target": "Development/Camofox camo profile.md"
+      },
+      {
+        "source": "Development/Browser reliability plan (Claude, 2026-09-06).md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Browser reliability plan (Claude, 2026-09-06).md",
+        "target": "Development/BrowserOS neo bridge.md"
+      },
+      {
+        "source": "Development/Browser reliability plan (Claude, 2026-09-06).md",
+        "target": "Development/Hermes audit and cleanup 2026-09-06.md"
+      },
+      {
+        "source": "Development/Browser reliability plan (Claude, 2026-09-06).md",
+        "target": "Development/Yahoo bot mailbox.md"
+      },
+      {
+        "source": "Development/BrowserOS neo bridge.md",
+        "target": "Home/Automation shop — tomorrow handoff.md"
+      },
+      {
+        "source": "Development/BrowserOS neo bridge.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/BrowserOS neo bridge.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/BrowserOS neo bridge.md",
+        "target": "dangling:webbot"
+      },
+      {
+        "source": "Development/BrowserOS neo bridge.md",
+        "target": "Development/Browser reliability plan (Claude, 2026-09-06).md"
+      },
+      {
+        "source": "Development/BrowserOS neo bridge.md",
+        "target": "Development/Yahoo bot mailbox.md"
+      },
+      {
+        "source": "Development/Camofox camo profile.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Camofox camo profile.md",
+        "target": "Development/Hermes skill catalog.md"
+      },
+      {
+        "source": "Development/Camofox camo profile.md",
+        "target": "Development/BrowserOS neo bridge.md"
+      },
+      {
+        "source": "Development/ClipsFarm.md",
+        "target": "Jason.md"
       },
       {
         "source": "Development/Cloud instance.md",
@@ -2706,11 +3406,27 @@
       },
       {
         "source": "Development/Cloud instance.md",
+        "target": "Development/Coder fleet.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Development/Cloud instance.md",
         "target": "Development/Discord-Cron-Runbook.md"
       },
       {
         "source": "Development/Cloud instance.md",
         "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
+        "source": "Development/Coder fleet.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/Coder fleet.md",
+        "target": "Development/Hermes.md"
       },
       {
         "source": "Development/ConstructionDevelopment.md",
@@ -2735,6 +3451,10 @@
       {
         "source": "Development/Cron-Financial-Suite-Inventory.md",
         "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/Dev notes.md",
+        "target": "Trading/Operational.md"
       },
       {
         "source": "Development/Discord-Cron-Runbook.md",
@@ -2762,11 +3482,19 @@
       },
       {
         "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD Audit 20260911.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
         "target": "Development/FinancialDevelopment/FD Swaps DB.md"
       },
       {
         "source": "Development/FinancialDevelopment.md",
         "target": "Development/FinancialDevelopment/FD Dashboard.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment.md",
+        "target": "Development/FinancialDevelopment/FD Widget console.md"
       },
       {
         "source": "Development/FinancialDevelopment.md",
@@ -2793,8 +3521,72 @@
         "target": "Development.md"
       },
       {
+        "source": "Development/Hermes audit and cleanup 2026-09-06.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Hermes audit and cleanup 2026-09-06.md",
+        "target": "Development/Cloud instance.md"
+      },
+      {
+        "source": "Development/Hermes audit and cleanup 2026-09-06.md",
+        "target": "Development/BrowserOS neo bridge.md"
+      },
+      {
+        "source": "Development/Hermes audit and cleanup 2026-09-06.md",
+        "target": "Development/Local Qwen llama.cpp.md"
+      },
+      {
+        "source": "Development/Hermes audit and cleanup 2026-09-06.md",
+        "target": "Development/hermes-artifacts.md"
+      },
+      {
+        "source": "Development/Hermes audit and cleanup 2026-09-06.md",
+        "target": "Development/Browser reliability plan (Claude, 2026-09-06).md"
+      },
+      {
+        "source": "Development/Hermes Desktop plugins.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Hermes Desktop plugins.md",
+        "target": "Development/hermes-artifacts.md"
+      },
+      {
+        "source": "Development/Hermes Desktop plugins.md",
+        "target": "Development/FinancialDevelopment/FD Widget console.md"
+      },
+      {
+        "source": "Development/Hermes Desktop plugins.md",
+        "target": "Development/Hermes update and desktop plugins 2026-09-09.md"
+      },
+      {
         "source": "Development/Hermes skill catalog.md",
         "target": "Development/Local Qwen llama.cpp.md"
+      },
+      {
+        "source": "Development/Hermes update and desktop plugins 2026-09-09.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Hermes update and desktop plugins 2026-09-09.md",
+        "target": "Development/Hermes Desktop plugins.md"
+      },
+      {
+        "source": "Development/Hermes update and desktop plugins 2026-09-09.md",
+        "target": "Development/hermes-artifacts.md"
+      },
+      {
+        "source": "Development/Hermes update and desktop plugins 2026-09-09.md",
+        "target": "Development/Local Qwen llama.cpp.md"
+      },
+      {
+        "source": "Development/Hermes update and desktop plugins 2026-09-09.md",
+        "target": "Development/FinancialDevelopment.md"
+      },
+      {
+        "source": "Development/Hermes update and desktop plugins 2026-09-09.md",
+        "target": "Development/Hermes audit and cleanup 2026-09-06.md"
       },
       {
         "source": "Development/hermes-artifacts.md",
@@ -2807,6 +3599,18 @@
       {
         "source": "Development/hermes-artifacts.md",
         "target": "Development/Hermes skill catalog.md"
+      },
+      {
+        "source": "Development/hermes-artifacts.md",
+        "target": "Development/scored-cards template.md"
+      },
+      {
+        "source": "Development/hermes-artifacts.md",
+        "target": "Development/Hermes Desktop plugins.md"
+      },
+      {
+        "source": "Development/hermes-artifacts.md",
+        "target": "Trading/Tue open plays 20260908.md"
       },
       {
         "source": "Development/hermes-artifacts.md",
@@ -2826,11 +3630,47 @@
       },
       {
         "source": "Development/Hermes.md",
+        "target": "Development/Hermes Desktop plugins.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Hermes update and desktop plugins 2026-09-09.md"
+      },
+      {
+        "source": "Development/Hermes.md",
         "target": "Development/Hermes skill catalog.md"
       },
       {
         "source": "Development/Hermes.md",
+        "target": "Development/Shelved Hermes Bot-mode org.md"
+      },
+      {
+        "source": "Development/Hermes.md",
         "target": "Development/Vault handoff.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/A2A and Relay.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/FinancialDevelopment/FD Widget console.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Browser reliability plan (Claude, 2026-09-06).md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/BrowserOS neo bridge.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Camofox camo profile.md"
+      },
+      {
+        "source": "Development/Hermes.md",
+        "target": "Development/Yahoo bot mailbox.md"
       },
       {
         "source": "Development/Hermes.md",
@@ -2853,12 +3693,36 @@
         "target": "Development/Zai GLM provider setup.md"
       },
       {
+        "source": "Development/Hermes.md",
+        "target": "Development/Coder fleet.md"
+      },
+      {
         "source": "Development/Local Qwen llama.cpp.md",
         "target": "Development/Hermes.md"
       },
       {
         "source": "Development/Local Qwen llama.cpp.md",
+        "target": "Development/Hermes update and desktop plugins 2026-09-09.md"
+      },
+      {
+        "source": "Development/Local Qwen llama.cpp.md",
         "target": "Development/Hermes skill catalog.md"
+      },
+      {
+        "source": "Development/Reddit bot + reading skill.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Reddit bot + reading skill.md",
+        "target": "Development/Hermes skill catalog.md"
+      },
+      {
+        "source": "Development/Reddit bot + reading skill.md",
+        "target": "Development/FinancialDevelopment/FD Cloud Keys.md"
+      },
+      {
+        "source": "Development/Reddit bot + reading skill.md",
+        "target": "Trading/FinancialDevelopment Journal/hermes_settings_audit_20260813.md"
       },
       {
         "source": "Development/Repo and vault map.md",
@@ -2891,6 +3755,18 @@
       {
         "source": "Development/Repo and vault map.md",
         "target": "Trading.md"
+      },
+      {
+        "source": "Development/scored-cards template.md",
+        "target": "Trading/Tue open plays 20260908.md"
+      },
+      {
+        "source": "Development/scored-cards template.md",
+        "target": "Development/hermes-artifacts.md"
+      },
+      {
+        "source": "Development/Shelved Hermes Bot-mode org.md",
+        "target": "Development/Hermes.md"
       },
       {
         "source": "Development/SoundDevelopment.md",
@@ -2949,12 +3825,100 @@
         "target": "dangling:wikilink"
       },
       {
+        "source": "Development/Yahoo bot mailbox.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Development/Yahoo bot mailbox.md",
+        "target": "Development/Hermes.md"
+      },
+      {
+        "source": "Development/Yahoo bot mailbox.md",
+        "target": "Development/Browser reliability plan (Claude, 2026-09-06).md"
+      },
+      {
+        "source": "Development/Yahoo bot mailbox.md",
+        "target": "Development/BrowserOS neo bridge.md"
+      },
+      {
+        "source": "Development/Zai GLM provider setup.md",
+        "target": "Development/Coder fleet.md"
+      },
+      {
         "source": "Development/Zai GLM provider setup.md",
         "target": "Development/Hermes.md"
       },
       {
         "source": "Development/Zai GLM provider setup.md",
         "target": "Development/Local Qwen llama.cpp.md"
+      },
+      {
+        "source": "Home/Attorney income brief.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Home/Attorney income brief.md",
+        "target": "dangling:Attorney_Income_Report_2026.pdf"
+      },
+      {
+        "source": "Home/Automatable gig market — broad board sweep.md",
+        "target": "Home/TC Gig Radar — Lane B deep dive.md"
+      },
+      {
+        "source": "Home/Automatable gig market — broad board sweep.md",
+        "target": "dangling:TC outreach engine"
+      },
+      {
+        "source": "Home/Automatable gig market — broad board sweep.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Home/Automation shop — platform profile + proposal packet.md",
+        "target": "Home/Automatable gig market — broad board sweep.md"
+      },
+      {
+        "source": "Home/Automation shop — platform profile + proposal packet.md",
+        "target": "Home/TC Gig Radar — Lane B deep dive.md"
+      },
+      {
+        "source": "Home/Automation shop — platform profile + proposal packet.md",
+        "target": "Home/Fiverr gig demand sweep.md"
+      },
+      {
+        "source": "Home/Automation shop — tomorrow handoff.md",
+        "target": "Home/Fiverr gig demand sweep.md"
+      },
+      {
+        "source": "Home/Automation shop — tomorrow handoff.md",
+        "target": "Development/BrowserOS neo bridge.md"
+      },
+      {
+        "source": "Home/Automation shop — tomorrow handoff.md",
+        "target": "dangling:webbot"
+      },
+      {
+        "source": "Home/Automation shop — tomorrow handoff.md",
+        "target": "Home/Automatable gig market — broad board sweep.md"
+      },
+      {
+        "source": "Home/Automation shop — tomorrow handoff.md",
+        "target": "Home/TC Gig Radar — Lane B deep dive.md"
+      },
+      {
+        "source": "Home/Contacts.md",
+        "target": "Jason.md"
+      },
+      {
+        "source": "Home/Contacts.md",
+        "target": "Home/Attorney income brief.md"
+      },
+      {
+        "source": "Home/TC Gig Radar — Lane B deep dive.md",
+        "target": "dangling:TC outreach engine"
+      },
+      {
+        "source": "Home/TC Gig Radar — Lane B deep dive.md",
+        "target": "Jason.md"
       },
       {
         "source": "Trading/0DTE Anderson Lakha Cem 20260820.md",
@@ -2989,6 +3953,22 @@
         "target": "Trading/Jump-diffusion model zoo — shipped.md"
       },
       {
+        "source": "Trading/CASY_research_20260909.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/CASY_research_20260909.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/CASY_research_20260909.md",
+        "target": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md"
+      },
+      {
+        "source": "Trading/CASY_research_20260909.md",
+        "target": "Trading/Sentiment scanner 3packs 20260825-0827.md"
+      },
+      {
         "source": "Trading/Cem charm clock insight.md",
         "target": "Trading/AIGamma teardown - what to steal.md"
       },
@@ -3021,6 +4001,30 @@
         "target": "Trading/Trading journal.md"
       },
       {
+        "source": "Trading/Fri vol hunt 20260911.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/Fri vol hunt 20260911.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Fri vol hunt 20260911.md",
+        "target": "dangling:feedback_no_per_leg_stops_on_straddles"
+      },
+      {
+        "source": "Trading/Fri vol hunt 20260911.md",
+        "target": "dangling:robinhood"
+      },
+      {
+        "source": "Trading/Fri vol hunt 20260911.md",
+        "target": "dangling:feedback_dont_exit_on_single_adverse_tick"
+      },
+      {
+        "source": "Trading/Fri vol hunt 20260911.md",
+        "target": "dangling:feedback_options_under_60dte_need_watching"
+      },
+      {
         "source": "Trading/Jump-diffusion model zoo — shipped.md",
         "target": "Trading/AIGamma teardown - what to steal.md"
       },
@@ -3029,20 +4033,156 @@
         "target": "Trading/AIGamma steal list — Phase 2-3 plan status.md"
       },
       {
+        "source": "Trading/Kalshi BTC 15m engine.md",
+        "target": "Trading/Polymarket 200 desk.md"
+      },
+      {
+        "source": "Trading/Kalshi BTC 15m engine.md",
+        "target": "Trading/Polymarket overnight watch.md"
+      },
+      {
+        "source": "Trading/Kalshi BTC 15m engine.md",
+        "target": "Trading/Operational.md"
+      },
+      {
+        "source": "Trading/LATEST rumor social brief.md",
+        "target": "Trading/Sentiment rumor social brief 20260910.md"
+      },
+      {
+        "source": "Trading/LATEST rumor social brief.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Trading/LATEST rumor social brief.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/LATEST rumor social brief.md",
+        "target": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md"
+      },
+      {
+        "source": "Trading/Polymarket 200 desk.md",
+        "target": "Trading/Polymarket overnight watch.md"
+      },
+      {
+        "source": "Trading/Polymarket 200 desk.md",
+        "target": "Trading/Operational.md"
+      },
+      {
+        "source": "Trading/Polymarket 200 desk.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/Polymarket overnight watch.md",
+        "target": "Trading/Polymarket 200 desk.md"
+      },
+      {
+        "source": "Trading/Polymarket overnight watch.md",
+        "target": "Trading/Operational.md"
+      },
+      {
+        "source": "Trading/Positions.md",
+        "target": "dangling:feedback_no_per_leg_stops_on_straddles"
+      },
+      {
         "source": "Trading/Positions.md",
         "target": "Trading/Trading journal.md"
       },
       {
         "source": "Trading/Positions.md",
-        "target": "dangling:robinhood"
+        "target": "dangling:feedback_options_under_60dte_need_watching"
+      },
+      {
+        "source": "Trading/Research.md",
+        "target": "Trading/CASY_research_20260909.md"
+      },
+      {
+        "source": "Trading/Research.md",
+        "target": "Trading/Sentiment rumor social brief 20260910.md"
+      },
+      {
+        "source": "Trading/Research.md",
+        "target": "Trading/LATEST rumor social brief.md"
+      },
+      {
+        "source": "Trading/Research.md",
+        "target": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md"
       },
       {
         "source": "Trading/Research.md",
         "target": "Trading/0DTE Anderson Lakha Cem 20260820.md"
       },
       {
+        "source": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md",
+        "target": "Trading/Sentiment scanner 3packs 20260825-0827.md"
+      },
+      {
+        "source": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Sentiment rumor social brief 20260910.md",
+        "target": "dangling:market-rumor-research"
+      },
+      {
+        "source": "Trading/Sentiment rumor social brief 20260910.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/Sentiment rumor social brief 20260910.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Trading/Sentiment rumor social brief 20260910.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Sentiment rumor social brief 20260910.md",
+        "target": "Trading/Rumor watchlist JBLU GME AMC NOK CHWY TSLA SPCX 20260909.md"
+      },
+      {
+        "source": "Trading/Sentiment rumor social brief 20260910.md",
+        "target": "Trading/CASY_research_20260909.md"
+      },
+      {
+        "source": "Trading/Sentiment rumor social brief 20260910.md",
+        "target": "Trading/LATEST rumor social brief.md"
+      },
+      {
+        "source": "Trading/Sentiment rumor social brief 20260910.md",
+        "target": "Trading/Sentiment scanner 3packs 20260825-0827.md"
+      },
+      {
         "source": "Trading/Sentiment scanner 3packs 20260825-0827.md",
         "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Thu open plays 20260910.md",
+        "target": "Trading/Sentiment rumor social brief 20260910.md"
+      },
+      {
+        "source": "Trading/Thu open plays 20260910.md",
+        "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/Thu open plays 20260910.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Thu open plays 20260910.md",
+        "target": "Trading/Research.md"
+      },
+      {
+        "source": "Trading/Thu open plays 20260910.md",
+        "target": "Trading/CASY_research_20260909.md"
       },
       {
         "source": "Trading/Trading journal.md",
@@ -3050,11 +4190,31 @@
       },
       {
         "source": "Trading/Trading journal.md",
-        "target": "dangling:robinhood"
+        "target": "dangling:feedback_options_under_60dte_need_watching"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:feedback_no_per_leg_stops_on_straddles"
       },
       {
         "source": "Trading/Trading journal.md",
         "target": "Trading/Positions.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Trading/Tue open plays 20260908.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Development/scored-cards template.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Development/hermes-artifacts.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:robinhood"
       },
       {
         "source": "Trading/Trading journal.md",
@@ -3087,6 +4247,34 @@
       {
         "source": "Trading/Trading journal.md",
         "target": "dangling:Direction tool"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:feedback_dont_exit_on_single_adverse_tick"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "Trading/FinancialDevelopment Journal/gme_earnings_vol_20260903.md"
+      },
+      {
+        "source": "Trading/Trading journal.md",
+        "target": "dangling:feedback_standing_authorization_manage_positions"
+      },
+      {
+        "source": "Trading/Tue open plays 20260908.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/Tue open plays 20260908.md",
+        "target": "Development/hermes-artifacts.md"
+      },
+      {
+        "source": "Trading/Tue open plays 20260908.md",
+        "target": "Trading/Sentiment scanner 3packs 20260825-0827.md"
+      },
+      {
+        "source": "Trading/Tue open plays 20260908.md",
+        "target": "Development/scored-cards template.md"
       },
       {
         "source": "Construction/Jobs/8430 Verdugo Tower.md",
@@ -3161,6 +4349,26 @@
         "target": "Development/FinancialDevelopment/FD Suites.md"
       },
       {
+        "source": "Development/FinancialDevelopment/FD Audit 20260911.md",
+        "target": "Development/FinancialDevelopment.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Audit 20260911.md",
+        "target": "Development/FinancialDevelopment/FD Audit 20260831.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Audit 20260911.md",
+        "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Audit 20260911.md",
+        "target": "Development/FinancialDevelopment/FD Repo docs.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Audit 20260911.md",
+        "target": "Development/FinancialDevelopment/FD Map.md"
+      },
+      {
         "source": "Development/FinancialDevelopment/FD Cloud Keys.md",
         "target": "Development/FinancialDevelopment.md"
       },
@@ -3183,6 +4391,10 @@
       {
         "source": "Development/FinancialDevelopment/FD Cloud Workers.md",
         "target": "Development/FinancialDevelopment/FD Swaps DB.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Dashboard.md",
+        "target": "Development/FinancialDevelopment/FD Widget console.md"
       },
       {
         "source": "Development/FinancialDevelopment/FD Dealer book 20260821.md",
@@ -3254,11 +4466,15 @@
       },
       {
         "source": "Development/FinancialDevelopment/FD Open work.md",
-        "target": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md"
+        "target": "Development/FinancialDevelopment/FD Audit 20260911.md"
       },
       {
         "source": "Development/FinancialDevelopment/FD Open work.md",
         "target": "Development/FinancialDevelopment/FD Widget console plan 20260903.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Open work.md",
+        "target": "Development/FinancialDevelopment/FD Modularization handoff 20260902.md"
       },
       {
         "source": "Development/FinancialDevelopment/FD Open work.md",
@@ -3283,6 +4499,10 @@
       {
         "source": "Development/FinancialDevelopment/FD Open work.md",
         "target": "Development/FinancialDevelopment/FD Improve 20260902.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Repo docs.md",
+        "target": "Development/FinancialDevelopment/FD Audit 20260911.md"
       },
       {
         "source": "Development/FinancialDevelopment/FD Repo docs.md",
@@ -3323,6 +4543,26 @@
       {
         "source": "Development/FinancialDevelopment/FD Widget console plan 20260903.md",
         "target": "Development/FinancialDevelopment/FD Open work.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Widget console.md",
+        "target": "Development/FinancialDevelopment/FD Dashboard.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Widget console.md",
+        "target": "Development/FinancialDevelopment/FD Widget console plan 20260903.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Widget console.md",
+        "target": "Development/hermes-artifacts.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Widget console.md",
+        "target": "Development/FinancialDevelopment.md"
+      },
+      {
+        "source": "Development/FinancialDevelopment/FD Widget console.md",
+        "target": "Development/Hermes.md"
       },
       {
         "source": "Development/SoundDevelopment/AmbiToolbox.md",
@@ -3377,6 +4617,26 @@
         "target": "Trading/FinancialDevelopment Journal/morning_scan_2026-08-21.md"
       },
       {
+        "source": "Trading/FinancialDevelopment Journal/gme_earnings_vol_20260903.md",
+        "target": "dangling:robinhood"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/pcg_straddle_20260903.md",
+        "target": "dangling:robinhood"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/sentiment_scanner_3packs_20260825-0827.md",
+        "target": "Trading/Trading journal.md"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/vol_suite_screener_sellvol_20260828.md",
+        "target": "dangling:robinhood"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/vol_suite_screener_sellvol_20260828.md",
+        "target": "Trading/Positions.md"
+      },
+      {
         "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_morning.md",
         "target": "dangling:2"
       },
@@ -3415,6 +4675,138 @@
       {
         "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-21_power-hour.md",
         "target": "dangling:8"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-24_morning.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-24_morning.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-25_mid-day.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-25_power-hour.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:6"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:5"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:3"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:4"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:10"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:8"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:7"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-26_mid-day.md",
+        "target": "dangling:9"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:3"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:4"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:12"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:5"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:6"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:9"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:7"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_morning.md",
+        "target": "dangling:11"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:1"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:11"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:10"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:8"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:9"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:3"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:2"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:6"
+      },
+      {
+        "source": "Trading/FinancialDevelopment Journal/x_buzz/2026-08-27_power-hour.md",
+        "target": "dangling:4"
       },
       {
         "source": "Trading/FinancialDevelopment Journal/x_buzz/LATEST.md",
@@ -3498,5 +4890,5 @@
   "schema_version": 1,
   "artifact_id": "vault-graph",
   "title": "Vault graph",
-  "generated_at": "2026-09-05 03:25 UTC"
+  "generated_at": "2026-09-14 03:40 UTC"
 }

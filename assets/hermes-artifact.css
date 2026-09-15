@@ -54,3 +54,25 @@ tr:last-child td { border-bottom: none; }
 .ha-ghost-toast { position: absolute; left: 50%; transform: translateX(-50%); bottom: 12px; padding: 6px 12px; border-radius: 8px; background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; opacity: 0; transition: opacity .25s ease; pointer-events: none; }
 .ha-ghost-toast.on { opacity: 1; }
 .ha-glegend i { box-shadow: 0 0 6px rgba(255,255,255,.35); }
+
+/* Embed / Brain-tab mode: graph only, no white chrome, full viewport. */
+html.ha-embed, html.ha-embed body {
+  margin: 0; padding: 0; height: 100%; overflow: hidden;
+  background: #05070c; color: #e5e7eb;
+}
+html.ha-embed #app { height: 100%; }
+html.ha-embed .ha-graph {
+  border: none; padding: 0; margin: 0; border-radius: 0;
+  height: 100%; display: flex; flex-direction: column; position: relative;
+}
+html.ha-embed .ha-graph h3 { display: none; }
+html.ha-embed .ha-glegend {
+  position: absolute; z-index: 2; left: 12px; bottom: 12px;
+  margin: 0; color: rgba(229, 231, 235, 0.65); pointer-events: none;
+  text-shadow: 0 0 8px rgba(5, 7, 12, 0.9);
+}
+html.ha-embed .ha-glegend i { box-shadow: 0 0 10px currentColor; }
+html.ha-embed .ha-gstage {
+  flex: 1; height: auto !important; min-height: 0; border-radius: 0;
+}
+html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }

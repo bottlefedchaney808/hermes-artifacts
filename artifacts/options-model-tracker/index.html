@@ -43,6 +43,46 @@ th { cursor: pointer; color: var(--muted-foreground, #6b6b6b);
 tr:last-child td { border-bottom: none; }
 .ha-notes { color: var(--muted-foreground, #6b6b6b); font-size: 12px; }
 .ha-notes li { margin-bottom: 4px; }
+.ha-graph { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
+  padding: 12px; margin-bottom: 16px; }
+.ha-graph h3 { font-size: 14px; margin: 0 0 8px; }
+.ha-glegend { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px;
+  color: var(--muted-foreground, #6b6b6b); margin-bottom: 8px; }
+.ha-glegend .swatch { display: inline-flex; align-items: center; gap: 6px; }
+.ha-glegend i { width: 8px; height: 8px; border-radius: 99px; display: inline-block; }
+/* Jarvis graph stage: base color only here (kills white-flash before JS paints).
+   The radial vignette + faint dot grid are drawn per-frame on the canvas inside
+   renderGraph() — see spec §2 Rendering. Do NOT add a CSS gradient to this rule;
+   it would double-paint under the canvas fill. */
+.ha-gstage { position: relative; height: 560px; border-radius: 10px; overflow: hidden; background: #05070c; }
+.ha-gstage canvas { display: block; width: 100%; height: 560px; cursor: grab; }
+.ha-gtip { display: none; position: absolute; pointer-events: none; }
+.ha-gtip { background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; border-radius: 6px; padding: 4px 8px; box-shadow: 0 0 6px rgba(0,0,0,.4); font-size: 12px; }
+.ha-ghost-toast { position: absolute; left: 50%; transform: translateX(-50%); bottom: 12px; padding: 6px 12px; border-radius: 8px; background: rgba(8,12,20,.92); border: 1px solid rgba(148,163,184,.35); color: #e5e7eb; opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+.ha-ghost-toast.on { opacity: 1; }
+.ha-glegend i { box-shadow: 0 0 6px rgba(255,255,255,.35); }
+
+/* Embed / Brain-tab mode: graph only, no white chrome, full viewport. */
+html.ha-embed, html.ha-embed body {
+  margin: 0; padding: 0; height: 100%; overflow: hidden;
+  background: #05070c; color: #e5e7eb;
+}
+html.ha-embed #app { height: 100%; }
+html.ha-embed .ha-graph {
+  border: none; padding: 0; margin: 0; border-radius: 0;
+  height: 100%; display: flex; flex-direction: column; position: relative;
+}
+html.ha-embed .ha-graph h3 { display: none; }
+html.ha-embed .ha-glegend {
+  position: absolute; z-index: 2; left: 12px; bottom: 12px;
+  margin: 0; color: rgba(229, 231, 235, 0.65); pointer-events: none;
+  text-shadow: 0 0 8px rgba(5, 7, 12, 0.9);
+}
+html.ha-embed .ha-glegend i { box-shadow: 0 0 10px currentColor; }
+html.ha-embed .ha-gstage {
+  flex: 1; height: auto !important; min-height: 0; border-radius: 0;
+}
+html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
 
 </style>
 <!--/HERMES-ARTIFACT:CSS-->
@@ -51,7 +91,7 @@ tr:last-child td { border-bottom: none; }
 <div id="app"></div>
 <!--HERMES-ARTIFACT:DATA-->
 <script id="hermes-artifact-data" type="application/json">
-{"summary": [{"label": "comparison CSVs", "value": "none", "tone": "bad"}], "tables": [], "charts": [], "notes": ["No Options_Suite/comparison_*.csv found — run Option 9 (Run all models & compare) in the Options Suite CLI."], "source": {"repo": "/opt/data/FinancialDevelopment", "collector": "options-models", "note": "comparison_*.csv"}, "schema_version": 1, "artifact_id": "options-model-tracker", "title": "Options Model Tracker", "generated_at": "2026-09-03 06:31 UTC"}
+{"summary": [{"label": "newest run", "value": "20260728_115604"}, {"label": "underlying", "value": "AMD 180.0 put"}, {"label": "expiry", "value": "20261016"}, {"label": "models compared", "value": "9"}], "tables": [{"id": "models", "title": "Model comparison — comparison_20260728_115604.csv", "columns": ["Model", "Price", "Delta", "Gamma", "Vega", "Theta", "Vanna", "Charm", "Sigma", "PriceErr%"], "rows": [["Market", "1.0", "-0.0115", "0.0001", "6.5287", "-0.0399", "-0.0548", "0.122", "", "baseline"], ["CRR", "0.995854036148", "-0.01137577204", "0.000118880190", "6.598903969220", "-0.04181731321", "-0.05707550575", "-0.10823399457", "0.997432653045", "-0.41%"], ["Leisen-Reimer", "0.990932185570", "-0.01142860321", "0.000138922914", "6.481049629008", "-0.03963900550", "-0.05449273437", "-0.12114003859", "0.995658854293", "-0.91%"], ["Newton-Raphson", "0.992893900150", "-0.01144507734", "0.000139054516", "6.489161791979", "-0.03970074194", "-0.05452340718", "-0.12124524480", "0.995961391918", "-0.71%"], ["SABR", "0.723119263412", "-0.01545053606", "0.000312367844", "5.269757127289", "-0.03160804584", "-0.09103982670", "0.190017404090", "0.950114038787", "-27.69%"], ["VannaVolga", "0.099093270804", "-0.00190758464", "3.750819893083", "1.316064385986", "-0.00603631197", "-0.02066611731", "0.034576745877", "0.748303598544", "-90.09%"], ["MC", "0.974611231616", "-0.01158389145", "0.000400038755", "6.939925844794", "-0.03754596159", "-0.05885635131", "0.184648280410", "0.982517485046", "-2.54%"], ["BAW", "0.988347196246", "-0.01140113877", "0.000138570411", "6.477802081686", "-0.03953141758", "-0.05415973491", "0.120760672890", "0.995559654235", "-1.17%"], ["Heston", "0.632223325664", "-0.00565588540", "0.000201484298", "2.603619621676", "-0.02366551792", "-0.04197988938", "0.082112716122", "0.733607935069", "-36.78%"]]}], "charts": [], "notes": ["Spot 462.5, 0.2191780821917808y, r=0.0408, q=0.0. Older runs: comparison_20260728_093751.csv, comparison_20260728_093844.csv, comparison_20260728_115039.csv"], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "options-models", "note": "comparison_20260728_115604.csv"}, "schema_version": 1, "artifact_id": "options-model-tracker", "title": "Options Model Tracker", "generated_at": "2026-09-15 05:17 UTC"}
 </script>
 <!--/HERMES-ARTIFACT:DATA-->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" crossorigin="anonymous"></script>
@@ -175,13 +215,485 @@ tr:last-child td { border-bottom: none; }
     return wrap;
   }
 
+  var GROUP_COLOR = {
+    construction: '#f59e0b',
+    development: '#3b82f6',
+    trading: '#22c55e',
+    hub: '#eab308',
+    daily: '#a855f7',
+    inbox: '#ef4444',
+    dangling: '#94a3b8',
+    templates: '#06b6d4',
+    attachments: '#64748b'
+  };
+
+  /* Jarvis brain — cinematic force graph of the vault. Canvas renderer with
+     d3-force physics (when reachable), manual zoom/pan transform state, hover
+     neighborhood isolation, and click-to-open in Obsidian. Falls back to a
+     compact hand-rolled sim when the d3 CDN is unreachable. ES5 on purpose:
+     this file ships inline into single-file artifacts with no build step. */
+
+  var OBSIDIAN_VAULT = 'obsidian-vault';
+  // Single-instance teardown handle for the live Jarvis graph (set by renderGraph's start()).
+  var activeJarvisDestroy = null;
+
+  function isEmbed() {
+    try {
+      var q = String(location.search || '');
+      var hsh = String(location.hash || '');
+      return q.indexOf('embed=1') !== -1 || hsh.indexOf('embed') !== -1;
+    } catch (err) { return false; }
+  }
+
+  function hexRgb(hex) {
+    var s = String(hex || '').replace('#', '');
+    if (s.length === 3) s = s.charAt(0) + s.charAt(0) + s.charAt(1) + s.charAt(1) + s.charAt(2) + s.charAt(2);
+    var n = parseInt(s, 16);
+    if (isNaN(n)) return [148, 163, 184];
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+
+  function renderGraph(graph) {
+    // Empty/missing graph → return a visible note box (spec §6). Always returns a
+    // DOM element so any caller's appendChild is safe; no canvas loop started.
+    if (!graph || !(graph.nodes && graph.nodes.length)) {
+      var emptyBox = h('div', { class: 'ha-graph' }, h('h3', { text: 'Graph view' }));
+      var emptyStage = h('div', { class: 'ha-gstage' });
+      emptyStage.appendChild(h('div', { class: 'ha-notes', style: 'padding:16px;', text: 'No links found in this vault.' }));
+      emptyBox.appendChild(emptyStage);
+      return emptyBox;
+    }
+
+    // ---- Init: degree map, adjacency (neighborhood sets), top-label set ----
+    var rawNodes = graph.nodes, rawEdges = graph.edges || [];
+    var deg = {}, adj = {};
+    var i, n, e;
+    for (i = 0; i < rawNodes.length; i++) {
+      n = rawNodes[i];
+      if (!deg[n.id]) deg[n.id] = 0;
+      if (!adj[n.id]) adj[n.id] = {};
+      adj[n.id][n.id] = true; // self, so the hovered node stays lit
+    }
+    for (i = 0; i < rawEdges.length; i++) {
+      e = rawEdges[i];
+      var a = e.source, b = e.target;
+      if (!deg[a]) deg[a] = 0;
+      if (!deg[b]) deg[b] = 0;
+      deg[a]++; deg[b]++;
+      (adj[a] || (adj[a] = {}))[b] = true;
+      (adj[b] || (adj[b] = {}))[a] = true;
+    }
+    var topLabelSet = {};
+    rawNodes.slice().sort(function (x, y) { return deg[y.id] - deg[x.id]; })
+      .slice(0, 8).forEach(function (nd) { topLabelSet[nd.id] = true; });
+
+    // Group attractor points: each distinct group gets an angle on a ~260 circle.
+    var groups = [];
+    rawNodes.forEach(function (nd) { if (groups.indexOf(nd.group || 'hub') === -1) groups.push(nd.group || 'hub'); });
+    var groupCount = {};
+    rawNodes.forEach(function (nd) { var g = nd.group || 'hub'; groupCount[g] = (groupCount[g] || 0) + 1; });
+    // Big groups pull harder so they form compact blobs instead of diffuse clouds.
+    function cohesionStrength(g) { return Math.min(0.12, 0.01 * Math.sqrt(groupCount[g] || 1)); }
+    var attract = {};
+    for (i = 0; i < groups.length; i++) {
+      var ang = (i / Math.max(1, groups.length)) * Math.PI * 2;
+      attract[groups[i]] = { x: Math.cos(ang) * 260, y: Math.sin(ang) * 260 };
+    }
+
+    // Sim node objects. Seed positions near the group attractor for fast convergence.
+    var nodes = rawNodes.map(function (nd, idx) {
+      var g = nd.group || 'hub';
+      var at = attract[g] || { x: 0, y: 0 };
+      return {
+        id: nd.id, label: nd.label != null ? nd.label : String(nd.id), group: g,
+        size: Math.max(1, nd.size || 1),
+        x: at.x + (Math.random() - 0.5) * 60, y: at.y + (Math.random() - 0.5) * 60,
+        vx: 0, vy: 0
+      };
+    });
+    var byId = {};
+    nodes.forEach(function (nd) { byId[nd.id] = nd; });
+    // Links reference node objects directly so d3.forceLink can bind them.
+    var links = [];
+    for (i = 0; i < rawEdges.length; i++) {
+      e = rawEdges[i];
+      if (byId[e.source] && byId[e.target]) links.push({ source: byId[e.source], target: byId[e.target] });
+    }
+
+    function radius(nd) { return 3 + Math.sqrt(nd.size) * 1.8; }
+    var hasD3 = typeof d3 !== 'undefined' && !!d3.forceSimulation;
+
+    // ---- DOM scaffold (canvas, not SVG — spec §2) ----
+    var box = h('div', { class: 'ha-graph' }, h('h3', { text: 'Graph view' }));
+    var legend = h('div', { class: 'ha-glegend' });
+    groups.forEach(function (g) {
+      legend.appendChild(h('span', { class: 'swatch' },
+        h('i', { style: 'background:' + (GROUP_COLOR[g] || '#94a3b8') }),
+        h('span', { text: g })));
+    });
+    box.appendChild(legend);
+    var stage = h('div', { class: 'ha-gstage' });
+    var canvas = document.createElement('canvas');
+    var tip = h('div', { class: 'ha-gtip', text: '' });
+    var toast = h('div', { class: 'ha-ghost-toast', text: '' });
+    stage.appendChild(canvas);
+    stage.appendChild(tip);
+    stage.appendChild(toast);
+    box.appendChild(stage);
+
+    // ---- Zoom/pan transform state (manual, spec §3). screenCSS = world*k + t ----
+    var view = { k: 1, tx: 0, ty: 0 };
+    function clampK(k) { return Math.max(0.25, Math.min(8, k)); }
+
+    // ---- Canvas sizing (backing store × dpr; CSS height fixed at 560 by .ha-gstage) ----
+    var cssW = 960, cssH = 560, dpr = window.devicePixelRatio || 1;
+    var embed = isEmbed();
+    function resize() {
+      var r = stage.getBoundingClientRect();
+      if (r.width > 2) cssW = Math.round(r.width);
+      if (embed && r.height > 2) cssH = Math.round(r.height);
+      else cssH = 560;
+      canvas.style.width = cssW + 'px';
+      canvas.style.height = cssH + 'px';
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(cssW * dpr));
+      canvas.height = Math.max(1, Math.round(cssH * dpr));
+    }
+
+    var ctx = null; // set after first resize (canvas must be in DOM)
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.className = 'ha-ghost-toast on';
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(function () { toast.className = 'ha-ghost-toast'; }, 2000);
+    }
+
+    // ---- Click → open note in Obsidian (spec §5, NO silent file:// fallback) ----
+    function openNote(nd) {
+      if (!nd || String(nd.id).indexOf('dangling:') === 0) return;
+      var uri = 'obsidian://open?vault=' + encodeURIComponent(OBSIDIAN_VAULT) +
+        '&file=' + encodeURIComponent(String(nd.id));
+      try {
+        var a = document.createElement('a');
+        a.href = uri;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        showToast("Opening '" + nd.label + "' in Obsidian…");
+      } catch (err) { /* custom-scheme nav may be blocked by host — toast already names the attempt */ }
+    }
+
+    // ---- Pointer state: explicit ownership so zoom/pan/drag don't fight (spec §3) ----
+    var hover = null, mode = null; // mode: 'drag' | 'pan' | null
+    var dragNode = null, lastX = 0, lastY = 0, downX = 0, downY = 0;
+
+    function pointer(ev) {
+      var rect = canvas.getBoundingClientRect();
+      return { mx: ev.clientX - rect.left, my: ev.clientY - rect.top };
+    }
+    // Screen-space hit test (works under any zoom). Returns node or null.
+    function pick(mx, my) {
+      var best = null, bestD = 1e9;
+      for (var j = 0; j < nodes.length; j++) {
+        n = nodes[j];
+        var sx = n.x * view.k + view.tx, sy = n.y * view.k + view.ty;
+        var d = Math.hypot(sx - mx, sy - my);
+        if (d < bestD) { bestD = d; best = n; }
+      }
+      return (best && bestD <= Math.max(10, radius(best) * view.k + 6)) ? best : null;
+    }
+
+    // ---- Draw one frame. Shared by the live and fallback paths. ----
+    function draw() {
+      if (!ctx) ctx = canvas.getContext('2d');
+      var W = cssW, H = cssH;
+      var tnow = Date.now() / 1000;
+      var pulse = 0.72 + 0.28 * Math.sin(tnow * 1.7);
+      // (1)-(3): screen-space background — fill, radial vignette, faint dot grid.
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = '#05070c';
+      ctx.fillRect(0, 0, W, H);
+      var vg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.72);
+      vg.addColorStop(0, embed ? 'rgba(56, 80, 140, 0.38)' : 'rgba(30,41,66,0.55)');
+      vg.addColorStop(1, 'rgba(5,7,12,0)');
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, 0, W, H);
+      if (nodes.length <= 1500) {
+        ctx.fillStyle = embed ? 'rgba(148,163,184,0.08)' : 'rgba(148,163,184,0.05)';
+        for (var gx = 20; gx < W; gx += 40) for (var gy = 20; gy < H; gy += 40) { ctx.fillRect(gx, gy, 1, 1); }
+      }
+
+      // World pass: apply zoom transform. screenCSS = world*k + t.
+      var k = view.k, tx = view.tx, ty = view.ty;
+      ctx.setTransform(dpr * k, 0, 0, dpr * k, dpr * tx, dpr * ty);
+
+      // Edges first (spec §2): alpha modulated by hover neighborhood.
+      var litSet = hover ? adj[hover.id] : null;
+      ctx.lineCap = 'round';
+      for (var li = 0; li < links.length; li++) {
+        e = links[li];
+        var touchesHover = hover && (e.source === hover || e.target === hover);
+        var alpha = !hover ? (embed ? 0.16 : 0.10) : (touchesHover ? 0.72 : 0.03);
+        var col = hexRgb(GROUP_COLOR[e.source.group] || '#94a3b8');
+        if (embed && touchesHover) {
+          ctx.shadowBlur = 18 / k;
+          ctx.shadowColor = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',0.85)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.lineWidth = (touchesHover ? 1.6 : (embed ? 1.05 : 0.8)) / k;
+        ctx.strokeStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + alpha.toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.moveTo(e.source.x, e.source.y);
+        ctx.lineTo(e.target.x, e.target.y);
+        ctx.stroke();
+      }
+      ctx.shadowBlur = 0;
+
+      // Nodes: bloom (embed) → glow → core. Dim non-neighbors on hover.
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var lit = !hover || (litSet && litSet[n.id]);
+        var gcol = GROUP_COLOR[n.group] || '#94a3b8';
+        var rgb = hexRgb(gcol);
+        var r = radius(n);
+        ctx.globalAlpha = lit ? 1 : 0.08;
+        if (embed) {
+          ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + (0.18 * pulse).toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, r * (3.4 + pulse), 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.shadowBlur = Math.min(embed ? 56 : 40, (embed ? 18 : 12) + n.size * (embed ? 2.2 : 1));
+        ctx.shadowColor = gcol;
+        ctx.fillStyle = gcol;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#f8fafc';
+        ctx.globalAlpha = lit ? (embed ? 0.95 : 0.85) : 0.08;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, Math.max(1.1, r * 0.38), 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+
+      // Labels in SCREEN space (reset transform) — sparse per spec §2.
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.font = embed ? '600 11px sans-serif' : '11px sans-serif';
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var showLabel = hover ? (!!litSet && litSet[n.id]) : (topLabelSet[n.id] || k > 2);
+        if (!showLabel) continue;
+        var sx = n.x * k + tx, sy = n.y * k + ty;
+        // Cull off-screen when in zoomed label mode.
+        if (k > 2 && (sx < -40 || sx > W + 40 || sy < -16 || sy > H + 16)) continue;
+        var litL = !hover || (litSet && litSet[n.id]);
+        ctx.globalAlpha = litL ? 0.95 : 0.25;
+        ctx.shadowBlur = embed ? 10 : 0;
+        ctx.shadowColor = embed ? (GROUP_COLOR[n.group] || '#94a3b8') : 'transparent';
+        ctx.fillStyle = '#e5e7eb';
+        ctx.fillText(n.label, sx + radius(n) * k + 3, sy + 4);
+      }
+      ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
+    }
+
+    // ---- Fallback: compact hand-rolled sim when d3 is absent (spec §6). ----
+    function fallbackStep() {
+      var j, m, dx, dy, dist, f;
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        for (j = i + 1; j < nodes.length; j++) {
+          m = nodes[j];
+          dx = n.x - m.x; dy = n.y - m.y; dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+          f = 420 / (dist * dist);
+          n.vx += dx / dist * f; n.vy += dy / dist * f;
+          m.vx -= dx / dist * f; m.vy -= dy / dist * f;
+        }
+      }
+      for (i = 0; i < links.length; i++) {
+        e = links[i];
+        dx = e.target.x - e.source.x; dy = e.target.y - e.source.y; dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        f = (dist - 46) * 0.012;
+        e.source.vx += dx / dist * f; e.source.vy += dy / dist * f;
+        e.target.vx -= dx / dist * f; e.target.vy -= dy / dist * f;
+      }
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var g = attract[n.group] || { x: 0, y: 0 };
+        n.vx += (g.x - n.x) * 0.004 + (-n.x) * 0.002;
+        n.vy += (g.y - n.y) * 0.004 + (-n.y) * 0.002;
+        if (dragNode !== n) { n.vx *= 0.72; n.vy *= 0.72; n.x += n.vx; n.y += n.vy; }
+      }
+    }
+
+    // ---- Wire up events + start the loop once canvas is measurable. ----
+    function onWheel(ev) {
+      if (!hasD3) return; // fallback path: no zoom (spec §6)
+      ev.preventDefault();
+      var p = pointer(ev);
+      var factor = Math.pow(2, -ev.deltaY * 0.002);
+      var newK = clampK(view.k * factor);
+      view.tx = p.mx - (p.mx - view.tx) * (newK / view.k);
+      view.ty = p.my - (p.my - view.ty) * (newK / view.k);
+      view.k = newK;
+    }
+    function onDown(ev) {
+      var p = pointer(ev);
+      downX = p.mx; downY = p.my; lastX = p.mx; lastY = p.my;
+      dragNode = pick(p.mx, p.my);
+      if (dragNode) { mode = 'drag'; if (hasD3) sim.alphaTarget(0.3); } // fallback: reposition only (spec §6)
+      else if (!dragNode && hasD3) { mode = 'pan'; }
+    }
+    function onMove(ev) {
+      var p = pointer(ev);
+      if (mode === 'drag' && dragNode) {
+        dragNode.x = (p.mx - view.tx) / view.k;
+        dragNode.y = (p.my - view.ty) / view.k;
+        dragNode.vx = 0; dragNode.vy = 0;
+      } else if (mode === 'pan') {
+        view.tx += p.mx - lastX; view.ty += p.my - lastY;
+        lastX = p.mx; lastY = p.my;
+      } else {
+        hover = pick(p.mx, p.my);
+        tip.style.display = hover ? 'block' : 'none';
+        if (hover) {
+          var unresolved = String(hover.id).indexOf('dangling:') === 0;
+          tip.textContent = hover.label + '  ·  ' + hover.group + '  ·  deg ' + (deg[hover.id] || 0) +
+            (unresolved ? '  ·  unresolved link' : '');
+          tip.style.left = (p.mx + 12) + 'px';
+          tip.style.top = (p.my + 12) + 'px';
+        }
+      }
+    }
+    function onUp(ev) {
+      var p = pointer(ev);
+      if (mode === 'drag') sim.alphaTarget(0);
+      // Click = up with negligible movement.
+      if (Math.hypot(p.mx - downX, p.my - downY) < 4 && dragNode) {
+        openNote(dragNode);
+      } else if (String((pick(p.mx, p.my) || {}).id).indexOf('dangling:') === 0) {
+        showToast('Unresolved link');
+      }
+      mode = null; dragNode = null;
+    }
+
+    var sim = null;
+    // Single-instance guard: only one live Jarvis graph at a time. If renderGraph is
+    // called again (re-render / refresh), tear down the previous instance first so
+    // window-level listeners + rAF loop never accumulate across renders.
+    if (typeof activeJarvisDestroy === 'function') { try { activeJarvisDestroy(); } catch (e) {} }
+
+    // Auto-fit: frame the whole graph in ~90% of the stage, centered (like Obsidian's fit-to-view).
+    function autoFit() {
+      if (!nodes.length) return;
+      var minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+      for (var j = 0; j < nodes.length; j++) {
+        n = nodes[j];
+        if (n.x < minX) minX = n.x;
+        if (n.y < minY) minY = n.y;
+        if (n.x > maxX) maxX = n.x;
+        if (n.y > maxY) maxY = n.y;
+      }
+      var bw = Math.max(60, maxX - minX), bh = Math.max(60, maxY - minY);
+      view.k = clampK(Math.min(cssW * 0.9 / bw, cssH * 0.9 / bh));
+      view.tx = (cssW - bw * view.k) / 2 - minX * view.k;
+      view.ty = (cssH - bh * view.k) / 2 - minY * view.k;
+    }
+
+    function start() {
+      resize();
+      // Center world origin in the viewport so the ~260-radius attractor circle fits.
+      view.tx = cssW / 2;
+      view.ty = cssH / 2;
+      window.addEventListener('resize', resize);
+      var ro = null;
+      if (typeof ResizeObserver !== 'undefined') {
+        ro = new ResizeObserver(function () { resize(); });
+        ro.observe(stage);
+      }
+      if (hasD3) {
+        // d3-force physics with the exact verified v7 API surface.
+        sim = d3.forceSimulation(nodes)
+          .force('link', d3.forceLink(links).id(function (d) { return d.id; })
+            .distance(46)
+            .strength(function (l) {
+              var idOf = function (x) { return typeof x === 'object' ? x.id : x; };
+              return 0.5 / Math.max(deg[idOf(l.source)] || 1, deg[idOf(l.target)] || 1);
+            }))
+          .force('charge', d3.forceManyBody().theta(0.9)
+            .strength(function (nd) { return -10 * (1 + Math.sqrt(nd.size) * 0.4); }))
+          .force('collide', d3.forceCollide(radius).iterations(2))
+          .force('gx', d3.forceX(function (nd) { return (attract[nd.group] || { x: 0 }).x; })
+            .strength(function (nd) { return cohesionStrength(nd.group); }))
+          .force('gy', d3.forceY(function (nd) { return (attract[nd.group] || { y: 0 }).y; })
+            .strength(function (nd) { return cohesionStrength(nd.group); }));
+
+        canvas.addEventListener('wheel', onWheel, { passive: false });
+      } else {
+        // Settle the hand-rolled sim synchronously before first paint.
+        for (var t = 0; t < 150; t++) fallbackStep();
+      }
+      canvas.addEventListener('mousedown', onDown);
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseup', onUp);
+
+      var fitted = false;
+      function maybeFit() { if (!fitted) { autoFit(); fitted = true; } }
+      if (hasD3) setTimeout(maybeFit, 1500); // let the sim settle before framing
+      else maybeFit();
+
+      var rafId = 0;
+      function loop() {
+        if (!hasD3) fallbackStep(); // keep the static layout gently alive / responsive to drag
+        draw();
+        rafId = requestAnimationFrame(loop);
+      }
+      loop();
+
+      // Teardown: stop rAF, remove every listener this instance added (window-level ones
+      // outlive the DOM box that render() clears), and halt the sim. Called by a later
+      // renderGraph via activeJarvisDestroy so re-renders never stack handlers/loops.
+      function destroy() {
+        cancelAnimationFrame(rafId);
+        window.removeEventListener('resize', resize);
+        if (ro) { try { ro.disconnect(); } catch (e) {} }
+        canvas.removeEventListener('wheel', onWheel);
+        canvas.removeEventListener('mousedown', onDown);
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseup', onUp);
+        if (sim && sim.stop) { try { sim.alphaTarget(0).stop(); } catch (e) {} }
+      }
+      activeJarvisDestroy = destroy;
+    }
+
+    // Defer start until the stage has a measurable width (it's appended during render()).
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); });
+    } else {
+      setTimeout(start, 0);
+    }
+
+    return box;
+  }
   function render(root) {
     var d = payload();
     root.textContent = '';
+    if (isEmbed()) {
+      try { document.documentElement.classList.add('ha-embed'); } catch (e) {}
+      if (d.graph && (d.graph.nodes || []).length) root.appendChild(renderGraph(d.graph));
+      else root.appendChild(renderGraph(null));
+      return;
+    }
     root.appendChild(h('h1', { text: d.title || d.artifact_id }));
     root.appendChild(h('div', { class: 'ha-sub', text: 'Generated '
       + d.generated_at + (d.source && d.source.note ? ' - ' + d.source.note : '') }));
     if ((d.summary || []).length) root.appendChild(renderCards(d));
+    if (d.graph && (d.graph.nodes || []).length) root.appendChild(renderGraph(d.graph));
     (d.charts || []).forEach(function (c) { root.appendChild(renderChart(c)); });
     (d.tables || []).forEach(function (t) { root.appendChild(renderTable(t)); });
     if ((d.notes || []).length) {

@@ -1,49 +1,34 @@
 {
+  "summary": [
+    {
+      "label": "tracked markdown",
+      "value": "0"
+    }
+  ],
+  "tables": [
+    {
+      "id": "recent",
+      "title": "Newest notes",
+      "columns": [
+        "file",
+        "mtime",
+        "size",
+        "title"
+      ],
+      "rows": []
+    }
+  ],
+  "charts": [],
+  "notes": [
+    "Top 20 newest .md across trading_journal/, docs/, .hermes/plans/ of the source repo."
+  ],
+  "source": {
+    "repo": "FinancialDevelopment",
+    "collector": "dev-roadmap",
+    "note": "mtime-ranked"
+  },
   "schema_version": 1,
   "artifact_id": "stream-test",
   "title": "Stream Test (demo job)",
-  "generated_at": "2026-09-06 00:02:20 UTC",
-  "live": false,
-  "status": "complete",
-  "command": [
-    "/opt/data/FinancialDevelopment/.venv/bin/python",
-    "tools/examples/demo_job.py"
-  ],
-  "cwd": "/opt/data/hermes-artifacts",
-  "started_at": "2026-09-06 00:02:16 UTC",
-  "ended_at": "2026-09-06 00:02:20 UTC",
-  "elapsed_sec": 3.9,
-  "exit_code": 0,
-  "log": [
-    "demo job starting",
-    "[1/5] loading context ... ok",
-    "[2/5] fetching chain snapshot (simulated) ... ok",
-    "[3/5] computing dealer book ... ok",
-    "[4/5] fitting SVI smile ... ok",
-    "[5/5] summarizing exposures ... ok",
-    "demo job complete — exit 0"
-  ],
-  "summary": [
-    {
-      "label": "status",
-      "value": "complete",
-      "tone": "ok"
-    },
-    {
-      "label": "elapsed",
-      "value": "4s"
-    },
-    {
-      "label": "log lines",
-      "value": "7"
-    }
-  ],
-  "tables": [],
-  "charts": [],
-  "notes": [],
-  "source": {
-    "repo": "/opt/data/hermes-artifacts",
-    "collector": "livestream",
-    "note": "live stream of /opt/data/FinancialDevelopment/.venv/bin/python tools/examples/demo_job.py"
-  }
+  "generated_at": "2026-09-15 05:16 UTC"
 }

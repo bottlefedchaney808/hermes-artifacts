@@ -1,64 +1,23 @@
 {
-  "schema_version": 1,
-  "artifact_id": "findev-live",
-  "title": "FinDev — SPY dealer exposure (LIVE)",
-  "generated_at": "2026-09-06 00:03:31 UTC",
-  "live": false,
-  "status": "complete",
-  "command": [
-    "/opt/data/FinancialDevelopment/.venv/bin/python",
-    "/opt/data/hermes-artifacts/tools/examples/findev_spy_run.py"
-  ],
-  "cwd": "/opt/data/FinancialDevelopment",
-  "started_at": "2026-09-06 00:03:05 UTC",
-  "ended_at": "2026-09-06 00:03:31 UTC",
-  "elapsed_sec": 26.6,
-  "exit_code": 0,
-  "log": [
-    "repo: /opt/data/FinancialDevelopment",
-    "minting run via shared.module_execution (widget-native engine)",
-    "  [flow] scanner_trades failed: PHAPIError: API request failed",
-    "engine order: ['dealer_exposure']",
-    "  dealer_exposure  status=ok metrics=12 artifacts=5",
-    "  spot: 769.05",
-    "  gex_reference: -175483098.43216679",
-    "  book_gamma: 1419404088.327022",
-    "  charm_1d: -9514.686371385433",
-    "  residual_vanna_inventory: -4053.2491682135715",
-    "  structural_status: available",
-    "run_id: 20260906T000305Z-8998",
-    "run_dir: /opt/data/FinancialDevelopment/outputs/20260906T000305Z-8998",
-    "total elapsed: 26s"
-  ],
   "summary": [
     {
-      "label": "ticker",
-      "value": "SPY"
-    },
-    {
-      "label": "suite",
-      "value": "Vol_Suite"
-    },
-    {
-      "label": "status",
-      "value": "complete",
-      "tone": "ok"
-    },
-    {
-      "label": "elapsed",
-      "value": "27s"
-    },
-    {
-      "label": "log lines",
-      "value": "14"
+      "label": "swaps.db",
+      "value": "missing",
+      "tone": "bad"
     }
   ],
   "tables": [],
   "charts": [],
-  "notes": [],
+  "notes": [
+    "FinancialDevelopment\\swaps.db not found"
+  ],
   "source": {
-    "repo": "/opt/data/FinancialDevelopment",
-    "collector": "livestream",
-    "note": "live stream of /opt/data/FinancialDevelopment/.venv/bin/python /opt/data/hermes-artifacts/tools/examples/findev_spy_run.py"
-  }
+    "repo": "FinancialDevelopment",
+    "collector": "findev-swaps",
+    "note": "swaps.db"
+  },
+  "schema_version": 1,
+  "artifact_id": "findev-live",
+  "title": "FinDev — SPY dealer exposure (LIVE)",
+  "generated_at": "2026-09-15 05:17 UTC"
 }

@@ -1,5 +1,6 @@
 {
   "id": "stream-test",
   "title": "Stream Test (demo job)",
-  "collector": "livestream"
+  "collector": "dev-roadmap",
+  "repo": "FinancialDevelopment"
 }

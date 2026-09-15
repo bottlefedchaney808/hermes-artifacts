@@ -2,7 +2,7 @@
   "summary": [
     {
       "label": "tracked markdown",
-      "value": "234"
+      "value": "264"
     }
   ],
   "tables": [
@@ -17,124 +17,124 @@
       ],
       "rows": [
         [
-          "trading_journal/watchlist_adds_research_20260813.md",
-          "2026-09-03 05:47",
-          "8,017 B",
-          "Watchlist Additions Research — 2026-08-13"
+          "docs/wiki/07-workflows.md",
+          "2026-09-14 16:46",
+          "3,872 B",
+          "Workflows"
         ],
         [
-          "trading_journal/spy_directional_scan_20260828.md",
-          "2026-09-03 05:47",
-          "4,961 B",
-          "SPY Directional Daily Play — Full-Suite Scan — 2026-08-28"
+          "docs/wiki/README.md",
+          "2026-09-14 16:46",
+          "1,838 B",
+          "FinDev Wiki"
         ],
         [
-          "trading_journal/web_tools_outage_fix_20260813.md",
-          "2026-09-03 05:47",
-          "11,870 B",
-          "web_search / Firecrawl (Nous managed web tools) outage — 2026-08-13 root-cause & fix"
+          "docs/wiki/00-tree-status.md",
+          "2026-09-14 16:46",
+          "5,612 B",
+          "Tree Status — where the work actually stands"
         ],
         [
-          "trading_journal/tgb_research_20260814.md",
-          "2026-09-03 05:47",
-          "10,575 B",
-          "TGB (Trekor Metals Ltd., fka Taseko Mines) — Research Report"
+          "docs/wiki/04-the-engine.md",
+          "2026-09-14 16:46",
+          "3,753 B",
+          "The Engine"
         ],
         [
-          "trading_journal/vol_suite_screener_sellvol_20260828.md",
-          "2026-09-03 05:47",
-          "4,201 B",
-          "Vol_Suite Variance-Swap Screener — \"Sell Vol Plays\" basket — 2026-08-28"
+          "docs/superpowers/specs/2026-08-31-party-taxonomy-classifier-design.md",
+          "2026-09-14 16:46",
+          "2,832 B",
+          "Design: Weighted party-taxonomy dealer-flow classifier + falsifier rerun"
         ],
         [
-          "trading_journal/x_buzz/LATEST_mid-day.md",
-          "2026-09-03 05:47",
-          "3,737 B",
-          "X.com Fintwit Buzz — mid-day — 2026-08-27"
+          "docs/guides/TABS.md",
+          "2026-09-14 16:46",
+          "12,233 B",
+          "The dashboard tabs — what lives where, and why"
         ],
         [
-          "trading_journal/x_buzz/2026-08-21_power-hour.md",
-          "2026-09-03 05:47",
-          "3,351 B",
-          "X.com Fintwit Buzz — power-hour — 2026-08-21"
+          "docs/superpowers/plans/2026-08-31-party-taxonomy-classifier-plan.md",
+          "2026-09-14 16:46",
+          "3,996 B",
+          "Plan: Party-taxonomy dealer classifier — full wiring (falsifier + band + flow)"
         ],
         [
-          "trading_journal/x_buzz/2026-08-21_morning.md",
-          "2026-09-03 05:47",
-          "4,038 B",
-          "X.com Fintwit Buzz — morning — 2026-08-21"
+          "docs/guides/DESK.md",
+          "2026-09-14 16:46",
+          "11,011 B",
+          "The Desk — how the dashboard works now"
         ],
         [
-          "trading_journal/x_buzz/2026-08-24_morning.md",
-          "2026-09-03 05:47",
-          "3,611 B",
-          "X.com Fintwit Buzz — morning — 2026-08-24"
+          "docs/audits/2026-09-11-repo-audit-grok.md",
+          "2026-09-14 16:46",
+          "37,317 B",
+          "FinancialDevelopment whole-repo audit"
         ],
         [
-          "trading_journal/x_buzz/2026-08-25_mid-day.md",
-          "2026-09-03 05:47",
-          "3,780 B",
-          "X.com Fintwit Buzz — mid-day — 2026-08-25"
+          "docs/audits/2026-09-13-math-audit-verification.md",
+          "2026-09-14 16:46",
+          "4,673 B",
+          "Math audit verification — 2026-09-13"
         ],
         [
-          "trading_journal/x_buzz/2026-08-26_morning.md",
-          "2026-09-03 05:47",
-          "3,742 B",
-          "X.com Fintwit Buzz — morning — 2026-08-26"
+          "docs/PROJECT_AUDIT_AND_SPEC.md",
+          "2026-09-14 16:46",
+          "85,487 B",
+          "FinancialDevelopment — Project Spec & Technical Audit"
+        ],
+        [
+          "docs/audits/2026-09-11-math-audit-findings.md",
+          "2026-09-14 16:46",
+          "14,303 B",
+          "Math audit findings — driver pass (Grok 4.6)"
+        ],
+        [
+          "docs/MATH_AUDIT_HANDOFF_2026-09-11.md",
+          "2026-09-14 16:46",
+          "11,523 B",
+          "Math audit handoff — 2026-09-11"
+        ],
+        [
+          "docs/wiki/06-architecture-and-module-map.md",
+          "2026-09-11 18:00",
+          "4,317 B",
+          "Architecture and Module Map"
+        ],
+        [
+          "docs/guides/START_HERE.md",
+          "2026-09-08 14:08",
+          "8,647 B",
+          "Start Here — FinDev in one sitting"
+        ],
+        [
+          "docs/SWAPS_DB_LAYOUT.md",
+          "2026-09-08 14:02",
+          "1,702 B",
+          "Swaps Database Layout"
+        ],
+        [
+          "docs/superpowers/plans/2026-09-08-overview-chart-widgets-and-swaps-archive.md",
+          "2026-09-08 13:38",
+          "25,377 B",
+          "PLAN — Overview/Chart layout, widget wiring, and swaps archive restore"
+        ],
+        [
+          ".hermes/plans/2026-09-05-widget-console-artifact-plan.md",
+          "2026-09-06 00:27",
+          "11,653 B",
+          "Plan — Widget Console in Hermes Interactive Artifacts (pick one or many widgets, run them)"
         ],
         [
           "trading_journal/x_buzz/LATEST_power-hour.md",
-          "2026-09-03 05:47",
-          "3,461 B",
+          "2026-09-05 21:29",
+          "3,517 B",
           "X.com Fintwit Buzz — power-hour — 2026-08-27"
-        ],
-        [
-          "trading_journal/x_buzz/2026-08-21_mid-day.md",
-          "2026-09-03 05:47",
-          "3,800 B",
-          "X.com Fintwit Buzz — mid-day — 2026-08-21"
         ],
         [
           "trading_journal/x_buzz/2026-08-27_power-hour.md",
-          "2026-09-03 05:47",
-          "3,461 B",
+          "2026-09-05 21:29",
+          "3,517 B",
           "X.com Fintwit Buzz — power-hour — 2026-08-27"
-        ],
-        [
-          "trading_journal/x_buzz/2026-08-27_morning.md",
-          "2026-09-03 05:47",
-          "3,573 B",
-          "X.com Fintwit Buzz — morning — 2026-08-27"
-        ],
-        [
-          "trading_journal/x_buzz/2026-08-26_power-hour.md",
-          "2026-09-03 05:47",
-          "3,977 B",
-          "X.com Fintwit Buzz — power-hour — 2026-08-26"
-        ],
-        [
-          "trading_journal/x_buzz/2026-08-25_power-hour.md",
-          "2026-09-03 05:47",
-          "3,804 B",
-          "X.com Fintwit Buzz — power-hour — 2026-08-25"
-        ],
-        [
-          "trading_journal/x_buzz/LATEST_morning.md",
-          "2026-09-03 05:47",
-          "3,573 B",
-          "X.com Fintwit Buzz — morning — 2026-08-27"
-        ],
-        [
-          "trading_journal/x_buzz/2026-08-27_mid-day.md",
-          "2026-09-03 05:47",
-          "3,737 B",
-          "X.com Fintwit Buzz — mid-day — 2026-08-27"
-        ],
-        [
-          "trading_journal/x_buzz/2026-08-26_mid-day.md",
-          "2026-09-03 05:47",
-          "3,604 B",
-          "X.com Fintwit Buzz — mid-day — 2026-08-26"
         ]
       ]
     }
@@ -144,12 +144,12 @@
     "Top 20 newest .md across trading_journal/, docs/, .hermes/plans/ of the source repo."
   ],
   "source": {
-    "repo": "/opt/data/FinancialDevelopment",
+    "repo": "C:\\Users\\bottl\\FinancialDevelopment",
     "collector": "dev-roadmap",
     "note": "mtime-ranked"
   },
   "schema_version": 1,
   "artifact_id": "dev-knowledge-roadmap",
   "title": "Dev Knowledge Roadmap",
-  "generated_at": "2026-09-03 06:31 UTC"
+  "generated_at": "2026-09-15 05:17 UTC"
 }

@@ -2,33 +2,33 @@
   "summary": [
     {
       "label": "Record",
-      "value": "44W–12L"
+      "value": "0W–0L"
     },
     {
       "label": "Win rate (settled)",
-      "value": "78.6%"
+      "value": "0.0%"
     },
     {
       "label": "Closed P&L",
-      "value": "$1,208.01",
+      "value": "$0.00",
       "tone": "ok"
     },
     {
       "label": "Clips logged",
-      "value": "117",
-      "sub": "$2,474 deployed all-time"
+      "value": "7",
+      "sub": "$139 deployed all-time"
     },
     {
       "label": "Open exposure",
-      "value": "18 pos / $398.83"
+      "value": "7 pos / $139.43"
     },
     {
       "label": "Avg entry",
-      "value": "67¢"
+      "value": "73¢"
     },
     {
       "label": "Streak (current)",
-      "value": "W15"
+      "value": "—"
     }
   ],
   "tables": [
@@ -42,112 +42,46 @@
       ],
       "rows": [
         [
-          "Emmys: Outstanding Lead Actor in a Limited Serie",
-          "Oscar Isaac Beef",
-          "67¢",
-          "$20.00"
-        ],
-        [
-          "Emmys: Outstanding Supporting Actress in a Comed",
-          "Kate OFlynn Widows Bay",
-          "80¢",
-          "$20.00"
-        ],
-        [
-          "Emmys: Outstanding Supporting Actress in a Drama",
-          "Katherine LaNasa The Pitt",
-          "73¢",
-          "$20.00"
-        ],
-        [
-          "Washington vs Philadelphia",
-          "Philadelphia",
-          "69¢",
-          "$20.00"
-        ],
-        [
-          "New Orleans vs Detroit",
-          "Detroit",
-          "75¢",
-          "$20.00"
-        ],
-        [
-          "Cleveland vs Jacksonville",
-          "Jacksonville",
-          "79¢",
-          "$20.00"
-        ],
-        [
-          "Jean Silva vs Jose Delgado",
-          "Jean Silva",
+          "usfed-fomc-2026-09-16",
+          "2",
           "78¢",
-          "$20.00"
+          "$19.99"
         ],
         [
-          "Atlanta vs Pittsburgh",
-          "Pittsburgh",
-          "72¢",
-          "$20.00"
+          "agt-s21-win-2026-09-23",
+          "Nene Royal",
+          "78¢",
+          "$19.99"
         ],
         [
-          "Saitama Seibu Lions vs Nippon Ham Fighters",
-          "Saitama Seibu Lions",
-          "54¢",
-          "$20.01"
+          "emmys-sfds-2026-09-14",
+          "K",
+          "73¢",
+          "$19.99"
         ],
         [
-          "Yujin Kim vs Dabin Kim",
-          "Dabin Kim",
+          "nfl-was-phi-2026-09-13",
+          "Who will win in the upcoming football event Washington Commanders vs Philadelphia Eagles scheduled for September 13, 2026 at 8:25 PM UTC?",
+          "69¢",
+          "$19.98"
+        ],
+        [
+          "emmys-sfcs-2026-09-14",
+          "K",
+          "81¢",
+          "$19.97"
+        ],
+        [
+          "emmys-lmls-2026-09-14",
+          "O",
           "67¢",
           "$19.97"
         ],
         [
-          "SoftBank Hawks vs Lotte Marines",
-          "SoftBank",
-          "66¢",
-          "$19.99"
-        ],
-        [
-          "Zhao Zhao vs Hiromasa Koyama",
-          "Hiromasa Koyama",
-          "69¢",
-          "$20.00"
-        ],
-        [
-          "KT Wiz vs Lotte Giants",
-          "KT Wiz",
-          "67¢",
-          "$19.99"
-        ],
-        [
-          "Victoria Bosio vs Lizette Cabrera",
-          "Lizette Cabrera",
-          "69¢",
-          "$20.01"
-        ],
-        [
-          "Arthur Weber vs Ilia Simakin",
-          "Ilia Simakin",
-          "79¢",
-          "$40.00"
-        ],
-        [
-          "Xiaodi You vs Luiza Fullana",
-          "Xiaodi You",
-          "76¢",
-          "$20.00"
-        ],
-        [
-          "Manon Fiorot vs Alexa Grasso",
-          "Manon Fiorot",
-          "70¢",
-          "$39.28"
-        ],
-        [
-          "Los Angeles Dodgers vs Miami Marlins",
-          "Dodgers",
-          "64¢",
-          "$19.58"
+          "nfl-dal-nyg-2026-09-13",
+          "Who will win in the upcoming football event Dallas Cowboys vs New York Giants scheduled for September 14, 2026 at 12:20 AM UTC?",
+          "61¢",
+          "$19.54"
         ]
       ]
     },
@@ -160,119 +94,13 @@
         "Cost",
         "P&L"
       ],
-      "rows": [
-        [
-          "Clement Chidekh vs Sebastian Dominko",
-          "Clement Chidekh",
-          "74¢",
-          "$19.99",
-          "+$33.63"
-        ],
-        [
-          "Liverpool FC vs Fulham FC",
-          "Liverpool Yes",
-          "67¢",
-          "$39.22",
-          "+$34.20"
-        ],
-        [
-          "Titouan Droguet vs Nicolai Budkov Kjaer",
-          "Titouan Droguet",
-          "63¢",
-          "$19.99",
-          "+$23.31"
-        ],
-        [
-          "Harold Mayot vs Max Basing",
-          "Harold Mayot",
-          "70¢",
-          "$20.00",
-          "+$35.40"
-        ],
-        [
-          "Luca Castelnuovo vs Ilya Ivashka",
-          "Ilya Ivashka",
-          "77¢",
-          "$19.99",
-          "+$33.08"
-        ],
-        [
-          "Frances Tiafoe vs Ben Shelton",
-          "Ben Shelton",
-          "72¢",
-          "$19.99",
-          "+$32.81"
-        ],
-        [
-          "Fukuoka SoftBank Hawks vs Chiba Lotte Marines",
-          "Fukuoka SoftBank Hawks",
-          "64¢",
-          "$19.99",
-          "+$32.55"
-        ],
-        [
-          "FC Kobenhavn vs AC Horsens",
-          "FC Kobenhavn Yes",
-          "75¢",
-          "$20.00",
-          "+$26.15"
-        ],
-        [
-          "SV Ried vs FC Salzburg",
-          "FC Salzburg Yes",
-          "64¢",
-          "$19.57",
-          "+$32.55"
-        ],
-        [
-          "Titouan Droguet vs Daniil Glinka",
-          "Titouan Droguet",
-          "69¢",
-          "$19.98",
-          "+$32.55"
-        ],
-        [
-          "Khachanov vs Tien",
-          "Khachanov",
-          "57¢",
-          "$20.00",
-          "+$31.97"
-        ],
-        [
-          "Derepasko vs Ziegann",
-          "Derepasko",
-          "70¢",
-          "$20.00",
-          "+$55.61"
-        ],
-        [
-          "Samrej vs Rawat",
-          "Samrej",
-          "68¢",
-          "$20.00",
-          "+$28.85"
-        ],
-        [
-          "Sekulic vs Bouzige",
-          "Sekulic",
-          "71¢",
-          "$20.00",
-          "+$27.68"
-        ],
-        [
-          "Bax vs Jones",
-          "Jones",
-          "52¢",
-          "$20.00",
-          "+$36.92"
-        ]
-      ]
+      "rows": []
     }
   ],
   "charts": [],
   "notes": [
-    "fills.json is the all-time clip log (117 clips). Realized P&L joins from the Polymarket history export; 43 closed fills have no matching settlement row yet (P&L not reconciled) and are shown as 'unsettled', never guessed.",
-    "Account SoT at last verification: cash $27.8, portfolio $369.54 (18 open)."
+    "fills.json is the all-time clip log (7 clips). Realized P&L joins from the Polymarket history export; 0 closed fills have no matching settlement row yet (P&L not reconciled) and are shown as 'unsettled', never guessed.",
+    "Account SoT at last verification: cash $258.37, portfolio $395.53 (7 open)."
   ],
   "source": {
     "note": "EventTrading fills.json + _hist_parsed.json @ C:\\Users\\bottl\\EventTrading"
@@ -280,1263 +108,53 @@
   "viz": {
     "trades": [
       {
-        "market": "Elsa Jacquemot vs Anastasia Tikhonova",
-        "side": "Jacquemot",
-        "cost": 20.0,
-        "entry": 0.74,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Ane Mintegi Del Olmo vs Alicia Herrero Linana",
-        "side": "Olmo",
-        "cost": 20.0,
-        "entry": 0.6,
-        "outcome": "lost",
-        "pnl": -19.99,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 6.0
-      },
-      {
-        "market": "Sao Bernardo vs Londrina Serie B",
-        "side": "Sao Bernardo",
-        "cost": 20.0,
-        "entry": 0.55,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Millonarios vs AD Cali",
-        "side": "Millonarios",
-        "cost": 19.99,
-        "entry": 0.57,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "CS Cienciano vs Montevideo City Torque",
-        "side": "Cienciano",
-        "cost": 20.0,
-        "entry": 0.63,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Olivieri vs Pereira ML",
-        "side": "Olivieri",
-        "cost": 19.51,
-        "entry": 0.58,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Da Silva vs Monteiro ML",
-        "side": "Da Silva",
-        "cost": 19.23,
-        "entry": 0.33,
-        "outcome": "won",
-        "pnl": 58.26,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 6.0
-      },
-      {
-        "market": "Erel vs Albot ML",
-        "side": "Erel",
-        "cost": 19.57,
-        "entry": 0.64,
-        "outcome": "won",
-        "pnl": 30.58,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 9.0
-      },
-      {
-        "market": "Kjaer vs Durand ML",
-        "side": "Kjaer",
-        "cost": 19.81,
-        "entry": 0.85,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Dedura-Palomero vs Heide ML",
-        "side": "Heide",
-        "cost": 19.48,
-        "entry": 0.56,
-        "outcome": "won",
-        "pnl": 34.79,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 7.0
-      },
-      {
-        "market": "Doosan vs Kiwoom KBO",
-        "side": "Doosan",
-        "cost": 19.98,
-        "entry": 0.69,
-        "outcome": "lost",
-        "pnl": -19.98,
-        "cat": "KBO",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Philadelphia Union vs Cincinnati ML",
-        "side": "Philadelphia Union",
-        "cost": 19.99,
-        "entry": 0.6,
-        "outcome": "won",
-        "pnl": 32.55,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 18.0
-      },
-      {
-        "market": "Nam vs Yevseyev ML",
-        "side": "Nam",
-        "cost": 19.46,
-        "entry": 0.54,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Cui vs Zhou ML",
-        "side": "Zhou",
-        "cost": 19.99,
-        "entry": 0.65,
-        "outcome": "won",
-        "pnl": 30.13,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 9.0
-      },
-      {
-        "market": "Tomic vs Ivashka ML",
-        "side": "Ivashka",
-        "cost": 20.0,
-        "entry": 0.59,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Sekulic vs Matsuda ML",
-        "side": "Sekulic",
-        "cost": 19.99,
-        "entry": 0.65,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Basing vs Alkaya ML",
-        "side": "Basing",
-        "cost": 19.99,
-        "entry": 0.6,
-        "outcome": "won",
-        "pnl": 32.55,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 11.0
-      },
-      {
-        "market": "Tobon vs Butvilas ML",
-        "side": "Butvilas",
-        "cost": 20.0,
-        "entry": 0.77,
-        "outcome": "won",
-        "pnl": 25.62,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 12.0
-      },
-      {
-        "market": "Miyoshi vs Peliwo ML",
-        "side": "Miyoshi",
-        "cost": 19.99,
-        "entry": 0.88,
-        "outcome": "lost",
-        "pnl": -19.99,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 15.0
-      },
-      {
-        "market": "Zverev vs Zandschulp ML",
-        "side": "Zverev",
-        "cost": 19.99,
-        "entry": 0.865,
-        "outcome": "won",
-        "pnl": 22.93,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 18.0
-      },
-      {
-        "market": "Aguiard vs Simakin ML",
-        "side": "Simakin",
-        "cost": 19.98,
-        "entry": 0.79,
-        "outcome": "won",
-        "pnl": 24.97,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 16.0
-      },
-      {
-        "market": "Chelsea vs Leeds ML",
-        "side": "Chelsea",
-        "cost": 16.98,
-        "entry": 0.636,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Sporting vs Galatasaray ML",
-        "side": "Sporting",
-        "cost": 19.99,
-        "entry": 0.58,
-        "outcome": "won",
-        "pnl": 33.63,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 23.0
-      },
-      {
-        "market": "Stuttgart vs Viking ML",
-        "side": "Stuttgart",
-        "cost": 20.0,
-        "entry": 0.79,
-        "outcome": "won",
-        "pnl": 25.0,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Munar vs Bueno ML",
-        "side": "Munar",
-        "cost": 20.0,
-        "entry": 0.77,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Ritschard vs Ofner ML",
-        "side": "Ofner",
-        "cost": 19.99,
-        "entry": 0.58,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Patriots vs Seahawks ML",
-        "side": "SEA",
-        "cost": 19.99,
-        "entry": 0.62,
-        "outcome": "won",
-        "pnl": 31.53,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": 17.0
-      },
-      {
-        "market": "Napoli vs Arsenal ML",
-        "side": "Arsenal",
-        "cost": 19.99,
-        "entry": 0.6,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Ajdukovic vs Sakellaridis ML",
-        "side": "Sakellaridis",
-        "cost": 19.99,
-        "entry": 0.73,
-        "outcome": "won",
-        "pnl": 26.95,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 23.0
-      },
-      {
-        "market": "Liverpool vs Atletico ML",
-        "side": "Liverpool",
-        "cost": 19.99,
-        "entry": 0.57,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Acosta vs Moro Canas ML",
-        "side": "Acosta",
-        "cost": 19.99,
-        "entry": 0.74,
-        "outcome": "won",
-        "pnl": 26.6,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Blanchet vs Rincon ML",
-        "side": "Blanchet",
-        "cost": 20.0,
-        "entry": 0.59,
-        "outcome": "won",
-        "pnl": 33.08,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Khachanov vs Blockx ML",
-        "side": "Khachanov",
-        "cost": 20.0,
-        "entry": 0.61,
-        "outcome": "won",
-        "pnl": 32.03,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 21.0
-      },
-      {
-        "market": "Gjorcheska vs Zantedeschi WTA",
-        "side": "Zantedeschi",
-        "cost": 29.99,
-        "entry": 0.56,
-        "outcome": "won",
-        "pnl": 52.16,
-        "cat": "WTA/ITF",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Giants vs Chunichi NPB",
-        "side": "Yomiuri Giants",
-        "cost": 19.99,
-        "entry": 0.53,
-        "outcome": "won",
-        "pnl": 36.69,
-        "cat": "NPB",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Rakuten vs Lotte NPB",
-        "side": "Rakuten",
-        "cost": 20.0,
-        "entry": 0.55,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "NPB",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Orix vs Seibu NPB",
-        "side": "Orix",
-        "cost": 39.98,
-        "entry": 0.55,
-        "outcome": "lost",
-        "pnl": -19.97,
-        "cat": "NPB",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "SoftBank vs Nippon Ham NPB",
-        "side": "SoftBank",
-        "cost": 19.99,
-        "entry": 0.58,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "NPB",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Yokohama vs Yakult NPB",
-        "side": "Yokohama",
-        "cost": 20.0,
-        "entry": 0.58,
-        "outcome": "won",
-        "pnl": 67.26,
-        "cat": "NPB",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Hanshin vs Hiroshima NPB",
-        "side": "Hanshin",
-        "cost": 19.99,
-        "entry": 0.68,
-        "outcome": "lost",
-        "pnl": -20.0,
-        "cat": "NPB",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Doosan vs SSG KBO",
-        "side": "Doosan",
-        "cost": 19.98,
-        "entry": 0.67,
-        "outcome": "won",
-        "pnl": 28.44,
-        "cat": "KBO",
-        "sleeve": "",
-        "age_h": 8.0
-      },
-      {
-        "market": "Moeller vs Soto ML",
-        "side": "Moeller",
-        "cost": 19.6,
-        "entry": 0.67,
-        "outcome": "lost",
-        "pnl": -20.0,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Erhard vs Glinka ML",
-        "side": "Glinka",
-        "cost": 19.53,
-        "entry": 0.6,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Sharipov vs Daniel ML",
-        "side": "Daniel",
-        "cost": 19.62,
-        "entry": 0.68,
-        "outcome": "lost",
-        "pnl": -20.0,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Hewitt vs Derepasko ML",
-        "side": "Hewitt",
-        "cost": 19.99,
-        "entry": 0.82,
-        "outcome": "won",
-        "pnl": 24.12,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 16.0
-      },
-      {
-        "market": "Jones vs Moriya ML",
-        "side": "Jones",
-        "cost": 19.49,
-        "entry": 0.57,
-        "outcome": "lost",
-        "pnl": -20.0,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Samrej vs Shimizu ML",
-        "side": "Shimizu",
-        "cost": 19.6,
-        "entry": 0.66,
-        "outcome": "won",
-        "pnl": 29.69,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Dortmund vs Villarreal ML",
-        "side": "Dortmund",
-        "cost": 19.49,
-        "entry": 0.57,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Napolitano vs Travaglia ML",
-        "side": "Travaglia",
-        "cost": 19.49,
-        "entry": 0.57,
-        "outcome": "won",
-        "pnl": 34.2,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Lajovic vs Landaluce ML",
-        "side": "Landaluce",
-        "cost": 19.51,
-        "entry": 0.58,
-        "outcome": "lost",
-        "pnl": -19.99,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Gaubas vs Lagutin ML",
-        "side": "Gaubas",
-        "cost": 20.0,
-        "entry": 0.68,
-        "outcome": "lost",
-        "pnl": -20.0,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Dalla Valle vs Crivellaro ML",
-        "side": "Dalla Valle",
-        "cost": 19.99,
-        "entry": 0.86,
-        "outcome": "won",
-        "pnl": 23.05,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Sonego vs Passaro ML",
-        "side": "Sonego",
-        "cost": 20.0,
-        "entry": 0.61,
-        "outcome": "lost",
-        "pnl": -20.0,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Lee vs Gurri ML",
-        "side": "Gurri",
-        "cost": 20.0,
-        "entry": 0.75,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Dellien vs Alves ML",
-        "side": "Dellien",
-        "cost": 19.98,
-        "entry": 0.69,
-        "outcome": "won",
-        "pnl": 28.44,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Munar vs Batalla ML",
-        "side": "Munar",
-        "cost": 19.99,
-        "entry": 0.74,
-        "outcome": "won",
-        "pnl": 26.6,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "AEK vs LASK ML",
-        "side": "AEK",
-        "cost": 19.49,
-        "entry": 0.57,
-        "outcome": "won",
-        "pnl": 34.2,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Tiafoe vs Michelsen ML",
-        "side": "Tiafoe",
-        "cost": 19.52,
-        "entry": 0.595,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Porto vs Man City ML",
-        "side": "Manchester City",
-        "cost": 20.0,
-        "entry": 0.59,
-        "outcome": "won",
-        "pnl": 33.08,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Real Madrid vs Inter ML",
-        "side": "Real Madrid",
-        "cost": 19.99,
-        "entry": 0.62,
-        "outcome": "won",
-        "pnl": 31.53,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Shelton vs Alcaraz ML",
-        "side": "Alcaraz",
-        "cost": 19.99,
-        "entry": 0.785,
-        "outcome": "lost",
-        "pnl": -19.99,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Bax vs Jones",
-        "side": "Jones",
-        "cost": 20.0,
-        "entry": 0.52,
-        "outcome": "won",
-        "pnl": 36.92,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 72.0
-      },
-      {
-        "market": "Sekulic vs Bouzige",
-        "side": "Sekulic",
-        "cost": 20.0,
-        "entry": 0.71,
-        "outcome": "won",
-        "pnl": 27.68,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Samrej vs Rawat",
-        "side": "Samrej",
-        "cost": 20.0,
-        "entry": 0.68,
-        "outcome": "won",
-        "pnl": 28.85,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Derepasko vs Ziegann",
-        "side": "Derepasko",
-        "cost": 20.0,
-        "entry": 0.7,
-        "outcome": "won",
-        "pnl": 55.61,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 72.0
-      },
-      {
-        "market": "Purcell vs Pacheco",
-        "side": "Purcell",
-        "cost": 20.0,
-        "entry": 0.55,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Khachanov vs Tien",
-        "side": "Khachanov",
-        "cost": 20.0,
-        "entry": 0.58,
-        "outcome": "won",
-        "pnl": 31.97,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 72.0
-      },
-      {
-        "market": "SMU vs FSU ML",
-        "side": "SMU",
-        "cost": 20.0,
-        "entry": 0.57,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Al Qadisiyah vs Al Ettifaq",
-        "side": "Al Qadisiyah Yes",
-        "cost": 19.98,
-        "entry": 0.78,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Samsung Lions vs Kiwoom Heroes",
-        "side": "Samsung Lions",
-        "cost": 19.99,
-        "entry": 0.78,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Titouan Droguet vs Daniil Glinka",
-        "side": "Titouan Droguet",
-        "cost": 19.98,
-        "entry": 0.69,
-        "outcome": "won",
-        "pnl": 32.55,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Lokomotiv Tashkent vs PFK Mash AL Mubarek",
-        "side": "Lokomotiv Tashkent Yes",
-        "cost": 19.46,
-        "entry": 0.76,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "West Ham United FC vs Wrexham AFC",
-        "side": "West Ham United FC Yes",
-        "cost": 19.23,
-        "entry": 0.62,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Rutgers vs Boston College",
-        "side": "Boston College",
-        "cost": 20.0,
-        "entry": 0.6,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "SV Ried vs FC Salzburg",
-        "side": "FC Salzburg Yes",
-        "cost": 19.57,
-        "entry": 0.64,
-        "outcome": "won",
-        "pnl": 32.55,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": 23.0
-      },
-      {
-        "market": "FC Kobenhavn vs AC Horsens",
-        "side": "FC Kobenhavn Yes",
-        "cost": 20.0,
-        "entry": 0.75,
-        "outcome": "won",
-        "pnl": 26.15,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": 23.0
-      },
-      {
-        "market": "BK Hacken vs Mjallby AIF",
-        "side": "BK Hacken Yes",
-        "cost": 19.57,
-        "entry": 0.64,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Mate Valkusz vs Bruno Fernandez",
-        "side": "Mate Valkusz",
-        "cost": 19.99,
-        "entry": 0.73,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Fukuoka SoftBank Hawks vs Chiba Lotte Marines",
-        "side": "Fukuoka SoftBank Hawks",
-        "cost": 19.99,
-        "entry": 0.64,
-        "outcome": "won",
-        "pnl": 32.55,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": 9.0
-      },
-      {
-        "market": "Samsung Lions vs LG Twins",
-        "side": "Samsung Lions",
-        "cost": 20.0,
-        "entry": 0.58,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Frances Tiafoe vs Ben Shelton",
-        "side": "Ben Shelton",
-        "cost": 19.99,
-        "entry": 0.72,
-        "outcome": "won",
-        "pnl": 32.81,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 48.0
-      },
-      {
-        "market": "Luca Castelnuovo vs Ilya Ivashka",
-        "side": "Ilya Ivashka",
-        "cost": 19.99,
-        "entry": 0.77,
-        "outcome": "won",
-        "pnl": 33.08,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 11.0
-      },
-      {
-        "market": "Harold Mayot vs Max Basing",
-        "side": "Harold Mayot",
-        "cost": 20.0,
-        "entry": 0.7,
-        "outcome": "won",
-        "pnl": 35.4,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 72.0
-      },
-      {
-        "market": "CA Boca Juniors vs CA Central Cordoba",
-        "side": "Boca Juniors Yes",
-        "cost": 19.99,
-        "entry": 0.66,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Titouan Droguet vs Nicolai Budkov Kjaer",
-        "side": "Titouan Droguet",
-        "cost": 19.99,
-        "entry": 0.63,
-        "outcome": "won",
-        "pnl": 23.31,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 9.0
-      },
-      {
-        "market": "Laslo Djere vs Pedro Martinez",
-        "side": "Laslo Djere",
-        "cost": 20.0,
-        "entry": 0.66,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Liverpool FC vs Fulham FC",
-        "side": "Liverpool Yes",
-        "cost": 39.22,
-        "entry": 0.67,
-        "outcome": "won",
-        "pnl": 34.2,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": 23.0
-      },
-      {
-        "market": "Oklahoma vs Michigan",
-        "side": "Oklahoma",
-        "cost": 39.2,
-        "entry": 0.66,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Los Angeles Dodgers vs Miami Marlins",
-        "side": "Dodgers",
-        "cost": 19.58,
-        "entry": 0.64,
+        "market": "nfl-dal-nyg-2026-09-13",
+        "side": "Who will win in the upcoming football event Dallas Cowboys vs New York Giants scheduled for September 14, 2026 at 12:20 AM UTC?",
+        "cost": 19.54,
+        "entry": 0.615,
         "outcome": "open",
         "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Rositsa Dencheva vs Irene Burillo Escorihuela",
-        "side": "Rositsa Dencheva",
-        "cost": 19.66,
-        "entry": 0.72,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Yuliya Perapekhina vs Yasmin Ezzat",
-        "side": "Yuliya Perapekhina",
-        "cost": 19.98,
-        "entry": 0.69,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Darko Jorgic vs Truls Moregard",
-        "side": "Truls Moregard",
-        "cost": 19.99,
-        "entry": 0.74,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Manon Fiorot vs Alexa Grasso",
-        "side": "Manon Fiorot",
-        "cost": 39.28,
-        "entry": 0.7,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Dortmund vs Paderborn (reg)",
-        "side": "Dortmund Yes",
-        "cost": 39.99,
-        "entry": 0.78,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Ross County vs Hibernian (reg)",
-        "side": "Hibernian Yes",
-        "cost": 40.0,
-        "entry": 0.66,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Andre Lukosiute vs Riko Kikawada",
-        "side": "Andre Lukosiute",
-        "cost": 19.9,
-        "entry": 0.76,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "West Ham vs London City Lionesses (reg)",
-        "side": "London City Lionesses Yes",
-        "cost": 19.99,
-        "entry": 0.71,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Clement Chidekh vs Sebastian Dominko",
-        "side": "Clement Chidekh",
-        "cost": 19.99,
-        "entry": 0.74,
-        "outcome": "won",
-        "pnl": 33.63,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": 24.0
-      },
-      {
-        "market": "Xiaodi You vs Luiza Fullana",
-        "side": "Xiaodi You",
-        "cost": 20.0,
-        "entry": 0.76,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Arthur Weber vs Ilia Simakin",
-        "side": "Ilia Simakin",
-        "cost": 40.0,
-        "entry": 0.79,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Wolfsberger vs SK Rapid (reg)",
-        "side": "SK Rapid Yes",
-        "cost": 20.0,
-        "entry": 0.63,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Victoria Bosio vs Lizette Cabrera",
-        "side": "Lizette Cabrera",
-        "cost": 20.01,
-        "entry": 0.69,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "KT Wiz vs Lotte Giants",
-        "side": "KT Wiz",
-        "cost": 19.99,
-        "entry": 0.67,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Zhao Zhao vs Hiromasa Koyama",
-        "side": "Hiromasa Koyama",
-        "cost": 20.0,
-        "entry": 0.69,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "SoftBank Hawks vs Lotte Marines",
-        "side": "SoftBank",
-        "cost": 19.99,
-        "entry": 0.66,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Soccer/Club",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Yujin Kim vs Dabin Kim",
-        "side": "Dabin Kim",
-        "cost": 19.97,
-        "entry": 0.67,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "CS Independiente Rivadavia vs CA Aldosivi (reg)",
-        "side": "Rivadavia Yes",
-        "cost": 19.99,
-        "entry": 0.68,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "",
-        "age_h": null
-      },
-      {
-        "market": "Saitama Seibu Lions vs Nippon Ham Fighters",
-        "side": "Saitama Seibu Lions",
-        "cost": 20.01,
-        "entry": 0.54,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Soccer/Club",
-        "sleeve": "sports_line",
-        "age_h": null
-      },
-      {
-        "market": "Drakkar Klose vs Tommy Gantt",
-        "side": "Tommy Gantt",
-        "cost": 20.0,
-        "entry": 0.78,
-        "outcome": "unsettled",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "maker",
-        "age_h": null
-      },
-      {
-        "market": "Atlanta vs Pittsburgh",
-        "side": "Pittsburgh",
-        "cost": 20.0,
-        "entry": 0.72,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "sports_weekend",
-        "age_h": null
-      },
-      {
-        "market": "Jean Silva vs Jose Delgado",
-        "side": "Jean Silva",
-        "cost": 20.0,
-        "entry": 0.78,
-        "outcome": "open",
-        "pnl": null,
-        "cat": "Other Sports",
+        "cat": "NFL",
         "sleeve": "sports_ml",
         "age_h": null
       },
       {
-        "market": "Cleveland vs Jacksonville",
-        "side": "Jacksonville",
-        "cost": 20.0,
-        "entry": 0.79,
+        "market": "emmys-lmls-2026-09-14",
+        "side": "O",
+        "cost": 19.97,
+        "entry": 0.678,
         "outcome": "open",
         "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "sports_weekend",
+        "cat": "Emmys",
+        "sleeve": "events",
         "age_h": null
       },
       {
-        "market": "New Orleans vs Detroit",
-        "side": "Detroit",
-        "cost": 20.0,
-        "entry": 0.75,
+        "market": "emmys-sfcs-2026-09-14",
+        "side": "K",
+        "cost": 19.97,
+        "entry": 0.819,
         "outcome": "open",
         "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "sports_weekend",
+        "cat": "Emmys",
+        "sleeve": "events",
         "age_h": null
       },
       {
-        "market": "Washington vs Philadelphia",
-        "side": "Philadelphia",
-        "cost": 20.0,
+        "market": "nfl-was-phi-2026-09-13",
+        "side": "Who will win in the upcoming football event Washington Commanders vs Philadelphia Eagles scheduled for September 13, 2026 at 8:25 PM UTC?",
+        "cost": 19.98,
         "entry": 0.69,
         "outcome": "open",
         "pnl": null,
-        "cat": "Other Sports",
-        "sleeve": "sports_weekend",
+        "cat": "NFL",
+        "sleeve": "sports_ml",
         "age_h": null
       },
       {
-        "market": "Emmys: Outstanding Supporting Actress in a Drama Series",
-        "side": "Katherine LaNasa The Pitt",
-        "cost": 20.0,
+        "market": "emmys-sfds-2026-09-14",
+        "side": "K",
+        "cost": 19.99,
         "entry": 0.73,
         "outcome": "open",
         "pnl": null,
@@ -1545,24 +163,24 @@
         "age_h": null
       },
       {
-        "market": "Emmys: Outstanding Supporting Actress in a Comedy Series",
-        "side": "Kate OFlynn Widows Bay",
-        "cost": 20.0,
-        "entry": 0.8,
+        "market": "agt-s21-win-2026-09-23",
+        "side": "Nene Royal",
+        "cost": 19.99,
+        "entry": 0.78,
         "outcome": "open",
         "pnl": null,
-        "cat": "Emmys",
+        "cat": "Events",
         "sleeve": "events",
         "age_h": null
       },
       {
-        "market": "Emmys: Outstanding Lead Actor in a Limited Series",
-        "side": "Oscar Isaac Beef",
-        "cost": 20.0,
-        "entry": 0.67,
+        "market": "usfed-fomc-2026-09-16",
+        "side": "2",
+        "cost": 19.99,
+        "entry": 0.78,
         "outcome": "open",
         "pnl": null,
-        "cat": "Emmys",
+        "cat": "Fed/FOMC",
         "sleeve": "events",
         "age_h": null
       }
@@ -1576,17 +194,17 @@
       300.0
     ],
     "totals": {
-      "won": 44,
-      "lost": 12,
-      "open": 18,
-      "unsettled": 43,
-      "closed_pnl": 1208.01,
-      "deployed": 2473.51,
-      "open_exposure": 398.83
+      "won": 0,
+      "lost": 0,
+      "open": 7,
+      "unsettled": 0,
+      "closed_pnl": 0,
+      "deployed": 139.43,
+      "open_exposure": 139.43
     }
   },
   "schema_version": 1,
   "artifact_id": "polymarket-desk",
   "title": "Polymarket desk — W/L record",
-  "generated_at": "2026-09-12 23:46 UTC"
+  "generated_at": "2026-09-15 05:17 UTC"
 }

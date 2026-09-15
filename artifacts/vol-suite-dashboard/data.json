@@ -1,6 +1,10 @@
 {
   "summary": [
     {
+      "label": "latest unified run",
+      "value": "bridge_jobs"
+    },
+    {
       "label": "schema_version",
       "value": "1"
     },
@@ -27,10 +31,6 @@
     {
       "label": "timestamp",
       "value": "2026-08-01T22:16:52.686142Z"
-    },
-    {
-      "label": "vol_surface.focus_ticker",
-      "value": "INTC"
     }
   ],
   "tables": [
@@ -407,17 +407,56 @@
           "list[1]"
         ]
       ]
+    },
+    {
+      "id": "runs",
+      "title": "Recent unified runs",
+      "columns": [
+        "run"
+      ],
+      "rows": [
+        [
+          "20260912T054717Z724592"
+        ],
+        [
+          "20260912T054737Z026484"
+        ],
+        [
+          "20260912T055212Z426214"
+        ],
+        [
+          "20260912T055212Z427215"
+        ],
+        [
+          "20260912T055231Z112323"
+        ],
+        [
+          "20260913T195004Z839656"
+        ],
+        [
+          "20260913T195214Z160332"
+        ],
+        [
+          "20260913T201144Z222850"
+        ],
+        [
+          "20260913T201326Z750006"
+        ],
+        [
+          "bridge_jobs"
+        ]
+      ]
     }
   ],
   "charts": [],
   "notes": [],
   "source": {
-    "repo": "/opt/data/FinancialDevelopment",
+    "repo": "C:\\Users\\bottl\\FinancialDevelopment",
     "collector": "vol-suite",
     "note": "vol_suite_result.json + orchestrator_output/"
   },
   "schema_version": 1,
   "artifact_id": "vol-suite-dashboard",
   "title": "Vol Suite Dashboard",
-  "generated_at": "2026-09-03 06:31 UTC"
+  "generated_at": "2026-09-14 03:40 UTC"
 }

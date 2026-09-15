@@ -62,6 +62,28 @@ tr:last-child td { border-bottom: none; }
 .ha-ghost-toast.on { opacity: 1; }
 .ha-glegend i { box-shadow: 0 0 6px rgba(255,255,255,.35); }
 
+/* Embed / Brain-tab mode: graph only, no white chrome, full viewport. */
+html.ha-embed, html.ha-embed body {
+  margin: 0; padding: 0; height: 100%; overflow: hidden;
+  background: #05070c; color: #e5e7eb;
+}
+html.ha-embed #app { height: 100%; }
+html.ha-embed .ha-graph {
+  border: none; padding: 0; margin: 0; border-radius: 0;
+  height: 100%; display: flex; flex-direction: column; position: relative;
+}
+html.ha-embed .ha-graph h3 { display: none; }
+html.ha-embed .ha-glegend {
+  position: absolute; z-index: 2; left: 12px; bottom: 12px;
+  margin: 0; color: rgba(229, 231, 235, 0.65); pointer-events: none;
+  text-shadow: 0 0 8px rgba(5, 7, 12, 0.9);
+}
+html.ha-embed .ha-glegend i { box-shadow: 0 0 10px currentColor; }
+html.ha-embed .ha-gstage {
+  flex: 1; height: auto !important; min-height: 0; border-radius: 0;
+}
+html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
+
 </style>
 <!--/HERMES-ARTIFACT:CSS-->
 <style>
@@ -120,7 +142,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 </div>
 <!--HERMES-ARTIFACT:DATA-->
 <script id="hermes-artifact-data" type="application/json">
-{"summary": [{"label": "widgets in registry", "value": "47"}, {"label": "widget API", "value": "UP @ http://127.0.0.1:8787"}, {"label": "suites", "value": "options_suite, sentiment_scanner, tools, var_tools, vol_suite"}, {"label": "categories", "value": "9"}], "tables": [{"id": "catalog", "title": "Widget catalog (47) — snapshot at refresh; console re-fetches live", "columns": ["name", "slug", "suite", "category", "inputs"], "rows": [["BAW", "baw", "options_suite", "pricing", "ticker, expiry, basket"], ["CRR", "crr", "options_suite", "pricing", "ticker, expiry, basket"], ["Leisen-Reimer", "leisen_reimer", "options_suite", "pricing", "ticker, expiry, basket"], ["MC", "mc", "options_suite", "pricing", "ticker, expiry, basket"], ["MC Heston LSM", "mc_heston_lsm", "options_suite", "pricing", "ticker, expiry, basket"], ["Model Comparison", "model_comparison", "options_suite", "pricing", "ticker, expiry, basket"], ["Newton-Raphson IV", "newton_raphson_iv", "options_suite", "pricing", "ticker, expiry, basket"], ["SABR", "sabr", "options_suite", "pricing", "ticker, expiry, basket"], ["Vanna-Volga", "vanna_volga", "options_suite", "pricing", "ticker, expiry, basket"], ["Earnings", "earnings", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["GEX Scanner", "gex", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["IV Rank", "iv_rank", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Max Pain", "max_pain", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Skew", "skew", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Unusual OI", "unusual_oi", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Vol Dispersion", "vol_dispersion", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Backtesting Tool", "backtesting", "tools", "tool", "ticker, expiry, basket"], ["Directional Engine", "directional-engine", "tools", "tool", "ticker, expiry, basket"], ["Hedge Optimizer", "hedge-optimizer", "tools", "tool", "ticker, expiry, basket"], ["Options Strategy Tool", "options-strategy", "tools", "tool", "ticker, expiry, basket"], ["Simulations", "simulations", "tools", "tool", "ticker, expiry, basket"], ["Surface Explorer", "surface-explorer", "tools", "tool", "ticker, expiry, basket"], ["VRP Term Structure", "vrp-term-structure", "tools", "tool", "ticker, expiry, basket"], ["Cash Flow Mapping", "cashflow_map", "var_tools", "var", "ticker, expiry, basket"], ["Copula VaR", "copulas", "var_tools", "var", "ticker, expiry, basket"], ["Correlation Simulation", "corr_sim", "var_tools", "var", "ticker, expiry, basket"], ["Forex VaR", "forex_var", "var_tools", "var", "ticker, expiry, basket"], ["Hedge Optimizer", "hedge_optimizer", "var_tools", "var", "ticker, expiry, basket"], ["Historical Simulation", "hist_sim", "var_tools", "var", "ticker, expiry, basket"], ["Monte Carlo Simulation", "mc_sim", "var_tools", "var", "ticker, expiry, basket"], ["Price Distribution", "price_dist", "var_tools", "var", "ticker, expiry, basket"], ["Stress Test", "stress_test", "var_tools", "var", "ticker, expiry, basket"], ["VaR Aggregation", "var_agg", "var_tools", "var", "ticker, expiry, basket"], ["Chain Scanner", "chain_scanner", "vol_suite", "scanner", "ticker, expiry, basket"], ["Dealer Exposure", "dealer_exposure", "vol_suite", "exposure", "ticker, expiry, basket"], ["Dealer Flow", "dealer_flow", "vol_suite", "flow", "ticker, expiry, basket"], ["Dual Book", "dual_book", "vol_suite", "exposure", "ticker, expiry, basket"], ["Group Screener (selection-only)", "group_screener", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["Position Book", "position_book", "vol_suite", "exposure", "ticker, expiry, basket"], ["Sentiment Backtest (selection-only)", "sentiment_backtest", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["Surface Flow (Strike x Expiry)", "surface_flow_strike_expiry", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Flow (Strike x Time)", "surface_flow_strike_time", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Greek", "surface_greek", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Market IV", "surface_market_iv", "vol_suite", "surface", "ticker, expiry, basket"], ["SVI Smile", "svi_smile", "vol_suite", "smile", "ticker, expiry, basket"], ["Vol Surface 2D (selection-only)", "vol_surface_2d", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["VRP Term Structure (selection-only)", "vrp_term_structure", "vol_suite", "pipeline_step", "ticker, expiry, basket"]]}], "charts": [], "notes": [], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "widget-console", "note": "live catalog from http://127.0.0.1:8787/api/widgets/catalog"}, "schema_version": 1, "artifact_id": "widget-console", "title": "Widget Console — pick & run widgets", "generated_at": "2026-09-06 05:47 UTC"}
+{"summary": [{"label": "widgets in registry", "value": "57"}, {"label": "widget API", "value": "UP @ http://127.0.0.1:8787"}, {"label": "suites", "value": "dashboard, options_suite, sentiment_scanner, tools, var_tools, vol_suite"}, {"label": "categories", "value": "11"}], "tables": [{"id": "catalog", "title": "Widget catalog (57) — snapshot at refresh; console re-fetches live", "columns": ["name", "slug", "suite", "category", "inputs"], "rows": [["Position Analysis", "position_analysis", "dashboard", "cache", "ticker, expiry, basket"], ["Positions", "positions", "dashboard", "cache", "ticker, expiry, basket"], ["Signals", "signals", "dashboard", "cache", "ticker, expiry, basket"], ["Surfaces", "surfaces", "dashboard", "cache", "ticker, expiry, basket"], ["BAW", "baw", "options_suite", "pricing", "ticker, expiry, basket"], ["CRR", "crr", "options_suite", "pricing", "ticker, expiry, basket"], ["Leisen-Reimer", "leisen_reimer", "options_suite", "pricing", "ticker, expiry, basket"], ["MC", "mc", "options_suite", "pricing", "ticker, expiry, basket"], ["MC Heston LSM", "mc_heston_lsm", "options_suite", "pricing", "ticker, expiry, basket"], ["Model Comparison", "model_comparison", "options_suite", "pricing", "ticker, expiry, basket"], ["Newton-Raphson IV", "newton_raphson_iv", "options_suite", "pricing", "ticker, expiry, basket"], ["SABR", "sabr", "options_suite", "pricing", "ticker, expiry, basket"], ["Vanna-Volga", "vanna_volga", "options_suite", "pricing", "ticker, expiry, basket"], ["Earnings", "earnings", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["GEX Scanner", "gex", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Highlight Packs", "highlight_packs", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["IV Rank", "iv_rank", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Max Pain", "max_pain", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Skew", "skew", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Unusual OI", "unusual_oi", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Vol Dispersion", "vol_dispersion", "sentiment_scanner", "scanner", "ticker, expiry, basket"], ["Backtesting Tool", "backtesting", "tools", "tool", "ticker, expiry, basket"], ["Directional Engine", "directional-engine", "tools", "tool", "ticker, expiry, basket"], ["Hedge Optimizer", "hedge-optimizer", "tools", "tool", "ticker, expiry, basket"], ["Options Strategy Tool", "options-strategy", "tools", "tool", "ticker, expiry, basket"], ["Simulations", "simulations", "tools", "tool", "ticker, expiry, basket"], ["Surface Explorer", "surface-explorer", "tools", "tool", "ticker, expiry, basket"], ["VRP Term Structure", "vrp-term-structure", "tools", "tool", "ticker, expiry, basket"], ["Cash Flow Mapping", "cashflow_map", "var_tools", "var", "ticker, expiry, basket"], ["Copula VaR", "copulas", "var_tools", "var", "ticker, expiry, basket"], ["Correlation Simulation", "corr_sim", "var_tools", "var", "ticker, expiry, basket"], ["Forex VaR", "forex_var", "var_tools", "var", "ticker, expiry, basket"], ["Hedge Optimizer", "hedge_optimizer", "var_tools", "var", "ticker, expiry, basket"], ["Historical Simulation", "hist_sim", "var_tools", "var", "ticker, expiry, basket"], ["Monte Carlo Simulation", "mc_sim", "var_tools", "var", "ticker, expiry, basket"], ["Price Distribution", "price_dist", "var_tools", "var", "ticker, expiry, basket"], ["Stress Test", "stress_test", "var_tools", "var", "ticker, expiry, basket"], ["VaR Aggregation", "var_agg", "var_tools", "var", "ticker, expiry, basket"], ["Chain Scanner", "chain_scanner", "vol_suite", "scanner", "ticker, expiry, basket"], ["Correlation Matrix", "correlation_matrix", "vol_suite", "metrics", "ticker, expiry, basket"], ["Dealer Flow", "dealer_flow", "vol_suite", "flow", "ticker, expiry, basket"], ["Dual Book", "dual_book", "vol_suite", "exposure", "ticker, expiry, basket"], ["Expiry Exposure", "expiry_exposure", "vol_suite", "exposure", "ticker, expiry, basket"], ["GARCH(1,1)", "garch", "vol_suite", "metrics", "ticker, expiry, basket"], ["Group Screener (selection-only)", "group_screener", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["Jump Diffusion", "jump_diffusion", "vol_suite", "pricing", "ticker, expiry, basket"], ["Jump Model Comparison", "jump_model_comparison", "vol_suite", "pricing", "ticker, expiry, basket"], ["Position Book", "position_book", "vol_suite", "exposure", "ticker, expiry, basket"], ["Sentiment Backtest (selection-only)", "sentiment_backtest", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["Surface Flow (Strike x Expiry)", "surface_flow_strike_expiry", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Flow (Strike x Time)", "surface_flow_strike_time", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Greek", "surface_greek", "vol_suite", "surface", "ticker, expiry, basket"], ["Surface Market IV", "surface_market_iv", "vol_suite", "surface", "ticker, expiry, basket"], ["SVI Smile", "svi_smile", "vol_suite", "smile", "ticker, expiry, basket"], ["Variance Swap", "variance_swap", "vol_suite", "pricing", "ticker, expiry, basket"], ["Vol Surface 2D (selection-only)", "vol_surface_2d", "vol_suite", "pipeline_step", "ticker, expiry, basket"], ["VRP Term Structure (selection-only)", "vrp_term_structure", "vol_suite", "pipeline_step", "ticker, expiry, basket"]]}], "charts": [], "notes": [], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "widget-console", "note": "live catalog from http://127.0.0.1:8787/api/widgets/catalog"}, "schema_version": 1, "artifact_id": "widget-console", "title": "Widget Console — pick & run widgets", "generated_at": "2026-09-14 03:40 UTC"}
 </script>
 <!--/HERMES-ARTIFACT:DATA-->
 <!--HERMES-ARTIFACT:JS-->
@@ -265,6 +287,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   // Single-instance teardown handle for the live Jarvis graph (set by renderGraph's start()).
   var activeJarvisDestroy = null;
 
+  function isEmbed() {
+    try {
+      var q = String(location.search || '');
+      var hsh = String(location.hash || '');
+      return q.indexOf('embed=1') !== -1 || hsh.indexOf('embed') !== -1;
+    } catch (err) { return false; }
+  }
+
+  function hexRgb(hex) {
+    var s = String(hex || '').replace('#', '');
+    if (s.length === 3) s = s.charAt(0) + s.charAt(0) + s.charAt(1) + s.charAt(1) + s.charAt(2) + s.charAt(2);
+    var n = parseInt(s, 16);
+    if (isNaN(n)) return [148, 163, 184];
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+
   function renderGraph(graph) {
     // Empty/missing graph → return a visible note box (spec §6). Always returns a
     // DOM element so any caller's appendChild is safe; no canvas loop started.
@@ -359,10 +397,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 
     // ---- Canvas sizing (backing store × dpr; CSS height fixed at 560 by .ha-gstage) ----
     var cssW = 960, cssH = 560, dpr = window.devicePixelRatio || 1;
+    var embed = isEmbed();
     function resize() {
       var r = stage.getBoundingClientRect();
       if (r.width > 2) cssW = Math.round(r.width);
-      cssH = 560;
+      if (embed && r.height > 2) cssH = Math.round(r.height);
+      else cssH = 560;
       canvas.style.width = cssW + 'px';
       canvas.style.height = cssH + 'px';
       dpr = window.devicePixelRatio || 1;
@@ -418,17 +458,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     function draw() {
       if (!ctx) ctx = canvas.getContext('2d');
       var W = cssW, H = cssH;
+      var tnow = Date.now() / 1000;
+      var pulse = 0.72 + 0.28 * Math.sin(tnow * 1.7);
       // (1)-(3): screen-space background — fill, radial vignette, faint dot grid.
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.fillStyle = '#05070c';
       ctx.fillRect(0, 0, W, H);
-      var vg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.7);
-      vg.addColorStop(0, 'rgba(30,41,66,0.55)');
+      var vg = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.72);
+      vg.addColorStop(0, embed ? 'rgba(56, 80, 140, 0.38)' : 'rgba(30,41,66,0.55)');
       vg.addColorStop(1, 'rgba(5,7,12,0)');
       ctx.fillStyle = vg;
       ctx.fillRect(0, 0, W, H);
       if (nodes.length <= 1500) {
-        ctx.fillStyle = 'rgba(148,163,184,0.05)';
+        ctx.fillStyle = embed ? 'rgba(148,163,184,0.08)' : 'rgba(148,163,184,0.05)';
         for (var gx = 20; gx < W; gx += 40) for (var gy = 20; gy < H; gy += 40) { ctx.fillRect(gx, gy, 1, 1); }
       }
 
@@ -438,41 +480,60 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 
       // Edges first (spec §2): alpha modulated by hover neighborhood.
       var litSet = hover ? adj[hover.id] : null;
-      ctx.lineWidth = 0.8 / k;
+      ctx.lineCap = 'round';
       for (var li = 0; li < links.length; li++) {
         e = links[li];
         var touchesHover = hover && (e.source === hover || e.target === hover);
-        var alpha = !hover ? 0.10 : (touchesHover ? 0.5 : 0.03);
-        ctx.strokeStyle = 'rgba(148,163,184,' + alpha.toFixed(3) + ')';
+        var alpha = !hover ? (embed ? 0.16 : 0.10) : (touchesHover ? 0.72 : 0.03);
+        var col = hexRgb(GROUP_COLOR[e.source.group] || '#94a3b8');
+        if (embed && touchesHover) {
+          ctx.shadowBlur = 18 / k;
+          ctx.shadowColor = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',0.85)';
+        } else {
+          ctx.shadowBlur = 0;
+        }
+        ctx.lineWidth = (touchesHover ? 1.6 : (embed ? 1.05 : 0.8)) / k;
+        ctx.strokeStyle = 'rgba(' + col[0] + ',' + col[1] + ',' + col[2] + ',' + alpha.toFixed(3) + ')';
         ctx.beginPath();
         ctx.moveTo(e.source.x, e.source.y);
         ctx.lineTo(e.target.x, e.target.y);
         ctx.stroke();
       }
+      ctx.shadowBlur = 0;
 
-      // Nodes: two-pass glow (A) then core fill (B). Dim non-neighbors on hover.
-      for (var pass = 0; pass < 2; pass++) {
-        for (i = 0; i < nodes.length; i++) {
-          n = nodes[i];
-          var lit = !hover || (litSet && litSet[n.id]);
-          ctx.globalAlpha = lit ? 1 : 0.08;
-          if (pass === 0) {
-            ctx.shadowBlur = Math.min(40, 12 + n.size);
-            ctx.shadowColor = GROUP_COLOR[n.group] || '#94a3b8';
-          } else {
-            ctx.shadowBlur = 0;
-          }
-          ctx.fillStyle = GROUP_COLOR[n.group] || '#94a3b8';
+      // Nodes: bloom (embed) → glow → core. Dim non-neighbors on hover.
+      for (i = 0; i < nodes.length; i++) {
+        n = nodes[i];
+        var lit = !hover || (litSet && litSet[n.id]);
+        var gcol = GROUP_COLOR[n.group] || '#94a3b8';
+        var rgb = hexRgb(gcol);
+        var r = radius(n);
+        ctx.globalAlpha = lit ? 1 : 0.08;
+        if (embed) {
+          ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + (0.18 * pulse).toFixed(3) + ')';
           ctx.beginPath();
-          ctx.arc(n.x, n.y, radius(n), 0, Math.PI * 2);
+          ctx.arc(n.x, n.y, r * (3.4 + pulse), 0, Math.PI * 2);
           ctx.fill();
         }
+        ctx.shadowBlur = Math.min(embed ? 56 : 40, (embed ? 18 : 12) + n.size * (embed ? 2.2 : 1));
+        ctx.shadowColor = gcol;
+        ctx.fillStyle = gcol;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#f8fafc';
+        ctx.globalAlpha = lit ? (embed ? 0.95 : 0.85) : 0.08;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, Math.max(1.1, r * 0.38), 0, Math.PI * 2);
+        ctx.fill();
       }
       ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
 
       // Labels in SCREEN space (reset transform) — sparse per spec §2.
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = '11px sans-serif';
+      ctx.font = embed ? '600 11px sans-serif' : '11px sans-serif';
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         var showLabel = hover ? (!!litSet && litSet[n.id]) : (topLabelSet[n.id] || k > 2);
@@ -480,12 +541,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
         var sx = n.x * k + tx, sy = n.y * k + ty;
         // Cull off-screen when in zoomed label mode.
         if (k > 2 && (sx < -40 || sx > W + 40 || sy < -16 || sy > H + 16)) continue;
-        var lit = !hover || (litSet && litSet[n.id]);
-        ctx.globalAlpha = lit ? 0.95 : 0.25;
+        var litL = !hover || (litSet && litSet[n.id]);
+        ctx.globalAlpha = litL ? 0.95 : 0.25;
+        ctx.shadowBlur = embed ? 10 : 0;
+        ctx.shadowColor = embed ? (GROUP_COLOR[n.group] || '#94a3b8') : 'transparent';
         ctx.fillStyle = '#e5e7eb';
         ctx.fillText(n.label, sx + radius(n) * k + 3, sy + 4);
       }
       ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
     }
 
     // ---- Fallback: compact hand-rolled sim when d3 is absent (spec §6). ----
@@ -597,6 +661,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       view.tx = cssW / 2;
       view.ty = cssH / 2;
       window.addEventListener('resize', resize);
+      var ro = null;
+      if (typeof ResizeObserver !== 'undefined') {
+        ro = new ResizeObserver(function () { resize(); });
+        ro.observe(stage);
+      }
       if (hasD3) {
         // d3-force physics with the exact verified v7 API surface.
         sim = d3.forceSimulation(nodes)
@@ -642,6 +711,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       function destroy() {
         cancelAnimationFrame(rafId);
         window.removeEventListener('resize', resize);
+        if (ro) { try { ro.disconnect(); } catch (e) {} }
         canvas.removeEventListener('wheel', onWheel);
         canvas.removeEventListener('mousedown', onDown);
         window.removeEventListener('mousemove', onMove);
@@ -663,6 +733,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   function render(root) {
     var d = payload();
     root.textContent = '';
+    if (isEmbed()) {
+      try { document.documentElement.classList.add('ha-embed'); } catch (e) {}
+      if (d.graph && (d.graph.nodes || []).length) root.appendChild(renderGraph(d.graph));
+      else root.appendChild(renderGraph(null));
+      return;
+    }
     root.appendChild(h('h1', { text: d.title || d.artifact_id }));
     root.appendChild(h('div', { class: 'ha-sub', text: 'Generated '
       + d.generated_at + (d.source && d.source.note ? ' - ' + d.source.note : '') }));

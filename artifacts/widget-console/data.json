@@ -2,7 +2,7 @@
   "summary": [
     {
       "label": "widgets in registry",
-      "value": "47"
+      "value": "57"
     },
     {
       "label": "widget API",
@@ -10,17 +10,17 @@
     },
     {
       "label": "suites",
-      "value": "options_suite, sentiment_scanner, tools, var_tools, vol_suite"
+      "value": "dashboard, options_suite, sentiment_scanner, tools, var_tools, vol_suite"
     },
     {
       "label": "categories",
-      "value": "9"
+      "value": "11"
     }
   ],
   "tables": [
     {
       "id": "catalog",
-      "title": "Widget catalog (47) — snapshot at refresh; console re-fetches live",
+      "title": "Widget catalog (57) — snapshot at refresh; console re-fetches live",
       "columns": [
         "name",
         "slug",
@@ -29,6 +29,34 @@
         "inputs"
       ],
       "rows": [
+        [
+          "Position Analysis",
+          "position_analysis",
+          "dashboard",
+          "cache",
+          "ticker, expiry, basket"
+        ],
+        [
+          "Positions",
+          "positions",
+          "dashboard",
+          "cache",
+          "ticker, expiry, basket"
+        ],
+        [
+          "Signals",
+          "signals",
+          "dashboard",
+          "cache",
+          "ticker, expiry, basket"
+        ],
+        [
+          "Surfaces",
+          "surfaces",
+          "dashboard",
+          "cache",
+          "ticker, expiry, basket"
+        ],
         [
           "BAW",
           "baw",
@@ -102,6 +130,13 @@
         [
           "GEX Scanner",
           "gex",
+          "sentiment_scanner",
+          "scanner",
+          "ticker, expiry, basket"
+        ],
+        [
+          "Highlight Packs",
+          "highlight_packs",
           "sentiment_scanner",
           "scanner",
           "ticker, expiry, basket"
@@ -268,10 +303,10 @@
           "ticker, expiry, basket"
         ],
         [
-          "Dealer Exposure",
-          "dealer_exposure",
+          "Correlation Matrix",
+          "correlation_matrix",
           "vol_suite",
-          "exposure",
+          "metrics",
           "ticker, expiry, basket"
         ],
         [
@@ -289,10 +324,38 @@
           "ticker, expiry, basket"
         ],
         [
+          "Expiry Exposure",
+          "expiry_exposure",
+          "vol_suite",
+          "exposure",
+          "ticker, expiry, basket"
+        ],
+        [
+          "GARCH(1,1)",
+          "garch",
+          "vol_suite",
+          "metrics",
+          "ticker, expiry, basket"
+        ],
+        [
           "Group Screener (selection-only)",
           "group_screener",
           "vol_suite",
           "pipeline_step",
+          "ticker, expiry, basket"
+        ],
+        [
+          "Jump Diffusion",
+          "jump_diffusion",
+          "vol_suite",
+          "pricing",
+          "ticker, expiry, basket"
+        ],
+        [
+          "Jump Model Comparison",
+          "jump_model_comparison",
+          "vol_suite",
+          "pricing",
           "ticker, expiry, basket"
         ],
         [
@@ -345,6 +408,13 @@
           "ticker, expiry, basket"
         ],
         [
+          "Variance Swap",
+          "variance_swap",
+          "vol_suite",
+          "pricing",
+          "ticker, expiry, basket"
+        ],
+        [
           "Vol Surface 2D (selection-only)",
           "vol_surface_2d",
           "vol_suite",
@@ -371,5 +441,5 @@
   "schema_version": 1,
   "artifact_id": "widget-console",
   "title": "Widget Console — pick & run widgets",
-  "generated_at": "2026-09-06 05:47 UTC"
+  "generated_at": "2026-09-14 03:40 UTC"
 }

@@ -1,23 +1,99 @@
 {
   "summary": [
     {
-      "label": "source",
-      "value": "missing",
-      "tone": "bad"
+      "label": "suite",
+      "value": "var"
+    },
+    {
+      "label": "status",
+      "value": "ok"
+    },
+    {
+      "label": "module",
+      "value": "corr_sim"
+    },
+    {
+      "label": "var",
+      "value": "166668.32023587194"
+    },
+    {
+      "label": "cvar",
+      "value": "186857.32331584513"
+    },
+    {
+      "label": "confidence",
+      "value": "0.99"
+    },
+    {
+      "label": "horizon_days",
+      "value": "252"
+    },
+    {
+      "label": "timestamp",
+      "value": "2026-09-04T19:02:52.447693Z"
     }
   ],
-  "tables": [],
-  "charts": [],
-  "notes": [
-    "/opt/data/FinancialDevelopment/VaR_Tools_Simulations/var_context_run_latest.json not found — run the VaR context mode first."
+  "tables": [
+    {
+      "id": "fields",
+      "title": "Fields",
+      "columns": [
+        "field",
+        "value"
+      ],
+      "rows": [
+        [
+          "suite",
+          "var"
+        ],
+        [
+          "status",
+          "ok"
+        ],
+        [
+          "module",
+          "corr_sim"
+        ],
+        [
+          "var",
+          "166668.32023587194"
+        ],
+        [
+          "cvar",
+          "186857.32331584513"
+        ],
+        [
+          "confidence",
+          "0.99"
+        ],
+        [
+          "horizon_days",
+          "252"
+        ],
+        [
+          "timestamp",
+          "2026-09-04T19:02:52.447693Z"
+        ],
+        [
+          "positions_source",
+          "derived"
+        ],
+        [
+          "notes",
+          "weights were normalized to sum to 1.0. | positions missing; derived proportional notionals from weights with total notional = 1,000,000. | correlation matrix missing; used identity matrix. | volatilities missing; used default annual volatility 0.25 for each asset. | live spot unavailable for GME,NVDA,AAPL,MSFT,AMZN,GOOGL,AVGO,MU,META,TSLA,BRK.B; used fallback price 100.0."
+        ]
+      ]
+    }
   ],
+  "charts": [],
+  "notes": [],
   "source": {
-    "repo": "/opt/data/FinancialDevelopment",
+    "repo": "C:\\Users\\bottl\\FinancialDevelopment",
     "collector": "var-sim",
     "note": "var_context_run_latest.json"
   },
   "schema_version": 1,
   "artifact_id": "var-simulations-digest",
   "title": "VaR Simulations Digest",
-  "generated_at": "2026-09-03 06:31 UTC"
+  "generated_at": "2026-09-14 03:40 UTC"
 }
