@@ -1,8 +1,7 @@
 {
-  "id": "sentiment-scanner-board",
-  "title": "Sentiment Scanner Board",
-  "collector": "sentiment",
+  "id": "daily-plays",
+  "title": "Daily Plays",
+  "collector": "daily-plays",
   "repo": "C:/Users/bottl/FinancialDevelopment",
-  "description": "Converted from the static Cowork mockup to the universal Hermes artifact shell.",
-  "refresh": "ask Hermes to 'refresh sentiment-scanner-board'"
+  "description": "Full market scan interpreted into scored trading cards with searchable history."
 }

@@ -6,6 +6,11 @@
 <title>Model usage</title>
 <!--HERMES-ARTIFACT:CSS-->
 <!--/HERMES-ARTIFACT:CSS-->
+<style id="base-theme">
+  /* Self-contained dark base — outside markers, survives refresh. */
+  :root { --foreground:#e2e8f0; --muted-foreground:#94a3b8; --border:rgba(148,163,184,.2); --card:#0b1220; }
+  body { background:#0b1220; color:var(--foreground); }
+</style>
 <style id="mu-css">
   /* Show-off layer. OUTSIDE all markers -> survives every refresh. */
   #mu { display:none; margin:0 0 26px; }

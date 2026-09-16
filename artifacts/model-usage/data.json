@@ -1,16 +1,2195 @@
 {
-  "summary": [],
-  "tables": [],
+  "summary": [
+    {
+      "label": "Fresh tokens",
+      "value": "20.85M"
+    },
+    {
+      "label": "Cached reads",
+      "value": "400.12M"
+    },
+    {
+      "label": "API calls",
+      "value": "4,635"
+    },
+    {
+      "label": "Est. cost (partial)",
+      "value": "$1.18",
+      "tone": "accent"
+    },
+    {
+      "label": "Local share",
+      "value": "44%",
+      "tone": "ok"
+    },
+    {
+      "label": "Lanes",
+      "value": "6"
+    }
+  ],
+  "tables": [
+    {
+      "title": "Usage by model",
+      "columns": [
+        "model",
+        "lane",
+        "fresh",
+        "cached",
+        "calls",
+        "est_cost_usd"
+      ],
+      "rows": [
+        [
+          "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+          "local",
+          "7.24M",
+          "120.59M",
+          "2,049",
+          "$0.0000"
+        ],
+        [
+          "glm-5.3-flash",
+          "zai",
+          "6.93M",
+          "170.28M",
+          "1,375",
+          "$0.0000"
+        ],
+        [
+          "deepseek/deepseek-v4.1-flash",
+          "nous",
+          "2.56M",
+          "5.55M",
+          "64",
+          "$0.4887"
+        ],
+        [
+          "Qwen3.8-27B-UD-IQ4_XS",
+          "local",
+          "1.99M",
+          "32.73M",
+          "463",
+          "$0.0000"
+        ],
+        [
+          "grok-4.6",
+          "xai-oauth",
+          "1.01M",
+          "38.66M",
+          "245",
+          "$0.0000"
+        ],
+        [
+          "tencent/hy4-preview",
+          "nous",
+          "285.96K",
+          "7.94M",
+          "40",
+          "$0.6395"
+        ],
+        [
+          "openai/gpt-5-nano",
+          "nous",
+          "269.89K",
+          "0",
+          "134",
+          "$0.0407"
+        ],
+        [
+          "upstage/solar-pro4:free",
+          "unknown",
+          "182.97K",
+          "407.49K",
+          "18",
+          "$0.0000"
+        ],
+        [
+          "gpt-5.6-terra",
+          "copilot",
+          "178.67K",
+          "23.94M",
+          "223",
+          "$0.0000"
+        ],
+        [
+          "deepseek/deepseek-v4-flash-0731",
+          "unknown",
+          "157.24K",
+          "18.82K",
+          "6",
+          "$0.0090"
+        ],
+        [
+          "stepfun/step-3.7-flash:free",
+          "nous",
+          "24.28K",
+          "0",
+          "3",
+          "$0.0000"
+        ],
+        [
+          "gemini-2.5-flash-lite",
+          "nous",
+          "20.74K",
+          "0",
+          "8",
+          "$0.0036"
+        ],
+        [
+          "z-ai/glm-5.3-flash",
+          "nous",
+          "8.51K",
+          "0",
+          "2",
+          "$0.0014"
+        ],
+        [
+          "gemma-4-26B-A4B-it-qat-UD-Q4_K_XL",
+          "local",
+          "2.11K",
+          "0",
+          "1",
+          "$0.0000"
+        ],
+        [
+          "LFM2.5-2.6B-Q4_K_M",
+          "local",
+          "1.09K",
+          "256",
+          "4",
+          "$0.0000"
+        ]
+      ]
+    },
+    {
+      "title": "Usage by profile",
+      "columns": [
+        "profile",
+        "lane",
+        "fresh",
+        "cached",
+        "calls",
+        "est_cost_usd"
+      ],
+      "rows": [
+        [
+          "(root)",
+          "zai",
+          "11.15M",
+          "246.78M",
+          "1,966",
+          "$1.1282"
+        ],
+        [
+          "local",
+          "nous",
+          "9.71M",
+          "153.34M",
+          "2,669",
+          "$0.0547"
+        ]
+      ]
+    },
+    {
+      "title": "Usage by provider / lane",
+      "columns": [
+        "provider",
+        "lane",
+        "fresh",
+        "cached",
+        "calls",
+        "est_cost_usd"
+      ],
+      "rows": [
+        [
+          "local",
+          "local",
+          "9.23M",
+          "153.32M",
+          "2,517",
+          "$0.0000"
+        ],
+        [
+          "zai",
+          "zai",
+          "6.93M",
+          "170.28M",
+          "1,375",
+          "$0.0000"
+        ],
+        [
+          "nous",
+          "nous",
+          "3.43M",
+          "13.92M",
+          "267",
+          "$1.1829"
+        ],
+        [
+          "xai-oauth",
+          "xai-oauth",
+          "1.01M",
+          "38.66M",
+          "245",
+          "$0.0000"
+        ],
+        [
+          "copilot",
+          "copilot",
+          "178.67K",
+          "23.94M",
+          "223",
+          "$0.0000"
+        ],
+        [
+          "unknown",
+          "unknown",
+          "82.70K",
+          "0",
+          "8",
+          "$0.0000"
+        ]
+      ]
+    }
+  ],
   "charts": [],
   "notes": [
-    "No session_model_usage rows found under C:\\Users\\bottl\\AppData\\Local\\hermes."
+    "Scanned 2 state.db file(s) under C:\\Users\\bottl\\.hermes; 151 usage rows.",
+    "Primary metric is FRESH tokens (input+output). Cached reads are tracked separately because they dwarf fresh usage and would flatten every chart.",
+    "Cost is partial — only 16% of fresh tokens came from priced lanes (zai and local report $0).",
+    "Daily buckets use date(last_seen) of per-session aggregate rows — an activity view, not exact per-call timestamps."
   ],
   "source": {
-    "note": "scanned 0 db(s)"
+    "note": "151 rows across 2 profile db(s)"
   },
-  "viz": {},
+  "viz": {
+    "schema": [
+      "profile",
+      "lane",
+      "model",
+      "task",
+      "fresh",
+      "cached",
+      "day"
+    ],
+    "rows": [
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        257,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        32540,
+        189440,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        265,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        2245361,
+        57269376,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "background_review",
+        61584,
+        3701248,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        338,
+        192,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        91382,
+        1401280,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "approval",
+        893,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        299,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        204208,
+        2181312,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "background_review",
+        123900,
+        490688,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        64,
+        192,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        175411,
+        2187008,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        282,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        25685,
+        25472,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        167122,
+        2759424,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        130248,
+        6155712,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        40892,
+        753728,
+        "2026-09-13"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        330,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        1281770,
+        22694144,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "approval",
+        5354,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "background_review",
+        73202,
+        5134336,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        285,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        926765,
+        4985792,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "background_review",
+        47689,
+        1042944,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "approval",
+        876,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "title_generation",
+        287,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "main",
+        1234531,
+        56267200,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "background_review",
+        56084,
+        3041408,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "zai",
+        "glm-5.3-flash",
+        "approval",
+        1090,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "copilot",
+        "gpt-5.6-terra",
+        "main",
+        78535,
+        19711765,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "copilot",
+        "gpt-5.6-terra",
+        "approval",
+        6780,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "copilot",
+        "gpt-5.6-terra",
+        "background_review",
+        14095,
+        4230236,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "copilot",
+        "gpt-5.6-terra",
+        "compression",
+        79257,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "deepseek/deepseek-v4.1-flash",
+        "main",
+        1997727,
+        4251520,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "deepseek/deepseek-v4.1-flash",
+        "approval",
+        2312,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "tencent/hy4-preview",
+        "main",
+        259965,
+        6971456,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "deepseek/deepseek-v4.1-flash",
+        "background_review",
+        9294,
+        592640,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "stepfun/step-3.7-flash:free",
+        "vision",
+        3417,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "tencent/hy4-preview",
+        "approval",
+        2578,
+        128,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "tencent/hy4-preview",
+        "background_review",
+        23414,
+        968768,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "unknown",
+        "upstage/solar-pro4:free",
+        "title_generation",
+        323,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "upstage/solar-pro4:free",
+        "main",
+        182646,
+        407488,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "deepseek/deepseek-v4.1-flash",
+        "title_generation",
+        307,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "deepseek/deepseek-v4.1-flash",
+        "main",
+        551253,
+        709376,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "nous",
+        "deepseek/deepseek-v4.1-flash",
+        "approval",
+        627,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "(root)",
+        "xai-oauth",
+        "grok-4.6",
+        "main",
+        583456,
+        27053952,
+        "2026-09-16"
+      ],
+      [
+        "(root)",
+        "xai-oauth",
+        "grok-4.6",
+        "title_generation",
+        2413,
+        0,
+        "2026-09-16"
+      ],
+      [
+        "(root)",
+        "xai-oauth",
+        "grok-4.6",
+        "approval",
+        16714,
+        0,
+        "2026-09-16"
+      ],
+      [
+        "(root)",
+        "xai-oauth",
+        "grok-4.6",
+        "background_review",
+        61818,
+        4022144,
+        "2026-09-16"
+      ],
+      [
+        "(root)",
+        "xai-oauth",
+        "grok-4.6",
+        "main",
+        316115,
+        6780672,
+        "2026-09-16"
+      ],
+      [
+        "(root)",
+        "xai-oauth",
+        "grok-4.6",
+        "title_generation",
+        2228,
+        0,
+        "2026-09-16"
+      ],
+      [
+        "(root)",
+        "xai-oauth",
+        "grok-4.6",
+        "background_review",
+        22958,
+        799488,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        520,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        44331,
+        219491,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        813,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        217096,
+        5451499,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "compression",
+        21091,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        12013,
+        304897,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "nous",
+        "z-ai/glm-5.3-flash",
+        "vision",
+        8510,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "unknown",
+        "openai/gpt-5-nano",
+        "title_generation",
+        670,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        371675,
+        10228823,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "compression",
+        34441,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        94079,
+        935178,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        622,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        25140,
+        25008,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        681,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        202882,
+        9345997,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        20543,
+        634367,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "unknown",
+        "openai/gpt-5-nano",
+        "compression",
+        29170,
+        0,
+        "2026-09-13"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        878,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        927,
+        49520,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        782,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        55211,
+        1416267,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        144371,
+        3703517,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        21228,
+        621763,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        113819,
+        4873838,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        2805,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        67798,
+        570907,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        996,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        29879,
+        140011,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        58302,
+        1075019,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        2253,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        3204,
+        54222,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        977,
+        0,
+        "2026-09-14"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        1187275,
+        16470037,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        1138,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        25180,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        1068,
+        24595,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        675,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "approval",
+        19508,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        275627,
+        2397404,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        6967,
+        168164,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        1031,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        1830,
+        127620,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        2264,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        3315,
+        76020,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        956,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "compression",
+        71802,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "gemma-4-26B-A4B-it-qat-UD-Q4_K_XL",
+        "vision",
+        2109,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "LFM2.5-2.6B-Q4_K_M",
+        "title_generation",
+        370,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        26846,
+        25777,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "vision",
+        4131,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "LFM2.5-2.6B-Q4_K_M",
+        "title_generation",
+        324,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "LFM2.5-2.6B-Q4_K_M",
+        "title_generation",
+        392,
+        256,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        29829,
+        324674,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        26231,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "title_generation",
+        266,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "title_generation",
+        274,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        25863,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "title_generation",
+        274,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        72864,
+        1271993,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "title_generation",
+        56,
+        241,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        33068,
+        488582,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "approval",
+        910,
+        699,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "title_generation",
+        267,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        2033612,
+        31055845,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "approval",
+        1556,
+        932,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        414511,
+        6195831,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "compression",
+        40221,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "title_generation",
+        295,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "title_generation",
+        295,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        28289,
+        132685,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        33662,
+        371740,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        1937,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        268510,
+        8191957,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "approval",
+        18315,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "unknown",
+        "stepfun/step-3.7-flash:free",
+        "compression",
+        8287,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        41199,
+        962052,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "title_generation",
+        1388,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        371725,
+        3941706,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "approval",
+        6370,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "unknown",
+        "stepfun/step-3.7-flash:free",
+        "compression",
+        12575,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "openai/gpt-5-nano",
+        "approval",
+        45430,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        443119,
+        1483598,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "unknown",
+        "openai/gpt-5-nano",
+        "approval",
+        2373,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "unknown",
+        "deepseek/deepseek-v4-flash-0731",
+        "compression",
+        29298,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "deepseek/deepseek-v4-flash-0731",
+        "compression",
+        77121,
+        18816,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "nous",
+        "gemini-2.5-flash-lite",
+        "vision",
+        3793,
+        0,
+        "2026-09-15"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "main",
+        305828,
+        5653300,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "background_review",
+        48959,
+        1575917,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "nous",
+        "gemini-2.5-flash-lite",
+        "vision",
+        16948,
+        0,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "nous",
+        "deepseek/deepseek-v4-flash-0731",
+        "compression",
+        50820,
+        0,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-UD-IQ4_XS",
+        "main",
+        246928,
+        5511131,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-UD-IQ4_XS",
+        "background_review",
+        53592,
+        143710,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-UD-IQ4_XS",
+        "title_generation",
+        262,
+        0,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-UD-IQ4_XS",
+        "main",
+        172343,
+        4477855,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-UD-IQ4_XS",
+        "main",
+        948342,
+        16790342,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-UD-IQ4_XS",
+        "background_review",
+        239383,
+        394547,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-UD-IQ4_XS",
+        "main",
+        187772,
+        2771907,
+        "2026-09-16"
+      ],
+      [
+        "local",
+        "local",
+        "Qwen3.8-27B-UD-IQ4_XS",
+        "main",
+        141730,
+        2636369,
+        "2026-09-16"
+      ]
+    ],
+    "palette": [
+      "#38bdf8",
+      "#f472b6",
+      "#4ade80",
+      "#facc15",
+      "#a78bfa",
+      "#22d3ee",
+      "#fb923c",
+      "#f87171",
+      "#2dd4bf",
+      "#c084fc"
+    ],
+    "by_provider": [
+      {
+        "key": "local",
+        "fresh": 9229967,
+        "cached": 153317810,
+        "reasoning": 0,
+        "calls": 2517,
+        "cost_usd": 0.0,
+        "lane": "local"
+      },
+      {
+        "key": "zai",
+        "fresh": 6928994,
+        "cached": 170280896,
+        "reasoning": 419126,
+        "calls": 1375,
+        "cost_usd": 0.0,
+        "lane": "zai"
+      },
+      {
+        "key": "nous",
+        "fresh": 3428405,
+        "cached": 13920192,
+        "reasoning": 139665,
+        "calls": 267,
+        "cost_usd": 1.1829012310000007,
+        "lane": "nous"
+      },
+      {
+        "key": "xai-oauth",
+        "fresh": 1005702,
+        "cached": 38656256,
+        "reasoning": 126131,
+        "calls": 245,
+        "cost_usd": 0.0,
+        "lane": "xai-oauth"
+      },
+      {
+        "key": "copilot",
+        "fresh": 178667,
+        "cached": 23942001,
+        "reasoning": 31406,
+        "calls": 223,
+        "cost_usd": 0.0,
+        "lane": "copilot"
+      },
+      {
+        "key": "unknown",
+        "fresh": 82696,
+        "cached": 0,
+        "reasoning": 6025,
+        "calls": 8,
+        "cost_usd": 0.0,
+        "lane": "unknown"
+      }
+    ],
+    "by_model": [
+      {
+        "key": "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+        "fresh": 7236420,
+        "cached": 120591693,
+        "reasoning": 0,
+        "calls": 2049,
+        "cost_usd": 0.0,
+        "lane": "local"
+      },
+      {
+        "key": "glm-5.3-flash",
+        "fresh": 6928994,
+        "cached": 170280896,
+        "reasoning": 419126,
+        "calls": 1375,
+        "cost_usd": 0.0,
+        "lane": "zai"
+      },
+      {
+        "key": "deepseek/deepseek-v4.1-flash",
+        "fresh": 2561520,
+        "cached": 5553536,
+        "reasoning": 25345,
+        "calls": 64,
+        "cost_usd": 0.48874223999999994,
+        "lane": "nous"
+      },
+      {
+        "key": "Qwen3.8-27B-UD-IQ4_XS",
+        "fresh": 1990352,
+        "cached": 32725861,
+        "reasoning": 0,
+        "calls": 463,
+        "cost_usd": 0.0,
+        "lane": "local"
+      },
+      {
+        "key": "grok-4.6",
+        "fresh": 1005702,
+        "cached": 38656256,
+        "reasoning": 126131,
+        "calls": 245,
+        "cost_usd": 0.0,
+        "lane": "xai-oauth"
+      },
+      {
+        "key": "tencent/hy4-preview",
+        "fresh": 285957,
+        "cached": 7940352,
+        "reasoning": 25101,
+        "calls": 40,
+        "cost_usd": 0.6394997560000001,
+        "lane": "nous"
+      },
+      {
+        "key": "openai/gpt-5-nano",
+        "fresh": 269886,
+        "cached": 0,
+        "reasoning": 60480,
+        "calls": 134,
+        "cost_usd": 0.040696699999999995,
+        "lane": "nous"
+      },
+      {
+        "key": "upstage/solar-pro4:free",
+        "fresh": 182969,
+        "cached": 407488,
+        "reasoning": 3833,
+        "calls": 18,
+        "cost_usd": 0.0,
+        "lane": "unknown"
+      },
+      {
+        "key": "gpt-5.6-terra",
+        "fresh": 178667,
+        "cached": 23942001,
+        "reasoning": 31406,
+        "calls": 223,
+        "cost_usd": 0.0,
+        "lane": "copilot"
+      },
+      {
+        "key": "deepseek/deepseek-v4-flash-0731",
+        "fresh": 157239,
+        "cached": 18816,
+        "reasoning": 28877,
+        "calls": 6,
+        "cost_usd": 0.008979959999999999,
+        "lane": "unknown"
+      },
+      {
+        "key": "stepfun/step-3.7-flash:free",
+        "fresh": 24279,
+        "cached": 0,
+        "reasoning": 0,
+        "calls": 3,
+        "cost_usd": 0.0,
+        "lane": "nous"
+      },
+      {
+        "key": "gemini-2.5-flash-lite",
+        "fresh": 20741,
+        "cached": 0,
+        "reasoning": 0,
+        "calls": 8,
+        "cost_usd": 0.0036221,
+        "lane": "nous"
+      },
+      {
+        "key": "z-ai/glm-5.3-flash",
+        "fresh": 8510,
+        "cached": 0,
+        "reasoning": 2054,
+        "calls": 2,
+        "cost_usd": 0.0013604749999999999,
+        "lane": "nous"
+      },
+      {
+        "key": "gemma-4-26B-A4B-it-qat-UD-Q4_K_XL",
+        "fresh": 2109,
+        "cached": 0,
+        "reasoning": 0,
+        "calls": 1,
+        "cost_usd": 0.0,
+        "lane": "local"
+      },
+      {
+        "key": "LFM2.5-2.6B-Q4_K_M",
+        "fresh": 1086,
+        "cached": 256,
+        "reasoning": 0,
+        "calls": 4,
+        "cost_usd": 0.0,
+        "lane": "local"
+      }
+    ],
+    "by_profile": [
+      {
+        "key": "(root)",
+        "fresh": 11147226,
+        "cached": 246780529,
+        "reasoning": 630942,
+        "calls": 1966,
+        "cost_usd": 1.128241996,
+        "lane": "zai"
+      },
+      {
+        "key": "local",
+        "fresh": 9707205,
+        "cached": 153336626,
+        "reasoning": 91411,
+        "calls": 2669,
+        "cost_usd": 0.054659234999999994,
+        "lane": "nous"
+      }
+    ],
+    "by_task": [
+      {
+        "key": "main",
+        "fresh": 17968322,
+        "cached": 359797406,
+        "reasoning": 511548,
+        "calls": 4006,
+        "cost_usd": 1.0359868460000001,
+        "lane": "zai"
+      },
+      {
+        "key": "background_review",
+        "fresh": 2229293,
+        "cached": 40298293,
+        "reasoning": 112931,
+        "calls": 397,
+        "cost_usd": 0.086377089,
+        "lane": "zai"
+      },
+      {
+        "key": "compression",
+        "fresh": 454083,
+        "cached": 18816,
+        "reasoning": 33229,
+        "calls": 22,
+        "cost_usd": 0.023120159999999997,
+        "lane": "copilot"
+      },
+      {
+        "key": "approval",
+        "fresh": 131686,
+        "cached": 1759,
+        "reasoning": 47351,
+        "calls": 154,
+        "cost_usd": 0.025746210999999998,
+        "lane": "zai"
+      },
+      {
+        "key": "vision",
+        "fresh": 38908,
+        "cached": 0,
+        "reasoning": 2054,
+        "calls": 13,
+        "cost_usd": 0.0049825749999999995,
+        "lane": "nous"
+      },
+      {
+        "key": "title_generation",
+        "fresh": 32139,
+        "cached": 881,
+        "reasoning": 15240,
+        "calls": 43,
+        "cost_usd": 0.00668835,
+        "lane": "zai"
+      }
+    ],
+    "timeseries": {
+      "days": [
+        "2026-09-13",
+        "2026-09-14",
+        "2026-09-15",
+        "2026-09-16"
+      ],
+      "series": [
+        {
+          "name": "local",
+          "data": [
+            987759,
+            494739,
+            5402330,
+            2345139
+          ]
+        },
+        {
+          "name": "zai",
+          "data": [
+            3300731,
+            2336558,
+            1291705,
+            0
+          ]
+        },
+        {
+          "name": "nous",
+          "data": [
+            66678,
+            8691,
+            3285268,
+            67768
+          ]
+        },
+        {
+          "name": "xai-oauth",
+          "data": [
+            0,
+            0,
+            0,
+            1005702
+          ]
+        },
+        {
+          "name": "copilot",
+          "data": [
+            0,
+            0,
+            178667,
+            0
+          ]
+        },
+        {
+          "name": "unknown",
+          "data": [
+            29840,
+            0,
+            52856,
+            0
+          ]
+        }
+      ],
+      "calendar": [
+        [
+          "2026-09-13",
+          4385008
+        ],
+        [
+          "2026-09-14",
+          2839988
+        ],
+        [
+          "2026-09-15",
+          10210826
+        ],
+        [
+          "2026-09-16",
+          3418609
+        ]
+      ]
+    },
+    "sankey": {
+      "nodes": [
+        {
+          "name": "(root)"
+        },
+        {
+          "name": "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M"
+        },
+        {
+          "name": "Qwen3.8-27B-UD-IQ4_XS"
+        },
+        {
+          "name": "copilot"
+        },
+        {
+          "name": "deepseek/deepseek-v4-flash-0731"
+        },
+        {
+          "name": "deepseek/deepseek-v4.1-flash"
+        },
+        {
+          "name": "glm-5.3-flash"
+        },
+        {
+          "name": "gpt-5.6-terra"
+        },
+        {
+          "name": "grok-4.6"
+        },
+        {
+          "name": "local"
+        },
+        {
+          "name": "nous"
+        },
+        {
+          "name": "openai/gpt-5-nano"
+        },
+        {
+          "name": "other models"
+        },
+        {
+          "name": "tencent/hy4-preview"
+        },
+        {
+          "name": "unknown"
+        },
+        {
+          "name": "upstage/solar-pro4:free"
+        },
+        {
+          "name": "xai-oauth"
+        },
+        {
+          "name": "zai"
+        }
+      ],
+      "links": [
+        {
+          "source": "local",
+          "target": "local",
+          "value": 9229967
+        },
+        {
+          "source": "local",
+          "target": "Qwen3.8-27B-TurboFCFusion-735-882-Here-Uncen-NEO-CODER-MAX-MTP-Q4_K_M",
+          "value": 7236420
+        },
+        {
+          "source": "(root)",
+          "target": "zai",
+          "value": 6928994
+        },
+        {
+          "source": "zai",
+          "target": "glm-5.3-flash",
+          "value": 6928994
+        },
+        {
+          "source": "(root)",
+          "target": "nous",
+          "value": 3033540
+        },
+        {
+          "source": "nous",
+          "target": "deepseek/deepseek-v4.1-flash",
+          "value": 2561520
+        },
+        {
+          "source": "local",
+          "target": "Qwen3.8-27B-UD-IQ4_XS",
+          "value": 1990352
+        },
+        {
+          "source": "(root)",
+          "target": "xai-oauth",
+          "value": 1005702
+        },
+        {
+          "source": "xai-oauth",
+          "target": "grok-4.6",
+          "value": 1005702
+        },
+        {
+          "source": "local",
+          "target": "nous",
+          "value": 394865
+        },
+        {
+          "source": "nous",
+          "target": "tencent/hy4-preview",
+          "value": 285957
+        },
+        {
+          "source": "nous",
+          "target": "openai/gpt-5-nano",
+          "value": 237673
+        },
+        {
+          "source": "nous",
+          "target": "upstage/solar-pro4:free",
+          "value": 182646
+        },
+        {
+          "source": "(root)",
+          "target": "copilot",
+          "value": 178667
+        },
+        {
+          "source": "copilot",
+          "target": "gpt-5.6-terra",
+          "value": 178667
+        },
+        {
+          "source": "nous",
+          "target": "deepseek/deepseek-v4-flash-0731",
+          "value": 127941
+        },
+        {
+          "source": "local",
+          "target": "unknown",
+          "value": 82373
+        },
+        {
+          "source": "nous",
+          "target": "other models",
+          "value": 32668
+        },
+        {
+          "source": "unknown",
+          "target": "openai/gpt-5-nano",
+          "value": 32213
+        },
+        {
+          "source": "unknown",
+          "target": "deepseek/deepseek-v4-flash-0731",
+          "value": 29298
+        },
+        {
+          "source": "unknown",
+          "target": "other models",
+          "value": 20862
+        },
+        {
+          "source": "local",
+          "target": "other models",
+          "value": 3195
+        },
+        {
+          "source": "(root)",
+          "target": "unknown",
+          "value": 323
+        },
+        {
+          "source": "unknown",
+          "target": "upstage/solar-pro4:free",
+          "value": 323
+        }
+      ]
+    },
+    "totals": {
+      "fresh": 20854431,
+      "cached": 400117155,
+      "reasoning": 722353,
+      "calls": 4635,
+      "cost_usd": 1.1829,
+      "local_fresh": 9229967,
+      "cloud_fresh": 11624464,
+      "profiles": 2,
+      "models": 15
+    }
+  },
   "schema_version": 1,
   "artifact_id": "model-usage",
   "title": "Model usage",
-  "generated_at": "2026-09-15 05:17 UTC"
+  "generated_at": "2026-09-16 11:46 UTC"
 }

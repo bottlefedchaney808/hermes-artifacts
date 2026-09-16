@@ -1,0 +1,1 @@
+{"id": "kalshi-desk", "title": "Kalshi Trading Desk", "collector": "kalshi-desk", "repo": "E:/BlackHole Investments/BlackHole/Event_Desk", "description": "Bucket clips, perps tape, and trading stats for all Kalshi products.", "template": "scored-cards.html", "auto_refresh": true, "refresh_interval_seconds": 600}

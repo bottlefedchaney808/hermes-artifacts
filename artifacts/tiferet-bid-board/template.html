@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiferet — Bid Desk</title>
+<style>
+:root{
+  --bg:#141414; --panel:#1d1d1b; --panel2:#232320; --line:#33332e;
+  --ink:#e8e3d8; --muted:#8a8578; --dim:#5c5850;
+  --orange:#f0742a; --amber:#e8a33d; --green:#8fd674; --blue:#7fb4e8; --teal:#5ec8a8; --rose:#e85f8a;
+  --mono:'Consolas','SF Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono);padding:28px clamp(16px,4vw,48px) 60px;max-width:1280px;margin:0 auto}
+header{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;border-bottom:2px solid var(--orange);padding-bottom:14px;margin-bottom:22px}
+h1{font-size:22px;font-weight:700;letter-spacing:.5px}
+h1 .sq{display:inline-block;width:12px;height:12px;background:var(--orange);margin-right:10px}
+.sub{color:var(--muted);font-size:11.5px}
+nav{margin-left:auto;display:flex;gap:6px}
+nav button{background:none;border:1px solid var(--line);color:var(--muted);font:600 12px var(--mono);padding:7px 14px;cursor:pointer;letter-spacing:.5px}
+nav button.on{background:var(--orange);border-color:var(--orange);color:#141414}
+nav button:not(.on):hover{border-color:var(--muted);color:var(--ink)}
+section{display:none}section.on{display:block}
+.grid{display:grid;gap:14px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-bottom:14px}
+.card{background:var(--panel);border:1px solid var(--line);padding:18px}
+.card h3{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px}
+.kpi .v{font-size:clamp(24px,3.2vw,34px);font-weight:700;letter-spacing:-.5px}
+.kpi .u{font-size:12px;color:var(--muted);margin-top:4px}
+.kpi .bar{height:6px;margin-top:12px;background:var(--panel2)}
+.kpi .bar i{display:block;height:100%;background:var(--orange)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:860px){.row{grid-template-columns:1fr}}
+.brow{display:grid;grid-template-columns:70px 1fr 44px;gap:10px;align-items:center;margin:7px 0;font-size:12px}
+.brow .lbl{color:var(--muted)}
+.brow .tr{background:var(--panel2);height:18px;position:relative}
+.brow .tr i{position:absolute;inset:0 auto 0 0;background:var(--orange)}
+.brow.alt i{background:var(--teal)}
+.brow .n{text-align:right;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid #26261f}
+tr:hover td{background:var(--panel2)}
+.due{font-weight:700;white-space:nowrap}
+.due.soon{color:var(--orange)}
+.pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border:1px solid;border-radius:2px;white-space:nowrap}
+.past th,.past td{color:var(--muted)}
+.past td.op{color:var(--dim)}
+footer{margin-top:26px;color:var(--dim);font-size:11px;line-height:1.7;border-top:1px solid var(--line);padding-top:12px}
+.big{font-size:12px;color:var(--muted);line-height:1.9}
+.big b{color:var(--ink);font-size:15px}
+.fun{display:grid;gap:6px}
+.fun .st{display:grid;grid-template-columns:190px 1fr 34px;gap:10px;align-items:center;font-size:11.5px}
+.fun .st .tr{background:var(--panel2);height:20px;position:relative}
+.fun .st .tr i{position:absolute;inset:0 auto 0 0}
+.fun .st .nm{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.note{font-size:11px;color:var(--dim);margin-top:10px;line-height:1.6}
+.dual{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:6px}
+.dual .h{font-size:10px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+@media(max-width:700px){.fun .st{grid-template-columns:120px 1fr 30px}}
+</style>
+<!--HERMES-ARTIFACT:CSS-->
+<!--/HERMES-ARTIFACT:CSS-->
+</head>
+<body>
+<header>
+  <h1><span class="sq"></span>TIFERET · BID DESK</h1>
+  <span class="sub" id="gen"></span>
+  <nav>
+    <button data-t="overview" class="on">OVERVIEW</button>
+    <button data-t="calendar">BID CALENDAR</button>
+    <button data-t="database">DATABASE</button>
+  </nav>
+</header>
+
+<section id="overview" class="on">
+  <div class="grid kpis" id="kpis"></div>
+  <div class="row">
+    <div class="card">
+      <h3>Pipeline velocity — new vs submitted, by month</h3>
+      <div id="vel"></div>
+      <div class="dual" style="margin-top:10px">
+        <div class="h"><span style="color:var(--orange)">■</span> new opportunities</div>
+        <div class="h"><span style="color:var(--teal)">■</span> submitted</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Assigned → Submitted turnaround</h3>
+      <div id="speed"></div>
+      <div class="note">Median <b style="color:var(--orange)" id="speedmed"></b> days from Copper “Assigned Bids” to “Submitted” across <span id="speedn"></span> measurable bids. Range <span id="speedrange"></span> days.</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card">
+      <h3>Where the 49 tracked opportunities sit right now</h3>
+      <div class="fun" id="funnel"></div>
+    </div>
+    <div class="card">
+      <h3>Heaviest pursuits — combined quoted value</h3>
+      <div id="topjobs"></div>
+      <div class="note">Multiple proposals per job counted (rebids, alternates, BAFOs). Asterisk = placeholder job number pending resolution in the DB.</div>
+    </div>
+  </div>
+</section>
+
+<section id="calendar">
+  <div class="card" style="margin-bottom:14px">
+    <h3>Upcoming bid due dates <span style="color:var(--dim);text-transform:none;letter-spacing:0">— from Copper pipeline records</span></h3>
+    <table><thead><tr><th>Due</th><th>Opportunity</th><th>Stage</th><th></th></tr></thead><tbody id="up"></tbody></table>
+  </div>
+  <div class="card past">
+    <h3>Recently passed due dates</h3>
+    <table><thead><tr><th>Was due</th><th>Opportunity</th><th>Stage now</th></tr></thead><tbody id="past"></tbody></table>
+  </div>
+</section>
+
+<section id="database">
+  <div class="grid kpis" id="dbkpis"></div>
+  <div class="row">
+    <div class="card">
+      <h3>Quoted $/SF distribution — <span id="psfn"></span> jobs with SF + total</h3>
+      <div id="psf"></div>
+      <div class="note">Percentiles: p25 <b>$4.34</b> · median <b>$8.43</b> · p75 <b>$20.37</b> · p90 <b>$73</b>. The tail is real — scope differences (paint-only vs full build-out) — not noise.</div>
+    </div>
+    <div class="card">
+      <h3>Quoted $/unit distribution — <span id="pun"></span> sane records</h3>
+      <div id="pu"></div>
+      <div class="note">Records outside $500–$50,000/unit excluded (scope pairing errors flagged OUTLIER in the DB).</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Top projects by combined quoted value</h3>
+    <table><thead><tr><th>Project</th><th>Proposals</th><th style="text-align:right">Combined quoted</th><th style="text-align:right">Largest single</th></tr></thead><tbody id="topdb"></tbody></table>
+    <div class="note" id="intumnote"></div>
+  </div>
+</section>
+
+<footer id="foot"></footer>
+<div id="app" style="display:none"></div>
+
+<!--HERMES-ARTIFACT:JS-->
+<!--/HERMES-ARTIFACT:JS-->
+<!--HERMES-ARTIFACT:DATA-->
+<!--/HERMES-ARTIFACT:DATA-->
+<script>
+(function(){
+  var el = document.getElementById("hermes-artifact-data");
+  if (el) {
+    try {
+      var d = JSON.parse(el.textContent);
+      if (d && d.tiferet && d.tiferet.kpi) window.D = d.tiferet;
+    } catch (e) { /* fall through to embedded snapshot */ }
+  }
+})();
+</script>
+<script>
+var D = (window.D || {"meta":{"generated":"Sep 3, 2026","sources":"price_history.json (238 recs) \u00b7 final_db.json (357) \u00b7 Copper via Gmail (500 notifications, May 20\u2013Sep 3)"},"kpi":{"pipeline_total":137598321,"sf":10680193,"units":46713,"records":238,"sf_total_n":75,"projects":44,"final_db":357},"pricing":{"per_sf":{"n":75,"min":0.42,"p25":4.34,"med":8.43,"p75":20.37,"p90":73.0,"max":603.88},"buckets":{"0\u20133":11,"3\u20136":23,"6\u201310":10,"10\u201320":12,"20\u201350":11,"50+":8},"buckets_pct":{"0\u20133":48,"3\u20136":100,"6\u201310":43,"10\u201320":52,"20\u201350":48,"50+":35},"n":75,"per_unit":{"n":119,"p25":4163,"med":5398,"p75":7694},"unit_hist":{"$3-4k":23,"$4-5k":25,"$5-6k":28,"$6-7k":7,"$7k+":36},"unit_hist_pct":{"$3-4k":64,"$4-5k":69,"$5-6k":78,"$6-7k":19,"$7k+":100}},"top":[{"name":"Marina Shores *","n_proposals":6,"combined_total":13659535,"max_total":2609714},{"name":"Bundy Expo (HC)","n_proposals":6,"combined_total":12661517,"max_total":3227573},{"name":"Columbia and A Street Tower *","n_proposals":6,"combined_total":12003114,"max_total":2158529},{"name":"Malibu Villa","n_proposals":14,"combined_total":11929423,"max_total":3038526},{"name":"Stuart & Eureka *","n_proposals":3,"combined_total":10769274,"max_total":7196971},{"name":"234 Pico","n_proposals":8,"combined_total":9560179,"max_total":1370700}],"intum":{"n_proposals":2,"combined":6963865,"note":"Stuart & Eureka (9403) R1 + original \u2014 only 2 proposals carry intumescent pricing"},"funnel":[{"stage":"Assigned Bids","n":7},{"stage":"Takeoff","n":1},{"stage":"Madi Review","n":1},{"stage":"Approval Pending","n":1},{"stage":"Approved","n":2},{"stage":"Submitted","n":1},{"stage":"SUBMITTED","n":2},{"stage":"REBIDS","n":1},{"stage":"Level 3 (Exec Level of Traction)","n":1},{"stage":"Level 1 (No Traction)","n":24},{"stage":"Not Bidding","n":4},{"stage":"Lost","n":1}],"velocity":[{"m":"May","new":4,"sub":6,"new_pct":25,"sub_pct":55},{"m":"Jun","new":16,"sub":7,"new_pct":100,"sub_pct":64},{"m":"Jul","new":9,"sub":11,"new_pct":56,"sub_pct":100},{"m":"Aug","new":16,"sub":4,"new_pct":100,"sub_pct":36},{"m":"Sep","new":2,"sub":2,"new_pct":12,"sub_pct":18}],"speed":{"med":14,"min":3,"max":21,"n":17,"hist":{"0-4":2,"5-9":3,"10-14":5,"15-19":6,"20-24":1}},"cal_upcoming":[{"opportunity":"ACBCI San Luis Rey Warehouse","bid_due":"2026-09-04","stage":"Approval Pending"},{"opportunity":"Troost 75","bid_due":"2026-09-04","stage":"New"},{"opportunity":"1318 4th Street","bid_due":"2026-09-11","stage":"REBIDS"},{"opportunity":"Sunrise of San Marcos","bid_due":"2026-09-15","stage":"Not Bidding"},{"opportunity":"Camp Alonim Project (17 building structures)","bid_due":"2026-09-16","stage":"Assigned Bids"},{"opportunity":"6010 Klump Ave","bid_due":"2026-09-18","stage":"New"},{"opportunity":"Avalon Palm Springs","bid_due":"2026-09-20","stage":"Assigned Bids"},{"opportunity":"MacArthur Court","bid_due":"2026-09-24","stage":"New"}],"cal_past":[{"opportunity":"The Garden Street Hotel","bid_due":"2026-07-07","stage":"Assigned Bids"},{"opportunity":"Desmond - Prettybird","bid_due":"2026-07-09","stage":"Level 1 (No Traction)"},{"opportunity":"1318 4th Street","bid_due":"2026-07-21","stage":"REBIDS"},{"opportunity":"Palisade Santee Commerce Center","bid_due":"2026-07-22","stage":"Level 1 (No Traction)"},{"opportunity":"Manchester & La Tijera","bid_due":"2026-07-24","stage":"Level 1 (No Traction)"},{"opportunity":"6136 Manchester (FINAL BID)","bid_due":"2026-07-24","stage":"Level 1 (No Traction)"},{"opportunity":"Manchester Apartments (75% CD)","bid_due":"2026-07-27","stage":"Level 1 (No Traction)"},{"opportunity":"Picasso Brentwood Apartments","bid_due":"2026-07-28","stage":"Level 1 (No Traction)"},{"opportunity":"5444 Napa Street (San Diego)","bid_due":"2026-08-03","stage":"Level 1 (No Traction)"},{"opportunity":"PATH Villas - East Los Angeles","bid_due":"2026-08-11","stage":"Not Bidding"},{"opportunity":"Fairchild","bid_due":"2026-08-17","stage":"Level 1 (No Traction)"},{"opportunity":"Rosemead Family Apartments (Best and Final)","bid_due":"2026-08-24","stage":"Level 1 (No Traction)"},{"opportunity":"The Aventine - Encino Senior Living II","bid_due":"2026-08-28","stage":"Level 1 (No Traction)"},{"opportunity":"Rams Village Block A","bid_due":"2026-09-02","stage":"SUBMITTED"}],"stage_palette":{"New":"#e8e3d8","Assigned Bids":"#7fb4e8","Takeoff":"#5ec8a8","Madi Review":"#c9b458","ROBIN APPROVAL":"#c9b458","Approval Pending":"#c9b458","Approved":"#8fd674","READY TO SUBMIT":"#f0a24a","Submitted":"#f0742a","SUBMITTED":"#f0742a","REBIDS":"#e85f8a","Level 3 (Exec Level of Traction)":"#b48fe8","Level 1 (No Traction)":"#6b7280","Not Bidding":"#4b5563","Lost":"#374151"}});
+
+var stage_palette = (D && D.stage_palette) || {"New":"#e8e3d8","Assigned Bids":"#f0742a","Takeoff":"#e8a33d","Madi Review":"#e8a33d","Approval Pending":"#e8a33d","Approved":"#5ec8a8","Submitted":"#8fd674","SUBMITTED":"#8fd674","REBIDS":"#7fb4e8","Lost":"#e85f8a","Not Bidding":"#8a8578","Level 1 (No Traction)":"#5c5850","Level 3 (Exec Level of Traction)":"#7fb4e8"};
+
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const fmt$ = n => n>=1e6 ? '$'+(n/1e6).toFixed(1).replace(/\.0$/,'')+'M' : '$'+Math.round(n/1e3)+'k';
+const fmt$full = n => '$'+n.toLocaleString('en-US',{maximumFractionDigits:0});
+
+// ---------- nav ----------
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('section').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); $('#'+b.dataset.t).classList.add('on');
+});
+
+// ---------- header ----------
+$('#gen').textContent = D.meta.generated + ' · ' + D.meta.sources;
+
+// ---------- overview KPIs ----------
+const k = D.kpi;
+const kpis = [
+  {v:fmt$(k.pipeline_total), u:'combined quoted value — 130 priced proposals', pct:100},
+  {v:k.sf.toLocaleString(), u:'total square feet quoted', pct:100},
+  {v:k.units.toLocaleString(), u:'dwelling units priced', pct:100},
+  {v:k.records, u:'price-history records ('+k.projects+' projects)', pct:100},
+];
+$('#kpis').innerHTML = kpis.map(x=>
+ `<div class="card kpi"><div class="v">${x.v}</div><div class="u">${x.u}</div><div class="bar"><i style="width:${x.pct}%"></i></div></div>`).join('');
+
+// ---------- velocity ----------
+$('#vel').innerHTML = D.velocity.map(v=>
+ `<div class="brow"><span class="lbl">${v.m}</span><span class="tr"><i style="width:${v.new_pct}%"></i></span><span class="n">${v.new}</span></div>
+  <div class="brow alt"><span class="lbl"></span><span class="tr"><i style="width:${v.sub_pct}%"></i></span><span class="n">${v.sub}</span></div>`).join('');
+
+// ---------- speed ----------
+$('#speed').innerHTML = Object.entries(D.speed.hist).map(([b,n])=>{
+  const mx = Math.max(...Object.values(D.speed.hist));
+  return `<div class="brow"><span class="lbl">${b}d</span><span class="tr"><i style="width:${Math.round(n/mx*100)}%"></i></span><span class="n">${n}</span></div>`;
+}).join('');
+$('#speedmed').textContent = D.speed.med;
+$('#speedn').textContent = D.speed.n;
+$('#speedrange').textContent = D.speed.min+'–'+D.speed.max;
+
+// ---------- funnel ----------
+const mx = Math.max(...D.funnel.map(f=>f.n));
+$('#funnel').innerHTML = D.funnel.map(f=>{
+  const c = D.stage_palette[f.stage]||'#888';
+  return `<div class="st"><span class="nm">${f.stage}</span><span class="tr"><i style="width:${Math.round(f.n/mx*100)}%;background:${c}"></i></span><span class="n">${f.n}</span></div>`;
+}).join('');
+$('#funnel').insertAdjacentHTML('beforeend','<div class="note">30 of 49 tracked opportunities have reached Submitted at least once. Live Copper stages via notification emails; “Level 1 (No Traction)” = parked.</div>');
+
+// ---------- top jobs ----------
+const tmax = D.top[0].combined_total;
+$('#topjobs').innerHTML = D.top.map(t=>
+ `<div class="brow" style="grid-template-columns:150px 1fr 74px"><span class="lbl" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.name}</span><span class="tr"><i style="width:${Math.round(t.combined_total/tmax*100)}%"></i></span><span class="n">${fmt$(t.combined_total)}</span></div>`).join('');
+
+// ---------- calendar ----------
+const today = new Date('2026-09-03');
+$('#up').innerHTML = D.cal_upcoming.map(r=>{
+  const days = Math.round((new Date(r.bid_due)-today)/864e5);
+  const c = D.stage_palette[r.stage]||'#6b7280';
+  return `<tr><td class="due ${days<=7?'soon':''}">${r.bid_due.slice(5).replace('-','/')} <span style="color:var(--dim);font-weight:400">(${days===0?'today':days+'d'})</span></td>
+  <td class="op">${r.opportunity}</td>
+  <td><span class="pill" style="color:${c};border-color:${c}">${r.stage}</span></td>
+  <td></td></tr>`;
+}).join('');
+$('#past').innerHTML = D.cal_past.map(r=>{
+  const c = D.stage_palette[r.stage]||'#6b7280';
+  return `<tr><td class="due">${r.bid_due.slice(5).replace('-','/')}</td><td class="op">${r.opportunity}</td>
+  <td><span class="pill" style="color:${c};border-color:${c}">${r.stage||'—'}</span></td></tr>`;
+}).join('');
+
+// ---------- database ----------
+$('#dbkpis').innerHTML = [
+  {v:D.kpi.final_db, u:'proposals in consolidated final_db.json'},
+  {v:D.kpi.projects, u:'distinct projects in price history'},
+  {v:fmt$(D.intum.combined), u:'intumescent priced across 2 proposals'},
+].map(x=>`<div class="card kpi"><div class="v">${x.v}</div><div class="u">${x.u}</div><div class="bar"><i style="width:100%;background:var(--amber)"></i></div></div>`).join('');
+
+$('#psfn').textContent = D.pricing.n;
+const pb = D.pricing.buckets, pbp = D.pricing.buckets_pct;
+$('#psf').innerHTML = Object.keys(pb).map(b=>
+ `<div class="brow"><span class="lbl">$${b}</span><span class="tr"><i style="width:${pbp[b]}%"></i></span><span class="n">${pb[b]}</span></div>`).join('');
+
+$('#pun').textContent = D.pricing.per_unit.n;
+const uh = D.pricing.unit_hist, uhp = D.pricing.unit_hist_pct;
+$('#pu').innerHTML = Object.keys(uh).map(b=>
+ `<div class="brow alt"><span class="lbl">${b}</span><span class="tr"><i style="width:${uhp[b]}%"></i></span><span class="n">${uh[b]}</span></div>`).join('');
+$('#pu').insertAdjacentHTML('beforeend','<div class="note">Median $'+D.pricing.per_unit.med.toLocaleString()+'/unit · p25 $'+D.pricing.per_unit.p25.toLocaleString()+' · p75 $'+D.pricing.per_unit.p75.toLocaleString()+'</div>');
+
+$('#topdb').innerHTML = D.top.map(t=>
+ `<tr><td class="op">${t.name}</td><td>${t.n_proposals}</td><td style="text-align:right;font-weight:700">${fmt$full(t.combined_total)}</td><td style="text-align:right">${fmt$full(t.max_total)}</td></tr>`).join('');
+$('#intumnote').textContent = D.intum.note;
+
+// ---------- footer ----------
+$('#foot').innerHTML = 'Sources: ' + D.meta.sources + '. Copper data reconstructed from 500 CRM notification emails (2026-05-20 → 2026-09-03); stage history is event-derived, not a live API pull. Price book, wage rates, and WC calculator remain cloud Sheets (Drive API disabled on this Google project) — add them when API access lands. Built ' + D.meta.generated + '.';
+</script>
+</body>
+</html>

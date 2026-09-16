@@ -1,0 +1,382 @@
+{
+  "summary": [
+    {
+      "label": "record",
+      "value": "16W–18L"
+    },
+    {
+      "label": "win rate",
+      "value": "47.1%"
+    },
+    {
+      "label": "total pnl",
+      "value": "$-32.77"
+    },
+    {
+      "label": "avg win",
+      "value": "$+29.26"
+    },
+    {
+      "label": "avg loss",
+      "value": "$-27.83"
+    },
+    {
+      "label": "open positions",
+      "value": "34"
+    },
+    {
+      "label": "settled",
+      "value": "34"
+    }
+  ],
+  "cards": [
+    {
+      "symbol": "KXGOLD15M",
+      "score": 22,
+      "lean": "short",
+      "event": "settlement",
+      "meta": "no · $-28.81",
+      "thesis": "Bucket clip settled no",
+      "evidence": "Ticker: KXGOLD15M-26SEP150730-30",
+      "risk": "",
+      "delta": -28.81
+    },
+    {
+      "symbol": "KXGOLD15M",
+      "score": 22,
+      "lean": "short",
+      "event": "settlement",
+      "meta": "no · $-28.35",
+      "thesis": "Bucket clip settled no",
+      "evidence": "Ticker: KXGOLD15M-26SEP150745-45",
+      "risk": "",
+      "delta": -28.35
+    },
+    {
+      "symbol": "KXBTC15M",
+      "score": 22,
+      "lean": "short",
+      "event": "settlement",
+      "meta": "no · $-28.51",
+      "thesis": "Bucket clip settled no",
+      "evidence": "Ticker: KXBTC15M-26SEP150930-30",
+      "risk": "",
+      "delta": -28.51
+    },
+    {
+      "symbol": "KXWTI15M",
+      "score": 22,
+      "lean": "short",
+      "event": "settlement",
+      "meta": "no · $-28.76",
+      "thesis": "Bucket clip settled no",
+      "evidence": "Ticker: KXWTI15M-26SEP151115-15",
+      "risk": "",
+      "delta": -28.76
+    },
+    {
+      "symbol": "KXSILVER15M",
+      "score": 82,
+      "lean": "long",
+      "event": "settlement",
+      "meta": "yes · $+32.09",
+      "thesis": "Bucket clip settled yes",
+      "evidence": "Ticker: KXSILVER15M-26SEP151300-00",
+      "risk": "",
+      "delta": 32.09
+    },
+    {
+      "symbol": "KXBTC15M",
+      "score": 73,
+      "lean": "long",
+      "event": "settlement",
+      "meta": "yes · $+23.14",
+      "thesis": "Bucket clip settled yes",
+      "evidence": "Ticker: KXBTC15M-26SEP151430-30",
+      "risk": "",
+      "delta": 23.14
+    },
+    {
+      "symbol": "KXGOLD15M",
+      "score": 75,
+      "lean": "long",
+      "event": "settlement",
+      "meta": "yes · $+25.11",
+      "thesis": "Bucket clip settled yes",
+      "evidence": "Ticker: KXGOLD15M-26SEP151445-45",
+      "risk": "",
+      "delta": 25.11
+    },
+    {
+      "symbol": "KXSOL15M",
+      "score": 27,
+      "lean": "short",
+      "event": "settlement",
+      "meta": "no · $-23.70",
+      "thesis": "Bucket clip settled no",
+      "evidence": "Ticker: KXSOL15M-26SEP151500-00",
+      "risk": "",
+      "delta": -23.7
+    },
+    {
+      "symbol": "KXWTI15M",
+      "score": 27,
+      "lean": "short",
+      "event": "settlement",
+      "meta": "no · $-23.87",
+      "thesis": "Bucket clip settled no",
+      "evidence": "Ticker: KXWTI15M-26SEP151515-15",
+      "risk": "",
+      "delta": -23.87
+    },
+    {
+      "symbol": "KXBTC15M",
+      "score": 27,
+      "lean": "short",
+      "event": "settlement",
+      "meta": "no · $-23.81",
+      "thesis": "Bucket clip settled no",
+      "evidence": "Ticker: KXBTC15M-26SEP151545-45",
+      "risk": "",
+      "delta": -23.81
+    }
+  ],
+  "tables": [
+    {
+      "id": "recent",
+      "title": "Recent Settlements",
+      "columns": [
+        "Time",
+        "Series",
+        "Result",
+        "PnL"
+      ],
+      "rows": [
+        [
+          "74+00:00",
+          "KXSOL15M",
+          "yes",
+          "$+30.24"
+        ],
+        [
+          "30+00:00",
+          "KXSOL15M",
+          "yes",
+          "$+31.35"
+        ],
+        [
+          "54+00:00",
+          "KXSILVER15M",
+          "yes",
+          "$+15.07"
+        ],
+        [
+          "80+00:00",
+          "KXSILVER15M",
+          "yes",
+          "$+28.07"
+        ],
+        [
+          "57+00:00",
+          "KXSILVER15M",
+          "no",
+          "$-28.41"
+        ],
+        [
+          "61+00:00",
+          "KXGOLD15M",
+          "no",
+          "$-28.81"
+        ],
+        [
+          "77+00:00",
+          "KXGOLD15M",
+          "no",
+          "$-28.35"
+        ],
+        [
+          "22+00:00",
+          "KXBTC15M",
+          "no",
+          "$-28.51"
+        ],
+        [
+          "64+00:00",
+          "KXWTI15M",
+          "no",
+          "$-28.76"
+        ],
+        [
+          "39+00:00",
+          "KXSILVER15M",
+          "yes",
+          "$+32.09"
+        ],
+        [
+          "81+00:00",
+          "KXBTC15M",
+          "yes",
+          "$+23.14"
+        ],
+        [
+          "23+00:00",
+          "KXGOLD15M",
+          "yes",
+          "$+25.11"
+        ],
+        [
+          "12+00:00",
+          "KXSOL15M",
+          "no",
+          "$-23.70"
+        ],
+        [
+          "81+00:00",
+          "KXWTI15M",
+          "no",
+          "$-23.87"
+        ],
+        [
+          "59+00:00",
+          "KXBTC15M",
+          "no",
+          "$-23.81"
+        ]
+      ]
+    },
+    {
+      "id": "series-stats",
+      "title": "Stats by Series",
+      "columns": [
+        "Series",
+        "W/L",
+        "Win Rate",
+        "PnL"
+      ],
+      "rows": [
+        [
+          "KXETH15M",
+          "2/2",
+          "100%",
+          "$+68.79"
+        ],
+        [
+          "KXSILVER15M",
+          "4/7",
+          "57%",
+          "$+19.76"
+        ],
+        [
+          "KXWTI15M",
+          "3/6",
+          "50%",
+          "$+16.50"
+        ],
+        [
+          "KXSOL15M",
+          "3/6",
+          "50%",
+          "$+11.96"
+        ],
+        [
+          "KXBTC15M",
+          "2/6",
+          "33%",
+          "$-59.74"
+        ],
+        [
+          "KXGOLD15M",
+          "2/7",
+          "29%",
+          "$-90.04"
+        ]
+      ]
+    },
+    {
+      "id": "perps-prices",
+      "title": "Perps Prices (by 24h Volume)",
+      "columns": [
+        "Ticker",
+        "Price",
+        "Open Interest",
+        "24h Volume"
+      ],
+      "rows": [
+        [
+          "BTC",
+          "$7.60",
+          "2,030,486",
+          "$504,801,438"
+        ],
+        [
+          "ETH",
+          "$2.41",
+          "1,679,918",
+          "$315,725,500"
+        ],
+        [
+          "XRP",
+          "$1.39",
+          "1,231,004",
+          "$43,401,085"
+        ],
+        [
+          "SILVER",
+          "$6.33",
+          "183,259",
+          "$23,094,974"
+        ],
+        [
+          "GOLD",
+          "$4.29",
+          "454,744",
+          "$18,889,882"
+        ],
+        [
+          "SOL",
+          "$9.92",
+          "99,709",
+          "$11,502,378"
+        ],
+        [
+          "ZEC",
+          "$11.16",
+          "165,010",
+          "$8,896,728"
+        ],
+        [
+          "NEAR",
+          "$2.36",
+          "137,834",
+          "$5,719,753"
+        ],
+        [
+          "VVV",
+          "$2.19",
+          "45,419",
+          "$2,832,603"
+        ],
+        [
+          "HYPE",
+          "$7.74",
+          "188,162",
+          "$2,808,684"
+        ]
+      ]
+    }
+  ],
+  "charts": [],
+  "notes": [
+    "Data from bucket_clip_log.jsonl and perps_tape.jsonl",
+    "As of 2026-09-16 11:46 UTC"
+  ],
+  "source": {
+    "bucket_log": "E:\\BlackHole_Investments\\BlackHole\\Event_Desk\\kalshi_btc15m\\data\\bucket_clip_log.jsonl",
+    "perps_tape": "E:\\BlackHole_Investments\\BlackHole\\Event_Desk\\kalshi_btc15m\\data\\perps_tape.jsonl",
+    "collector": "kalshi-desk"
+  },
+  "schema_version": 1,
+  "artifact_id": "kalshi-desk",
+  "title": "Kalshi Trading Desk",
+  "generated_at": "2026-09-16 11:46 UTC"
+}

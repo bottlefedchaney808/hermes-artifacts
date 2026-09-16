@@ -1,8 +1,0 @@
-{
-  "id": "options-model-tracker",
-  "title": "Options Model Tracker",
-  "collector": "options-models",
-  "repo": "C:/Users/bottl/FinancialDevelopment",
-  "description": "Newest Options_Suite comparison_*.csv (Option 9: all pricing models vs Market baseline) with per-greek columns and price error.",
-  "refresh": "ask Hermes to 'refresh options-model-tracker'"
-}

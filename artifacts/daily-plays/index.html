@@ -1,8 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Sentiment Scanner Board</title>
+<meta charset="utf-8">
+<title>Daily Plays</title>
+<style>
+  :root{
+    --bg:#141414; --panel:#1d1d1b; --panel2:#232320; --line:#33332e;
+    --ink:#e8e3d8; --muted:#8a8578; --dim:#5c5850;
+    --orange:#f0742a; --amber:#e8a33d; --green:#8fd674; --blue:#7fb4e8; --teal:#5ec8a8; --rose:#e85f8a;
+    --mono:'Consolas','SF Mono',ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font:13px/1.45 var(--mono);padding:24px 20px 48px;max-width:960px;margin:0 auto}
+  header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:2px solid var(--orange);padding-bottom:12px;margin-bottom:16px}
+  h1{font-size:20px;font-weight:700;letter-spacing:.5px}
+  h1 .sq{display:inline-block;width:11px;height:11px;background:var(--orange);margin-right:9px}
+  .sub{color:var(--muted);font-size:11px;margin-top:2px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .chip{border:1px solid var(--line);border-radius:6px;padding:6px 10px;background:var(--panel)}
+  .chip b{display:block;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  .chip span{font-size:12.5px;font-weight:600}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:12px}
+  .head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .sym{font-size:18px;font-weight:800;letter-spacing:.5px}
+  .score{font-size:18px;font-weight:800;color:var(--orange)}
+  .lean{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border:1px solid;border-radius:2px;padding:2px 8px}
+  .long{color:var(--green);border-color:var(--green)}
+  .short{color:var(--rose);border-color:var(--rose)}
+  .event{color:var(--amber);border-color:var(--amber)}
+  .tape{color:var(--blue);border-color:var(--blue)}
+  .fade{color:var(--muted);border-color:var(--muted)}
+  .meta{color:var(--muted);font-size:12px;margin:6px 0 8px}
+  .ah.up{color:var(--green)}
+  .ah.dn{color:var(--rose)}
+  p{margin:5px 0}
+  .k{color:var(--dim);font-size:9.5px;text-transform:uppercase;letter-spacing:1px}
+  a{color:var(--blue)}
+  .foot{margin-top:18px;color:var(--dim);font-size:10.5px;border-top:1px solid var(--line);padding-top:10px;line-height:1.6}
+  .empty{border:1px dashed var(--line);border-radius:6px;padding:16px;color:var(--muted);background:var(--panel)}
+  .empty b{color:var(--ink)}
+</style>
 <!--HERMES-ARTIFACT:CSS-->
 <style>
 /* Hermes Interactive Artifacts — universal shell styles.
@@ -88,13 +125,17 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
 <!--/HERMES-ARTIFACT:CSS-->
 </head>
 <body>
-<div id="app"></div>
-<!--HERMES-ARTIFACT:DATA-->
-<script id="hermes-artifact-data" type="application/json">
-{"summary": [{"label": "version", "value": "1"}, {"label": "updated_at", "value": "2026-09-10T10:28:39.692993+00:00"}, {"label": "packs", "value": "list[15]"}], "tables": [{"id": "fields", "title": "Fields", "columns": ["field", "value"], "rows": [["version", "1"], ["updated_at", "2026-09-10T10:28:39.692993+00:00"], ["packs", "list[15]"]]}], "charts": [], "notes": [], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "sentiment", "note": "latest_manifest.json"}, "schema_version": 1, "artifact_id": "sentiment-scanner-board", "title": "Sentiment Scanner Board", "generated_at": "2026-09-15 05:17 UTC"}
-</script>
-<!--/HERMES-ARTIFACT:DATA-->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" crossorigin="anonymous"></script>
+  <div id="dp">
+    <header>
+      <h1><span class="sq"></span><span id="h1">Daily Plays</span></h1>
+    </header>
+    <p class="sub" id="sub">Full market scan with history.</p>
+    <div class="chips" id="chips"></div>
+    <div id="grid"></div>
+    <p class="foot">Research only — no orders placed. Score = persistence + catalyst + corroboration + tape alignment, minus extension / binary haircuts.</p>
+  </div>
+  <div id="app" style="display:none"></div>
+
 <!--HERMES-ARTIFACT:JS-->
 <script>
 /* Hermes Interactive Artifacts — universal renderer.
@@ -711,5 +752,75 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
 
 </script>
 <!--/HERMES-ARTIFACT:JS-->
+<!--HERMES-ARTIFACT:DATA-->
+<script id="hermes-artifact-data" type="application/json">
+{"summary": [{"label": "cards", "value": "10"}, {"label": "history scans", "value": "1"}, {"label": "last updated", "value": "2026-09-16 11:46 UTC"}], "cards": [{"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}], "history": [{"timestamp": "2026-09-16T11:46:08.998611+00:00", "cards": [{"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}, {"symbol": "UNKNOWN", "score": 50, "lean": "long", "event": "sentiment scan", "meta": "UNKNOWN", "thesis": "", "evidence": "", "risk": "", "delta": 0}], "sources": ["version", "updated_at", "packs"], "_filename": "20260916_114608.json"}], "source": {"repo": "C:\\Users\\bottl\\FinancialDevelopment", "collector": "daily-plays", "note": "full market scan with history"}, "schema_version": 1, "artifact_id": "daily-plays", "title": "Daily Plays", "generated_at": "2026-09-16 11:46 UTC"}
+</script>
+<!--/HERMES-ARTIFACT:DATA-->
+<script>
+(function () {
+  var el = document.getElementById("hermes-artifact-data");
+  var d = {};
+  if (el) { try { d = JSON.parse(el.textContent); } catch (e) { d = {}; } }
+
+  var esc = function (s) {
+    return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  };
+
+  var cards = Array.isArray(d.cards) ? d.cards : [];
+  var summary = Array.isArray(d.summary) ? d.summary : [];
+  var byLabel = {};
+  summary.forEach(function (s) { byLabel[s.label] = s.value; });
+
+  document.getElementById("h1").textContent = d.title || "Daily Plays";
+  document.getElementById("sub").textContent =
+    (d.generated_at || "") + " — " + ((d.source && d.source.note) || "full market scan with history");
+
+  var chips = document.getElementById("chips");
+  function chip(label, value) {
+    var c = document.createElement("div");
+    c.className = "chip";
+    c.innerHTML = "<b>" + esc(label) + "</b><span>" + esc(value) + "</span>";
+    chips.appendChild(c);
+  }
+  if (byLabel.cards != null) chip("cards", byLabel.cards);
+  if (byLabel["history scans"] != null) chip("history scans", byLabel["history scans"]);
+  if (byLabel["last updated"] != null) chip("last updated", byLabel["last updated"]);
+  var scored = cards
+    .filter(function (c) { return c.symbol && c.symbol !== "UNKNOWN"; })
+    .sort(function (a, b) { return (b.score || 0) - (a.score || 0); }).slice(0, 3);
+  if (scored.length) chip("top", scored.map(function (c) { return c.symbol + " " + c.score; }).join(" · "));
+
+  var grid = document.getElementById("grid");
+  var known = cards.filter(function (c) { return c.symbol && c.symbol !== "UNKNOWN"; });
+  if (!known.length) {
+    var empty = document.createElement("div");
+    empty.className = "empty";
+    empty.innerHTML = "<b>No scored cards in this scan.</b> Sentiment source is empty or the scanner is down" +
+      (byLabel["last updated"] ? " — last updated " + esc(byLabel["last updated"]) : "") + ".";
+    grid.appendChild(empty);
+  }
+  known.forEach(function (c) {
+    var leanCls = { long: "long", short: "short", event: "event", tape: "tape", fade: "fade" }[c.lean] || "fade";
+    var card = document.createElement("div");
+    card.className = "card";
+    var delta = "";
+    if (typeof c.delta === "number" && c.delta !== 0) {
+      delta = ' · <span class="ah ' + (c.delta > 0 ? "up" : "dn") + '">' + (c.delta > 0 ? "+" : "") + (c.delta * 100).toFixed(0) + "%</span>";
+    }
+    card.innerHTML =
+      '<div class="head">' +
+        '<span class="sym">' + esc(c.symbol) + "</span>" +
+        '<span class="score">' + esc(c.score) + "</span>" +
+        '<span class="lean ' + leanCls + '">' + esc(c.lean || "") + (c.event ? " / " + esc(c.event) : "") + "</span>" +
+      "</div>" +
+      '<div class="meta">' + esc(c.meta || "") + delta + "</div>" +
+      (c.thesis ? '<p><span class="k">Thesis</span> ' + esc(c.thesis) + "</p>" : "") +
+      (c.evidence ? '<p><span class="k">Evidence</span> ' + esc(c.evidence) + "</p>" : "") +
+      (c.risk ? '<p><span class="k">Risk</span> ' + esc(c.risk) + "</p>" : "");
+    grid.appendChild(card);
+  });
+})();
+</script>
 </body>
 </html>

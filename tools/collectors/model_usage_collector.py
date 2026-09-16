@@ -13,7 +13,7 @@ from pathlib import Path
 from collectors import register
 
 import os
-HERMES_ROOT = Path(os.environ.get("HERMES_HOME", str(Path.home() / ".hermes")))
+HERMES_ROOT = Path(os.environ.get("HERMES_HOME", "C:/Users/bottl/.hermes"))
 
 
 _COLS = ["session_id","model","billing_provider","billing_base_url","billing_mode",

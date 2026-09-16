@@ -3,6 +3,5 @@
   "title": "Vault graph",
   "collector": "vault-graph",
   "repo": "C:/Users/bottl/obsidian-vault",
-  "description": "Obsidian-style force graph of real [[wikilinks]] in the vault, colored by leg.",
-  "refresh": "ask Hermes to 'refresh vault-graph'"
+  "description": "Knowledge graph of your Obsidian vault — nodes, edges, clusters, and orphaned notes."
 }

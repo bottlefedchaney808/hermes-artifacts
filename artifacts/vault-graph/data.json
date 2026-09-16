@@ -2,15 +2,15 @@
   "summary": [
     {
       "label": "notes",
-      "value": "412"
+      "value": "415"
     },
     {
       "label": "nodes",
-      "value": "443"
+      "value": "446"
     },
     {
       "label": "links",
-      "value": "507"
+      "value": "512"
     },
     {
       "label": "dangling",
@@ -178,7 +178,7 @@
             18,
             79,
             1,
-            298,
+            301,
             2,
             31
           ]
@@ -643,10 +643,28 @@
         "size": 4
       },
       {
+        "id": "Trading/Kalshi 6-series live night 2026-09-14.md",
+        "label": "Kalshi 6-series live night 2026-09-14",
+        "group": "trading",
+        "size": 1
+      },
+      {
         "id": "Trading/Kalshi BTC 15m engine.md",
         "label": "Kalshi BTC 15m engine",
         "group": "trading",
-        "size": 3
+        "size": 4
+      },
+      {
+        "id": "Trading/Kalshi BTC night 2026-09-13.md",
+        "label": "Kalshi BTC night 2026-09-13",
+        "group": "trading",
+        "size": 5
+      },
+      {
+        "id": "Trading/Kalshi BTC15m Heston build 2026-09-14.md",
+        "label": "Kalshi BTC15m Heston build 2026-09-14",
+        "group": "trading",
+        "size": 1
       },
       {
         "id": "Trading/LATEST rumor social brief.md",
@@ -658,13 +676,13 @@
         "id": "Trading/Operational.md",
         "label": "Operational",
         "group": "trading",
-        "size": 6
+        "size": 7
       },
       {
         "id": "Trading/Polymarket 200 desk.md",
         "label": "Polymarket 200 desk",
         "group": "trading",
-        "size": 5
+        "size": 6
       },
       {
         "id": "Trading/Polymarket overnight watch.md",
@@ -4033,6 +4051,10 @@
         "target": "Trading/AIGamma steal list — Phase 2-3 plan status.md"
       },
       {
+        "source": "Trading/Kalshi 6-series live night 2026-09-14.md",
+        "target": "Trading/Kalshi BTC night 2026-09-13.md"
+      },
+      {
         "source": "Trading/Kalshi BTC 15m engine.md",
         "target": "Trading/Polymarket 200 desk.md"
       },
@@ -4043,6 +4065,22 @@
       {
         "source": "Trading/Kalshi BTC 15m engine.md",
         "target": "Trading/Operational.md"
+      },
+      {
+        "source": "Trading/Kalshi BTC night 2026-09-13.md",
+        "target": "Trading/Kalshi BTC 15m engine.md"
+      },
+      {
+        "source": "Trading/Kalshi BTC night 2026-09-13.md",
+        "target": "Trading/Polymarket 200 desk.md"
+      },
+      {
+        "source": "Trading/Kalshi BTC night 2026-09-13.md",
+        "target": "Trading/Operational.md"
+      },
+      {
+        "source": "Trading/Kalshi BTC15m Heston build 2026-09-14.md",
+        "target": "Trading/Kalshi BTC night 2026-09-13.md"
       },
       {
         "source": "Trading/LATEST rumor social brief.md",
@@ -4890,5 +4928,5 @@
   "schema_version": 1,
   "artifact_id": "vault-graph",
   "title": "Vault graph",
-  "generated_at": "2026-09-14 03:40 UTC"
+  "generated_at": "2026-09-16 11:46 UTC"
 }
