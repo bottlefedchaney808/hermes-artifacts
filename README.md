@@ -72,7 +72,7 @@ repository for a one-off refresh.
 # wrap ANY command — its output streams into a live-updating artifact:
 python tools/livestream.py --id findev-live --title "FinDev — SPY run" \
     --cwd /opt/data/FinancialDevelopment --card "ticker=SPY" \
-    -- /opt/data/FinancialDevelopment/.venv/bin/python tools/examples/findev_spy_run.py
+    -- .venv/Scripts/python.exe tools/examples/findev_spy_run.py
 ```
 
 - `tools/livestream.py` runs the command, rewrites `data.json` + `index.html`
@@ -98,10 +98,20 @@ python tools/refresh.py dev-knowledge-roadmap --repo /path/to/other/repo
 In chat: **ask Hermes to "refresh <artifact-id>"** — it runs the command and
 delivers `::preview{file="artifacts/<id>/index.html"}`.
 
+## Setup
+
+```bash
+python -m venv .venv                      # Python 3.12
+.venv/Scripts/python.exe -m pip install -r requirements.txt
+```
+
+All suites and refreshes run from the repo-local `.venv` — never from a
+sibling repo's venv.
+
 ## Tests
 
 ```bash
-C:/Users/bottl/FinancialDevelopment/.venv/Scripts/python.exe -m pytest tests -q
+.venv/Scripts/python.exe -m pytest tests -q
 ```
 
 ## Conventions
