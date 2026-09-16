@@ -2,15 +2,15 @@
   "summary": [
     {
       "label": "Fresh tokens",
-      "value": "20.85M"
+      "value": "20.86M"
     },
     {
       "label": "Cached reads",
-      "value": "400.12M"
+      "value": "400.77M"
     },
     {
       "label": "API calls",
-      "value": "4,635"
+      "value": "4,641"
     },
     {
       "label": "Est. cost (partial)",
@@ -67,8 +67,8 @@
           "Qwen3.8-27B-UD-IQ4_XS",
           "local",
           "1.99M",
-          "32.73M",
-          "463",
+          "33.37M",
+          "469",
           "$0.0000"
         ],
         [
@@ -184,8 +184,8 @@
           "local",
           "nous",
           "9.71M",
-          "153.34M",
-          "2,669",
+          "153.99M",
+          "2,675",
           "$0.0547"
         ]
       ]
@@ -205,8 +205,8 @@
           "local",
           "local",
           "9.23M",
-          "153.32M",
-          "2,517",
+          "153.97M",
+          "2,523",
           "$0.0000"
         ],
         [
@@ -1628,8 +1628,8 @@
         "local",
         "Qwen3.8-27B-UD-IQ4_XS",
         "main",
-        141730,
-        2636369,
+        146212,
+        3284937,
         "2026-09-16"
       ]
     ],
@@ -1648,10 +1648,10 @@
     "by_provider": [
       {
         "key": "local",
-        "fresh": 9229967,
-        "cached": 153317810,
+        "fresh": 9234449,
+        "cached": 153966378,
         "reasoning": 0,
-        "calls": 2517,
+        "calls": 2523,
         "cost_usd": 0.0,
         "lane": "local"
       },
@@ -1731,10 +1731,10 @@
       },
       {
         "key": "Qwen3.8-27B-UD-IQ4_XS",
-        "fresh": 1990352,
-        "cached": 32725861,
+        "fresh": 1994834,
+        "cached": 33374429,
         "reasoning": 0,
-        "calls": 463,
+        "calls": 469,
         "cost_usd": 0.0,
         "lane": "local"
       },
@@ -1850,10 +1850,10 @@
       },
       {
         "key": "local",
-        "fresh": 9707205,
-        "cached": 153336626,
+        "fresh": 9711687,
+        "cached": 153985194,
         "reasoning": 91411,
-        "calls": 2669,
+        "calls": 2675,
         "cost_usd": 0.054659234999999994,
         "lane": "nous"
       }
@@ -1861,10 +1861,10 @@
     "by_task": [
       {
         "key": "main",
-        "fresh": 17968322,
-        "cached": 359797406,
+        "fresh": 17972804,
+        "cached": 360445974,
         "reasoning": 511548,
-        "calls": 4006,
+        "calls": 4012,
         "cost_usd": 1.0359868460000001,
         "lane": "zai"
       },
@@ -1928,7 +1928,7 @@
             987759,
             494739,
             5402330,
-            2345139
+            2349621
           ]
         },
         {
@@ -1992,7 +1992,7 @@
         ],
         [
           "2026-09-16",
-          3418609
+          3423091
         ]
       ]
     },
@@ -2057,7 +2057,7 @@
         {
           "source": "local",
           "target": "local",
-          "value": 9229967
+          "value": 9234449
         },
         {
           "source": "local",
@@ -2087,7 +2087,7 @@
         {
           "source": "local",
           "target": "Qwen3.8-27B-UD-IQ4_XS",
-          "value": 1990352
+          "value": 1994834
         },
         {
           "source": "(root)",
@@ -2177,12 +2177,12 @@
       ]
     },
     "totals": {
-      "fresh": 20854431,
-      "cached": 400117155,
+      "fresh": 20858913,
+      "cached": 400765723,
       "reasoning": 722353,
-      "calls": 4635,
+      "calls": 4641,
       "cost_usd": 1.1829,
-      "local_fresh": 9229967,
+      "local_fresh": 9234449,
       "cloud_fresh": 11624464,
       "profiles": 2,
       "models": 15
@@ -2191,5 +2191,5 @@
   "schema_version": 1,
   "artifact_id": "model-usage",
   "title": "Model usage",
-  "generated_at": "2026-09-16 11:46 UTC"
+  "generated_at": "2026-09-16 11:47 UTC"
 }

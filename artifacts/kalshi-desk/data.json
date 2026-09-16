@@ -368,7 +368,7 @@
   "charts": [],
   "notes": [
     "Data from bucket_clip_log.jsonl and perps_tape.jsonl",
-    "As of 2026-09-16 11:46 UTC"
+    "As of 2026-09-16 11:47 UTC"
   ],
   "source": {
     "bucket_log": "E:\\BlackHole_Investments\\BlackHole\\Event_Desk\\kalshi_btc15m\\data\\bucket_clip_log.jsonl",
@@ -378,5 +378,5 @@
   "schema_version": 1,
   "artifact_id": "kalshi-desk",
   "title": "Kalshi Trading Desk",
-  "generated_at": "2026-09-16 11:46 UTC"
+  "generated_at": "2026-09-16 11:47 UTC"
 }
