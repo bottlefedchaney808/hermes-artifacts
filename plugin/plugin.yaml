@@ -1,4 +1,4 @@
 name: interactive-artifacts
 version: "1.0.0"
-description: "Browse, view, and mount Hermes interactive artifact boards (single-file HTML from C:/Users/bottl/hermes-artifacts)."
+description: "Browse, view, and mount interactive artifact boards (single-file HTML) from any repo listed in roots.json."
 author: bottlefedchaney808

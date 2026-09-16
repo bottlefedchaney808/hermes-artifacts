@@ -1,0 +1,31 @@
+{
+  "_comment": [
+    "Where interactive-artifact boards live. Edit freely — _core.py re-reads this on",
+    "mtime change, so no restart is needed.",
+    "",
+    "Per root:  name    label used in the board key '<name>/<id>'  (required, [a-z0-9-])",
+    "           path    repo root                                  (required)",
+    "           boards  subdir holding board folders               (default 'artifacts')",
+    "           refresh collector script, relative to path         (default 'tools/refresh.py')",
+    "           python  interpreter for that collector             (default the shared venv)",
+    "",
+    "A board is <path>/<boards>/<id>/ containing artifact.json + index.html",
+    "(and optionally data.json, whose generated_at drives the staleness column).",
+    "",
+    "The FIRST root is the default: a bare id with no '<root>/' prefix resolves there,",
+    "which is what keeps older stored ids and agent calls working. A root whose path",
+    "does not exist on this machine is skipped silently, so this file is safe to share",
+    "across boxes that have cloned different repos."
+  ],
+  "roots": [
+    {
+      "name": "hermes",
+      "path": "C:/Users/bottl/hermes-artifacts"
+    },
+    {
+      "name": "findev",
+      "path": "C:/Users/bottl/FinancialDevelopment",
+      "boards": "artifact-boards"
+    }
+  ]
+}

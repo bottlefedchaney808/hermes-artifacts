@@ -1,5 +1,9 @@
 /**
- * Interactive Artifacts  -  browse, view, and mount hermes-artifacts boards.
+ * Interactive Artifacts  -  browse, view, and mount artifact boards from ANY repo.
+ * Roots are configured in roots.json beside the plugin's Python half; a board is
+ * identified by the key '<root>/<id>' and rows carry a root badge once boards come
+ * from more than one repo. A bare id still means the default root, so a cache or a
+ * stored selection written by the single-root version keeps resolving.
  * Folder name must equal id. Loads uncompiled: jsx() only, no JSX syntax.
  *
  * Deployed copy must be at $HERMES_HOME/desktop-plugins/interactive-artifacts/
@@ -28,10 +32,25 @@ import {
 import { useEffect, useState } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
 
+// Only used to synthesise an index_path for a cached row that predates the backend
+// sending one. Boards now come from any repo listed in the plugin's roots.json, so
+// this is a last-resort guess for the DEFAULT root, never the definition of one.
 var FALLBACK_ROOT = 'C:/Users/bottl/hermes-artifacts/artifacts'
 var CACHE_KEY = 'boardCache'
 var SORT_KEY = 'sortMode'
 var WORKSPACE_ID = 'interactive-artifacts.board'
+
+/**
+ * Identity of a board.
+ *
+ * Multi-root rows carry `key` ('<root>/<id>', e.g. 'findev/spy-flow') because two
+ * repos may legitimately both hold a board called 'overview'. Rows cached by the
+ * pre-multi-root version only have `id` — the backend still resolves a bare id
+ * against the default root, so an old cache keeps working until the next load().
+ */
+function keyOf(it) {
+  return (it && (it.key || it.id)) || ''
+}
 
 /**
  * Cross-component state. The page and the docked pane are separate React trees,
@@ -133,6 +152,9 @@ function cachedItems(ctx) {
     var path = it.index_path || (FALLBACK_ROOT + '/' + it.id + '/index.html')
     out.push({
       id: it.id,
+      key: keyOf(it),
+      root: it.root || '',
+      refreshable: it.refreshable !== false,
       title: it.title || it.id,
       description: it.description || '',
       generated_at: it.generated_at || '',
@@ -168,9 +190,9 @@ function Viewer(props) {
  *  (persistence). Both, always  -  they serve different lifetimes. */
 function setMounted(ctx, item) {
   if (!item) return
-  $mounted.set({ id: item.id, url: item.file_url })
+  $mounted.set({ id: keyOf(item), url: item.file_url })
   try {
-    ctx.storage.set('mountedId', item.id)
+    ctx.storage.set('mountedId', keyOf(item))
     ctx.storage.set('mountedUrl', item.file_url)
   } catch (e) {
     /* storage is best-effort; the atom already carries this session */
@@ -222,9 +244,9 @@ function BoardPage(props) {
   function chooseSelection(list, current) {
     var i
     for (i = 0; i < list.length; i++) {
-      if (list[i].id === current) return current
+      if (keyOf(list[i]) === current) return current
     }
-    return list.length ? list[0].id : ''
+    return list.length ? keyOf(list[0]) : ''
   }
 
   function applyList(list, fromBackend) {
@@ -237,7 +259,11 @@ function BoardPage(props) {
     setLoading(true)
     return ctx.rest('/items').then(function (data) {
       var list = (data && data.items) ? data.items : []
-      setErr(list.length ? '' : 'Backend reachable but no complete boards found under ' + FALLBACK_ROOT + '.')
+      var rootNames = (data && data.roots ? data.roots : []).map(function (r) { return r.name }).join(', ')
+      setErr(list.length
+        ? ''
+        : ('Backend reachable but no complete boards found in ' + (rootNames || 'any configured root') +
+           '. A board is <root>/<boards>/<id>/ with artifact.json + index.html.'))
       cacheItems(ctx, list)
       applyList(list, true)
       setLoading(false)
@@ -271,14 +297,27 @@ function BoardPage(props) {
 
   var selectedItem = null
   var filtered = []
+  // Distinct roots present in the CURRENT list, not the configured count: a
+  // configured-but-empty repo should not switch on per-row root badges.
+  var rootsSeen = {}
+  var multiRoot = false
+  if (items) {
+    for (var ri = 0; ri < items.length; ri++) {
+      var rn = items[ri].root || ''
+      if (rn) rootsSeen[rn] = true
+    }
+    multiRoot = Object.keys(rootsSeen).length > 1
+  }
   if (items) {
     var i
     var needle = (q || '').toLowerCase()
     for (i = 0; i < items.length; i++) {
       var it = items[i]
-      var hay = (it.id + ' ' + (it.title || '') + ' ' + (it.description || '')).toLowerCase()
+      // Root is part of the haystack so typing "findev" narrows to one repo —
+      // the cheapest possible "filter by repo" without another control.
+      var hay = (keyOf(it) + ' ' + (it.root || '') + ' ' + (it.title || '') + ' ' + (it.description || '')).toLowerCase()
       if (!needle || hay.indexOf(needle) !== -1) filtered.push(it)
-      if (it.id === selected) selectedItem = it
+      if (keyOf(it) === selected) selectedItem = it
     }
     if (sortMode === 'recent') {
       filtered.sort(function (a, b) {
@@ -300,7 +339,7 @@ function BoardPage(props) {
     if (!selectedItem) return
     setMounted(ctx, selectedItem)
     haptic('tap')
-    host.notify({ kind: 'info', message: 'Mounted ' + selectedItem.id + ' in the Interactive pane.' })
+    host.notify({ kind: 'info', message: 'Mounted ' + keyOf(selectedItem) + ' in the Interactive pane.' })
   }
 
   /** Dock the board as a real tab in the main workspace zone AND reveal it.
@@ -313,7 +352,7 @@ function BoardPage(props) {
     try {
       if (typeof host.openWorkspace === 'function') {
         host.openWorkspace(WORKSPACE_ID, {
-          title: item.title || item.id,
+          title: item.title || keyOf(item),
           minWidth: '480px',
           render: function () { return jsx(Viewer, { url: item.file_url }) }
         })
@@ -339,7 +378,7 @@ function BoardPage(props) {
     if (!selectedItem || !selectedItem.index_path) return
     ctx.os.writeClipboard(selectedItem.index_path)
     haptic('tap')
-    host.notify({ kind: 'info', message: 'Copied path for ' + selectedItem.id })
+    host.notify({ kind: 'info', message: 'Copied path for ' + keyOf(selectedItem) })
   }
 
   function refreshOne(id) {
@@ -353,7 +392,7 @@ function BoardPage(props) {
       setBusy('')
       haptic('tap')
       load()
-      if (res && res.item) setSelected(res.item.id)
+      if (res && res.item) setSelected(keyOf(res.item))
     }).catch(function (e) {
       setBusy('')
       var detail = (e && (e.detail || e.message)) ? String(e.detail || e.message) : ''
@@ -370,7 +409,14 @@ function BoardPage(props) {
    *  failure name the board that broke instead of failing the whole batch. */
   function doRefreshAll() {
     if (!backendOk || busy || !filtered.length) return
-    var queue = filtered.map(function (it) { return it.id })
+    // A root with no collector cannot be refreshed; queueing it only buys a
+    // guaranteed "tool_missing" and a misleading failure count.
+    var queue = filtered.filter(function (it) { return it.refreshable !== false })
+                        .map(function (it) { return keyOf(it) })
+    if (!queue.length) {
+      host.notify({ kind: 'info', message: 'No refreshable boards in view (none of these roots ship a collector).' })
+      return
+    }
     var failed = []
     setBusy('all')
 
@@ -471,7 +517,7 @@ function BoardPage(props) {
               jsx(ScrollArea, {
                 className: 'min-h-0 flex-1',
                 children: filtered.length ? filtered.map(function (it) {
-                  var active = it.id === selected
+                  var active = keyOf(it) === selected
                   var tone = ageTone(it.generated_at)
                   return jsx('button', {
                     type: 'button',
@@ -481,10 +527,10 @@ function BoardPage(props) {
                       active ? 'bg-(--chrome-action-hover)' : 'hover:bg-(--chrome-action-hover)'
                     ),
                     onClick: function () {
-                      setSelected(it.id)
+                      setSelected(keyOf(it))
                     },
                     onDoubleClick: function () {
-                      setSelected(it.id)
+                      setSelected(keyOf(it))
                       setMounted(ctx, it)
                     },
                     children: jsxs('span', {
@@ -497,15 +543,25 @@ function BoardPage(props) {
                             jsx('span', { className: 'truncate font-medium', children: it.title || it.id })
                           ]
                         }),
-                        it.generated_at
-                          ? jsx('span', { className: 'block pl-3 text-[0.6875rem] text-(--ui-text-tertiary)', children: ageLabel(it.generated_at) })
-                          : null
+                        jsxs('span', {
+                          className: 'flex items-center gap-1.5 pl-3 text-[0.6875rem] text-(--ui-text-tertiary)',
+                          children: [
+                            // Only worth the pixels once boards actually come from
+                            // more than one repo; with a single root it is noise.
+                            multiRoot && it.root
+                              ? jsx('span', { className: 'shrink-0 rounded-sm bg-(--chrome-action-hover) px-1', children: it.root })
+                              : null,
+                            it.generated_at ? jsx('span', { children: ageLabel(it.generated_at) }) : null
+                          ]
+                        })
                       ]
                     })
-                  }, it.id)
+                  }, keyOf(it))
                 }) : jsx(EmptyState, {
                   title: q ? 'No match' : 'No boards',
-                  description: q ? 'Nothing matches "' + q + '".' : 'Refresh hermes-artifacts or check the repo path.'
+                  description: q
+                    ? 'Nothing matches "' + q + '".'
+                    : 'No complete boards in any configured root. Add one at <root>/<boards>/<id>/ with artifact.json + index.html, or edit roots.json.'
                 })
               })
             ]
@@ -516,7 +572,7 @@ function BoardPage(props) {
               jsxs('div', {
                 className: 'flex items-center gap-2 px-3 py-1.5 text-xs text-(--ui-text-tertiary)',
                 children: [
-                  jsx('span', { className: 'truncate', children: selectedItem ? (selectedItem.title + '  -  ' + selectedItem.id) : ' - ' }),
+                  jsx('span', { className: 'truncate', children: selectedItem ? (selectedItem.title + '  -  ' + keyOf(selectedItem)) : ' - ' }),
                   selectedItem && selectedItem.generated_at
                     ? jsx('span', { className: 'shrink-0', children: '- ' + ageLabel(selectedItem.generated_at) })
                     : null,
