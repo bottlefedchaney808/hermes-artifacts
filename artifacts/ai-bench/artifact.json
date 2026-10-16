@@ -1,0 +1,8 @@
+{
+  "id": "ai-bench",
+  "title": "AI bench — scorecard",
+  "collector": "ai-bench",
+  "repo": "/home/zinko83/ai-bench",
+  "description": "Local model benchmark scorecard: per-task scores, run-over-run trends, and endpoint provenance for the ai-bench suite (GSM8K, HellaSwag, MMLU, HumanEval, IFEval). Auto-refreshes at the end of every bench.py run.",
+  "refresh": "auto (bench.py) or: ask Hermes to 'refresh ai-bench'"
+}

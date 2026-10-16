@@ -1,0 +1,203 @@
+{
+  "summary": [
+    {
+      "label": "Models (latest run)",
+      "value": "1"
+    },
+    {
+      "label": "Tasks",
+      "value": "5 / 5"
+    },
+    {
+      "label": "Best overall",
+      "value": "82.1%",
+      "tone": "ok"
+    },
+    {
+      "label": "Leader",
+      "value": "mock",
+      "tone": "accent"
+    },
+    {
+      "label": "Runs recorded",
+      "value": "1",
+      "tone": "ok"
+    },
+    {
+      "label": "Last run",
+      "value": "2026-10-16"
+    }
+  ],
+  "tables": [
+    {
+      "title": "Scorecard — latest run",
+      "columns": [
+        "model",
+        "GSM8K (math)",
+        "HellaSwag (stories)",
+        "MMLU (knowledge)",
+        "HumanEval (code)",
+        "IFEval (instructions)",
+        "overall"
+      ],
+      "rows": [
+        [
+          "mock",
+          "100.0%",
+          "100.0%",
+          "100.0%",
+          "100.0%",
+          "10.5%",
+          "82.1%"
+        ]
+      ]
+    },
+    {
+      "title": "Latest run — detail",
+      "columns": [
+        "model",
+        "task",
+        "metric",
+        "score",
+        "right/wrong",
+        "seconds",
+        "endpoint"
+      ],
+      "rows": [
+        [
+          "mock",
+          "GSM8K (math)",
+          "accuracy",
+          "100.0%",
+          "50/50",
+          "0.0",
+          "?"
+        ],
+        [
+          "mock",
+          "HellaSwag (stories)",
+          "accuracy",
+          "100.0%",
+          "50/50",
+          "0.0",
+          "?"
+        ],
+        [
+          "mock",
+          "MMLU (knowledge)",
+          "accuracy",
+          "100.0%",
+          "50/50",
+          "0.0",
+          "?"
+        ],
+        [
+          "mock",
+          "HumanEval (code)",
+          "pass@1",
+          "100.0%",
+          "30/30",
+          "0.3",
+          "?"
+        ],
+        [
+          "mock",
+          "IFEval (instructions)",
+          "constraint_pass_rate",
+          "10.5%",
+          "2/19",
+          "0.0",
+          "?"
+        ]
+      ]
+    },
+    {
+      "title": "Run history",
+      "columns": [
+        "run",
+        "time",
+        "model",
+        "task",
+        "score"
+      ],
+      "rows": [
+        [
+          "#1 10-16 21:07",
+          "2026-10-16 21:07 UTC",
+          "mock",
+          "GSM8K (math)",
+          "100.0%"
+        ],
+        [
+          "#1 10-16 21:07",
+          "2026-10-16 21:07 UTC",
+          "mock",
+          "HellaSwag (stories)",
+          "100.0%"
+        ],
+        [
+          "#1 10-16 21:07",
+          "2026-10-16 21:07 UTC",
+          "mock",
+          "MMLU (knowledge)",
+          "100.0%"
+        ],
+        [
+          "#1 10-16 21:07",
+          "2026-10-16 21:07 UTC",
+          "mock",
+          "HumanEval (code)",
+          "100.0%"
+        ],
+        [
+          "#1 10-16 21:07",
+          "2026-10-16 21:07 UTC",
+          "mock",
+          "IFEval (instructions)",
+          "10.5%"
+        ]
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "id": "by-task",
+      "title": "Score by task — latest run",
+      "type": "bar",
+      "labels": [
+        "GSM8K (math)",
+        "HellaSwag (stories)",
+        "MMLU (knowledge)",
+        "HumanEval (code)",
+        "IFEval (instructions)"
+      ],
+      "series": [
+        {
+          "label": "mock",
+          "data": [
+            100.0,
+            100.0,
+            100.0,
+            100.0,
+            10.53
+          ]
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Scores: accuracy / pass@1 / constraint pass-rate per task; overall = mean of available tasks.",
+    "Run history keeps the last 40 runs (source: results/history.jsonl, appended by bench.py).",
+    "The board refreshes automatically at the end of every bench.py run.",
+    "IFEval 'na' = constraints not implemented by the scorer (excluded from the rate)."
+  ],
+  "source": {
+    "repo": "/home/zinko83/ai-bench",
+    "collector": "ai-bench",
+    "note": "1 run(s) recorded"
+  },
+  "schema_version": 1,
+  "artifact_id": "ai-bench",
+  "title": "AI bench — scorecard",
+  "generated_at": "2026-10-16 21:07 UTC"
+}

@@ -20,11 +20,11 @@
   "roots": [
     {
       "name": "hermes",
-      "path": "C:/Users/bottl/hermes-artifacts"
+      "path": "/home/zinko83/hermes-artifacts"
     },
     {
       "name": "findev",
-      "path": "C:/Users/bottl/FinancialDevelopment",
+      "path": "/opt/data/FinancialDevelopment",
       "boards": "artifact-boards"
     }
   ]
