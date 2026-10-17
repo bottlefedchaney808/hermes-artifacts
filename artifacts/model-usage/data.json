@@ -2,7 +2,7 @@
   "summary": [
     {
       "label": "Fresh tokens",
-      "value": "50.89M"
+      "value": "54.13M"
     },
     {
       "label": "Cached reads",
@@ -10,7 +10,7 @@
     },
     {
       "label": "API calls",
-      "value": "1,550"
+      "value": "1,598"
     },
     {
       "label": "Est. cost (partial)",
@@ -42,9 +42,9 @@
         [
           "dirk-qwen3.8-27b",
           "lmstudio",
-          "28.59M",
+          "31.77M",
           "0",
-          "450",
+          "496",
           "$0.0000"
         ],
         [
@@ -58,9 +58,9 @@
         [
           "grok-4.7",
           "xai-oauth",
-          "5.11M",
+          "5.17M",
           "51.61M",
-          "591",
+          "593",
           "$0.0000"
         ],
         [
@@ -111,9 +111,9 @@
         [
           "(root)",
           "xai-oauth",
-          "50.89M",
+          "54.13M",
           "67.76M",
-          "1,550",
+          "1,598",
           "$0.0001"
         ]
       ]
@@ -132,17 +132,17 @@
         [
           "lmstudio",
           "lmstudio",
-          "41.60M",
+          "44.78M",
           "0",
-          "627",
+          "673",
           "$0.0000"
         ],
         [
           "xai-oauth",
           "xai-oauth",
-          "5.11M",
+          "5.17M",
           "51.61M",
-          "591",
+          "593",
           "$0.0000"
         ],
         [
@@ -166,13 +166,13 @@
   ],
   "charts": [],
   "notes": [
-    "Scanned 2 state.db file(s) under /home/zinko83/.hermes; 95 usage rows.",
+    "Scanned 2 state.db file(s) under /home/zinko83/.hermes; 97 usage rows.",
     "Primary metric is FRESH tokens (input+output). Cached reads are tracked separately because they dwarf fresh usage and would flatten every chart.",
     "Cost is partial — only 0% of fresh tokens came from priced lanes (zai and local report $0).",
     "Daily buckets use date(last_seen) of per-session aggregate rows — an activity view, not exact per-call timestamps."
   ],
   "source": {
-    "note": "95 rows across 2 profile db(s)"
+    "note": "97 rows across 2 profile db(s)"
   },
   "viz": {
     "schema": [
@@ -1027,7 +1027,7 @@
         "lmstudio",
         "dirk-qwen3.8-27b",
         "main",
-        993109,
+        4165653,
         0,
         "2026-10-17"
       ],
@@ -1037,6 +1037,24 @@
         "grok-4.7",
         "approval",
         13319,
+        0,
+        "2026-10-17"
+      ],
+      [
+        "(root)",
+        "lmstudio",
+        "dirk-qwen3.8-27b",
+        "vision",
+        8808,
+        0,
+        "2026-10-17"
+      ],
+      [
+        "(root)",
+        "xai-oauth",
+        "grok-4.7",
+        "compression",
+        59743,
         0,
         "2026-10-17"
       ]
@@ -1056,19 +1074,19 @@
     "by_provider": [
       {
         "key": "lmstudio",
-        "fresh": 41597590,
+        "fresh": 44778942,
         "cached": 0,
-        "reasoning": 413410,
-        "calls": 627,
+        "reasoning": 428363,
+        "calls": 673,
         "cost_usd": 0.0,
         "lane": "lmstudio"
       },
       {
         "key": "xai-oauth",
-        "fresh": 5113498,
+        "fresh": 5173241,
         "cached": 51614464,
         "reasoning": 177285,
-        "calls": 591,
+        "calls": 593,
         "cost_usd": 0.0,
         "lane": "xai-oauth"
       },
@@ -1094,10 +1112,10 @@
     "by_model": [
       {
         "key": "dirk-qwen3.8-27b",
-        "fresh": 28588638,
+        "fresh": 31769990,
         "cached": 0,
-        "reasoning": 293341,
-        "calls": 450,
+        "reasoning": 308294,
+        "calls": 496,
         "cost_usd": 0.0,
         "lane": "lmstudio"
       },
@@ -1112,10 +1130,10 @@
       },
       {
         "key": "grok-4.7",
-        "fresh": 5113498,
+        "fresh": 5173241,
         "cached": 51614464,
         "reasoning": 177285,
-        "calls": 591,
+        "calls": 593,
         "cost_usd": 0.0,
         "lane": "xai-oauth"
       },
@@ -1159,10 +1177,10 @@
     "by_profile": [
       {
         "key": "(root)",
-        "fresh": 50887091,
+        "fresh": 54128186,
         "cached": 67757169,
-        "reasoning": 590695,
-        "calls": 1550,
+        "reasoning": 605648,
+        "calls": 1598,
         "cost_usd": 0.000111904,
         "lane": "xai-oauth"
       }
@@ -1170,10 +1188,10 @@
     "by_task": [
       {
         "key": "main",
-        "fresh": 47732961,
+        "fresh": 50905505,
         "cached": 60967403,
-        "reasoning": 509933,
-        "calls": 1238,
+        "reasoning": 521761,
+        "calls": 1281,
         "cost_usd": 0.0,
         "lane": "xai-oauth"
       },
@@ -1188,10 +1206,10 @@
       },
       {
         "key": "compression",
-        "fresh": 554877,
+        "fresh": 614620,
         "cached": 0,
         "reasoning": 10248,
-        "calls": 20,
+        "calls": 22,
         "cost_usd": 0.0,
         "lane": "xai-oauth"
       },
@@ -1206,10 +1224,10 @@
       },
       {
         "key": "vision",
-        "fresh": 42202,
+        "fresh": 51010,
         "cached": 0,
-        "reasoning": 11563,
-        "calls": 17,
+        "reasoning": 14688,
+        "calls": 20,
         "cost_usd": 0.0,
         "lane": "lmstudio"
       },
@@ -1237,7 +1255,7 @@
             0,
             40287017,
             0,
-            1310573
+            4491925
           ]
         },
         {
@@ -1246,7 +1264,7 @@
             1113796,
             0,
             190736,
-            3808966
+            3868709
           ]
         },
         {
@@ -1283,7 +1301,7 @@
         ],
         [
           "2026-10-17",
-          5155769
+          8396864
         ]
       ]
     },
@@ -1330,12 +1348,12 @@
         {
           "source": "(root)",
           "target": "lmstudio",
-          "value": 41597590
+          "value": 44778942
         },
         {
           "source": "lmstudio",
           "target": "dirk-qwen3.8-27b",
-          "value": 28588638
+          "value": 31769990
         },
         {
           "source": "lmstudio",
@@ -1345,12 +1363,12 @@
         {
           "source": "(root)",
           "target": "xai-oauth",
-          "value": 5113498
+          "value": 5173241
         },
         {
           "source": "xai-oauth",
           "target": "grok-4.7",
-          "value": 5113498
+          "value": 5173241
         },
         {
           "source": "(root)",
@@ -1385,13 +1403,13 @@
       ]
     },
     "totals": {
-      "fresh": 50887091,
+      "fresh": 54128186,
       "cached": 67757169,
-      "reasoning": 590695,
-      "calls": 1550,
+      "reasoning": 605648,
+      "calls": 1598,
       "cost_usd": 0.0001,
       "local_fresh": 4173499,
-      "cloud_fresh": 46713592,
+      "cloud_fresh": 49954687,
       "profiles": 1,
       "models": 7
     }
@@ -1399,5 +1417,5 @@
   "schema_version": 1,
   "artifact_id": "model-usage",
   "title": "Model usage",
-  "generated_at": "2026-10-17 13:24 UTC"
+  "generated_at": "2026-10-17 13:38 UTC"
 }

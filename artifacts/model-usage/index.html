@@ -23,7 +23,7 @@ h1 { font-size: 20px; margin: 0 0 2px; }
 .ha-card { border: 1px solid var(--border, #e8e6e0); border-radius: 10px; padding: 12px 14px; }
 .ha-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
   color: var(--muted-foreground, #8a8a8a); }
-.ha-card .value { font-size: 20px; font-weight: 650; margin-top: 3px; }
+.ha-card .value { font-size: 22px; font-weight: 650; margin-top: 3px; }
 .ha-card.tone-ok .value { color: #1a7f37; }
 .ha-card.tone-bad .value { color: #c0341d; }
 .ha-chart { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
@@ -36,11 +36,13 @@ h1 { font-size: 20px; margin: 0 0 2px; }
 .ha-filter { width: 220px; padding: 4px 8px; margin-bottom: 8px;
   border: 1px solid var(--border, #ccc); border-radius: 6px;
   background: transparent; color: inherit; font: inherit; }
-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-th, td { text-align: left; padding: 6px 9px; white-space: nowrap;
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 7px 10px; white-space: nowrap;
   border-bottom: 1px solid var(--border, #efece5); }
 th { cursor: pointer; color: var(--muted-foreground, #6b6b6b);
-  font-size: 11px; text-transform: uppercase; }
+  font-size: 11.5px; text-transform: uppercase; letter-spacing: .03em; }
+tbody tr:nth-child(odd) { background: var(--ha-zebra, transparent); }
+tbody tr:hover { background: var(--ha-hover, rgba(148,163,184,.12)); }
 tr:last-child td { border-bottom: none; }
 .ha-notes { color: var(--muted-foreground, #6b6b6b); font-size: 12px; }
 .ha-notes li { margin-bottom: 4px; }
@@ -89,7 +91,7 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
 <!--/HERMES-ARTIFACT:CSS-->
 <style id="base-theme">
   /* Self-contained dark base — outside markers, survives refresh. */
-  :root { --foreground:#e2e8f0; --muted-foreground:#94a3b8; --border:rgba(148,163,184,.2); --card:#0b1220; }
+  :root { --foreground:#e2e8f0; --muted-foreground:#94a3b8; --border:rgba(148,163,184,.2); --card:#0b1220; --ha-zebra:rgba(148,163,184,.05); --ha-hover:rgba(148,163,184,.14); }
   body { background:#0b1220; color:var(--foreground); }
 </style>
 <style id="mu-css">
@@ -137,9 +139,9 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
   </div>
   <div id="mu-kpis"></div>
   <div id="mu-grid">
-    <div class="mu-p s8"><h4>Fresh tokens over time &mdash; stacked by provider</h4><div id="c-time" class="mu-c" style="height:300px"></div></div>
+    <div class="mu-p s8"><h4>Fresh tokens over time &mdash; by provider</h4><div id="c-time" class="mu-c" style="height:300px"></div></div>
     <div class="mu-p s4"><h4>Lane share &mdash; click to filter</h4><div id="c-lane" class="mu-c" style="height:300px"></div></div>
-    <div class="mu-p s12"><h4>Daily activity heatmap</h4><div id="c-cal" class="mu-c" style="height:190px"></div></div>
+    <div class="mu-p s12"><h4>Daily activity heatmap</h4><div id="c-cal" class="mu-c" style="height:232px"></div></div>
     <div class="mu-p s6"><h4>Drill down &mdash; lane &rsaquo; model</h4><div id="c-sun" class="mu-c" style="height:340px"></div></div>
     <div class="mu-p s6"><h4>Top models by fresh tokens</h4><div id="c-model" class="mu-c" style="height:340px"></div></div>
     <div class="mu-p s12"><h4>Token flow &mdash; profile &rsaquo; provider &rsaquo; model</h4><div id="c-flow" class="mu-c" style="height:360px"></div></div>
@@ -151,7 +153,7 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
 <div id="app"></div>
 <!--HERMES-ARTIFACT:DATA-->
 <script id="hermes-artifact-data" type="application/json">
-{"summary": [{"label": "Fresh tokens", "value": "50.89M"}, {"label": "Cached reads", "value": "67.76M"}, {"label": "API calls", "value": "1,550"}, {"label": "Est. cost (partial)", "value": "$0.00", "tone": "accent"}, {"label": "Local share", "value": "8%", "tone": "ok"}, {"label": "Lanes", "value": "4"}], "tables": [{"title": "Usage by model", "columns": ["model", "lane", "fresh", "cached", "calls", "est_cost_usd"], "rows": [["dirk-qwen3.8-27b", "lmstudio", "28.59M", "0", "450", "$0.0000"], ["cyber-tiel-coder-35b-a3b-mtp", "lmstudio", "12.69M", "0", "166", "$0.0000"], ["grok-4.7", "xai-oauth", "5.11M", "51.61M", "591", "$0.0000"], ["Dirk-Qwen3.8-27B-UD-Q3_K_XL", "local", "3.73M", "13.95M", "255", "$0.0000"], ["Dirk-Qwen3.8-27B-UD-IQ4_XS", "local", "444.82K", "2.20M", "68", "$0.0000"], ["gemma-4-31b-it-heretic-i1", "lmstudio", "317.46K", "0", "11", "$0.0000"], ["qwen/qwen3.8-27b", "nous", "2.50K", "256", "9", "$0.0001"]]}, {"title": "Usage by profile", "columns": ["profile", "lane", "fresh", "cached", "calls", "est_cost_usd"], "rows": [["(root)", "xai-oauth", "50.89M", "67.76M", "1,550", "$0.0001"]]}, {"title": "Usage by provider / lane", "columns": ["provider", "lane", "fresh", "cached", "calls", "est_cost_usd"], "rows": [["lmstudio", "lmstudio", "41.60M", "0", "627", "$0.0000"], ["xai-oauth", "xai-oauth", "5.11M", "51.61M", "591", "$0.0000"], ["local", "local", "4.17M", "16.14M", "323", "$0.0000"], ["nous", "nous", "2.50K", "256", "9", "$0.0001"]]}], "charts": [], "notes": ["Scanned 2 state.db file(s) under /home/zinko83/.hermes; 95 usage rows.", "Primary metric is FRESH tokens (input+output). Cached reads are tracked separately because they dwarf fresh usage and would flatten every chart.", "Cost is partial — only 0% of fresh tokens came from priced lanes (zai and local report $0).", "Daily buckets use date(last_seen) of per-session aggregate rows — an activity view, not exact per-call timestamps."], "source": {"note": "95 rows across 2 profile db(s)"}, "viz": {"schema": ["profile", "lane", "model", "task", "fresh", "cached", "day"], "rows": [["(root)", "xai-oauth", "grok-4.7", "main", 516822, 10178048, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "title_generation", 1843, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "approval", 41891, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "main", 75774, 541696, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "title_generation", 2003, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "approval", 11495, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "compression", 2526, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "title_generation", 1725, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "main", 336307, 4373888, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "approval", 11964, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 76141, 289176, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "approval", 1005, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "title_generation", 415, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 111587, 316870, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "title_generation", 2343, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "main", 100201, 1595648, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "approval", 8902, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 49990, 536517, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "approval", 797, 346, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "title_generation", 441, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "background_review", 75564, 350175, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 55565, 316178, "2026-10-14"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 1765044, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "approval", 628, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "background_review", 182718, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 4550740, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "vision", 4856, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "title_generation", 567, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 542995, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "background_review", 644045, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 306324, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "compression", 66850, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 308647, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 143450, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 429436, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 340179, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "main", 3493969, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "approval", 1744, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "compression", 35596, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "vision", 5857, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "title_generation", 1037, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 37758, 136478, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "title_generation", 480, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 2976397, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "title_generation", 551, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "background_review", 170947, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "main", 8878286, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "compression", 64926, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "approval", 1201, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "title_generation", 1518, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "background_review", 207354, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 651022, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "title_generation", 896, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 14077781, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "title_generation", 502, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "background_review", 341029, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "compression", 58436, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "vision", 31489, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 653854, 4160090, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "compression", 21287, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "title_generation", 899, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "background_review", 220924, 901668, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 243826, 21359, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 189950, 124176, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 156027, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 653635, 362614, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 377928, 0, "2026-10-15"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 297, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 381747, 3430876, "2026-10-16"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "background_review", 35737, 601587, "2026-10-15"], ["(root)", "xai-oauth", "grok-4.7", "approval", 3813, 0, "2026-10-16"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 103944, 0, "2026-10-16"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 339, 0, "2026-10-16"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 509865, 3826917, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "approval", 19532, 0, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "compression", 54169, 0, "2026-10-16"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "background_review", 179051, 517814, "2026-10-16"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 393, 0, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "main", 3178893, 30349056, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "approval", 259570, 0, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "background_review", 104268, 4417920, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 327, 0, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "main", 113222, 158208, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "compression", 251087, 0, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 295, 0, "2026-10-17"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 35082, 249608, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "approval", 1829, 0, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 276, 0, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 20, 256, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 277, 0, "2026-10-17"], ["(root)", "lmstudio", "gemma-4-31b-it-heretic-i1", "main", 50627, 0, "2026-10-17"], ["(root)", "lmstudio", "gemma-4-31b-it-heretic-i1", "main", 266837, 0, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 280, 0, "2026-10-17"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 993109, 0, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "approval", 13319, 0, "2026-10-17"]], "palette": ["#38bdf8", "#f472b6", "#4ade80", "#facc15", "#a78bfa", "#22d3ee", "#fb923c", "#f87171", "#2dd4bf", "#c084fc"], "by_provider": [{"key": "lmstudio", "fresh": 41597590, "cached": 0, "reasoning": 413410, "calls": 627, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "xai-oauth", "fresh": 5113498, "cached": 51614464, "reasoning": 177285, "calls": 591, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "local", "fresh": 4173499, "cached": 16142449, "reasoning": 0, "calls": 323, "cost_usd": 0.0, "lane": "local"}, {"key": "nous", "fresh": 2504, "cached": 256, "reasoning": 0, "calls": 9, "cost_usd": 0.000111904, "lane": "nous"}], "by_model": [{"key": "dirk-qwen3.8-27b", "fresh": 28588638, "cached": 0, "reasoning": 293341, "calls": 450, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "cyber-tiel-coder-35b-a3b-mtp", "fresh": 12691488, "cached": 0, "reasoning": 119269, "calls": 166, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "grok-4.7", "fresh": 5113498, "cached": 51614464, "reasoning": 177285, "calls": 591, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "fresh": 3728674, "cached": 13947101, "reasoning": 0, "calls": 255, "cost_usd": 0.0, "lane": "local"}, {"key": "Dirk-Qwen3.8-27B-UD-IQ4_XS", "fresh": 444825, "cached": 2195348, "reasoning": 0, "calls": 68, "cost_usd": 0.0, "lane": "local"}, {"key": "gemma-4-31b-it-heretic-i1", "fresh": 317464, "cached": 0, "reasoning": 800, "calls": 11, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "qwen/qwen3.8-27b", "fresh": 2504, "cached": 256, "reasoning": 0, "calls": 9, "cost_usd": 0.000111904, "lane": "nous"}], "by_profile": [{"key": "(root)", "fresh": 50887091, "cached": 67757169, "reasoning": 590695, "calls": 1550, "cost_usd": 0.000111904, "lane": "xai-oauth"}], "by_task": [{"key": "main", "fresh": 47732961, "cached": 60967403, "reasoning": 509933, "calls": 1238, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "background_review", "fresh": 2161637, "cached": 6789164, "reasoning": 55839, "calls": 74, "cost_usd": 0.0, "lane": "local"}, {"key": "compression", "fresh": 554877, "cached": 0, "reasoning": 10248, "calls": 20, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "approval", "fresh": 377690, "cached": 346, "reasoning": 824, "calls": 178, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "vision", "fresh": 42202, "cached": 0, "reasoning": 11563, "calls": 17, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "title_generation", "fresh": 17724, "cached": 256, "reasoning": 2288, "calls": 23, "cost_usd": 0.000111904, "lane": "xai-oauth"}], "timeseries": {"days": ["2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17"], "series": [{"name": "lmstudio", "data": [0, 40287017, 0, 1310573]}, {"name": "xai-oauth", "data": [1113796, 0, 190736, 3808966]}, {"name": "local", "data": [371505, 2592305, 1174607, 35082]}, {"name": "nous", "data": [0, 297, 1059, 1148]}], "calendar": [["2026-10-14", 1485301], ["2026-10-15", 42879619], ["2026-10-16", 1366402], ["2026-10-17", 5155769]]}, "sankey": {"nodes": [{"name": "(root)"}, {"name": "Dirk-Qwen3.8-27B-UD-IQ4_XS"}, {"name": "Dirk-Qwen3.8-27B-UD-Q3_K_XL"}, {"name": "cyber-tiel-coder-35b-a3b-mtp"}, {"name": "dirk-qwen3.8-27b"}, {"name": "gemma-4-31b-it-heretic-i1"}, {"name": "grok-4.7"}, {"name": "lmstudio"}, {"name": "local"}, {"name": "nous"}, {"name": "qwen/qwen3.8-27b"}, {"name": "xai-oauth"}], "links": [{"source": "(root)", "target": "lmstudio", "value": 41597590}, {"source": "lmstudio", "target": "dirk-qwen3.8-27b", "value": 28588638}, {"source": "lmstudio", "target": "cyber-tiel-coder-35b-a3b-mtp", "value": 12691488}, {"source": "(root)", "target": "xai-oauth", "value": 5113498}, {"source": "xai-oauth", "target": "grok-4.7", "value": 5113498}, {"source": "(root)", "target": "local", "value": 4173499}, {"source": "local", "target": "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "value": 3728674}, {"source": "local", "target": "Dirk-Qwen3.8-27B-UD-IQ4_XS", "value": 444825}, {"source": "lmstudio", "target": "gemma-4-31b-it-heretic-i1", "value": 317464}, {"source": "(root)", "target": "nous", "value": 2504}, {"source": "nous", "target": "qwen/qwen3.8-27b", "value": 2504}]}, "totals": {"fresh": 50887091, "cached": 67757169, "reasoning": 590695, "calls": 1550, "cost_usd": 0.0001, "local_fresh": 4173499, "cloud_fresh": 46713592, "profiles": 1, "models": 7}}, "schema_version": 1, "artifact_id": "model-usage", "title": "Model usage", "generated_at": "2026-10-17 13:24 UTC"}
+{"summary": [{"label": "Fresh tokens", "value": "54.13M"}, {"label": "Cached reads", "value": "67.76M"}, {"label": "API calls", "value": "1,598"}, {"label": "Est. cost (partial)", "value": "$0.00", "tone": "accent"}, {"label": "Local share", "value": "8%", "tone": "ok"}, {"label": "Lanes", "value": "4"}], "tables": [{"title": "Usage by model", "columns": ["model", "lane", "fresh", "cached", "calls", "est_cost_usd"], "rows": [["dirk-qwen3.8-27b", "lmstudio", "31.77M", "0", "496", "$0.0000"], ["cyber-tiel-coder-35b-a3b-mtp", "lmstudio", "12.69M", "0", "166", "$0.0000"], ["grok-4.7", "xai-oauth", "5.17M", "51.61M", "593", "$0.0000"], ["Dirk-Qwen3.8-27B-UD-Q3_K_XL", "local", "3.73M", "13.95M", "255", "$0.0000"], ["Dirk-Qwen3.8-27B-UD-IQ4_XS", "local", "444.82K", "2.20M", "68", "$0.0000"], ["gemma-4-31b-it-heretic-i1", "lmstudio", "317.46K", "0", "11", "$0.0000"], ["qwen/qwen3.8-27b", "nous", "2.50K", "256", "9", "$0.0001"]]}, {"title": "Usage by profile", "columns": ["profile", "lane", "fresh", "cached", "calls", "est_cost_usd"], "rows": [["(root)", "xai-oauth", "54.13M", "67.76M", "1,598", "$0.0001"]]}, {"title": "Usage by provider / lane", "columns": ["provider", "lane", "fresh", "cached", "calls", "est_cost_usd"], "rows": [["lmstudio", "lmstudio", "44.78M", "0", "673", "$0.0000"], ["xai-oauth", "xai-oauth", "5.17M", "51.61M", "593", "$0.0000"], ["local", "local", "4.17M", "16.14M", "323", "$0.0000"], ["nous", "nous", "2.50K", "256", "9", "$0.0001"]]}], "charts": [], "notes": ["Scanned 2 state.db file(s) under /home/zinko83/.hermes; 97 usage rows.", "Primary metric is FRESH tokens (input+output). Cached reads are tracked separately because they dwarf fresh usage and would flatten every chart.", "Cost is partial — only 0% of fresh tokens came from priced lanes (zai and local report $0).", "Daily buckets use date(last_seen) of per-session aggregate rows — an activity view, not exact per-call timestamps."], "source": {"note": "97 rows across 2 profile db(s)"}, "viz": {"schema": ["profile", "lane", "model", "task", "fresh", "cached", "day"], "rows": [["(root)", "xai-oauth", "grok-4.7", "main", 516822, 10178048, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "title_generation", 1843, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "approval", 41891, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "main", 75774, 541696, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "title_generation", 2003, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "approval", 11495, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "compression", 2526, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "title_generation", 1725, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "main", 336307, 4373888, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "approval", 11964, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 76141, 289176, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "approval", 1005, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "title_generation", 415, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 111587, 316870, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "title_generation", 2343, 0, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "main", 100201, 1595648, "2026-10-14"], ["(root)", "xai-oauth", "grok-4.7", "approval", 8902, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 49990, 536517, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "approval", 797, 346, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "title_generation", 441, 0, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "background_review", 75564, 350175, "2026-10-14"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 55565, 316178, "2026-10-14"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 1765044, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "approval", 628, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "background_review", 182718, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 4550740, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "vision", 4856, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "title_generation", 567, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 542995, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "background_review", 644045, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 306324, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "compression", 66850, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 308647, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 143450, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 429436, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 340179, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "main", 3493969, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "approval", 1744, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "compression", 35596, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "vision", 5857, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "title_generation", 1037, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 37758, 136478, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "title_generation", 480, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 2976397, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "title_generation", 551, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "background_review", 170947, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "main", 8878286, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "compression", 64926, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "approval", 1201, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "title_generation", 1518, 0, "2026-10-15"], ["(root)", "lmstudio", "cyber-tiel-coder-35b-a3b-mtp", "background_review", 207354, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 651022, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "title_generation", 896, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 14077781, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "title_generation", 502, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "background_review", 341029, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "compression", 58436, 0, "2026-10-15"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "vision", 31489, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 653854, 4160090, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "compression", 21287, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "title_generation", 899, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "background_review", 220924, 901668, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 243826, 21359, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 189950, 124176, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 156027, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 653635, 362614, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 377928, 0, "2026-10-15"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 297, 0, "2026-10-15"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 381747, 3430876, "2026-10-16"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "background_review", 35737, 601587, "2026-10-15"], ["(root)", "xai-oauth", "grok-4.7", "approval", 3813, 0, "2026-10-16"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 103944, 0, "2026-10-16"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 339, 0, "2026-10-16"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "main", 509865, 3826917, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "approval", 19532, 0, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "compression", 54169, 0, "2026-10-16"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "background_review", 179051, 517814, "2026-10-16"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 393, 0, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "main", 3178893, 30349056, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "approval", 259570, 0, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "background_review", 104268, 4417920, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 327, 0, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "main", 113222, 158208, "2026-10-16"], ["(root)", "xai-oauth", "grok-4.7", "compression", 251087, 0, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 295, 0, "2026-10-17"], ["(root)", "local", "Dirk-Qwen3.8-27B-UD-IQ4_XS", "main", 35082, 249608, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "approval", 1829, 0, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 276, 0, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 20, 256, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 277, 0, "2026-10-17"], ["(root)", "lmstudio", "gemma-4-31b-it-heretic-i1", "main", 50627, 0, "2026-10-17"], ["(root)", "lmstudio", "gemma-4-31b-it-heretic-i1", "main", 266837, 0, "2026-10-17"], ["(root)", "nous", "qwen/qwen3.8-27b", "title_generation", 280, 0, "2026-10-17"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "main", 4165653, 0, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "approval", 13319, 0, "2026-10-17"], ["(root)", "lmstudio", "dirk-qwen3.8-27b", "vision", 8808, 0, "2026-10-17"], ["(root)", "xai-oauth", "grok-4.7", "compression", 59743, 0, "2026-10-17"]], "palette": ["#38bdf8", "#f472b6", "#4ade80", "#facc15", "#a78bfa", "#22d3ee", "#fb923c", "#f87171", "#2dd4bf", "#c084fc"], "by_provider": [{"key": "lmstudio", "fresh": 44778942, "cached": 0, "reasoning": 428363, "calls": 673, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "xai-oauth", "fresh": 5173241, "cached": 51614464, "reasoning": 177285, "calls": 593, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "local", "fresh": 4173499, "cached": 16142449, "reasoning": 0, "calls": 323, "cost_usd": 0.0, "lane": "local"}, {"key": "nous", "fresh": 2504, "cached": 256, "reasoning": 0, "calls": 9, "cost_usd": 0.000111904, "lane": "nous"}], "by_model": [{"key": "dirk-qwen3.8-27b", "fresh": 31769990, "cached": 0, "reasoning": 308294, "calls": 496, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "cyber-tiel-coder-35b-a3b-mtp", "fresh": 12691488, "cached": 0, "reasoning": 119269, "calls": 166, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "grok-4.7", "fresh": 5173241, "cached": 51614464, "reasoning": 177285, "calls": 593, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "fresh": 3728674, "cached": 13947101, "reasoning": 0, "calls": 255, "cost_usd": 0.0, "lane": "local"}, {"key": "Dirk-Qwen3.8-27B-UD-IQ4_XS", "fresh": 444825, "cached": 2195348, "reasoning": 0, "calls": 68, "cost_usd": 0.0, "lane": "local"}, {"key": "gemma-4-31b-it-heretic-i1", "fresh": 317464, "cached": 0, "reasoning": 800, "calls": 11, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "qwen/qwen3.8-27b", "fresh": 2504, "cached": 256, "reasoning": 0, "calls": 9, "cost_usd": 0.000111904, "lane": "nous"}], "by_profile": [{"key": "(root)", "fresh": 54128186, "cached": 67757169, "reasoning": 605648, "calls": 1598, "cost_usd": 0.000111904, "lane": "xai-oauth"}], "by_task": [{"key": "main", "fresh": 50905505, "cached": 60967403, "reasoning": 521761, "calls": 1281, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "background_review", "fresh": 2161637, "cached": 6789164, "reasoning": 55839, "calls": 74, "cost_usd": 0.0, "lane": "local"}, {"key": "compression", "fresh": 614620, "cached": 0, "reasoning": 10248, "calls": 22, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "approval", "fresh": 377690, "cached": 346, "reasoning": 824, "calls": 178, "cost_usd": 0.0, "lane": "xai-oauth"}, {"key": "vision", "fresh": 51010, "cached": 0, "reasoning": 14688, "calls": 20, "cost_usd": 0.0, "lane": "lmstudio"}, {"key": "title_generation", "fresh": 17724, "cached": 256, "reasoning": 2288, "calls": 23, "cost_usd": 0.000111904, "lane": "xai-oauth"}], "timeseries": {"days": ["2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17"], "series": [{"name": "lmstudio", "data": [0, 40287017, 0, 4491925]}, {"name": "xai-oauth", "data": [1113796, 0, 190736, 3868709]}, {"name": "local", "data": [371505, 2592305, 1174607, 35082]}, {"name": "nous", "data": [0, 297, 1059, 1148]}], "calendar": [["2026-10-14", 1485301], ["2026-10-15", 42879619], ["2026-10-16", 1366402], ["2026-10-17", 8396864]]}, "sankey": {"nodes": [{"name": "(root)"}, {"name": "Dirk-Qwen3.8-27B-UD-IQ4_XS"}, {"name": "Dirk-Qwen3.8-27B-UD-Q3_K_XL"}, {"name": "cyber-tiel-coder-35b-a3b-mtp"}, {"name": "dirk-qwen3.8-27b"}, {"name": "gemma-4-31b-it-heretic-i1"}, {"name": "grok-4.7"}, {"name": "lmstudio"}, {"name": "local"}, {"name": "nous"}, {"name": "qwen/qwen3.8-27b"}, {"name": "xai-oauth"}], "links": [{"source": "(root)", "target": "lmstudio", "value": 44778942}, {"source": "lmstudio", "target": "dirk-qwen3.8-27b", "value": 31769990}, {"source": "lmstudio", "target": "cyber-tiel-coder-35b-a3b-mtp", "value": 12691488}, {"source": "(root)", "target": "xai-oauth", "value": 5173241}, {"source": "xai-oauth", "target": "grok-4.7", "value": 5173241}, {"source": "(root)", "target": "local", "value": 4173499}, {"source": "local", "target": "Dirk-Qwen3.8-27B-UD-Q3_K_XL", "value": 3728674}, {"source": "local", "target": "Dirk-Qwen3.8-27B-UD-IQ4_XS", "value": 444825}, {"source": "lmstudio", "target": "gemma-4-31b-it-heretic-i1", "value": 317464}, {"source": "(root)", "target": "nous", "value": 2504}, {"source": "nous", "target": "qwen/qwen3.8-27b", "value": 2504}]}, "totals": {"fresh": 54128186, "cached": 67757169, "reasoning": 605648, "calls": 1598, "cost_usd": 0.0001, "local_fresh": 4173499, "cloud_fresh": 49954687, "profiles": 1, "models": 7}}, "schema_version": 1, "artifact_id": "model-usage", "title": "Model usage", "generated_at": "2026-10-17 13:38 UTC"}
 </script>
 <!--/HERMES-ARTIFACT:DATA-->
 <!--HERMES-ARTIFACT:JS-->
@@ -162,8 +164,14 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
    filterable/sortable tables. No build step, no fetches, no framework. */
 (function () {
   'use strict';
-  /* Vivid, full-opacity palette per Jason's chart preferences. */
-  var PALETTE = ['#3b82f6', '#ef4444', '#22c55e', '#eab308', '#a855f7', '#06b6d4'];
+  /* Vivid, full-opacity palette per Jason's chart preferences. 20 distinct
+     hues so boards with many series (e.g. 16 models) don't cycle colors. */
+  var PALETTE = [
+    '#3b82f6', '#ef4444', '#22c55e', '#eab308', '#a855f7', '#06b6d4',
+    '#f97316', '#ec4899', '#84cc16', '#14b8a6', '#f43f5e', '#0ea5e9',
+    '#8b5cf6', '#fbbf24', '#65a30d', '#d946ef', '#fb7185', '#2dd4bf',
+    '#facc15', '#60a5fa'
+  ];
 
   function h(tag, attrs) {
     var node = document.createElement(tag);
@@ -193,6 +201,31 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
     return wrap;
   }
 
+  /* Detect light/dark from the rendered body color so canvas text (which
+     ignores CSS vars) stays readable in either theme. */
+  function chartTheme() {
+    var col = 'rgba(0,0,0,0)';
+    try { col = getComputedStyle(document.body).color; } catch (e) { /* noop */ }
+    var m = col.match(/rgba?\((\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+    var lum = m ? (0.2126 * +m[1] + 0.7152 * +m[2] + 0.0722 * +m[3]) / 255 : 0;
+    var dark = lum > 0.55; // bright body text => dark board
+    return {
+      dark: dark,
+      text: dark ? '#c9d4e5' : '#3f4a5a',
+      grid: dark ? 'rgba(148,163,184,.16)' : 'rgba(15,23,42,.12)'
+    };
+  }
+
+  var themeReady = false;
+  function applyChartDefaults() {
+    if (themeReady || typeof Chart === 'undefined') return;
+    themeReady = true;
+    var t = chartTheme();
+    Chart.defaults.color = t.text;
+    Chart.defaults.borderColor = t.grid;
+    Chart.defaults.font.family = '-apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  }
+
   function renderChart(chart) {
     var box = h('div', { class: 'ha-chart' }, h('h3', { text: chart.title }));
     if (typeof Chart === 'undefined') {
@@ -200,8 +233,15 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
         text: 'Chart.js CDN unreachable — values remain in tables/notes.' }));
       return box;
     }
+    applyChartDefaults();
     var canvas = h('canvas');
-    box.appendChild(h('div', { class: 'box' }, canvas));
+    var boxEl = h('div', { class: 'box' }, canvas);
+    box.appendChild(boxEl);
+    // Horizontal bars need one row per label; grow the box for long lists.
+    var nLabels = (chart.labels || []).length;
+    if (chart.indexAxis === 'y') {
+      boxEl.style.height = Math.max(280, nLabels * 27 + 30) + 'px';
+    }
     var datasets = (chart.series || []).map(function (s, i) {
       return {
         label: s.label,
@@ -212,13 +252,44 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
         fill: chart.type === 'line'
       };
     });
+    var manySeries = datasets.length > 8;
+    var options = {
+      responsive: true, maintainAspectRatio: false,
+      indexAxis: chart.indexAxis || 'x',
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            boxWidth: 12, usePointStyle: true, pointStyle: 'rectRounded',
+            font: { size: 11 }, padding: 10
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { font: { size: 11 }, maxRotation: 45, autoSkip: true } },
+        y: { ticks: { font: { size: 11 } } }
+      }
+    };
+    if (chart.type === 'bar') {
+      // Fatten bars so many-series groups stay distinguishable.
+      options.scales.x = Object.assign({}, options.scales.x, { grid: { display: false } });
+      options.scales.y = Object.assign({}, options.scales.y, {
+        grid: { color: Chart.defaults.borderColor }
+      });
+      if (chart.indexAxis === 'y') {
+        options.scales.x = Object.assign({}, options.scales.x, { grid: { color: Chart.defaults.borderColor } });
+        options.scales.y = Object.assign({}, options.scales.y, { grid: { display: false } });
+      }
+      datasets.forEach(function (d) {
+        d.barPercentage = manySeries ? 0.9 : 0.7;
+        d.categoryPercentage = manySeries ? 0.94 : 0.75;
+        d.borderWidth = 0;
+      });
+    }
     new Chart(canvas.getContext('2d'), {
       type: chart.type,
       data: { labels: chart.labels || [], datasets: datasets },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } }
-      }
+      options: options
     });
     return box;
   }
@@ -344,7 +415,7 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
     }
     var topLabelSet = {};
     rawNodes.slice().sort(function (x, y) { return deg[y.id] - deg[x.id]; })
-      .slice(0, 8).forEach(function (nd) { topLabelSet[nd.id] = true; });
+      .slice(0, 12).forEach(function (nd) { topLabelSet[nd.id] = true; });
 
     // Group attractor points: each distinct group gets an angle on a ~260 circle.
     var groups = [];
@@ -493,7 +564,7 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
       for (var li = 0; li < links.length; li++) {
         e = links[li];
         var touchesHover = hover && (e.source === hover || e.target === hover);
-        var alpha = !hover ? (embed ? 0.16 : 0.10) : (touchesHover ? 0.72 : 0.03);
+        var alpha = !hover ? (embed ? 0.16 : 0.17) : (touchesHover ? 0.72 : 0.03);
         var col = hexRgb(GROUP_COLOR[e.source.group] || '#94a3b8');
         if (embed && touchesHover) {
           ctx.shadowBlur = 18 / k;
@@ -542,7 +613,7 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
 
       // Labels in SCREEN space (reset transform) — sparse per spec §2.
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = embed ? '600 11px sans-serif' : '11px sans-serif';
+      ctx.font = embed ? '600 11px sans-serif' : '600 12px sans-serif';
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         var showLabel = hover ? (!!litSet && litSet[n.id]) : (topLabelSet[n.id] || k > 2);
@@ -552,8 +623,14 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
         if (k > 2 && (sx < -40 || sx > W + 40 || sy < -16 || sy > H + 16)) continue;
         var litL = !hover || (litSet && litSet[n.id]);
         ctx.globalAlpha = litL ? 0.95 : 0.25;
-        ctx.shadowBlur = embed ? 10 : 0;
-        ctx.shadowColor = embed ? (GROUP_COLOR[n.group] || '#94a3b8') : 'transparent';
+        if (embed) {
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = GROUP_COLOR[n.group] || '#94a3b8';
+        } else {
+          // Dark halo keeps labels legible over bright node fills.
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = 'rgba(5,7,12,.95)';
+        }
         ctx.fillStyle = '#e5e7eb';
         ctx.fillText(n.label, sx + radius(n) * k + 3, sy + 4);
       }
@@ -815,9 +892,9 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
   function color(i) { return PAL[i % PAL.length]; }
   function laneColor(name, i) { return name === 'local' ? '#4ade80' : color(i); }
 
-  var TXT = { color: 'rgba(255,255,255,.72)' };
-  var SPLIT = { lineStyle: { color: 'rgba(255,255,255,.06)' } };
-  var AXIS = { axisLine: { lineStyle: { color: 'rgba(255,255,255,.16)' } }, axisLabel: TXT };
+  var TXT = { color: 'rgba(255,255,255,.85)' };
+  var SPLIT = { lineStyle: { color: 'rgba(255,255,255,.07)' } };
+  var AXIS = { axisLine: { lineStyle: { color: 'rgba(255,255,255,.18)' } }, axisLabel: TXT };
   function money(n) { return '$' + (+n || 0).toFixed(2); }
 
   /* ---- KPI strip with count-up animation ---- */
@@ -863,22 +940,22 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
   function draw() {
     var rs = rows();
 
-    /* 1. Stacked area over time (uses precomputed full-range series; zero-filled) */
+    /* 1. Lines over time, one per provider. Unstacked on purpose: with a
+       dominant lane a stacked area turns every other series into an
+       invisible hairline. */
     var ts = V.timeseries;
     init('c-time').setOption({
-      grid: { left: 58, right: 18, top: 26, bottom: 30 },
+      grid: { left: 58, right: 36, top: 30, bottom: 30 },
       tooltip: { trigger: 'axis', valueFormatter: fmt },
-      legend: { top: 0, textStyle: TXT, itemWidth: 10, itemHeight: 10 },
+      legend: { top: 0, textStyle: Object.assign({ fontSize: 12 }, TXT), itemWidth: 12, itemHeight: 12 },
       xAxis: [Object.assign({ type: 'category', boundaryGap: false, data: ts.days }, AXIS)],
       yAxis: [Object.assign({ type: 'value', splitLine: SPLIT,
-        axisLabel: { color: 'rgba(255,255,255,.72)', formatter: fmt } }, { axisLine: AXIS.axisLine })],
+        axisLabel: { color: 'rgba(255,255,255,.85)', formatter: fmt } }, { axisLine: AXIS.axisLine })],
       series: ts.series.map(function (s, i) {
         var c = laneColor(s.name, i);
         return {
-          name: s.name, type: 'line', stack: 'total', smooth: true, symbol: 'none',
-          lineStyle: { width: 1.6, color: c }, itemStyle: { color: c },
-          areaStyle: { opacity: .85, color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: c }, { offset: 1, color: 'rgba(0,0,0,0)' }]) },
+          name: s.name, type: 'line', smooth: true, symbol: 'circle', symbolSize: 3,
+          lineStyle: { width: 2, color: c }, itemStyle: { color: c },
           emphasis: { focus: 'series' }, data: s.data
         };
       })

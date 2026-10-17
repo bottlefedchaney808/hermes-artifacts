@@ -8,7 +8,7 @@
 <!--/HERMES-ARTIFACT:CSS-->
 <style id="base-theme">
   /* Self-contained dark base — outside markers, survives refresh. */
-  :root { --foreground:#e2e8f0; --muted-foreground:#94a3b8; --border:rgba(148,163,184,.2); --card:#0b1220; }
+  :root { --foreground:#e2e8f0; --muted-foreground:#94a3b8; --border:rgba(148,163,184,.2); --card:#0b1220; --ha-zebra:rgba(148,163,184,.05); --ha-hover:rgba(148,163,184,.14); }
   body { background:#0b1220; color:var(--foreground); }
 </style>
 <style id="mu-css">
@@ -56,9 +56,9 @@
   </div>
   <div id="mu-kpis"></div>
   <div id="mu-grid">
-    <div class="mu-p s8"><h4>Fresh tokens over time &mdash; stacked by provider</h4><div id="c-time" class="mu-c" style="height:300px"></div></div>
+    <div class="mu-p s8"><h4>Fresh tokens over time &mdash; by provider</h4><div id="c-time" class="mu-c" style="height:300px"></div></div>
     <div class="mu-p s4"><h4>Lane share &mdash; click to filter</h4><div id="c-lane" class="mu-c" style="height:300px"></div></div>
-    <div class="mu-p s12"><h4>Daily activity heatmap</h4><div id="c-cal" class="mu-c" style="height:190px"></div></div>
+    <div class="mu-p s12"><h4>Daily activity heatmap</h4><div id="c-cal" class="mu-c" style="height:232px"></div></div>
     <div class="mu-p s6"><h4>Drill down &mdash; lane &rsaquo; model</h4><div id="c-sun" class="mu-c" style="height:340px"></div></div>
     <div class="mu-p s6"><h4>Top models by fresh tokens</h4><div id="c-model" class="mu-c" style="height:340px"></div></div>
     <div class="mu-p s12"><h4>Token flow &mdash; profile &rsaquo; provider &rsaquo; model</h4><div id="c-flow" class="mu-c" style="height:360px"></div></div>
@@ -117,9 +117,9 @@
   function color(i) { return PAL[i % PAL.length]; }
   function laneColor(name, i) { return name === 'local' ? '#4ade80' : color(i); }
 
-  var TXT = { color: 'rgba(255,255,255,.72)' };
-  var SPLIT = { lineStyle: { color: 'rgba(255,255,255,.06)' } };
-  var AXIS = { axisLine: { lineStyle: { color: 'rgba(255,255,255,.16)' } }, axisLabel: TXT };
+  var TXT = { color: 'rgba(255,255,255,.85)' };
+  var SPLIT = { lineStyle: { color: 'rgba(255,255,255,.07)' } };
+  var AXIS = { axisLine: { lineStyle: { color: 'rgba(255,255,255,.18)' } }, axisLabel: TXT };
   function money(n) { return '$' + (+n || 0).toFixed(2); }
 
   /* ---- KPI strip with count-up animation ---- */
@@ -165,22 +165,22 @@
   function draw() {
     var rs = rows();
 
-    /* 1. Stacked area over time (uses precomputed full-range series; zero-filled) */
+    /* 1. Lines over time, one per provider. Unstacked on purpose: with a
+       dominant lane a stacked area turns every other series into an
+       invisible hairline. */
     var ts = V.timeseries;
     init('c-time').setOption({
-      grid: { left: 58, right: 18, top: 26, bottom: 30 },
+      grid: { left: 58, right: 36, top: 30, bottom: 30 },
       tooltip: { trigger: 'axis', valueFormatter: fmt },
-      legend: { top: 0, textStyle: TXT, itemWidth: 10, itemHeight: 10 },
+      legend: { top: 0, textStyle: Object.assign({ fontSize: 12 }, TXT), itemWidth: 12, itemHeight: 12 },
       xAxis: [Object.assign({ type: 'category', boundaryGap: false, data: ts.days }, AXIS)],
       yAxis: [Object.assign({ type: 'value', splitLine: SPLIT,
-        axisLabel: { color: 'rgba(255,255,255,.72)', formatter: fmt } }, { axisLine: AXIS.axisLine })],
+        axisLabel: { color: 'rgba(255,255,255,.85)', formatter: fmt } }, { axisLine: AXIS.axisLine })],
       series: ts.series.map(function (s, i) {
         var c = laneColor(s.name, i);
         return {
-          name: s.name, type: 'line', stack: 'total', smooth: true, symbol: 'none',
-          lineStyle: { width: 1.6, color: c }, itemStyle: { color: c },
-          areaStyle: { opacity: .85, color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: c }, { offset: 1, color: 'rgba(0,0,0,0)' }]) },
+          name: s.name, type: 'line', smooth: true, symbol: 'circle', symbolSize: 3,
+          lineStyle: { width: 2, color: c }, itemStyle: { color: c },
           emphasis: { focus: 'series' }, data: s.data
         };
       })

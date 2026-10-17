@@ -1370,175 +1370,49 @@
   ],
   "charts": [
     {
-      "id": "by-task",
-      "title": "Score by task — latest run",
+      "id": "ranking",
+      "title": "Overall score — latest run, best at top (scale from 81%)",
       "type": "bar",
+      "indexAxis": "y",
+      "min": 81,
       "labels": [
-        "GSM8K (math)",
-        "HellaSwag (stories)",
-        "MMLU (knowledge)",
-        "HumanEval (code)",
-        "IFEval (instructions)"
+        "gemma-4-31b-it-heretic-i1",
+        "qwen3.8-27b (nous)",
+        "glm-5.3-flash",
+        "deepseek-v4.1-flash",
+        "dirk-qwen3.8-27b-iq4xs",
+        "gpt-6-luna",
+        "mimo-v2.6-flash",
+        "claude-haiku-5.5",
+        "qwen3.8-flash",
+        "qwen3.8-27b (local)",
+        "minicpm-v-4.7-35b-a3b",
+        "mistral-small-3.2",
+        "qwen3.8-27b-ninfer",
+        "google_gemma-4-26b-a4b-it",
+        "cyber-tiel-coder-35b-a3b-mtp",
+        "qwen3-27b (you)"
       ],
       "series": [
         {
-          "label": "qwen3-27b (you)",
+          "label": "overall",
           "data": [
-            90.0,
-            92.0,
-            84.0,
-            83.33,
-            73.68
-          ]
-        },
-        {
-          "label": "cyber-tiel-coder-35b-a3b-mtp",
-          "data": [
-            92.0,
-            88.0,
-            80.0,
-            90.0,
-            73.68
-          ]
-        },
-        {
-          "label": "mistral-small-3.2",
-          "data": [
-            96.0,
-            96.0,
-            82.0,
-            73.33,
-            84.21
-          ]
-        },
-        {
-          "label": "qwen3.8-flash",
-          "data": [
-            90.0,
-            96.0,
-            88.0,
-            90.0,
-            84.21
-          ]
-        },
-        {
-          "label": "mimo-v2.6-flash",
-          "data": [
-            94.0,
-            94.0,
-            90.0,
-            90.0,
-            84.21
-          ]
-        },
-        {
-          "label": "gpt-6-luna",
-          "data": [
-            98.0,
-            92.0,
-            84.0,
-            90.0,
-            89.47
-          ]
-        },
-        {
-          "label": "claude-haiku-5.5",
-          "data": [
-            94.0,
-            88.0,
-            90.0,
-            93.33,
-            84.21
-          ]
-        },
-        {
-          "label": "qwen3.8-27b (nous)",
-          "data": [
-            98.0,
-            94.0,
+            93.55,
+            92.16,
+            91.91,
+            91.78,
+            91.63,
+            90.69,
+            90.44,
+            89.91,
+            89.64,
+            88.16,
+            87.38,
+            86.31,
             86.0,
-            93.33,
-            89.47
-          ]
-        },
-        {
-          "label": "glm-5.3-flash",
-          "data": [
-            94.0,
-            96.0,
-            92.0,
-            93.33,
-            84.21
-          ]
-        },
-        {
-          "label": "deepseek-v4.1-flash",
-          "data": [
-            92.0,
-            94.0,
-            92.0,
-            96.67,
-            84.21
-          ]
-        },
-        {
-          "label": "qwen3.8-27b-ninfer",
-          "data": [
-            88.0,
-            90.0,
-            82.0,
-            86.67,
-            83.33
-          ]
-        },
-        {
-          "label": "minicpm-v-4.7-35b-a3b",
-          "data": [
-            82.0,
-            96.0,
-            88.0,
-            86.67,
-            84.21
-          ]
-        },
-        {
-          "label": "gemma-4-31b-it-heretic-i1",
-          "data": [
-            98.0,
-            96.0,
-            86.0,
-            93.33,
-            94.44
-          ]
-        },
-        {
-          "label": "qwen3.8-27b (local)",
-          "data": [
-            90.0,
-            90.0,
-            80.0,
-            86.67,
-            94.12
-          ]
-        },
-        {
-          "label": "google_gemma-4-26b-a4b-it",
-          "data": [
-            88.0,
-            92.0,
-            82.0,
-            70.0,
-            94.12
-          ]
-        },
-        {
-          "label": "dirk-qwen3.8-27b-iq4xs",
-          "data": [
-            94.0,
-            92.0,
-            86.0,
-            96.67,
-            89.47
+            85.22,
+            84.74,
+            84.6
           ]
         }
       ]
@@ -2950,5 +2824,5 @@
   "schema_version": 1,
   "artifact_id": "ai-bench",
   "title": "AI bench — scorecard",
-  "generated_at": "2026-10-17 13:24 UTC"
+  "generated_at": "2026-10-17 13:46 UTC"
 }

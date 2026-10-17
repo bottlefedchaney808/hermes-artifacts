@@ -175,15 +175,21 @@ def collect(repo_path=None) -> dict:
     # ---- charts ---------------------------------------------------------
     charts = []
     if len(results) > 0:
+        # One horizontal bar per model, sorted by overall — a 16-series
+        # grouped chart is unreadable; per-task scores stay in the scorecard.
+        ranked = sorted(latest_overall.items(), key=lambda kv: (-kv[1], kv[0]))
+        # Truncate the value axis so sub-point differences are visible;
+        # the title states where the scale starts so it isn't misleading.
+        axis_min = max(0, round(ranked[-1][1] * 100) - 4) if ranked else 0
         charts.append({
-            "id": "by-task",
-            "title": "Score by task — latest run",
+            "id": "ranking",
+            "title": f"Overall score — latest run, best at top (scale from {axis_min}%)",
             "type": "bar",
-            "labels": [TASK_LABEL[t] for t in tasks_present],
+            "indexAxis": "y",
+            "min": axis_min,
+            "labels": [name for name, _ in ranked],
             "series": [
-                {"label": m["name"],
-                 "data": [_num(m.get("tasks", {}).get(t, {}).get("score")) for t in tasks_present]}
-                for m in results
+                {"label": "overall", "data": [round(v * 100, 2) for _, v in ranked]}
             ],
         })
 

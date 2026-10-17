@@ -79,7 +79,7 @@ h1 { font-size: 20px; margin: 0 0 2px; }
 .ha-card { border: 1px solid var(--border, #e8e6e0); border-radius: 10px; padding: 12px 14px; }
 .ha-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
   color: var(--muted-foreground, #8a8a8a); }
-.ha-card .value { font-size: 20px; font-weight: 650; margin-top: 3px; }
+.ha-card .value { font-size: 22px; font-weight: 650; margin-top: 3px; }
 .ha-card.tone-ok .value { color: #1a7f37; }
 .ha-card.tone-bad .value { color: #c0341d; }
 .ha-chart { border: 1px solid var(--border, #e8e6e0); border-radius: 10px;
@@ -92,11 +92,13 @@ h1 { font-size: 20px; margin: 0 0 2px; }
 .ha-filter { width: 220px; padding: 4px 8px; margin-bottom: 8px;
   border: 1px solid var(--border, #ccc); border-radius: 6px;
   background: transparent; color: inherit; font: inherit; }
-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-th, td { text-align: left; padding: 6px 9px; white-space: nowrap;
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 7px 10px; white-space: nowrap;
   border-bottom: 1px solid var(--border, #efece5); }
 th { cursor: pointer; color: var(--muted-foreground, #6b6b6b);
-  font-size: 11px; text-transform: uppercase; }
+  font-size: 11.5px; text-transform: uppercase; letter-spacing: .03em; }
+tbody tr:nth-child(odd) { background: var(--ha-zebra, transparent); }
+tbody tr:hover { background: var(--ha-hover, rgba(148,163,184,.12)); }
 tr:last-child td { border-bottom: none; }
 .ha-notes { color: var(--muted-foreground, #6b6b6b); font-size: 12px; }
 .ha-notes li { margin-bottom: 4px; }
@@ -228,8 +230,14 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
    filterable/sortable tables. No build step, no fetches, no framework. */
 (function () {
   'use strict';
-  /* Vivid, full-opacity palette per Jason's chart preferences. */
-  var PALETTE = ['#3b82f6', '#ef4444', '#22c55e', '#eab308', '#a855f7', '#06b6d4'];
+  /* Vivid, full-opacity palette per Jason's chart preferences. 20 distinct
+     hues so boards with many series (e.g. 16 models) don't cycle colors. */
+  var PALETTE = [
+    '#3b82f6', '#ef4444', '#22c55e', '#eab308', '#a855f7', '#06b6d4',
+    '#f97316', '#ec4899', '#84cc16', '#14b8a6', '#f43f5e', '#0ea5e9',
+    '#8b5cf6', '#fbbf24', '#65a30d', '#d946ef', '#fb7185', '#2dd4bf',
+    '#facc15', '#60a5fa'
+  ];
 
   function h(tag, attrs) {
     var node = document.createElement(tag);
@@ -259,6 +267,56 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
     return wrap;
   }
 
+  /* Detect light/dark from the rendered body color so canvas text (which
+     ignores CSS vars) stays readable in either theme. */
+  function chartTheme() {
+    var col = 'rgba(0,0,0,0)';
+    try { col = getComputedStyle(document.body).color; } catch (e) { /* noop */ }
+    var m = col.match(/rgba?\((\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+    var lum = m ? (0.2126 * +m[1] + 0.7152 * +m[2] + 0.0722 * +m[3]) / 255 : 0;
+    var dark = lum > 0.55; // bright body text => dark board
+    return {
+      dark: dark,
+      text: dark ? '#c9d4e5' : '#3f4a5a',
+      grid: dark ? 'rgba(148,163,184,.16)' : 'rgba(15,23,42,.12)'
+    };
+  }
+
+  var themeReady = false;
+  function applyChartDefaults() {
+    if (themeReady || typeof Chart === 'undefined') return;
+    themeReady = true;
+    var t = chartTheme();
+    Chart.defaults.color = t.text;
+    Chart.defaults.borderColor = t.grid;
+    Chart.defaults.font.family = '-apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  }
+
+  /* Inline plugin: score at the end of each horizontal bar (first dataset).
+     Enabled per-chart via plugins.barEndLabels — makes truncated-scale
+     rankings readable without eyeballing lengths. */
+  var barEndLabelsPlugin = {
+    id: 'barEndLabels',
+    afterDatasetsDraw: function (chartApi) {
+      var opts = (chartApi.options.plugins || {}).barEndLabels;
+      if (!opts) return;
+      var meta = chartApi.getDatasetMeta(0);
+      if (!meta || !meta.data) return;
+      var vals = chartApi.data.datasets[0].data;
+      var ctx = chartApi.ctx;
+      ctx.save();
+      ctx.font = '600 11px ' + (Chart.defaults.font.family || 'sans-serif');
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = opts.color || '#dbe4f0';
+      meta.data.forEach(function (bar, i) {
+        var v = vals[i];
+        if (v == null) return;
+        ctx.fillText(String(Math.round(v * 10) / 10), bar.x + 5, bar.y);
+      });
+      ctx.restore();
+    }
+  };
+
   function renderChart(chart) {
     var box = h('div', { class: 'ha-chart' }, h('h3', { text: chart.title }));
     if (typeof Chart === 'undefined') {
@@ -266,8 +324,15 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
         text: 'Chart.js CDN unreachable — values remain in tables/notes.' }));
       return box;
     }
+    applyChartDefaults();
     var canvas = h('canvas');
-    box.appendChild(h('div', { class: 'box' }, canvas));
+    var boxEl = h('div', { class: 'box' }, canvas);
+    box.appendChild(boxEl);
+    // Horizontal bars need one row per label; grow the box for long lists.
+    var nLabels = (chart.labels || []).length;
+    if (chart.indexAxis === 'y') {
+      boxEl.style.height = Math.max(280, nLabels * 27 + 30) + 'px';
+    }
     var datasets = (chart.series || []).map(function (s, i) {
       return {
         label: s.label,
@@ -278,13 +343,50 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
         fill: chart.type === 'line'
       };
     });
+    var manySeries = datasets.length > 8;
+    var horizontal = chart.indexAxis === 'y';
+    var options = {
+      responsive: true, maintainAspectRatio: false,
+      indexAxis: chart.indexAxis || 'x',
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            boxWidth: 12, usePointStyle: true, pointStyle: 'rectRounded',
+            font: { size: 11 }, padding: 10
+          }
+        },
+        barEndLabels: horizontal ? { color: chartTheme().text } : false
+      },
+      scales: {
+        x: { ticks: { font: { size: 11 }, maxRotation: 45, autoSkip: true } },
+        y: { ticks: { font: { size: 11 } } }
+      }
+    };
+    if (horizontal && chart.min != null) {
+      options.scales.x.min = chart.min;
+    }
+    if (chart.type === 'bar') {
+      // Fatten bars so many-series groups stay distinguishable.
+      options.scales.x = Object.assign({}, options.scales.x, { grid: { display: false } });
+      options.scales.y = Object.assign({}, options.scales.y, {
+        grid: { color: Chart.defaults.borderColor }
+      });
+      if (horizontal) {
+        options.scales.x = Object.assign({}, options.scales.x, { grid: { color: Chart.defaults.borderColor } });
+        options.scales.y = Object.assign({}, options.scales.y, { grid: { display: false } });
+      }
+      datasets.forEach(function (d) {
+        d.barPercentage = manySeries ? 0.9 : 0.7;
+        d.categoryPercentage = manySeries ? 0.94 : 0.75;
+        d.borderWidth = 0;
+      });
+    }
     new Chart(canvas.getContext('2d'), {
       type: chart.type,
       data: { labels: chart.labels || [], datasets: datasets },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', labels: { boxWidth: 12 } } }
-      }
+      options: options,
+      plugins: horizontal ? [barEndLabelsPlugin] : []
     });
     return box;
   }
@@ -410,7 +512,7 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
     }
     var topLabelSet = {};
     rawNodes.slice().sort(function (x, y) { return deg[y.id] - deg[x.id]; })
-      .slice(0, 8).forEach(function (nd) { topLabelSet[nd.id] = true; });
+      .slice(0, 12).forEach(function (nd) { topLabelSet[nd.id] = true; });
 
     // Group attractor points: each distinct group gets an angle on a ~260 circle.
     var groups = [];
@@ -559,7 +661,7 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
       for (var li = 0; li < links.length; li++) {
         e = links[li];
         var touchesHover = hover && (e.source === hover || e.target === hover);
-        var alpha = !hover ? (embed ? 0.16 : 0.10) : (touchesHover ? 0.72 : 0.03);
+        var alpha = !hover ? (embed ? 0.16 : 0.17) : (touchesHover ? 0.72 : 0.03);
         var col = hexRgb(GROUP_COLOR[e.source.group] || '#94a3b8');
         if (embed && touchesHover) {
           ctx.shadowBlur = 18 / k;
@@ -608,7 +710,7 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
 
       // Labels in SCREEN space (reset transform) — sparse per spec §2.
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.font = embed ? '600 11px sans-serif' : '11px sans-serif';
+      ctx.font = embed ? '600 11px sans-serif' : '600 12px sans-serif';
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         var showLabel = hover ? (!!litSet && litSet[n.id]) : (topLabelSet[n.id] || k > 2);
@@ -618,8 +720,14 @@ html.ha-embed .ha-gstage canvas { width: 100%; height: 100% !important; }
         if (k > 2 && (sx < -40 || sx > W + 40 || sy < -16 || sy > H + 16)) continue;
         var litL = !hover || (litSet && litSet[n.id]);
         ctx.globalAlpha = litL ? 0.95 : 0.25;
-        ctx.shadowBlur = embed ? 10 : 0;
-        ctx.shadowColor = embed ? (GROUP_COLOR[n.group] || '#94a3b8') : 'transparent';
+        if (embed) {
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = GROUP_COLOR[n.group] || '#94a3b8';
+        } else {
+          // Dark halo keeps labels legible over bright node fills.
+          ctx.shadowBlur = 4;
+          ctx.shadowColor = 'rgba(5,7,12,.95)';
+        }
         ctx.fillStyle = '#e5e7eb';
         ctx.fillText(n.label, sx + radius(n) * k + 3, sy + 4);
       }
