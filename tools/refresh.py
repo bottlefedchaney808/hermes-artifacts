@@ -113,13 +113,21 @@ def build_index(template: Path, payload: dict, assets_dir: Path) -> str:
     return html
 
 
-def refresh_one(artifact_id: str, repo_override=None, root: Path = ROOT) -> dict:
+def refresh_one(artifact_id: str, repo_override=None, root: Path = ROOT) -> dict | None:
     artifact_dir = root / "artifacts" / artifact_id
     manifest = json.loads((artifact_dir / "artifact.json").read_text(encoding="utf-8"))
     collector_name = manifest["collector"]
     if collector_name not in collectors.COLLECTORS:
         raise SystemExit(f"unknown collector {collector_name!r} for {artifact_id}")
     repo = _resolve_repo(manifest["repo"], repo_override)
+    if not repo.exists():
+        if repo_override:
+            raise SystemExit(f"{artifact_id}: --repo path {repo} does not exist")
+        # Manifest root lives on another machine (e.g. the Windows spine).
+        # Skip rather than write an empty payload over the last good data.
+        print(f"skipped {artifact_id}: source repo {repo} does not exist "
+              f"(keeping existing data; pass --repo to point elsewhere)")
+        return None
     payload = collectors.COLLECTORS[collector_name](repo)
     payload.update({
         "schema_version": 1,
@@ -151,13 +159,13 @@ def main(argv=None, root: Path = ROOT) -> int:
         return 0
     if args.all:
         for aid in ids:
-            refresh_one(aid, args.repo, root=root)
-            print(f"refreshed {aid}")
+            if refresh_one(aid, args.repo, root=root) is not None:
+                print(f"refreshed {aid}")
         return 0
     if not args.artifact:
         ap.error("give an artifact id, --all, or --list")
-    refresh_one(args.artifact, args.repo, root=root)
-    print(f"refreshed {args.artifact}")
+    if refresh_one(args.artifact, args.repo, root=root) is not None:
+        print(f"refreshed {args.artifact}")
     return 0
 
 

@@ -8,7 +8,8 @@ from pathlib import Path
 
 import pytest
 
-SCRIPT = Path(r"C:\Users\bottl\hermes-artifacts\refresh_bid_desk.py")
+# Repo-relative: the script lives at the repo root on every machine.
+SCRIPT = Path(__file__).resolve().parents[1] / "refresh_bid_desk.py"
 
 
 def load():

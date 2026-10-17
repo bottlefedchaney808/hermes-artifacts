@@ -101,6 +101,32 @@ def test_cli_list(tmp_path, capsys):
     assert "a" in capsys.readouterr().out
 
 
+def _board(tmp_path, repo):
+    d = tmp_path / "artifacts" / "b"
+    d.mkdir(parents=True)
+    (d / "artifact.json").write_text(
+        json.dumps({"id": "b", "title": "B", "collector": "model-usage", "repo": repo}),
+        encoding="utf-8")
+    (d / "template.html").write_text(TEMPLATE, encoding="utf-8")
+    (d / "data.json").write_text(json.dumps(VALID), encoding="utf-8")
+    return d
+
+
+def test_missing_source_repo_skips_and_preserves_data(tmp_path, capsys):
+    d = _board(tmp_path, "/nonexistent/nowhere")
+    assert refresh.refresh_one("b", root=tmp_path) is None
+    out = capsys.readouterr().out
+    assert "skipped b" in out
+    # the previous good payload must be untouched
+    assert json.loads((d / "data.json").read_text(encoding="utf-8")) == VALID
+
+
+def test_missing_repo_override_fails_loudly(tmp_path):
+    _board(tmp_path, "/nonexistent/nowhere")
+    with pytest.raises(SystemExit):
+        refresh.refresh_one("b", repo_override="/nope", root=tmp_path)
+
+
 def test_json_to_payload_flattens_scalars():
     import collectors
     payload = collectors.json_to_payload({"spot": 6650.5, "flags": ["a", "b"]})
